@@ -95,7 +95,7 @@ export const history_all = data =>
 // 验证码2
 export const getBspapp = data =>
   uni.request({
-    url: `https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/`,
+    url: import.meta.env.VITE_APP_BASE_URL,
     method: "post",
     data,
   });
