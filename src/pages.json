@@ -1,0 +1,58 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "LOL战绩查询"
+			}
+		},
+		{
+			"path": "pages/history/index",
+			"style": {
+				"navigationBarTitleText": "历史战绩"
+			}
+		},
+		{
+			"path": "pages/history/yundingIndex",
+			"style": {
+				"navigationBarTitleText": "云顶历史战绩"
+			}
+		},
+		{
+			"path": "pages/history/details",
+			"style": {
+				"navigationBarTitleText": "战绩详情"
+			}
+		},
+		{
+			"path": "pages/history/yundingDetails",
+			"style": {
+				"navigationBarTitleText": "云顶战绩详情"
+			}
+		},
+		{
+			"path": "pages/history/currentDetail",
+			"style": {
+				"navigationBarTitleText": "当前对局"
+			}
+		},
+		{
+			"path": "pages/history/currentDetailCorn",
+			"style": {
+				"navigationBarTitleText": "实时对局"
+			}
+		},
+		{
+			"path": "pages/settings/index",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "u2ni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

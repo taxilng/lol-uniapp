@@ -1,0 +1,55 @@
+
+:root {
+  --tw-shadow-color: #dbeafe;
+  --tw-ring-offset-shadow: 0 0 #0000;
+  --tw-ring-shadow: 0 0 #0000;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.ml-2 {
+  margin-left: 20rpx;
+}
+
+.mt-2 {
+  margin-top: 20rpx;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.bg-red-500 {
+  background-color: rgb(239 68 68);
+}
+
+.top-0 {
+  top: 0;
+}
+
+.right-0 {
+  right: 0;
+}
+
+.w-8 {
+  width: 80rpx;
+}
+
+.h-8 {
+  height: 80rpx;
+}
+
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / .1), 0 2px 4px -2px rgb(0 0 0 / .1);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}

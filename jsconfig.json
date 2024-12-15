@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "commonjs", // 或者 "esnext"
+    "target": "es5", // 或者 "es6" 及以上
+    "types": ["element-plus/global"],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}
