@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/ape/*"
+  to = "https://white3zz.m3zz.com/:splat"
+  status = 200
+
+[[redirects]]
+  from = "https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/*"
+  to = "https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/:splat"
+  status = 200
+  force = true
