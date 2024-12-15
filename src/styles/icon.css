@@ -983,3 +983,7 @@ html body.lol-new {
   height: 36px !important;
   z-index: 0 !important;
 }
+
+svg {
+  display: inline;
+}
