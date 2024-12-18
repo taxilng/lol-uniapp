@@ -77,7 +77,7 @@
             :key="playerIndex"
           >
             <view class="flex">
-              <view>
+              <view class="shrink-0">
                 <HeroAvatar
                   :championId="player.detailChampionId"
                   :wasMvp="player.wasMvp"

@@ -5,10 +5,6 @@
         @click="updateRecord"
         class="flex items-center relative p-2 bg-slate-100"
       >
-        <img
-          class="absolute w-full h-auto top-0 left-0 opacity-30"
-          :src="recordData.loadingImg"
-        />
         <view>
           <LolAvartar
             :size="40"

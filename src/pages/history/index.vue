@@ -2,10 +2,6 @@
   <view class="max-w-screen-sm mx-auto h-full overflow-y-auto bg-slate-50">
     <view class="history">
       <view class="flex items-center relative p-2 bg-slate-100">
-        <img
-          class="absolute w-full h-auto top-0 left-0 opacity-30"
-          :src="recordData.loadingImg"
-        />
         <view @click="updateRecord">
           <LolAvartar
             :size="40"
@@ -305,7 +301,10 @@ onMounted(() => {
 
 function renderImg(messageDetail) {
   return messageDetail?.replaceAll(
-    '<img style="margin-left:0.3rem;width: 0.36rem;" src="./image/zd.png">',
+    '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
+    ""
+  )?.replaceAll(
+    'font-size: 0.36rem;',
     ""
   );
 }
