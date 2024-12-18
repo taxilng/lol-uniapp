@@ -40,70 +40,68 @@
         </view>
       </view>
 
-      <template>
-        <view class="mt-2">
-          <view
-            class="flex pt-2 bg-green-100"
-            v-for="(player, playerIndex) in userHistoryDetails1.teamOne"
-            :key="playerIndex"
-            @click="goSO1HistoryList(player)"
-          >
-            <view>
-              <HeroAvatar :championId="player.championId" :size="32" />
-            </view>
+      <view class="mt-2">
+        <view
+          class="flex pt-2 bg-green-100"
+          v-for="(player, playerIndex) in userHistoryDetails1.teamOne"
+          :key="playerIndex"
+          @click="goSO1HistoryList(player)"
+        >
+          <view>
+            <HeroAvatar :championId="player.championId" :size="32" />
+          </view>
 
-            <view class="ml-1">
-              <LolAbility :iconId="player.spell1Id" />
-              <LolAbility class="mt-1" :iconId="player.spell2Id" />
-            </view>
+          <view class="ml-1">
+            <LolAbility :iconId="player.spell1Id" />
+            <LolAbility class="mt-1" :iconId="player.spell2Id" />
+          </view>
 
-            <view class="ml-1">
-              <view class="mt-1 text-sm">
-                <text
-                  class="cursor-pointer"
-                  :class="{
-                    'text-fuchsia-500': player.summonerInternalName?.includes(
-                      userHistory.name
-                    ),
-                  }"
-                  >{{ player.summonerInternalName }}</text
-                >
-              </view>
+          <view class="ml-1">
+            <view class="mt-1 text-sm">
+              <text
+                class="cursor-pointer"
+                :class="{
+                  'text-fuchsia-500': player.summonerInternalName?.includes(
+                    userHistory.name
+                  ),
+                }"
+                >{{ player.summonerInternalName }}</text
+              >
             </view>
           </view>
         </view>
-        <view class="mt-2">
-          <view
-            class="flex pt-2 bg-red-100"
-            v-for="(player, playerIndex) in userHistoryDetails1.teamTwo"
-            :key="playerIndex"
-            @click="goSO1HistoryList(player)"
-          >
-            <view>
-              <HeroAvatar :championId="player.championId" :size="32" />
-            </view>
+      </view>
+      <view class="mt-2">
+        <view
+          class="flex pt-2 bg-red-100"
+          v-for="(player, playerIndex) in userHistoryDetails1.teamTwo"
+          :key="playerIndex"
+          @click="goSO1HistoryList(player)"
+        >
+          <view>
+            <HeroAvatar :championId="player.championId" :size="32" />
+          </view>
 
-            <view class="ml-1">
-              <LolAbility :iconId="player.spell1Id" />
-              <LolAbility class="mt-1" :iconId="player.spell2Id" />
-            </view>
+          <view class="ml-1">
+            <LolAbility :iconId="player.spell1Id" />
+            <LolAbility class="mt-1" :iconId="player.spell2Id" />
+          </view>
 
-            <view class="ml-1">
-              <view class="mt-1 text-sm">
-                <text
-                  class="cursor-pointer"
-                  :class="{
-                    'text-fuchsia-500': player.summonerInternalName?.includes(
-                      userHistory.name
-                    ),
-                  }"
-                  >{{ player.summonerInternalName }}</text
-                >
-              </view>
+          <view class="ml-1">
+            <view class="mt-1 text-sm">
+              <text
+                class="cursor-pointer"
+                :class="{
+                  'text-fuchsia-500': player.summonerInternalName?.includes(
+                    userHistory.name
+                  ),
+                }"
+                >{{ player.summonerInternalName }}</text
+              >
             </view>
           </view>
         </view>
-      </template>
+      </view>
     </view>
   </view>
 </template>
@@ -239,6 +237,7 @@ onMounted(() => {
     return { ...v, spell1Id, spell2Id };
   });
   userHistoryDetails1.value = { ...userHistoryDetails, teamOne, teamTwo };
+  console.log("最终只userHistoryDetails1", userHistoryDetails1.value);
 });
 </script>
 
