@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="max-w-7xl mx-auto p-3 sm:p-6 bg-white shadow-md rounded-lg">
-      <view class="flex flex-col sm:flex-row items-center sm:items-start">
+      <view class="flex flex-col items-center">
         <!-- 用户头像和姓名 -->
         <view
           v-if="recordData.name"
@@ -160,7 +160,7 @@
             <view class="flex items-center w-full">
               <img
                 class="w-6 h-6 rounded-lg"
-                :src="`/image/${item.tier?.slice(0, 2)}.png`"
+                :src="getDanImg(item)"
                 alt=""
               />
               <text class="ml-2"> {{ item.type }} </text>
@@ -222,6 +222,16 @@ const { recordData } = toRefs(props);
 
 const dataRankEloNum = ref("");
 const loading = ref(false);
+
+function getDanImg(item) {
+  const isH5 = process.env.UNI_PLATFORM === "h5";
+  console.log("当前环境", item.tier, isH5);
+  if (isH5) {
+    return `/public/image/${item.tier?.slice(0, 2)}.png`;
+  } else {
+    return `/image/${item.tier?.slice(0, 2)}.png`;
+  }
+}
 
 const ranks = [
   { name: "黑铁", color: "#6A4F4B" },

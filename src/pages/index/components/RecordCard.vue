@@ -1,7 +1,7 @@
 <template>
   <view>
     <view class="max-w-7xl mx-auto p-3 sm:p-6 bg-white shadow-md rounded-lg">
-      <view class="flex flex-col sm:flex-row items-center sm:items-start">
+      <view class="flex flex-col items-center">
         <!-- 用户头像和姓名 -->
         <view
           v-if="recordData.name"
@@ -160,7 +160,7 @@
             <view class="flex items-center w-full">
               <img
                 class="w-6 h-6 rounded-lg"
-                :src="`/image/${item.tier?.slice(0, 2)}.png`"
+                :src="getDanImg(item)"
                 alt=""
               />
               <text class="ml-2"> {{ item.type }} </text>
@@ -215,13 +215,17 @@ const props = defineProps({
 });
 const { recordData } = toRefs(props);
 
-watch(props, () => {
-  console.log('recordData.value', recordData.value);
-  
-  if (recordData.value.battleInfo) {
-    getRankElo(recordData.value.battleInfo);
-  }
-}, { immediate: true, deep: true });
+watch(
+  props,
+  () => {
+    console.log("recordData.value", recordData.value);
+
+    if (recordData.value.battleInfo) {
+      getRankElo(recordData.value.battleInfo);
+    }
+  },
+  { immediate: true, deep: true }
+);
 
 const dataRankEloNum = ref("");
 const loading = ref(false);
@@ -246,6 +250,16 @@ async function getRankElo(data) {
     console.log("错误", error);
   } finally {
     loading.value = false;
+  }
+}
+
+function getDanImg(item) {
+  const isH5 = process.env.UNI_PLATFORM === "h5";
+  console.log("当前环境", isH5);
+  if (isH5) {
+    return `/public/image/${item.tier?.slice(0, 2)}.png`;
+  } else {
+    return `/image/${item.tier?.slice(0, 2)}.png`;
   }
 }
 
@@ -408,7 +422,7 @@ const router = useRouter();
 
 const historyStore = userHistoryStore();
 function handleOpenHistory() {
-  uni.setStorageSync("showTips", 1)
+  uni.setStorageSync("showTips", 1);
   showTips.value = 1;
   historyStore.setHistoryList(recordData.value);
   navigateToWithLimit({

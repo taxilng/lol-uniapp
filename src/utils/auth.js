@@ -145,8 +145,9 @@ export function dataProcessing(data, dataRange) {
 function handlerData(source, dataRange, battleInfo) {
   // 第一局的时间
   const titleTime = source[source.length - 1].titleTime;
-  const startTime =
-    titleTime.startsWith('20') ? titleTime.slice(0, 10) : titleTime.slice(0, 5);
+  const startTime = titleTime.startsWith("20")
+    ? titleTime.slice(0, 10)
+    : titleTime.slice(0, 5);
   let effectiveCompetition = source.filter(
     v => v.title && !v.title?.includes("重开局")
   );
@@ -162,8 +163,7 @@ function handlerData(source, dataRange, battleInfo) {
       const CompetitionTime = new Date(fullDate).getTime();
       return (
         CompetitionTime >= new Date(dataRange.before).getTime() &&
-        CompetitionTime <
-          new Date(dataRange.after).getTime() + 1000 * 3600 * 24
+        CompetitionTime < new Date(dataRange.after).getTime() + 1000 * 3600 * 24
       );
     });
   }
@@ -203,8 +203,8 @@ function handlerData(source, dataRange, battleInfo) {
   const pattern = /\d+\((\d+-\d+-\d+)\)/;
   const pattern1 = /<br>(.+)(?=\()/;
   effectiveCompetition.forEach(v => {
-    v.openId = battleInfo.openId
-    v.areaId = battleInfo.areaId
+    v.openId = battleInfo.openId;
+    v.areaId = battleInfo.areaId;
     const match = v.title.match(pattern);
     if (match.length) {
       const k_d_a = match[1];
@@ -561,6 +561,7 @@ export function handlerMerge(source) {
   if (!mergeList.length) {
     return source;
   }
+  console.log("即将合并", source);
 
   const newList = source
     .map(v => {
@@ -576,6 +577,9 @@ export function handlerMerge(source) {
                 newTarget.onlineInfo > sourceOne.onlineInfo
                   ? newTarget.onlineInfo
                   : sourceOne.onlineInfo,
+              currentGame: newTarget.currentGame?.gameName
+                ? newTarget.currentGame
+                : sourceOne.currentGame,
               wins: newTarget.wins + sourceOne.wins,
               losses: newTarget.losses + sourceOne.losses,
               netVictoryField:
@@ -636,6 +640,7 @@ export function handlerMergeOld(source) {
   if (!mergeList.length) {
     return source;
   }
+  console.log("即将合并", source);
 
   const newList = source
     .map(v => {
@@ -651,6 +656,7 @@ export function handlerMergeOld(source) {
                 newTarget.onlineInfo > sourceOne.onlineInfo
                   ? newTarget.onlineInfo
                   : sourceOne.onlineInfo,
+              curryMap: newTarget.curryMap ?? sourceOne.curryMap,
               wins: newTarget.wins + sourceOne.wins,
               losses: newTarget.losses + sourceOne.losses,
               blackoutWins: newTarget.blackoutWins + sourceOne.blackoutWins,
@@ -662,18 +668,22 @@ export function handlerMergeOld(source) {
               svp: newTarget.svp + sourceOne.svp,
               twoBlackWins: newTarget.twoBlackWins + sourceOne.twoBlackWins,
               twoBlack: newTarget.twoBlack + sourceOne.twoBlack,
-              threeBlackWins: newTarget.threeBlackWins + sourceOne.threeBlackWins,
+              threeBlackWins:
+                newTarget.threeBlackWins + sourceOne.threeBlackWins,
               threeBlack: newTarget.threeBlack + sourceOne.threeBlack,
               fourBlackWins: newTarget.fourBlackWins + sourceOne.fourBlackWins,
               fourBlack: newTarget.fourBlack + sourceOne.fourBlack,
               fiveBlackWins: newTarget.fiveBlackWins + sourceOne.fiveBlackWins,
-              fiveBlack: newTarget.fiveBlack + sourceOne.fiveBlack, 
+              fiveBlack: newTarget.fiveBlack + sourceOne.fiveBlack,
               startTime:
                 newTarget.startTime > sourceOne.startTime
                   ? newTarget.startTime
                   : sourceOne.startTime,
               data: [...newTarget.data, ...sourceOne.data],
-              effectiveCompetition: [...newTarget.effectiveCompetition, ...sourceOne.effectiveCompetition],
+              effectiveCompetition: [
+                ...newTarget.effectiveCompetition,
+                ...sourceOne.effectiveCompetition,
+              ],
             };
           }
         });
@@ -681,13 +691,15 @@ export function handlerMergeOld(source) {
           ...newTarget,
           rate: ((newTarget.wins / newTarget.totalGames) * 100).toFixed(2),
         };
-        const effectiveCompetition = newTarget.effectiveCompetition.sort((a, b) => {
-          if (b.titleTime > a.titleTime) {
-            return 1;
-          } else {
-            return -1;
+        const effectiveCompetition = newTarget.effectiveCompetition.sort(
+          (a, b) => {
+            if (b.titleTime > a.titleTime) {
+              return 1;
+            } else {
+              return -1;
+            }
           }
-        });
+        );
         newTarget.effectiveCompetition = effectiveCompetition;
       }
       return newTarget;
