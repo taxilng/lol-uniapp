@@ -257,7 +257,7 @@ function getDanImg(item) {
   const isH5 = process.env.UNI_PLATFORM === "h5";
   console.log("当前环境", isH5);
   if (isH5) {
-    return `/public/image/${item.tier?.slice(0, 2)}.png`;
+    return `/image/${item.tier?.slice(0, 2)}.png`;
   } else {
     return `/image/${item.tier?.slice(0, 2)}.png`;
   }
