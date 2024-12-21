@@ -598,8 +598,8 @@ export function handlerMerge(source) {
               assistsMax: newTarget.assistsMax + sourceOne.assistsMax,
               pentaKills: newTarget.pentaKills + sourceOne.pentaKills,
               sortHarmfulFriend: [
-                ...newTarget.sortHarmfulFriend,
-                ...sourceOne.sortHarmfulFriend,
+                ...(newTarget.sortHarmfulFriend ?? []),
+                ...(sourceOne.sortHarmfulFriend ?? []),
               ],
               list: [...newTarget.list, ...sourceOne.list],
             };
@@ -612,7 +612,7 @@ export function handlerMerge(source) {
           avgDeaths: +(newTarget.deaths / newTarget.totalGames).toFixed(0),
           avgAssists: +(newTarget.assists / newTarget.totalGames).toFixed(0),
         };
-        const sortHarmfulFriend = newTarget.sortHarmfulFriend.sort(
+        const sortHarmfulFriend = newTarget.sortHarmfulFriend?.sort(
           (a, b) => b.netVictoryField - a.netVictoryField
         );
         newTarget.sortHarmfulFriend = sortHarmfulFriend;

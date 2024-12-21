@@ -302,6 +302,7 @@ function openType() {
 }
 function typeConfirm(e) {
   console.log("模式选择", e);
+  uni.setStorageSync("batchGameMode", e.value?.[0]?.value);
   userInfo.value.competitionType = e.value?.[0]?.value;
   userInfo.value.competitionTypeName = e.value?.[0]?.label;
   userInfo.value.queueId = e.value?.[0]?.queueId;
@@ -491,8 +492,6 @@ const CompetitionTypeOption = ref([
   { value: "3", label: "灵活排位", queueId: 440 },
   { value: "4", label: "匹配赛", queueId: 430 },
   { value: "5", label: "大乱斗", queueId: 450 },
-  { value: "7", label: "无限火力", queueId: 900 },
-  { value: "8", label: "斗魂竞技场", queueId: 1700 },
 ]);
 
 const roles = ref([]);
@@ -547,6 +546,7 @@ onMounted(() => {
   // 初始化日期
   initDate();
   initBatchBaseUrl();
+  initBatchGameMode();
 });
 
 function initBatchBaseUrl() {
@@ -554,6 +554,22 @@ function initBatchBaseUrl() {
   console.log("基础url", url, typeof url);
 
   userInfo.value.batchBaseUrl = url || "地址1";
+}
+
+// 从缓存获取 游戏模式
+function initBatchGameMode() {
+  const GameMode = uni.getStorageSync("batchGameMode");
+  console.log("GameMode", GameMode, typeof GameMode);
+  if(GameMode) {
+
+    userInfo.value.competitionType = GameMode;
+    const cur = CompetitionTypeOption.value.find(v => v.value === GameMode)
+    if(cur) {
+      userInfo.value.competitionTypeName = cur.label;
+      userInfo.value.queueId = cur.queueId;
+    }
+  }
+
 }
 
 onShow(() => {
