@@ -734,13 +734,13 @@ function calculationSessions() {
   } else if (days < 4) {
     return days * 15;
   } else if (days < 6) {
-    return days * 10;
+    return days * 13;
   } else if (days < 20) {
-    return days * 7;
+    return days * 10;
   } else if (days < 30) {
-    return days * 6;
+    return days * 8;
   } else {
-    return 200;
+    return 250;
   }
 }
 
