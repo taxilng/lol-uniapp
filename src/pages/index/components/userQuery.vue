@@ -1,5 +1,5 @@
 <template>
-  <view class="ml-2">
+  <view class="ml-2 max-w-screen-xl mx-auto lg:ml-auto">
     <uv-form
       v-if="collapseVisible"
       labelPosition="left"

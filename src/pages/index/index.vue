@@ -7,7 +7,7 @@
       <uv-icon name="setting-fill" size="24"></uv-icon>
     </view>
   </view>
-  <view v-if="activeTab === 2" class="ml-2">
+  <view v-if="activeTab === 2" class="ml-2 lg:ml-auto max-w-screen-xl mx-auto">
     <uv-form
       v-if="collapseVisible"
       labelPosition="left"
