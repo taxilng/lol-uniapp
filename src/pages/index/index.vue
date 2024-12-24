@@ -496,11 +496,6 @@ const CompetitionTypeOption = ref([
 
 const roles = ref([]);
 
-const searchHistory = ref([]);
-const handleClose = tag => {
-  searchHistory.value.splice(searchHistory.value.indexOf(tag), 1);
-  uni.setStorageSync("searchHistoryLocal", JSON.stringify(searchHistory.value));
-};
 
 watch(
   tableData1,
@@ -521,14 +516,7 @@ onMounted(() => {
   } catch (error) {
     console.log("缓存的默认批量战绩错误", error);
   }
-  const searchHistoryLocal = uni.getStorageSync("searchHistoryLocal");
-  try {
-    if (searchHistoryLocal && Array.isArray(JSON.parse(searchHistoryLocal))) {
-      searchHistory.value = JSON.parse(searchHistoryLocal);
-    }
-  } catch (error) {
-    console.log("缓存的历史搜索", error);
-  }
+ 
   const defaultPage = uni.getStorageSync("defaultPage");
   try {
     if (

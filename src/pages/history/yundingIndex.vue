@@ -97,9 +97,7 @@ import {
   yundingDataProcessing,
   handlerso1Data,
 } from "@/utils/auth";
-import {
-  searchPlayerAll,
-} from "@/axios/api";
+import { searchPlayerAll } from "@/axios/api";
 import { areaMap, levelConfig, platformMap } from "@/utils/area.js";
 import screenshot from "@/utils/screenshot";
 import { userHistoryStore } from "@/stores/userHistory";
@@ -186,7 +184,7 @@ function updateRecord() {
       if (res.code === 2) {
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }

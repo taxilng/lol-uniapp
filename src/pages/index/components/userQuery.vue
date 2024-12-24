@@ -554,7 +554,7 @@ async function getHistoryOne() {
         if (res.code === 2) {
           uni.showToast({
             title: res?.data?.[0]?.titleTime,
-            title: "error",
+            icon: "error",
           });
           return;
         }
@@ -597,7 +597,6 @@ function handleAfterSuccess() {
   console.log(recordData, "recordData");
   uni.setStorageSync("singlePlayerRecord", JSON.stringify(recordData.value));
 }
-
 
 function calculationSessions() {
   if (!dataRange.value || !dataRange.value.before) {

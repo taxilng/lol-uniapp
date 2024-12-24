@@ -249,7 +249,7 @@ const roles = ref([...defaultSelectedUser]);
 const searchHistory = ref([]);
 const handleClose = tag => {
   searchHistory.value.splice(searchHistory.value.indexOf(tag), 1);
-  uni.setStorageSync("searchHistoryLocal", JSON.stringify(searchHistory.value));
+  uni.setStorageSync("searchYundingHistoryLocal", JSON.stringify(searchHistory.value));
 };
 
 // 选择历史用户tag
@@ -281,7 +281,7 @@ onMounted(() => {
     }
   }
 
-  const searchHistoryLocal = uni.getStorageSync("searchHistoryLocal");
+  const searchHistoryLocal = uni.getStorageSync("searchYundingHistoryLocal");
   try {
     if (searchHistoryLocal && Array.isArray(JSON.parse(searchHistoryLocal))) {
       searchHistory.value = JSON.parse(searchHistoryLocal);
@@ -452,9 +452,11 @@ async function getHistoryOne() {
         return;
       }
       if (res.code === 2) {
+        console.log('走不走啊', res?.data?.[0]?.titleTime?.slice(0,7));
+        
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }
@@ -489,7 +491,7 @@ function handleAfterSuccess() {
       areaName: userInfo.value.areaName,
     });
     uni.setStorageSync(
-      "searchHistoryLocal",
+      "searchYundingHistoryLocal",
       JSON.stringify(searchHistory.value)
     );
   }

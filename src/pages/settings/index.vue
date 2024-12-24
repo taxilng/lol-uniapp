@@ -641,6 +641,7 @@ function getStorageStr() {
     defaultPage: uni.getStorageSync("defaultPage"),
     displayMode: uni.getStorageSync("displayMode"),
     searchHistoryLocal: uni.getStorageSync("searchHistoryLocal"),
+    searchYundingHistoryLocal: uni.getStorageSync("searchYundingHistoryLocal"),
     userList: uni.getStorageSync("userList"),
     mergeList: uni.getStorageSync("mergeList"),
   };

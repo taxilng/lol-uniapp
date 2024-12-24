@@ -300,13 +300,12 @@ onMounted(() => {
 });
 
 function renderImg(messageDetail) {
-  return messageDetail?.replaceAll(
-    '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
-    ""
-  )?.replaceAll(
-    'font-size: 0.36rem;',
-    ""
-  );
+  return messageDetail
+    ?.replaceAll(
+      '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
+      ""
+    )
+    ?.replaceAll("font-size: 0.36rem;", "");
 }
 
 const loading = ref(false);
@@ -348,7 +347,7 @@ function updateRecord() {
       if (res.code === 2) {
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }

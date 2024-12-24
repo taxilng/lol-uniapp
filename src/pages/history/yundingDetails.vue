@@ -37,71 +37,71 @@
           </view>
         </view>
       </view>
+      <view class="mt-2">
+        <view
+          class="flex pt-2 mb-2"
+          v-for="(player, playerIndex) in gameData.member_exploit_list"
+          :key="playerIndex"
+        >
+          <view class="px-2">
+            <view>
+              <ChessHeroAvatar :iconId="player.head_icon_id" :size="60" />
+            </view>
+            <view class="mt-1 text-sm">第{{ getRanking(player.ranking) }}</view>
+          </view>
 
-      <template>
-        <view class="mt-2">
-          <view
-            class="flex pt-2 mb-2"
-            v-for="(player, playerIndex) in gameData.member_exploit_list"
-            :key="playerIndex"
-          >
-            <view class="px-2">
-              <view>
-                <ChessHeroAvatar :iconId="player.head_icon_id" :size="60" />
-              </view>
-              <view class="mt-1 text-sm"
-                >第{{ getRanking(player.ranking) }}</view
+          <view class="ml-1 flex-1">
+            <view class="flex flex-wrap">
+              <view
+                class="mb-3"
+                v-for="(equipIndex, idx) in player.piece_list"
+                :key="idx"
               >
+                <ChessImages
+                  v-if="equipIndex.id"
+                  :iconId="idConvert(gameData.set_name, equipIndex.id)"
+                  :season="gameData.set_name"
+                  :basePrice="equipIndex.base_price"
+                  :starNum="equipIndex.star_num"
+                  :size="60"
+                />
+              </view>
             </view>
 
-            <view class="ml-1 flex-1">
-              <view class="flex flex-wrap">
-                <view class="mb-3" v-for="(equipIndex, idx) in player.piece_list" :key="idx">
-                  <ChessImages
-                    v-if="equipIndex.id"
-                    :iconId="idConvert(gameData.set_name, equipIndex.id)"
-                    :season="gameData.set_name"
-                    :basePrice="equipIndex.base_price"
-                    :starNum="equipIndex.star_num"
-                    :size="60"
-                  />
-                </view>
-              </view>
-
-              <view class="flex justify-between mt-1 text-sm pr-2">
-                <text
-                  @click="goHistoryList(player)"
-                  class="cursor-pointer"
-                  :class="{
-                    'text-fuchsia-500': player.nickname?.includes(
-                      userHistory.nameInfoNew
-                    ),
-                  }"
-                  >{{ player.nickname }}</text
-                >
-                <text class="ml-1 text-blue-400">{{
-                  areaMap[player.areaId]?.name
-                }}</text>
-                <view>
-                  <img
-                    class="w-5 h-5 inline-block"
-                    :src="`https://wegame.gtimg.com/g.26-r.c2d3c/helper/lol/v2/tier/tier-${player.game_rank_list?.[0]?.tier}.png`"
-                  />
-                  <text>
-                    {{ levelConfig.tier?.[player.game_rank_list?.[0]?.tier] }}
-                  </text>
-                  <text>
-                    {{ levelConfig.level?.[player.game_rank_list?.[0]?.rank] }}
-                  </text>
-                  <text>
-                    {{ player.game_rank_list?.[0]?.league_points }}
-                  </text>
-                </view>
+            <view class="flex justify-between mt-1 text-sm pr-2">
+              <text
+                @click="goHistoryList(player)"
+                class="cursor-pointer"
+                :class="{
+                  'text-fuchsia-500': player.nickname?.includes(
+                    userHistory.nameInfoNew
+                  ),
+                }"
+                >{{ player.nickname }}</text
+              >
+              <text class="ml-1 text-blue-400">{{
+                areaMap[player.areaId]?.name
+              }}</text>
+              <view>
+                <img
+                  v-if="player.game_rank_list?.[0]?.tier"
+                  class="w-5 h-5 inline-block"
+                  :src="`https://wegame.gtimg.com/g.26-r.c2d3c/helper/lol/v2/tier/tier-${player.game_rank_list?.[0]?.tier}.png`"
+                />
+                <text>
+                  {{ levelConfig.tier?.[player.game_rank_list?.[0]?.tier] }}
+                </text>
+                <text>
+                  {{ levelConfig.level?.[player.game_rank_list?.[0]?.rank] }}
+                </text>
+                <text>
+                  {{ player.game_rank_list?.[0]?.league_points }}
+                </text>
               </view>
             </view>
           </view>
         </view>
-      </template>
+      </view>
     </view>
   </view>
 </template>
@@ -178,8 +178,8 @@ const getRankColor = tier => {
 };
 
 function idConvert(set_name, id) {
-  console.log('哇哈哈哈', set_name, id);
-  
+  // console.log("哇哈哈哈", set_name, id);
+
   if (set_name === "s5") {
     return S5ChessList.find(v => v.chessId === String(id))?.TFTID;
   }
@@ -225,7 +225,7 @@ function goHistoryList(player) {
       if (res.code === 2) {
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }
@@ -261,11 +261,11 @@ async function goSO1HistoryList(player) {
       tagLine: player.riotIdTagline,
     });
     if (res1.data?.success === false) {
-        uni.showToast({
-          title: res1.data?.error?.message,
-          icon: "error",
-        });
-      }
+      uni.showToast({
+        title: res1.data?.error?.message,
+        icon: "error",
+      });
+    }
     const data = res1?.data?.data;
     const res2 = await history_all({
       area,

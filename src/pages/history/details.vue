@@ -19,8 +19,7 @@
           />
           <view>
             <text class="ml-2 text-base">{{
-              userHistory.nameInfoNew ??
-              userHistory.riotIdGameName
+              userHistory.nameInfoNew ?? userHistory.riotIdGameName
             }}</text>
             <view>
               <text class="ml-2 text-sm">{{
@@ -137,9 +136,17 @@
                   }}k</text
                 >
               </text>
-              <i v-for="item in player.biaoxianInfo" :key="item" :class="`honor16-${item}`" class="ml-2 common-icon honor16"></i>
-              <text class="ml-1" :style="{ color: getRankColor(player.duanweiInfo) }">
-                  {{ player.duanweiInfo }}
+              <i
+                v-for="item in player.biaoxianInfo"
+                :key="item"
+                :class="`honor16-${item}`"
+                class="ml-2 common-icon honor16"
+              ></i>
+              <text
+                class="ml-1"
+                :style="{ color: getRankColor(player.duanweiInfo) }"
+              >
+                {{ player.duanweiInfo }}
               </text>
             </view>
           </view>
@@ -327,7 +334,7 @@ function goHistoryList(player) {
       if (res.code === 2) {
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }
@@ -344,7 +351,13 @@ function goHistoryList(player) {
 }
 
 async function goSO1HistoryList(player) {
-  if (!(userHistoryDetails1.value?.platformId && player.riotIdGameName && player.riotIdTagline)) {
+  if (
+    !(
+      userHistoryDetails1.value?.platformId &&
+      player.riotIdGameName &&
+      player.riotIdTagline
+    )
+  ) {
     return;
   }
   const userHistoryDetails = historyStore.historyDetail ?? {};
@@ -357,11 +370,11 @@ async function goSO1HistoryList(player) {
       tagLine: player.riotIdTagline,
     });
     if (res1.data?.success === false) {
-        uni.showToast({
-          title: res1.data?.error?.message,
-          icon: "error",
-        });
-      }
+      uni.showToast({
+        title: res1.data?.error?.message,
+        icon: "error",
+      });
+    }
     const data = res1?.data?.data;
     const res2 = await history_all({
       area,
@@ -486,7 +499,7 @@ const userHistoryDetails1 = ref({});
 
 async function getHistoryDetails() {
   console.log("打印下", userHistoryDetails1.value);
-  if(!userHistoryDetails1.value.gameId) {
+  if (!userHistoryDetails1.value.gameId) {
     return;
   }
   loading.value = true;
@@ -510,7 +523,7 @@ async function getHistoryDetails() {
 
     historyStore.setHistoryDetailObj({
       gameId: userHistoryDetails1.value.gameId,
-      value:res
+      value: res,
     });
     gameData.value = res.data;
   } catch (error) {

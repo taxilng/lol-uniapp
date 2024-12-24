@@ -5,7 +5,11 @@
     <view class="history-details">
       <view class="flex justify-between items-center p-1 bg-blue-100">
         <view class="flex items-center">
-          <LolAvartar :size="40" :iconId="userHistory.iconId" :loading="loading" />
+          <LolAvartar
+            :size="40"
+            :iconId="userHistory.iconId"
+            :loading="loading"
+          />
           <view>
             <text class="ml-2 text-base">{{ userHistory.nameInfoNew }}</text>
             <text class="ml-2">{{
@@ -182,7 +186,7 @@ function goHistoryList(player) {
       if (res.code === 2) {
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
-          title: "error",
+          icon: "error",
         });
         return;
       }
@@ -256,7 +260,7 @@ async function getHistoryDetails() {
     }
     historyStore.setHistoryDetailObj({
       gameId: userHistoryDetails.value.gameId,
-      value:res
+      value: res,
     });
     gameData.value = res.data;
     console.log("gameData.value", gameData.value);
