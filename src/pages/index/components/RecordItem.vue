@@ -110,7 +110,7 @@
             </view>
             <view v-if="item.pentaKills">
               <i class="mr-1 ml-2 honor16 honor16-kill5"></i
-              >{{ percentageConversion(item.pentaKills, 0) }}
+              >{{item.pentaKills }}
             </view>
           </view>
         </view>
@@ -157,7 +157,7 @@
           </view>
           <view v-if="item.pentaKills">
             <i class="mr-1 ml-2 honor16 honor16-kill5"></i
-            >{{ percentageConversion(item.pentaKills) }}
+            >{{ item.pentaKills }}
           </view>
         </view>
         <view
@@ -214,6 +214,9 @@ EventBus.on("updateBaseUrl", () => {
 });
 
 function percentageConversion(val, decimal = 2) {
+  if(item.value.totalGames < 10) {
+    return val
+  }
   return ((val / item.value.totalGames) * 100).toFixed(decimal);
 }
 
