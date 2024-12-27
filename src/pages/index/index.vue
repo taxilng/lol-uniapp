@@ -419,7 +419,9 @@ async function getNewHistorys() {
           count: countList[i],
           tag: userInfo.value?.queueId,
         });
-        accumulatedMatches.push(...res2?.data?.data);
+        if(res2.data.success && res2?.data?.data?.length) {
+          accumulatedMatches.push(...res2?.data?.data);
+        }
       }
       const res3 = await spectator_info({
         area: areaMap[v.areaId]?.name,
