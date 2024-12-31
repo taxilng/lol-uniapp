@@ -12,16 +12,16 @@
             <LolAvartar :size="60" :iconId="recordData.iconId" />
             <view class="tooltips" v-if="!showTips">
               <view class="tooltipsText">点击头像查看历史战绩</view>
-              <view class="tooltipsArrow"> </view>
+              <view class="tooltipsArrow"></view>
             </view>
           </view>
           <h2 class="text-2xl font-semibold text-gray-800">
             {{ recordData.nameInfoNew }}
           </h2>
           <view class="mt-2">
-            <text class="text-purple-600">{{
-              loading ? "隐藏分" : dataRankEloNum
-            }}</text>
+            <text class="text-purple-600">
+              {{ loading ? "隐藏分" : dataRankEloNum }}
+            </text>
           </view>
         </view>
         <!-- 用户信息 -->
@@ -33,9 +33,9 @@
               class="flex items-center mb-2 text-sm"
             >
               <template v-if="item.value">
-                <view class="font-medium text-gray-600 whitespace-nowrap"
-                  >{{ item.label }}:</view
-                >
+                <view class="font-medium text-gray-600 whitespace-nowrap">
+                  {{ item.label }}:
+                </view>
                 <view
                   class="text-blue-500 ml-2"
                   v-html="
@@ -60,18 +60,20 @@
             />
           </view>
           <view>
-            <view class="mb-2">{{
-              parseTime(
-                recordData?.currentGame?.playerCredentials?.gameCreateDate,
-                "{m}月{d}日 {h}:{i}"
-              )
-            }}</view>
+            <view class="mb-2">
+              {{
+                parseTime(
+                  recordData?.currentGame?.playerCredentials?.gameCreateDate,
+                  "{m}月{d}日 {h}:{i}"
+                )
+              }}
+            </view>
             <view>
               <text class="mr-2 ml-4 greenRound">
                 {{
                   levelConfig.game_mod[
                     recordData?.currentGame?.playerCredentials?.queueId
-                  ]
+                  ] ?? "新模式"
                 }}
               </text>
               <text>
@@ -136,9 +138,9 @@
         </view>
       </view>
 
-      <view class="w-full bg-gray-400 text-center text-white text-sm p-1"
-        >排位</view
-      >
+      <view class="w-full bg-gray-400 text-center text-white text-sm p-1">
+        排位
+      </view>
       <!-- 颜色展示 -->
       <!-- <view class="flex p-2">
         <view class="flex items-center mr-2" v-for="(item, index) in ranks" :key="index">
@@ -158,17 +160,14 @@
             :key="index"
           >
             <view class="flex items-center w-full">
-              <img
-                class="w-6 h-6 rounded-lg"
-                :src="getDanImg(item)"
-                alt=""
-              />
-              <text class="ml-2"> {{ item.type }} </text>
+              <img class="w-6 h-6 rounded-lg" :src="getDanImg(item)" alt="" />
+              <text class="ml-2">{{ item.type }}</text>
               <text
                 class="ml-2 text-white px-1 rounded"
                 :style="{ background: getRanks(item.tier) }"
-                >{{ item.tier }}</text
               >
+                {{ item.tier }}
+              </text>
             </view>
 
             <view class="mt-1">

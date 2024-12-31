@@ -13,16 +13,16 @@
         <view class="ml-2 flex-1" @click="update3">
           <view class="font-medium">
             <text class="text-base">{{ recordData.nameInfoNew }}</text>
-            <text class="text-xs ml-2 text-gray-800"
-              >V{{ recordData.level }}</text
-            >
+            <text class="text-xs ml-2 text-gray-800">
+              V{{ recordData.level }}
+            </text>
           </view>
-          <view class="text-purple-600 text-xs mt-1">{{
-            rankEloLoading ? "隐藏分" : dataRankEloNum
-          }}</view>
-          <view class="mt-1 text-xs"
-            >在线时间: {{ recordData.onlineInfo }}</view
-          >
+          <view class="text-purple-600 text-xs mt-1">
+            {{ rankEloLoading ? "隐藏分" : dataRankEloNum }}
+          </view>
+          <view class="mt-1 text-xs">
+            在线时间: {{ recordData.onlineInfo }}
+          </view>
           <view
             class="message-detail text-xs"
             v-html="renderImg(recordData.messageDetail)"
@@ -43,18 +43,20 @@
             />
           </view>
           <view>
-            <view class="mb-2">{{
-              parseTime(
-                recordData?.currentGame?.playerCredentials?.gameCreateDate,
-                "{m}月{d}日 {h}:{i}"
-              )
-            }}</view>
+            <view class="mb-2">
+              {{
+                parseTime(
+                  recordData?.currentGame?.playerCredentials?.gameCreateDate,
+                  "{m}月{d}日 {h}:{i}"
+                )
+              }}
+            </view>
             <view>
               <text class="mr-2 ml-4 greenRound">
                 {{
                   levelConfig.game_mod[
                     recordData?.currentGame?.playerCredentials?.queueId
-                  ]
+                  ] ?? "新模式"
                 }}
               </text>
               <text>
@@ -86,17 +88,17 @@
             />
             <view class="text-sm ml-2 flex-1">
               <view class="flex justify-between">
-                <text
-                  >{{ item.win ? "胜利" : "失败" }}
-                  {{ `${item.kills}/${item.deaths}/${item.assists}` }}</text
-                >
+                <text>
+                  {{ item.win ? "胜利" : "失败" }}
+                  {{ `${item.kills}/${item.deaths}/${item.assists}` }}
+                </text>
                 <text>{{ parseTime(item.gameStartTimestamp) }}</text>
               </view>
               <view class="text-xs mt-1 flex justify-between">
                 <view class="flex items-center">
-                  <text class="text-slate-500">{{
-                    levelConfig.game_mod[item.queueId]
-                  }}</text>
+                  <text class="text-slate-500">
+                    {{ levelConfig.game_mod[item.queueId] }}
+                  </text>
                   <i
                     v-if="item.damageMax"
                     class="ml-2 honor16 honor16-hurt2"
@@ -115,9 +117,9 @@
                     class="ml-2 honor16 honor16-kill5"
                   ></i>
                 </view>
-                <text class="ml-2"
-                  >用时{{ secondsToHms(item.gameDuration) }}</text
-                >
+                <text class="ml-2">
+                  用时{{ secondsToHms(item.gameDuration) }}
+                </text>
               </view>
             </view>
           </view>
