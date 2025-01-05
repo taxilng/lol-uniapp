@@ -400,9 +400,23 @@ export function handlerso1Data(source) {
         x => x.puuid !== source.baseInfo?.puuid
       ).map((v, i) => {
         const isYourTeam = yourIndex < 5 && i < 5 || yourIndex >= 5 && i >= 5;
-        return { ...v, isYourTeam };
+        return { ...v, isYourTeam, totalGames: 0, Session: 0, teamWins: 0, opponentWins: 0, };
       })
-      yourMatchPlayersList.push(...yourMatchPlayers);
+      if(yourMatchPlayers.length) {
+        yourMatchPlayers.forEach(v => {
+          const has = yourMatchPlayersList.findIndex(x => x.puuid === v.puuid);
+          if(has === -1) {
+            yourMatchPlayersList.push(v);
+          } else {
+            yourMatchPlayersList[has].totalGames += 1;
+            yourMatchPlayersList[has].wins = v.win ? yourMatchPlayersList[has].wins + 1 : yourMatchPlayersList[has].wins;
+            yourMatchPlayersList[has].losses = v.win ? yourMatchPlayersList[has].losses : yourMatchPlayersList[has].losses + 1;
+            yourMatchPlayersList[has].netVictoryField = v.win ? yourMatchPlayersList[has].netVictoryField + 1 : yourMatchPlayersList[has].netVictoryField - 1;
+          }
+        })
+      } else {
+        yourMatchPlayersList.push(...yourMatchPlayers);
+      }
       console.log('你的队友', yourMatchPlayersList);
       harmfulFriend.forEach(y => {
         const hasYour = v.participants.find(x => x.riotIdGameName === y.label);
