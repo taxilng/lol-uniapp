@@ -384,12 +384,26 @@ export function handlerso1Data(source) {
         );
       });
     }
+    // 你的所有队友和对手
+    const yourMatchPlayersList = []
     const list = effectiveCompetition.map(v => {
       baseInfo.platformId = v.platformId;
       baseInfo.areaId = platform2areaId[v.platformId];
       const yours = v.participants.find(
         x => x.puuid === source.baseInfo?.puuid
       );
+      const yourIndex = v.participants.findIndex(
+        x => x.puuid === source.baseInfo?.puuid
+      );
+      console.log('你的index', yourIndex);
+      const yourMatchPlayers = v.participants.filter(
+        x => x.puuid !== source.baseInfo?.puuid
+      ).map((v, i) => {
+        const isYourTeam = yourIndex < 5 && i < 5 || yourIndex >= 5 && i >= 5;
+        return { ...v, isYourTeam };
+      })
+      yourMatchPlayersList.push(...yourMatchPlayers);
+      console.log('你的队友', yourMatchPlayersList);
       harmfulFriend.forEach(y => {
         const hasYour = v.participants.find(x => x.riotIdGameName === y.label);
         if (hasYour) {
@@ -525,7 +539,7 @@ export function handlerso1Data(source) {
         0
       );
     }
-    // console.log('新列表', list, baseInfo);
+    console.log('新列表', list, baseInfo);
     const sortHarmfulFriend = harmfulFriend
       .filter(v => v.totalGames)
       .sort((a, b) => b.netVictoryField - a.netVictoryField);
