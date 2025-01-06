@@ -112,6 +112,15 @@
             @click="failHistorys"
           ></uv-button>
         </view>
+        <view>
+          <uv-button
+            :loading="loading"
+            size="small"
+            type="error"
+            text="截图"
+            @click="handleShare"
+          ></uv-button>
+        </view>
       </view>
     </uv-form>
     <view class="flex flex-wrap items-center mt-2">
@@ -227,6 +236,7 @@ import {
   dataProcessing,
 } from "@/utils/auth";
 import multipleSelect from "@/components/multiple-select";
+import screenshot from '@/utils/screenshot'
 
 const collapseVisible = ref(true);
 
@@ -657,7 +667,7 @@ function handleShare() {
   shareLoading.value = true;
 
   nextTick(() => {
-    // screenshot(".shot", "战绩列表").finally(() => (shareLoading.value = false));
+    screenshot(".shot", "战绩列表").finally(() => (shareLoading.value = false));
   });
 }
 
