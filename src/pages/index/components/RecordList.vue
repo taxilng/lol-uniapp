@@ -6,7 +6,12 @@
       @click="tabChange"
       :current="currentTabs"
     ></uv-tabs>
-
+    <uv-tabs
+      v-if="batchBaseUrl === '地址3'"
+      :list="tabs3"
+      @click="tabChange3"
+      :current="currentTabs3"
+    ></uv-tabs>
     <view
       class="record-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"
     >
@@ -55,6 +60,18 @@ function tabChange(item) {
   console.log("item", item);
   currentTabs.value = item.index;
   activeTab.value = tabs.value?.find(t => t.value === item.value);
+}
+
+
+const currentTabs3 = ref(0);
+const tabs3 = ref([
+  { name: "总胜场", value: "TotalVictoryField", sort: sortField },
+  { name: "在线时间", value: "blackField", sort: sortOnlineTime },
+]);
+function tabChange3(item) {
+  console.log("item", item);
+  currentTabs3.value = item.index;
+  activeTab.value = tabs3.value?.find(t => t.value === item.value);
 }
 
 const batchBaseUrl = ref(uni.getStorageSync("batchBaseUrl"));
@@ -107,6 +124,19 @@ function sortBlackfield(a, b) {
   );
 }
 
+function sortOnlineTime(a, b) {
+  console.log("aaa", a);
+  if(a?.currentGame?.gameName) {
+    return 1;
+  }
+  if(b?.currentGame?.gameName) {
+    return -1;
+  }
+  return (
+    a.lastGameDate - b.lastGameDate
+  );
+}
+
 // function sortCarry(a, b) {
 //   return (a.mvp + a.svp) / a.totalGames > (b.mvp + b.svp) / b.totalGames
 // }
@@ -140,6 +170,7 @@ const sortList = computed(() => {
     oldIndex: index,
   }));
   const targetSort = activeTab.value?.sort;
+  console.log("排序方法", targetSort);
   return result?.sort(targetSort).reverse();
 });
 
