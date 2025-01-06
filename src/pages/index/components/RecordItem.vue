@@ -13,7 +13,7 @@
     </view>
 
     <view class="absolute top-0 right-0 flex items-center">
-      <text class="text-sm"> {{ activeTab.name }}排名 </text>
+      <text class="text-sm">{{ activeTab.name }}排名</text>
       <text
         class="ml-2 bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-tr-lg"
       >
@@ -32,91 +32,93 @@
 
       <view class="ml-2">
         <view class="font-medium">
-          <text class="text-base text-gray-900 cursor-pointer">{{
-            item.name
-          }}</text>
+          <text class="text-base text-gray-900 cursor-pointer">
+            {{ item.name }}
+          </text>
           <text class="text-xs ml-2 text-gray-400">
-            <template v-if="mode === 'mini'">{{
-              item.onlineInfo?.length < 5
-                ? item.onlineInfo
-                : item.onlineInfo?.length === 19
-                ? item.onlineInfo?.slice(5, 16)
-                : item.onlineInfo?.split("(")?.[1]?.slice(5, 16)
-            }}</template>
+            <template v-if="mode === 'mini'">
+              {{
+                item.onlineInfo?.length < 5
+                  ? item.onlineInfo
+                  : item.onlineInfo?.length === 19
+                  ? item.onlineInfo?.slice(5, 16)
+                  : item.onlineInfo?.split("(")?.[1]?.slice(5, 16)
+              }}
+            </template>
             <template v-else>V{{ item.level }}</template>
           </text>
         </view>
         <view v-if="mode === 'mini' && activeTab?.name?.includes('黑')">
-          <text class="mt-1 text-xs mr-2"
-            >黑胜: {{ item.blackoutWins * 2 - item.blackoutTimes }}</text
-          >
-          <text class="mt-1 text-xs mr-2"
-            >胜率:
+          <text class="mt-1 text-xs mr-2">
+            黑胜: {{ item.blackoutWins * 2 - item.blackoutTimes }}
+          </text>
+          <text class="mt-1 text-xs mr-2">
+            胜率:
             {{
               `${((item.blackoutWins / item.blackoutTimes) * 100).toFixed(2)}%`
-            }}</text
-          >
-          <text class="mt-1 text-xs"
-            >开黑C:
+            }}
+          </text>
+          <text class="mt-1 text-xs">
+            开黑C:
             {{
               `${item.blackMvp + item.blackSvp}/${item.blackoutTimes} (${(
                 ((item.blackMvp + item.blackSvp) / item.blackoutTimes) *
                 100
               ).toFixed(2)}%)`
-            }}</text
-          >
+            }}
+          </text>
         </view>
         <view
           class="flex flex-wrap"
           v-if="mode === 'mini' && !activeTab?.name?.includes('黑')"
         >
-          <text class="mt-1 text-xs mr-2"
-            >胜: {{ item.wins - item.losses }}</text
-          >
-          <text v-if="batchBaseUrl !== '地址3'" class="mt-1 text-xs mr-2"
-            >胜率: {{ `${item.rate}%` }}</text
-          >
-          <text v-if="batchBaseUrl === '地址3'" class="mt-1 text-xs"
-            >总场次: {{ item.totalGames }}</text
-          >
-          <text v-else class="mt-1 text-xs"
-            >总CARRY:
+          <text class="mt-1 text-xs mr-2">
+            胜: {{ item.wins - item.losses }}
+          </text>
+          <text v-if="batchBaseUrl !== '地址3'" class="mt-1 text-xs mr-2">
+            胜率: {{ `${item.rate}%` }}
+          </text>
+          <text v-if="batchBaseUrl === '地址3'" class="mt-1 text-xs">
+            总场次: {{ item.totalGames }}
+          </text>
+          <text v-else class="mt-1 text-xs">
+            总CARRY:
             {{
               `${item.mvp + item.svp}/${item.totalGames} (${(
                 ((item.mvp + item.svp) / item.totalGames) *
                 100
               ).toFixed(2)}%)`
-            }}</text
-          >
+            }}
+          </text>
           <view
             v-if="batchBaseUrl === '地址3'"
             class="flex flex-wrap mt-1 text-xs"
           >
             <view v-if="item.damageMax">
-              <i class="mr-1 ml-2 honor16 honor16-hurt2"></i
-              >{{ percentageConversion(item.damageMax, 0) }}
+              <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
+              {{ percentageConversion(item.damageMax, 0) }}
             </view>
             <view v-if="item.defenseMax">
-              <i class="mr-1 ml-2 honor16 honor16-hurt"></i
-              >{{ percentageConversion(item.defenseMax, 0) }}
+              <i class="mr-1 ml-2 honor16 honor16-hurt"></i>
+              {{ percentageConversion(item.defenseMax, 0) }}
             </view>
             <view v-if="item.killsMax">
-              <i class="mr-1 ml-2 honor16 honor16-kill"></i
-              >{{ percentageConversion(item.killsMax, 0) }}
+              <i class="mr-1 ml-2 honor16 honor16-kill"></i>
+              {{ percentageConversion(item.killsMax, 0) }}
             </view>
             <view v-if="item.assistsMax">
-              <i class="mr-1 ml-2 honor16 honor16-attack"></i
-              >{{ percentageConversion(item.assistsMax, 0) }}
+              <i class="mr-1 ml-2 honor16 honor16-attack"></i>
+              {{ percentageConversion(item.assistsMax, 0) }}
             </view>
             <view v-if="item.pentaKills">
-              <i class="mr-1 ml-2 honor16 honor16-kill5"></i
-              >{{item.pentaKills }}
+              <i class="mr-1 ml-2 honor16 honor16-kill5"></i>
+              {{ item.pentaKills }}
             </view>
           </view>
         </view>
-        <view v-if="mode !== 'mini'" class="mt-1 text-xs"
-          >在线时间: {{ item.onlineInfo }}</view
-        >
+        <view v-if="mode !== 'mini'" class="mt-1 text-xs">
+          在线时间: {{ item.onlineInfo }}
+        </view>
       </view>
     </view>
 
@@ -124,9 +126,9 @@
       class="mt-2 text-sm text-gray-500"
       v-show="['normal', 'detailed'].includes(mode)"
     >
-      <view class="mt-2" v-if="batchBaseUrl !== '地址3' && mode === 'detailed'"
-        >最近评分：{{ item.message }}</view
-      >
+      <view class="mt-2" v-if="batchBaseUrl !== '地址3' && mode === 'detailed'">
+        最近评分：{{ item.message }}
+      </view>
       <view class="flex flex-wrap text-sm text-gray-500 gap-2 mt-2">
         <view
           v-for="(info, key) in userInfos"
@@ -134,30 +136,30 @@
           class="flex items-center"
         >
           <text class="whitespace-nowrap">{{ info.label }}:</text>
-          <text class="ml-2 text-blue-400"> {{ info.value }}</text>
+          <text class="ml-2 text-blue-400">{{ info.value }}</text>
         </view>
       </view>
       <template v-if="batchBaseUrl === '地址3' && mode === 'detailed'">
         <view class="flex flex-wrap mt-1 text-sm">
           <view v-if="item.damageMax">
-            <i class="mr-1 ml-2 honor16 honor16-hurt2"></i
-            >{{ percentageConversion(item.damageMax) }}
+            <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
+            {{ percentageConversion(item.damageMax) }}
           </view>
           <view v-if="item.defenseMax">
-            <i class="mr-1 ml-2 honor16 honor16-hurt"></i
-            >{{ percentageConversion(item.defenseMax) }}
+            <i class="mr-1 ml-2 honor16 honor16-hurt"></i>
+            {{ percentageConversion(item.defenseMax) }}
           </view>
           <view v-if="item.killsMax">
-            <i class="mr-1 ml-2 honor16 honor16-kill"></i
-            >{{ percentageConversion(item.killsMax) }}
+            <i class="mr-1 ml-2 honor16 honor16-kill"></i>
+            {{ percentageConversion(item.killsMax) }}
           </view>
           <view v-if="item.assistsMax">
-            <i class="mr-1 ml-2 honor16 honor16-attack"></i
-            >{{ percentageConversion(item.assistsMax) }}
+            <i class="mr-1 ml-2 honor16 honor16-attack"></i>
+            {{ percentageConversion(item.assistsMax) }}
           </view>
           <view v-if="item.pentaKills">
-            <i class="mr-1 ml-2 honor16 honor16-kill5"></i
-            >{{ item.pentaKills }}
+            <i class="mr-1 ml-2 honor16 honor16-kill5"></i>
+            {{ item.pentaKills }}
           </view>
         </view>
         <view
@@ -165,17 +167,40 @@
           :key="key"
           class="mt-2"
         >
-          <text class="whitespace-nowrap inline-block min-w-24">{{
-            firend.label
-          }}</text>
-          <text class="ml-2 inline-block min-w-10"
-            >胜<text class="text-blue-400">{{ firend.netVictoryField }}</text>
+          <text class="whitespace-nowrap inline-block min-w-24">
+            {{ firend.label }}
           </text>
-          <text class="ml-2"
-            >场次<text class="text-violet-500">{{
-              `${firend.wins}/${firend.totalGames}`
-            }}</text></text
-          >
+          <text class="ml-2 inline-block min-w-10">
+            胜
+            <text class="text-blue-400">{{ firend.netVictoryField }}</text>
+          </text>
+          <text class="ml-2">
+            场次
+            <text class="text-violet-500">
+              {{ `${firend.wins}/${firend.totalGames}` }}
+            </text>
+          </text>
+        </view>
+        <view
+          v-for="(match2, key) in item.yourMatchPlayersList"
+          :key="key"
+          class="mt-2"
+        >
+          <text class="whitespace-nowrap inline-block min-w-44">
+            {{ match2.riotIdGameName }}#{{ match2.riotIdTagline }}
+          </text>
+          <text class="ml-2" v-if="match2.teamSession">
+            友方
+            <text class="text-violet-500">
+              {{ `${match2.teamWins}/${match2.teamSession}` }}
+            </text>
+          </text>
+          <text class="ml-2" v-if="match2.opponentSession">
+            敌方
+            <text class="text-violet-500">
+              {{ `${match2.opponentWins}/${match2.opponentSession}` }}
+            </text>
+          </text>
         </view>
       </template>
 
@@ -214,8 +239,8 @@ EventBus.on("updateBaseUrl", () => {
 });
 
 function percentageConversion(val, decimal = 2) {
-  if(item.value.totalGames < 10) {
-    return val
+  if (item.value.totalGames < 10) {
+    return val;
   }
   return ((val / item.value.totalGames) * 100).toFixed(decimal);
 }

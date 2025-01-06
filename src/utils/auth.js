@@ -385,7 +385,7 @@ export function handlerso1Data(source) {
       });
     }
     // 你的所有队友和对手
-    const yourMatchPlayersList = []
+    const yourMatchPlayersList = [];
     const list = effectiveCompetition.map(v => {
       baseInfo.platformId = v.platformId;
       baseInfo.areaId = platform2areaId[v.platformId];
@@ -395,29 +395,49 @@ export function handlerso1Data(source) {
       const yourIndex = v.participants.findIndex(
         x => x.puuid === source.baseInfo?.puuid
       );
-      console.log('你的index', yourIndex);
-      const yourMatchPlayers = v.participants.filter(
-        x => x.puuid !== source.baseInfo?.puuid
-      ).map((v, i) => {
-        const isYourTeam = yourIndex < 5 && i < 5 || yourIndex >= 5 && i >= 5;
-        return { ...v, isYourTeam, totalGames: 0, Session: 0, teamWins: 0, opponentWins: 0, };
-      })
-      if(yourMatchPlayers.length) {
+      // console.log("你的index", yourIndex);
+      const yourMatchPlayers = v.participants
+        .filter(x => x.puuid !== source.baseInfo?.puuid)
+        .map((v, i) => {
+          const isYourTeam =
+            (yourIndex < 5 && i < 5) || (yourIndex >= 5 && i >= 5);
+          return {
+            ...v,
+            isYourTeam,
+            totalGames: 1,
+            teamSession: isYourTeam ? 1 : 0,
+            teamWins: isYourTeam ? (v.win ? 1 : 0) : 0,
+            opponentSession: isYourTeam ? 0 : 1,
+            opponentWins: isYourTeam ? 0 : v.win ? 0 : 1,
+          };
+        });
+      if (yourMatchPlayersList.length) {
         yourMatchPlayers.forEach(v => {
           const has = yourMatchPlayersList.findIndex(x => x.puuid === v.puuid);
-          if(has === -1) {
+          if (has === -1) {
             yourMatchPlayersList.push(v);
           } else {
             yourMatchPlayersList[has].totalGames += 1;
-            yourMatchPlayersList[has].wins = v.win ? yourMatchPlayersList[has].wins + 1 : yourMatchPlayersList[has].wins;
-            yourMatchPlayersList[has].losses = v.win ? yourMatchPlayersList[has].losses : yourMatchPlayersList[has].losses + 1;
-            yourMatchPlayersList[has].netVictoryField = v.win ? yourMatchPlayersList[has].netVictoryField + 1 : yourMatchPlayersList[has].netVictoryField - 1;
+            if (v.isYourTeam) {
+              yourMatchPlayersList[has].teamSession += 1;
+              yourMatchPlayersList[has].teamWins = v.win
+                ? yourMatchPlayersList[has].teamWins + 1
+                : yourMatchPlayersList[has].teamWins;
+            } else {
+              yourMatchPlayersList[has].opponentSession += 1;
+              yourMatchPlayersList[has].opponentWins = v.win
+                ? yourMatchPlayersList[has].opponentWins
+                : yourMatchPlayersList[has].opponentWins + 1;
+            }
           }
-        })
+        });
       } else {
         yourMatchPlayersList.push(...yourMatchPlayers);
       }
-      console.log('你的队友', yourMatchPlayersList);
+      // console.log(
+      //   "你的队友",
+      //   yourMatchPlayersList.filter(v => v.totalGames > 1)
+      // );
       harmfulFriend.forEach(y => {
         const hasYour = v.participants.find(x => x.riotIdGameName === y.label);
         if (hasYour) {
@@ -553,11 +573,14 @@ export function handlerso1Data(source) {
         0
       );
     }
-    console.log('新列表', list, baseInfo);
+    console.log("新列表", list, baseInfo);
     const sortHarmfulFriend = harmfulFriend
       .filter(v => v.totalGames)
       .sort((a, b) => b.netVictoryField - a.netVictoryField);
     console.log("排序损友", sortHarmfulFriend);
+    const match2PlayersList = yourMatchPlayersList
+      .filter(v => v.totalGames > 1)
+      .sort((a, b) => b.totalGames - a.totalGames);
     return {
       ...baseInfo,
       list,
@@ -565,6 +588,7 @@ export function handlerso1Data(source) {
       publicInfo,
       onlineInfo,
       sortHarmfulFriend,
+      yourMatchPlayersList: match2PlayersList,
     };
   } else {
     return {
