@@ -439,7 +439,7 @@ export function handlerso1Data(source) {
       //   yourMatchPlayersList.filter(v => v.totalGames > 1)
       // );
       harmfulFriend.forEach(y => {
-        const hasYour = v.participants.find(x => x.riotIdGameName === y.label);
+        const hasYour = v.participants.find(x => x.riotIdGameName === y.label && x.riotIdTagline === y.tagLine);
         if (hasYour) {
           y.totalGames += 1;
           y.wins = hasYour.win ? y.wins + 1 : y.wins;
@@ -579,7 +579,7 @@ export function handlerso1Data(source) {
       .sort((a, b) => b.netVictoryField - a.netVictoryField);
     console.log("排序损友", sortHarmfulFriend);
     const match2PlayersList = yourMatchPlayersList
-      .filter(v => v.totalGames > 1)
+      .filter(v => v.totalGames > 2)
       .sort((a, b) => b.totalGames - a.totalGames);
     return {
       ...baseInfo,

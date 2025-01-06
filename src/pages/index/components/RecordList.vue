@@ -125,7 +125,6 @@ function sortBlackfield(a, b) {
 }
 
 function sortOnlineTime(a, b) {
-  console.log("aaa", a);
   if(a?.currentGame?.gameName) {
     return 1;
   }

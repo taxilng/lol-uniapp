@@ -13,7 +13,7 @@
     </view>
 
     <view class="absolute top-0 right-0 flex items-center">
-      <text class="text-sm">{{ activeTab.name }}排名</text>
+      <!-- <text class="text-sm">{{ activeTab.name }}排名</text> -->
       <text
         class="ml-2 bg-red-500 text-white w-8 h-8 flex items-center justify-center rounded-tr-lg"
       >
@@ -162,7 +162,7 @@
             {{ item.pentaKills }}
           </view>
         </view>
-        <view
+        <!-- <view
           v-for="(firend, key) in item.sortHarmfulFriend"
           :key="key"
           class="mt-2"
@@ -180,7 +180,7 @@
               {{ `${firend.wins}/${firend.totalGames}` }}
             </text>
           </text>
-        </view>
+        </view> -->
         <view
           v-for="(match2, key) in item.yourMatchPlayersList"
           :key="key"
@@ -190,13 +190,18 @@
             {{ match2.riotIdGameName }}#{{ match2.riotIdTagline }}
           </text>
           <text class="ml-2" v-if="match2.teamSession">
-            友方
+            <text class="text-teal-500">
+              友方
+            </text>
+              
             <text class="text-violet-500">
               {{ `${match2.teamWins}/${match2.teamSession}` }}
             </text>
           </text>
           <text class="ml-2" v-if="match2.opponentSession">
-            敌方
+            <text class="text-red-500	">
+              敌方
+            </text>
             <text class="text-violet-500">
               {{ `${match2.opponentWins}/${match2.opponentSession}` }}
             </text>
@@ -247,9 +252,13 @@ function percentageConversion(val, decimal = 2) {
 
 function getRanking(item, index) {
   if (batchBaseUrl.value === "地址3") {
-    return (
-      list.value?.findIndex(v => v.netVictoryField === item.netVictoryField) + 1
-    );
+    if (activeTab.value?.name?.includes("总胜场")) {
+      return (
+        list.value?.findIndex(v => v.netVictoryField === item.netVictoryField) + 1
+      );
+    } else if (activeTab.value?.name?.includes("在线时间")){
+      return index + 1;
+    }
   } else {
     if (activeTab?.value?.name?.includes("黑胜场")) {
       return (
