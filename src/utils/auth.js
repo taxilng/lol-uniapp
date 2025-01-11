@@ -368,6 +368,7 @@ export function handlerso1Data(source) {
       source.list[source.list.length - 1].gameStartTimestamp;
     const startTime = parseTime(gameStartTimestamp);
     let effectiveCompetition = source.list.filter(v => v.gameDuration > 180);
+    // 按照日期过滤数据
     if (source.dataRange?.before) {
       effectiveCompetition = effectiveCompetition.filter(v => {
         const CompetitionTime = v.gameStartTimestamp;
@@ -384,6 +385,16 @@ export function handlerso1Data(source) {
         );
       });
     }
+
+    // 按照比赛类型过滤数据
+    if (source.competitionType === "6") {
+      effectiveCompetition = effectiveCompetition.filter(v =>
+        ![
+          31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
+          890,
+        ].includes(v.queueId)
+      );
+    }
     // 你的所有队友和对手
     const yourMatchPlayersList = [];
     const list = effectiveCompetition.map(v => {
@@ -397,7 +408,6 @@ export function handlerso1Data(source) {
       );
       // console.log("你的index", yourIndex);
       const yourMatchPlayers = v.participants
-        .filter(x => x.puuid !== source.baseInfo?.puuid)
         .map((v, i) => {
           const isYourTeam =
             (yourIndex < 5 && i < 5) || (yourIndex >= 5 && i >= 5);
@@ -410,7 +420,8 @@ export function handlerso1Data(source) {
             opponentSession: isYourTeam ? 0 : 1,
             opponentWins: isYourTeam ? 0 : v.win ? 0 : 1,
           };
-        });
+        })
+        .filter(x => x.puuid !== source.baseInfo?.puuid);
       if (yourMatchPlayersList.length) {
         yourMatchPlayers.forEach(v => {
           const has = yourMatchPlayersList.findIndex(x => x.puuid === v.puuid);
@@ -439,7 +450,9 @@ export function handlerso1Data(source) {
       //   yourMatchPlayersList.filter(v => v.totalGames > 1)
       // );
       harmfulFriend.forEach(y => {
-        const hasYour = v.participants.find(x => x.riotIdGameName === y.label && x.riotIdTagline === y.tagLine);
+        const hasYour = v.participants.find(
+          x => x.riotIdGameName === y.label && x.riotIdTagline === y.tagLine
+        );
         if (hasYour) {
           y.totalGames += 1;
           y.wins = hasYour.win ? y.wins + 1 : y.wins;

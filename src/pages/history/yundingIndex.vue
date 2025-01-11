@@ -68,7 +68,7 @@
                 }}</view>
               </view>
               <view class="mt-1">
-                {{ parseTime(`${item.end_time}000`) }}
+               结束时间 {{ parseTime(`${item.end_time}000`) }}
               </view>
             </view>
           </view>

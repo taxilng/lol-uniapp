@@ -27,8 +27,7 @@
           disabledColor="#ffffff"
           placeholder="请选择召唤师"
           border="none"
-        >
-        </uv-input>
+        ></uv-input>
         <template v-slot:right>
           <uv-icon name="arrow-right"></uv-icon>
         </template>
@@ -41,8 +40,7 @@
             disabledColor="#ffffff"
             placeholder="请选择日期范围"
             border="none"
-          >
-          </uv-input>
+          ></uv-input>
         </view>
         <template v-slot:right>
           <text class="pr-2" @click="clearDate">清空</text>
@@ -69,8 +67,7 @@
           disabledColor="#ffffff"
           placeholder="请选择游戏模式"
           border="none"
-        >
-        </uv-input>
+        ></uv-input>
         <template v-slot:right>
           <uv-icon name="arrow-right"></uv-icon>
         </template>
@@ -87,8 +84,7 @@
           disabledColor="#ffffff"
           placeholder="请选择接口"
           border="none"
-        >
-        </uv-input>
+        ></uv-input>
         <template v-slot:right>
           <uv-icon name="arrow-right"></uv-icon>
         </template>
@@ -236,7 +232,7 @@ import {
   dataProcessing,
 } from "@/utils/auth";
 import multipleSelect from "@/components/multiple-select";
-import screenshot from '@/utils/screenshot'
+import screenshot from "@/utils/screenshot";
 
 const collapseVisible = ref(true);
 
@@ -429,7 +425,7 @@ async function getNewHistorys() {
           count: countList[i],
           tag: userInfo.value?.queueId,
         });
-        if(res2.data.success && res2?.data?.data?.length) {
+        if (res2.data.success && res2?.data?.data?.length) {
           accumulatedMatches.push(...res2?.data?.data);
         }
       }
@@ -469,6 +465,7 @@ async function getNewHistorys() {
           allrequestParams: allrequestParams,
           ...allrequestParams[idx],
           dataRange: dataRange.value,
+          competitionType: userInfo.value.competitionType,
         }),
       };
     });
@@ -504,10 +501,27 @@ const CompetitionTypeOption = ref([
   { value: "3", label: "灵活排位", queueId: 440 },
   { value: "4", label: "匹配赛", queueId: 430 },
   { value: "5", label: "大乱斗", queueId: 450 },
+  { value: "6", label: "非人机" },
 ]);
 
-const roles = ref([]);
+watch(
+  () => userInfo.value,
+  val => {
+    console.log("接口地址", val?.batchBaseUrl);
+    if (val?.batchBaseUrl !== "地址3") {
+      CompetitionTypeOption.value = [
+        { value: "1", label: "全部比赛" },
+        { value: "2", label: "单双排", queueId: 420 },
+        { value: "3", label: "灵活排位", queueId: 440 },
+        { value: "4", label: "匹配赛", queueId: 430 },
+        { value: "5", label: "大乱斗", queueId: 450 },
+      ];
+    }
+  },
+  { deep: true }
+);
 
+const roles = ref([]);
 
 watch(
   tableData1,
@@ -528,7 +542,7 @@ onMounted(() => {
   } catch (error) {
     console.log("缓存的默认批量战绩错误", error);
   }
- 
+
   const defaultPage = uni.getStorageSync("defaultPage");
   try {
     if (
@@ -560,16 +574,14 @@ function initBatchBaseUrl() {
 function initBatchGameMode() {
   const GameMode = uni.getStorageSync("batchGameMode");
   console.log("GameMode", GameMode, typeof GameMode);
-  if(GameMode) {
-
+  if (GameMode) {
     userInfo.value.competitionType = GameMode;
-    const cur = CompetitionTypeOption.value.find(v => v.value === GameMode)
-    if(cur) {
+    const cur = CompetitionTypeOption.value.find(v => v.value === GameMode);
+    if (cur) {
       userInfo.value.competitionTypeName = cur.label;
       userInfo.value.queueId = cur.queueId;
     }
   }
-
 }
 
 onShow(() => {
@@ -800,10 +812,12 @@ async function getHistorys() {
     //   return;
     // }
     // tableData1.value
-    let newData = res
-      .map((x, idx) => {
-        return { ...dataProcessing(x.data, dataRange.value), ...allrequestParams[idx] };
-      })
+    let newData = res.map((x, idx) => {
+      return {
+        ...dataProcessing(x.data, dataRange.value),
+        ...allrequestParams[idx],
+      };
+    });
     console.log("我来试试", newData);
     newData = handlerMergeOld(newData);
     newData.forEach(y => {
@@ -883,10 +897,9 @@ async function failHistorys() {
     //   });
     //   return;
     // }
-    const failtableData = res
-      .map((x, idx) => {
-        return { ...dataProcessing(x.data), ...failRequest.value[idx] };
-      })
+    const failtableData = res.map((x, idx) => {
+      return { ...dataProcessing(x.data), ...failRequest.value[idx] };
+    });
     tableData1.value = handlerMergeOld([...tableData1.value, ...failtableData]);
     // uni.showToast({
     //   title: "查询数据成功",
