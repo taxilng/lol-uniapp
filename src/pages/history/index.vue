@@ -11,8 +11,16 @@
         </view>
 
         <view class="ml-2 flex-1" @click="update3">
-          <view class="font-medium">
-            <text class="text-base">{{ recordData.nameInfoNew }}</text>
+          <view class="font-medium flex items-center">
+            <uv-tooltip
+              class="text-base"
+              color="#000"
+              size="1rem"
+              :text="recordData.nameInfoNew"
+              overlay
+              direction="bottom"
+            ></uv-tooltip>
+            <!-- <text class="text-base">{{ recordData.nameInfoNew }}</text> -->
             <text class="text-xs ml-2 text-gray-800">
               V{{ recordData.level }}
             </text>
@@ -235,7 +243,8 @@ function handleOpenCurrentDetailCorn() {
 }
 
 // 接口3 列表更新
-async function update3() {
+async function update3(e) {
+  console.log("更新3target", e);
   if (!recordData.value?.puuid) {
     return;
   }

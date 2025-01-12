@@ -19,6 +19,7 @@
 					@click.stop="longpressHandler"
 					:style="{
 						color: color,
+						fontSize: size,
 						backgroundColor: bgColor && showTooltip && tooltipTop !== -10000 ? bgColor : 'transparent'
 					}"
 				>{{ text }}</text>
@@ -33,6 +34,7 @@
 					@longpress.stop="longpressHandler"
 					:style="{
 						color: color,
+						fontSize: size,
 						backgroundColor: bgColor && showTooltip && tooltipTop !== -10000 ? bgColor : 'transparent'
 					}"
 				>{{ text }}</text>
