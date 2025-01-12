@@ -3,12 +3,10 @@
     class="max-w-screen-md mx-auto overflow-y-auto bg-slate-50 h-full flex flex-col"
   >
     <view class="history-details">
-      <view
-        class="flex justify-between items-center p-1 bg-blue-100"
-        @click="getHistoryDetails"
-      >
+      <view class="flex justify-between items-center p-1 bg-blue-100">
         <view class="flex items-center">
           <LolAvartar
+            @click="getHistoryDetails"
             :size="40"
             :loading="loading"
             :iconId="
@@ -18,22 +16,36 @@
             "
           />
           <view>
-            <text class="ml-2 text-base">{{
-              userHistory.nameInfoNew ?? userHistory.riotIdGameName
-            }}</text>
+            <uv-tooltip
+              class="ml-2 text-base"
+              color="#000"
+              size="1rem"
+              :text="userHistory.nameInfoNew ?? userHistory.riotIdGameName"
+              overlay
+              direction="bottom"
+            ></uv-tooltip>
+            <!-- <text class="ml-2 text-base">
+              {{ userHistory.nameInfoNew ?? userHistory.riotIdGameName }}
+            </text> -->
             <view>
-              <text class="ml-2 text-sm">{{
-                userHistoryDetails1.fullDate ??
-                parseTime(userHistoryDetails1.gameStartTimestamp)
-              }}</text>
-              <text class="ml-2 text-sm">{{
-                userHistoryDetails1.competitionType ??
-                levelConfig.game_mod[userHistoryDetails1.queueId]
-              }}</text>
-              <text class="ml-2 text-sm">{{
-                userHistoryDetails1.competitionDuration ??
-                secondsToHms(userHistoryDetails1.gameDuration)
-              }}</text>
+              <text class="ml-2 text-sm">
+                {{
+                  userHistoryDetails1.fullDate ??
+                  parseTime(userHistoryDetails1.gameStartTimestamp)
+                }}
+              </text>
+              <text class="ml-2 text-sm">
+                {{
+                  userHistoryDetails1.competitionType ??
+                  levelConfig.game_mod[userHistoryDetails1.queueId]
+                }}
+              </text>
+              <text class="ml-2 text-sm">
+                {{
+                  userHistoryDetails1.competitionDuration ??
+                  secondsToHms(userHistoryDetails1.gameDuration)
+                }}
+              </text>
             </view>
           </view>
         </view>
@@ -83,9 +95,9 @@
                   :wasSvp="player.wasSvp"
                   :size="32"
                 />
-                <view class="mt-0.5 text-sm text-center">{{
-                  player.scoreInfoNum
-                }}</view>
+                <view class="mt-0.5 text-sm text-center">
+                  {{ player.scoreInfoNum }}
+                </view>
               </view>
 
               <view class="ml-1">
@@ -114,11 +126,12 @@
                         userHistory.name
                       ),
                     }"
-                    >{{ player.nickName }}</text
                   >
-                  <text class="ml-1 text-blue-400">{{
-                    areaMap[player.translateAreaId]?.name
-                  }}</text>
+                    {{ player.nickName }}
+                  </text>
+                  <text class="ml-1 text-blue-400">
+                    {{ areaMap[player.translateAreaId]?.name }}
+                  </text>
                 </view>
               </view>
             </view>
@@ -130,11 +143,11 @@
               </text>
               <text class="ml-1">
                 <text class="text-sm">承</text>
-                <text
-                  >{{
+                <text>
+                  {{
                     (player?.echartsMap?.totalDamageTaken / 1000).toFixed(1)
-                  }}k</text
-                >
+                  }}k
+                </text>
               </text>
               <i
                 v-for="item in player.biaoxianInfo"
@@ -203,22 +216,23 @@
                       userHistoryDetails1.riotIdGameName
                     ),
                   }"
-                  >{{ player.riotIdGameName }}</text
                 >
-                <text class="ml-1 text-blue-400">{{
-                  `${player.kills}/${player.deaths}/${player.assists}`
-                }}</text>
+                  {{ player.riotIdGameName }}
+                </text>
+                <text class="ml-1 text-blue-400">
+                  {{ `${player.kills}/${player.deaths}/${player.assists}` }}
+                </text>
                 <text class="ml-1">
                   <text class="text-sm">攻</text>
-                  <text :class="{ 'text-red-500': player.damageMax }"
-                    >{{ (player.damageAll / 1000).toFixed(1) }}k</text
-                  >
+                  <text :class="{ 'text-red-500': player.damageMax }">
+                    {{ (player.damageAll / 1000).toFixed(1) }}k
+                  </text>
                 </text>
                 <text class="ml-1">
                   <text class="text-sm">承</text>
-                  <text :class="{ 'text-cyan-500': player.defenseMax }"
-                    >{{ (player.bearingInjuries / 1000).toFixed(1) }}k</text
-                  >
+                  <text :class="{ 'text-cyan-500': player.defenseMax }">
+                    {{ (player.bearingInjuries / 1000).toFixed(1) }}k
+                  </text>
                 </text>
               </view>
             </view>

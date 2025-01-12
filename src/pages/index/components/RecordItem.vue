@@ -184,24 +184,28 @@
         <view
           v-for="(match2, key) in item.yourMatchPlayersList"
           :key="key"
-          class="mt-2"
+          class="mt-2 flex items-center"
         >
-          <text class="whitespace-nowrap inline-block min-w-44">
+          <uv-tooltip
+            class="text-base whitespace-nowrap inline-block min-w-44"
+            color="#6b7280"
+            size="0.875rem"
+            :text="`${match2.riotIdGameName}#${match2.riotIdTagline}`"
+            overlay
+            direction="bottom"
+          ></uv-tooltip>
+          <!-- <text class="whitespace-nowrap inline-block min-w-44">
             {{ match2.riotIdGameName }}#{{ match2.riotIdTagline }}
-          </text>
+          </text> -->
           <text class="ml-2" v-if="match2.teamSession">
-            <text class="text-teal-500">
-              友方
-            </text>
-              
+            <text class="text-teal-500">友方</text>
+
             <text class="text-violet-500">
               {{ `${match2.teamWins}/${match2.teamSession}` }}
             </text>
           </text>
           <text class="ml-2" v-if="match2.opponentSession">
-            <text class="text-red-500	">
-              敌方
-            </text>
+            <text class="text-red-500">敌方</text>
             <text class="text-violet-500">
               {{ `${match2.opponentWins}/${match2.opponentSession}` }}
             </text>
@@ -254,9 +258,10 @@ function getRanking(item, index) {
   if (batchBaseUrl.value === "地址3") {
     if (activeTab.value?.name?.includes("总胜场")) {
       return (
-        list.value?.findIndex(v => v.netVictoryField === item.netVictoryField) + 1
+        list.value?.findIndex(v => v.netVictoryField === item.netVictoryField) +
+        1
       );
-    } else if (activeTab.value?.name?.includes("在线时间")){
+    } else if (activeTab.value?.name?.includes("在线时间")) {
       return index + 1;
     }
   } else {

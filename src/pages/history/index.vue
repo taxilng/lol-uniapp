@@ -10,7 +10,7 @@
           />
         </view>
 
-        <view class="ml-2 flex-1" @click="update3">
+        <view class="ml-2 flex-1">
           <view class="font-medium flex items-center">
             <uv-tooltip
               class="text-base"
@@ -35,6 +35,9 @@
             class="message-detail text-xs"
             v-html="renderImg(recordData.messageDetail)"
           ></view>
+        </view>
+        <view class="ml-2 p-2" @click="update3">
+          <uv-icon name="reload" size="20"></uv-icon>
         </view>
       </view>
 
