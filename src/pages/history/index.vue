@@ -2,7 +2,7 @@
   <view class="max-w-screen-sm mx-auto h-full overflow-y-auto bg-slate-50">
     <view class="history">
       <view class="flex items-center relative p-2 bg-slate-100">
-        <view @click="updateRecord">
+        <view @click="initUpdateRecord">
           <LolAvartar
             :size="40"
             :iconId="recordData.iconId"
@@ -36,154 +36,169 @@
             v-html="renderImg(recordData.messageDetail)"
           ></view>
         </view>
-        <view class="ml-2 p-2" @click="update3">
+        <view class="ml-2 p-2" @click="initUpdate">
           <uv-icon name="reload" size="20"></uv-icon>
         </view>
       </view>
 
       <template v-if="recordData.list">
-        <view
-          v-if="recordData?.currentGame?.gameName"
-          class="flex justify-center bg-violet-200 w-full p-2 items-center"
-          @click="handleOpenCurrentDetail()"
+        <scroll-view
+          class="scroll-container"
+          scroll-y
+          @scrolltolower="handleScrollToBottom3"
         >
-          <view class="mr-4">
-            <HeroAvatar
-              :championId="recordData?.currentGame?.championId"
-              :size="32"
-            />
-          </view>
-          <view>
-            <view class="mb-2">
-              {{
-                parseTime(
-                  recordData?.currentGame?.playerCredentials?.gameCreateDate,
-                  "{m}月{d}日 {h}:{i}"
-                )
-              }}
+          <view
+            v-if="recordData?.currentGame?.gameName"
+            class="flex justify-center bg-violet-200 w-full p-2 items-center"
+            @click="handleOpenCurrentDetail()"
+          >
+            <view class="mr-4">
+              <HeroAvatar
+                :championId="recordData?.currentGame?.championId"
+                :size="32"
+              />
             </view>
             <view>
-              <text class="mr-2 ml-4 greenRound">
+              <view class="mb-2">
                 {{
-                  levelConfig.game_mod[
-                    recordData?.currentGame?.playerCredentials?.queueId
-                  ] ?? "新模式"
-                }}
-              </text>
-              <text>
-                已开始{{
-                  timePassed(
-                    recordData?.currentGame?.playerCredentials?.gameCreateDate
+                  parseTime(
+                    recordData?.currentGame?.playerCredentials?.gameCreateDate,
+                    "{m}月{d}日 {h}:{i}"
                   )
-                }}分钟
-              </text>
-            </view>
-          </view>
-        </view>
-        <view
-          class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
-          :class="{
-            'bg-green-100': item.win === true,
-            'bg-red-100': item.win === false,
-          }"
-          v-for="(item, index) in recordData.list"
-          :key="index"
-          @click="handleOpenHistoryDetail(item)"
-        >
-          <view class="flex items-center cursor-pointer">
-            <HeroAvatar
-              :championId="item.championId"
-              :size="40"
-              :wasMvp="item.wasMvp"
-              :wasSvp="item.wasSvp"
-            />
-            <view class="text-sm ml-2 flex-1">
-              <view class="flex justify-between">
+                }}
+              </view>
+              <view>
+                <text class="mr-2 ml-4 greenRound">
+                  {{
+                    levelConfig.game_mod[
+                      recordData?.currentGame?.playerCredentials?.queueId
+                    ] ?? "新模式"
+                  }}
+                </text>
                 <text>
-                  {{ item.win ? "胜利" : "失败" }}
-                  {{ `${item.kills}/${item.deaths}/${item.assists}` }}
-                </text>
-                <text>{{ parseTime(item.gameStartTimestamp) }}</text>
-              </view>
-              <view class="text-xs mt-1 flex justify-between">
-                <view class="flex items-center">
-                  <text class="text-slate-500">
-                    {{ levelConfig.game_mod[item.queueId] }}
-                  </text>
-                  <i
-                    v-if="item.damageMax"
-                    class="ml-2 honor16 honor16-hurt2"
-                  ></i>
-                  <i
-                    v-if="item.defenseMax"
-                    class="ml-2 honor16 honor16-hurt"
-                  ></i>
-                  <i v-if="item.killsMax" class="ml-2 honor16 honor16-kill"></i>
-                  <i
-                    v-if="item.assistsMax"
-                    class="ml-2 honor16 honor16-attack"
-                  ></i>
-                  <i
-                    v-if="item.pentaKills"
-                    class="ml-2 honor16 honor16-kill5"
-                  ></i>
-                </view>
-                <text class="ml-2">
-                  用时{{ secondsToHms(item.gameDuration) }}
+                  已开始{{
+                    timePassed(
+                      recordData?.currentGame?.playerCredentials?.gameCreateDate
+                    )
+                  }}分钟
                 </text>
               </view>
             </view>
           </view>
-        </view>
+          <view
+            class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
+            :class="{
+              'bg-green-100': item.win === true,
+              'bg-red-100': item.win === false,
+            }"
+            v-for="(item, index) in recordData.list"
+            :key="index"
+            @click="handleOpenHistoryDetail(item)"
+          >
+            <view class="flex items-center cursor-pointer">
+              <HeroAvatar
+                :championId="item.championId"
+                :size="40"
+                :wasMvp="item.wasMvp"
+                :wasSvp="item.wasSvp"
+              />
+              <view class="text-sm ml-2 flex-1">
+                <view class="flex justify-between">
+                  <text>
+                    {{ item.win ? "胜利" : "失败" }}
+                    {{ `${item.kills}/${item.deaths}/${item.assists}` }}
+                  </text>
+                  <text>{{ parseTime(item.gameStartTimestamp) }}</text>
+                </view>
+                <view class="text-xs mt-1 flex justify-between">
+                  <view class="flex items-center">
+                    <text class="text-slate-500">
+                      {{ levelConfig.game_mod[item.queueId] }}
+                    </text>
+                    <i
+                      v-if="item.damageMax"
+                      class="ml-2 honor16 honor16-hurt2"
+                    ></i>
+                    <i
+                      v-if="item.defenseMax"
+                      class="ml-2 honor16 honor16-hurt"
+                    ></i>
+                    <i
+                      v-if="item.killsMax"
+                      class="ml-2 honor16 honor16-kill"
+                    ></i>
+                    <i
+                      v-if="item.assistsMax"
+                      class="ml-2 honor16 honor16-attack"
+                    ></i>
+                    <i
+                      v-if="item.pentaKills"
+                      class="ml-2 honor16 honor16-kill5"
+                    ></i>
+                  </view>
+                  <text class="ml-2">
+                    用时{{ secondsToHms(item.gameDuration) }}
+                  </text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </scroll-view>
       </template>
       <template v-if="recordData.data">
-        <view
-          v-if="recordData?.curryMap?.gameId"
-          class="flex justify-center bg-violet-200 w-full p-2 items-center"
-          @click="handleOpenCurrentDetailCorn()"
+        <scroll-view
+          class="scroll-container"
+          scroll-y
+          @scrolltolower="handleScrollToBottom1"
         >
-          <view class="mr-4">
-            <HeroAvatar
-              :championId="recordData?.curryMap?.championId"
-              :size="32"
-            />
-          </view>
-          <view>
-            <view class="mb-2">{{ recordData?.curryMap?.titleTime }}</view>
+          <view
+            v-if="recordData?.curryMap?.gameId"
+            class="flex justify-center bg-violet-200 w-full p-2 items-center"
+            @click="handleOpenCurrentDetailCorn()"
+          >
+            <view class="mr-4">
+              <HeroAvatar
+                :championId="recordData?.curryMap?.championId"
+                :size="32"
+              />
+            </view>
             <view>
-              <view class="mr-2 ml-4 greenRound">
-                <view v-html="recordData?.curryMap?.title"></view>
+              <view class="mb-2">{{ recordData?.curryMap?.titleTime }}</view>
+              <view>
+                <view class="mr-2 ml-4 greenRound">
+                  <view v-html="recordData?.curryMap?.title"></view>
+                </view>
               </view>
             </view>
           </view>
-        </view>
-        <view
-          class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
-          :class="{
-            'bg-green-100': item.isWin === 1,
-            'bg-red-100': item.isWin === 2,
-          }"
-          v-for="(item, index) in recordData.effectiveCompetition"
-          :key="index"
-          @click="handleOpenHistoryDetail(item)"
-        >
-          <view class="flex items-center cursor-pointer">
-            <HeroAvatar
-              :championId="item.championId"
-              :size="40"
-              :wasMvp="item.wasMvp"
-              :wasSvp="item.wasSvp"
-            />
-            <view class="text-sm ml-2">
-              <view>{{ item.titleTime }}</view>
-              <view class="mt-1">
-                <rich-text
-                  :nodes="`${item.title}${item.battleTypeStr}`"
-                ></rich-text>
+          <view
+            class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
+            :class="{
+              'bg-green-100': item.isWin === 1,
+              'bg-red-100': item.isWin === 2,
+            }"
+            v-for="(item, index) in recordData.effectiveCompetition"
+            :key="index"
+            @click="handleOpenHistoryDetail(item)"
+          >
+            <view class="flex items-center cursor-pointer">
+              <HeroAvatar
+                :championId="item.championId"
+                :size="40"
+                :wasMvp="item.wasMvp"
+                :wasSvp="item.wasSvp"
+              />
+              <view class="text-sm ml-2">
+                <view>{{ item.titleTime }}</view>
+                <view class="mt-1">
+                  <rich-text
+                    :nodes="`${item.title}${item.battleTypeStr}`"
+                  ></rich-text>
+                </view>
               </view>
             </view>
           </view>
-        </view>
+        </scroll-view>
       </template>
     </view>
   </view>
@@ -191,6 +206,7 @@
 
 <script setup>
 import { ref, onActivated, onMounted } from "vue";
+import { throttle } from "lodash";
 import LolAvartar from "@/components/LolAvartar.vue";
 import HeroAvatar from "@/components/HeroAvatar.vue";
 import { useRouter } from "vue-router";
@@ -220,7 +236,40 @@ const dataRankEloNum = ref("");
 const recordData = ref({});
 const router = useRouter();
 const shareLoading = ref(false);
-console.log(recordData.value);
+// console.log(recordData.value);
+
+// 滚动到底部
+const beginIdx = ref(0);
+const handleScrollToBottom3 = throttle(
+  () => {
+    console.log("滚动到底部");
+    beginIdx.value += 20;
+    update3();
+  },
+  1000,
+  { leading: true, trailing: false }
+);
+
+function initUpdate() {
+  beginIdx.value = 0;
+  update3(true);
+}
+
+const allCount = ref(10);
+const handleScrollToBottom1 = throttle(
+  () => {
+    console.log("滚动到底部");
+    allCount.value += 10;
+    updateRecord();
+  },
+  2000,
+  { leading: true, trailing: false }
+);
+
+function initUpdateRecord() {
+  allCount.value = 10;
+  updateRecord();
+}
 
 function handleOpenHistoryDetail(item) {
   historyStore.setHistoryDetail(item);
@@ -230,7 +279,7 @@ function handleOpenHistoryDetail(item) {
 }
 
 function handleOpenCurrentDetail() {
-  console.log("运行22");
+  // console.log("运行22");
 
   historyStore.setHistoryDetail(recordData.value?.currentGame);
   navigateToWithLimit({
@@ -246,8 +295,7 @@ function handleOpenCurrentDetailCorn() {
 }
 
 // 接口3 列表更新
-async function update3(e) {
-  console.log("更新3target", e);
+async function update3(init) {
   if (!recordData.value?.puuid) {
     return;
   }
@@ -269,8 +317,8 @@ async function update3(e) {
     const res2 = await history_all({
       area,
       puuid: data.puuid,
-      beginIdx: 0,
-      count: 100,
+      beginIdx: beginIdx.value,
+      count: 20,
     });
     const res3 = await spectator_info({
       area,
@@ -289,14 +337,23 @@ async function update3(e) {
       };
     }
     console.log("返回返沪i", res1, res2);
-    recordData.value = {
-      ...handlerso1Data({
+    if (init) {
+      recordData.value = {
+        ...handlerso1Data({
+          baseInfo: data,
+          allrequestParams: [],
+          list: res2.data?.data,
+        }),
+        currentGame,
+      };
+    } else {
+      const newData = handlerso1Data({
         baseInfo: data,
         allrequestParams: [],
         list: res2.data?.data,
-      }),
-      currentGame,
-    };
+      });
+      recordData.value.list = [...recordData.value.list, ...newData?.list];
+    }
   } catch (error) {
     console.log("错误2", error);
   } finally {
@@ -307,7 +364,7 @@ async function update3(e) {
 onMounted(() => {
   const userHistory = historyStore.historyList ?? {};
   recordData.value = { ...userHistory };
-  console.log("能触发吗？", userHistory);
+  // console.log("能触发吗？", userHistory);
   if (userHistory.openId) {
     getRankElo(userHistory);
   }
@@ -330,7 +387,7 @@ function updateRecord() {
   loading.value = true;
   searchPlayerAll({
     nickname: userHistory.nameInfoNew?.replace("#", "*~*~*"),
-    allCount: 30,
+    allCount: allCount.value,
     areaId: userHistory.areaId,
     areaName,
     seleMe: 1,
@@ -368,7 +425,7 @@ function updateRecord() {
       const newData = dataProcessing(res);
       historyStore.setHistoryList(newData);
       recordData.value = newData;
-      console.log("新格式", newData);
+      // console.log("新格式", newData);
       uni.showToast({
         title: "更新战绩成功",
         icon: "success",
@@ -413,6 +470,12 @@ function handleShare() {
 </script>
 
 <style lang="scss" scoped>
+.scroll-container {
+  background-color: #fff;
+  border-radius: 10rpx;
+  height: calc(100vh - 150rpx);
+}
+
 .greenRound {
   position: relative;
 

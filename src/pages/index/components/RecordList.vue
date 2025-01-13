@@ -219,7 +219,7 @@ const sortList = computed(() => {
     oldIndex: index,
   }));
   const targetSort = activeTab.value?.sort;
-  console.log("排序方法", targetSort);
+  // console.log("排序方法", targetSort);
   return result?.sort(targetSort).reverse();
 });
 

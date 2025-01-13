@@ -507,7 +507,7 @@ const CompetitionTypeOption = ref([
 watch(
   () => userInfo.value,
   val => {
-    console.log("接口地址", val?.batchBaseUrl);
+    // console.log("接口地址", val?.batchBaseUrl);
     if (val?.batchBaseUrl !== "地址3") {
       CompetitionTypeOption.value = [
         { value: "1", label: "全部比赛" },
@@ -565,7 +565,7 @@ onMounted(() => {
 
 function initBatchBaseUrl() {
   const url = uni.getStorageSync("batchBaseUrl");
-  console.log("基础url", url, typeof url);
+  // console.log("基础url", url, typeof url);
 
   userInfo.value.batchBaseUrl = url || "地址1";
 }
@@ -573,7 +573,7 @@ function initBatchBaseUrl() {
 // 从缓存获取 游戏模式
 function initBatchGameMode() {
   const GameMode = uni.getStorageSync("batchGameMode");
-  console.log("GameMode", GameMode, typeof GameMode);
+  // console.log("GameMode", GameMode, typeof GameMode);
   if (GameMode) {
     userInfo.value.competitionType = GameMode;
     const cur = CompetitionTypeOption.value.find(v => v.value === GameMode);
@@ -589,7 +589,7 @@ onShow(() => {
   addUserOptions();
 });
 onLoad(options => {
-  console.log("接收到的参数:", options);
+  // console.log("接收到的参数:", options);
   const activeTabStr = options.activeTab;
   if (activeTabStr) {
     setTimeout(() => {
@@ -599,7 +599,7 @@ onLoad(options => {
 });
 
 EventBus.on("updateOption", () => {
-  console.log("触发更新哦");
+  // console.log("触发更新哦");
   addSelectedUser();
   initDisplayMode();
 });
@@ -757,7 +757,7 @@ function calculationSessions() {
 }
 
 async function getHistorys() {
-  console.log(323, userInfo.value.num, options1.value);
+  // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;
   const allrequestParams = options1.value.filter(v =>
@@ -779,7 +779,7 @@ async function getHistorys() {
   try {
     resp = await Promise.all(allrequest);
     loading.value = false;
-    console.log(33, resp);
+    // console.log(33, resp);
     const res = resp.map(v => {
       if (typeof v === "string") {
         try {
@@ -818,7 +818,7 @@ async function getHistorys() {
         ...allrequestParams[idx],
       };
     });
-    console.log("我来试试", newData);
+    // console.log("我来试试", newData);
     newData = handlerMergeOld(newData);
     newData.forEach(y => {
       const findIdx = tableData1.value.findIndex(

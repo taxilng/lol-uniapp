@@ -875,7 +875,7 @@ export function navigateToWithLimit(options) {
         uni.navigateTo({
           ...options,
           success() {
-            console.log("跳转成功");
+            // console.log("跳转成功");
           },
           fail(err) {
             console.error("跳转失败", err);
@@ -891,7 +891,7 @@ export function navigateToWithLimit(options) {
     uni.navigateTo({
       ...options,
       success() {
-        console.log("跳转成功");
+        // console.log("跳转成功");
       },
       fail(err) {
         console.error("跳转失败", err);
