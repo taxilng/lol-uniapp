@@ -388,11 +388,12 @@ export function handlerso1Data(source) {
 
     // 按照比赛类型过滤数据
     if (source.competitionType === "6") {
-      effectiveCompetition = effectiveCompetition.filter(v =>
-        ![
-          31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
-          890,
-        ].includes(v.queueId)
+      effectiveCompetition = effectiveCompetition.filter(
+        v =>
+          ![
+            31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
+            890,
+          ].includes(v.queueId)
       );
     }
     // 你的所有队友和对手
@@ -642,6 +643,10 @@ export function handlerMerge(source) {
                 newTarget.onlineInfo > sourceOne.onlineInfo
                   ? newTarget.onlineInfo
                   : sourceOne.onlineInfo,
+              lastGameDate:
+                newTarget.lastGameDate > sourceOne.lastGameDate
+                  ? newTarget.lastGameDate
+                  : sourceOne.lastGameDate,
               currentGame: newTarget.currentGame?.gameName
                 ? newTarget.currentGame
                 : sourceOne.currentGame,
