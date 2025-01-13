@@ -51,9 +51,11 @@ const { list, editStatus } = toRefs(props);
 const currentTabs = ref(0);
 const tabs = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
+  { name: "总CARRY", value: "allCarry", sort: sortAllCarry },
   { name: "黑胜场", value: "blackField", sort: sortBlackfield },
-  { name: "黑胜率", value: "rate", sort: sortRate },
+  // { name: "黑胜率", value: "rate", sort: sortRate },
   { name: "黑CARRY", value: "carry", sort: sortBlackCarry },
+  { name: "在线时间", value: "onlineTimeOld", sort: sortOnlineTimeOld },
 ]);
 const activeTab = ref(tabs.value?.[0]);
 function tabChange(item) {
@@ -66,7 +68,7 @@ function tabChange(item) {
 const currentTabs3 = ref(0);
 const tabs3 = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
-  { name: "在线时间", value: "blackField", sort: sortOnlineTime },
+  { name: "在线时间", value: "onlineTime", sort: sortOnlineTime },
 ]);
 function tabChange3(item) {
   console.log("item", item);
@@ -98,6 +100,21 @@ function initTabs() {
 //   immediate: true,
 //   deep: true,
 // })
+
+function sortAllCarry(a, b) {
+  console.log('a', a);
+  console.log('b', b);
+  if (a.totalGames && b.totalGames) {
+    return (
+      (a.mvp + a.svp) / a.totalGames -
+      (b.mvp + b.svp) / b.totalGames
+    );
+  } else if (!a.totalGames) {
+    return -1;
+  } else if (!b.totalGames) {
+    return 1;
+  }
+}
 
 function sortBlackCarry(a, b) {
   if (a.blackoutTimes && b.blackoutTimes) {
@@ -138,6 +155,35 @@ function sortOnlineTime(a, b) {
   return (
     a.lastGameDate - b.lastGameDate
   );
+}
+
+function extractTimeFromText(text) {
+    // 使用正则表达式匹配括号内的内容
+    const regex = /\(([^)]+)\)/;
+    const match = text.match(regex);
+    if (match && match[1]) {
+        return match[1];
+    } else {
+        return null;
+    }
+}
+
+function sortOnlineTimeOld(a, b) {
+  console.log('a', a);
+  console.log('b', b);
+  if(a?.currentGame?.curryMap) {
+    return 1;
+  }
+  if(b?.currentGame?.curryMap) {
+    return -1;
+  }
+  const aTime = extractTimeFromText(a.onlineInfo);
+  const bTime = extractTimeFromText(b.onlineInfo);
+  if (aTime < bTime) {
+    return -1
+  } else {
+    return 1
+  }
 }
 
 // function sortCarry(a, b) {
