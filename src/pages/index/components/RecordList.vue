@@ -105,16 +105,20 @@ function sortBlackCarry(a, b) {
       (a.blackMvp + a.blackSvp) / a.blackoutTimes -
       (b.blackMvp + b.blackSvp) / b.blackoutTimes
     );
-  } else {
+  } else if (!a.blackoutTimes) {
     return -1;
+  } else if (!b.blackoutTimes) {
+    return 1;
   }
 }
 
 function sortRate(a, b) {
   if (a.blackoutTimes && b.blackoutTimes) {
     return a.blackoutWins / a.blackoutTimes - b.blackoutWins / b.blackoutTimes;
-  } else {
+  } else if (!a.blackoutTimes) {
     return -1;
+  } else if (!b.blackoutTimes) {
+    return 1;
   }
 }
 
