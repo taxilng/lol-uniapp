@@ -92,7 +92,7 @@
           </text>
           <view
             v-if="batchBaseUrl === '地址3'"
-            class="flex flex-wrap mt-1 text-xs"
+            class="flex mt-1 text-xs"
           >
             <view v-if="item.damageMax">
               <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
