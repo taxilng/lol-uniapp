@@ -99,7 +99,7 @@
             @click="submit"
           ></uv-button>
         </view>
-        <view v-if="failRequest.length">
+        <view class="mr-4" v-if="failRequest.length">
           <uv-button
             :loading="loading"
             size="small"

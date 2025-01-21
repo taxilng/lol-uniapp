@@ -1,12 +1,14 @@
 <template>
   <view>
     <uv-tabs
+      class="tabc"
       v-if="batchBaseUrl !== '地址3'"
       :list="tabs"
       @click="tabChange"
       :current="currentTabs"
     ></uv-tabs>
     <uv-tabs
+      class="tabc"
       v-if="batchBaseUrl === '地址3'"
       :list="tabs3"
       @click="tabChange3"
@@ -232,4 +234,15 @@ function handleDelItem(index) {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.share {
+  .record-list {
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .tabc {
+    display: none;
+  }
+}
+</style>

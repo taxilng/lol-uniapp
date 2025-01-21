@@ -539,6 +539,12 @@ function delItem() {
 </script>
 
 <style lang="scss" scoped>
+.share {
+  .record-item {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
 .message-detail {
   line-height: 32px;
 
