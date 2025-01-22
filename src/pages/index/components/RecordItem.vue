@@ -162,25 +162,6 @@
             {{ item.pentaKills }}
           </view>
         </view>
-        <!-- <view
-          v-for="(firend, key) in item.sortHarmfulFriend"
-          :key="key"
-          class="mt-2"
-        >
-          <text class="whitespace-nowrap inline-block min-w-24">
-            {{ firend.label }}
-          </text>
-          <text class="ml-2 inline-block min-w-10">
-            胜
-            <text class="text-blue-400">{{ firend.netVictoryField }}</text>
-          </text>
-          <text class="ml-2">
-            场次
-            <text class="text-violet-500">
-              {{ `${firend.wins}/${firend.totalGames}` }}
-            </text>
-          </text>
-        </view> -->
         <view
           v-for="(match2, key) in item.yourMatchPlayersList"
           :key="key"
@@ -466,10 +447,10 @@ const userInfos = computed(() =>
     {
       label: "神队友",
       value: (() => {
-        if (item.value.sortHarmfulFriend?.length) {
-          const firend = item.value.sortHarmfulFriend?.[0];
-          if (firend.netVictoryField > 0) {
-            return `${firend.label} 胜${firend.netVictoryField}`;
+        if (item.value.yourMatchPlayersList?.length) {
+          const firend = item.value.yourMatchPlayersList?.[0];
+          if ((firend.totalWins * 2 - firend.totalGames) > 0) {
+            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
           } else {
             return "无";
           }
@@ -484,13 +465,13 @@ const userInfos = computed(() =>
     {
       label: "损友",
       value: (() => {
-        if (item.value.sortHarmfulFriend?.length) {
+        if (item.value.yourMatchPlayersList?.length) {
           const firend =
-            item.value.sortHarmfulFriend?.[
-              item.value.sortHarmfulFriend.length - 1
+            item.value.yourMatchPlayersList?.[
+              item.value.yourMatchPlayersList.length - 1
             ];
-          if (firend.netVictoryField < 0) {
-            return `${firend.label} 胜${firend.netVictoryField}`;
+          if ((firend.totalWins * 2 - firend.totalGames) < 0) {
+            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
           } else {
             return "无";
           }
