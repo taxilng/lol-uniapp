@@ -69,7 +69,7 @@
           </text>
         </view>
         <view
-          class="flex flex-wrap"
+          class="flex"
           v-if="mode === 'mini' && !activeTab?.name?.includes('黑')"
         >
           <text class="mt-1 text-xs mr-2">
