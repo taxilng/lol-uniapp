@@ -200,14 +200,20 @@
           <text class="ml-2" v-if="match2.teamSession">
             <text class="text-teal-500">友方</text>
 
-            <text class="text-violet-500">
+            <text class="text-violet-500 ml-1 min-w-9 inline-block">
               {{ `${match2.teamWins}/${match2.teamSession}` }}
             </text>
           </text>
           <text class="ml-2" v-if="match2.opponentSession">
             <text class="text-red-500">敌方</text>
-            <text class="text-violet-500">
+            <text class="text-violet-500 ml-1">
               {{ `${match2.opponentWins}/${match2.opponentSession}` }}
+            </text>
+          </text>
+          <text class="ml-2" v-if="match2.totalGames">
+            <text class="text-blue-400">胜</text>
+            <text class="text-fuchsia-400 ml-1">
+              {{ match2.totalWins * 2 - match2.totalGames }}
             </text>
           </text>
         </view>
