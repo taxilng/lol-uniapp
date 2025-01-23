@@ -217,7 +217,7 @@ const { recordData } = toRefs(props);
 watch(
   props,
   () => {
-    console.log("recordData.value", recordData.value);
+    // console.log("recordData.value", recordData.value);
 
     if (recordData.value.battleInfo) {
       getRankElo(recordData.value.battleInfo);

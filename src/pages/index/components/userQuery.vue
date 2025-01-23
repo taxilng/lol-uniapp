@@ -294,7 +294,7 @@ const options1 = ref([...defaultUser]);
 
 onMounted(() => {
   const singleData = historyStore.singleData ?? {};
-  console.log("singleData", singleData);
+  // console.log("singleData", singleData);
   if (singleData.name) {
     recordData.value = singleData;
   } else {

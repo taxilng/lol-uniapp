@@ -338,17 +338,6 @@ export function handlerso1Data(source) {
     assistsMax: 0,
     pentaKills: 0,
   };
-  // 过滤损友
-  const harmfulFriend = source.allrequestParams
-    .filter(v => v.label !== source.label)
-    .map(v => ({
-      ...v,
-      netVictoryField: 0,
-      wins: 0,
-      losses: 0,
-      totalGames: 0,
-    }));
-  // console.log("harmfulFriend", harmfulFriend);
 
   // 战绩是否隐藏
   const publicInfo = source.baseInfo?.privacy === "PUBLIC" ? "公开" : "隐藏";
@@ -388,11 +377,12 @@ export function handlerso1Data(source) {
 
     // 按照比赛类型过滤数据
     if (source.competitionType === "6") {
-      effectiveCompetition = effectiveCompetition.filter(v =>
-        ![
-          31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
-          890,
-        ].includes(v.queueId)
+      effectiveCompetition = effectiveCompetition.filter(
+        v =>
+          ![
+            31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
+            890,
+          ].includes(v.queueId)
       );
     }
     // 你的所有队友和对手
@@ -419,6 +409,7 @@ export function handlerso1Data(source) {
             teamWins: isYourTeam ? (v.win ? 1 : 0) : 0,
             opponentSession: isYourTeam ? 0 : 1,
             opponentWins: isYourTeam ? 0 : v.win ? 0 : 1,
+            totalWins: v.win ? 1 : 0,
           };
         })
         .filter(x => x.puuid !== source.baseInfo?.puuid);
@@ -429,6 +420,7 @@ export function handlerso1Data(source) {
             yourMatchPlayersList.push(v);
           } else {
             yourMatchPlayersList[has].totalGames += 1;
+            yourMatchPlayersList[has].totalWins += v.win ? 1 : 0;
             if (v.isYourTeam) {
               yourMatchPlayersList[has].teamSession += 1;
               yourMatchPlayersList[has].teamWins = v.win
@@ -449,19 +441,7 @@ export function handlerso1Data(source) {
       //   "你的队友",
       //   yourMatchPlayersList.filter(v => v.totalGames > 1)
       // );
-      harmfulFriend.forEach(y => {
-        const hasYour = v.participants.find(
-          x => x.riotIdGameName === y.label && x.riotIdTagline === y.tagLine
-        );
-        if (hasYour) {
-          y.totalGames += 1;
-          y.wins = hasYour.win ? y.wins + 1 : y.wins;
-          y.losses = hasYour.win ? y.losses : y.losses + 1;
-          y.netVictoryField = hasYour.win
-            ? y.netVictoryField + 1
-            : y.netVictoryField - 1;
-        }
-      });
+
       baseInfo = {
         ...baseInfo,
         wins: yours.win ? baseInfo.wins + 1 : baseInfo.wins,
@@ -587,20 +567,18 @@ export function handlerso1Data(source) {
       );
     }
     console.log("新列表", list, baseInfo);
-    const sortHarmfulFriend = harmfulFriend
-      .filter(v => v.totalGames)
-      .sort((a, b) => b.netVictoryField - a.netVictoryField);
-    console.log("排序损友", sortHarmfulFriend);
     const match2PlayersList = yourMatchPlayersList
       .filter(v => v.totalGames > 2)
-      .sort((a, b) => b.totalGames - a.totalGames);
+      .sort(
+        (a, b) =>
+          b.totalWins * 2 - b.totalGames - (a.totalWins * 2 - a.totalGames)
+      );
     return {
       ...baseInfo,
       list,
       startTime,
       publicInfo,
       onlineInfo,
-      sortHarmfulFriend,
       yourMatchPlayersList: match2PlayersList,
     };
   } else {
@@ -642,6 +620,10 @@ export function handlerMerge(source) {
                 newTarget.onlineInfo > sourceOne.onlineInfo
                   ? newTarget.onlineInfo
                   : sourceOne.onlineInfo,
+              lastGameDate:
+                newTarget.lastGameDate > sourceOne.lastGameDate
+                  ? newTarget.lastGameDate
+                  : sourceOne.lastGameDate,
               currentGame: newTarget.currentGame?.gameName
                 ? newTarget.currentGame
                 : sourceOne.currentGame,
@@ -662,10 +644,15 @@ export function handlerMerge(source) {
               killsMax: newTarget.killsMax + sourceOne.killsMax,
               assistsMax: newTarget.assistsMax + sourceOne.assistsMax,
               pentaKills: newTarget.pentaKills + sourceOne.pentaKills,
-              sortHarmfulFriend: [
-                ...(newTarget.sortHarmfulFriend ?? []),
-                ...(sourceOne.sortHarmfulFriend ?? []),
-              ],
+              yourMatchPlayersList: [
+                ...(newTarget.yourMatchPlayersList ?? []),
+                ...(sourceOne.yourMatchPlayersList ?? []),
+              ].sort(
+                (a, b) =>
+                  b.totalWins * 2 -
+                  b.totalGames -
+                  (a.totalWins * 2 - a.totalGames)
+              ),
               list: [...newTarget.list, ...sourceOne.list],
             };
           }
@@ -677,10 +664,6 @@ export function handlerMerge(source) {
           avgDeaths: +(newTarget.deaths / newTarget.totalGames).toFixed(0),
           avgAssists: +(newTarget.assists / newTarget.totalGames).toFixed(0),
         };
-        const sortHarmfulFriend = newTarget.sortHarmfulFriend?.sort(
-          (a, b) => b.netVictoryField - a.netVictoryField
-        );
-        newTarget.sortHarmfulFriend = sortHarmfulFriend;
         const list = newTarget.list.sort(
           (a, b) => b.gameStartTimestamp - a.gameStartTimestamp
         );
@@ -870,7 +853,7 @@ export function navigateToWithLimit(options) {
         uni.navigateTo({
           ...options,
           success() {
-            console.log("跳转成功");
+            // console.log("跳转成功");
           },
           fail(err) {
             console.error("跳转失败", err);
@@ -886,7 +869,7 @@ export function navigateToWithLimit(options) {
     uni.navigateTo({
       ...options,
       success() {
-        console.log("跳转成功");
+        // console.log("跳转成功");
       },
       fail(err) {
         console.error("跳转失败", err);

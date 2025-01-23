@@ -69,7 +69,7 @@
           </text>
         </view>
         <view
-          class="flex flex-wrap"
+          class="flex"
           v-if="mode === 'mini' && !activeTab?.name?.includes('黑')"
         >
           <text class="mt-1 text-xs mr-2">
@@ -92,7 +92,7 @@
           </text>
           <view
             v-if="batchBaseUrl === '地址3'"
-            class="flex flex-wrap mt-1 text-xs"
+            class="flex mt-1 text-xs"
           >
             <view v-if="item.damageMax">
               <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
@@ -162,25 +162,6 @@
             {{ item.pentaKills }}
           </view>
         </view>
-        <!-- <view
-          v-for="(firend, key) in item.sortHarmfulFriend"
-          :key="key"
-          class="mt-2"
-        >
-          <text class="whitespace-nowrap inline-block min-w-24">
-            {{ firend.label }}
-          </text>
-          <text class="ml-2 inline-block min-w-10">
-            胜
-            <text class="text-blue-400">{{ firend.netVictoryField }}</text>
-          </text>
-          <text class="ml-2">
-            场次
-            <text class="text-violet-500">
-              {{ `${firend.wins}/${firend.totalGames}` }}
-            </text>
-          </text>
-        </view> -->
         <view
           v-for="(match2, key) in item.yourMatchPlayersList"
           :key="key"
@@ -200,14 +181,20 @@
           <text class="ml-2" v-if="match2.teamSession">
             <text class="text-teal-500">友方</text>
 
-            <text class="text-violet-500">
+            <text class="text-violet-500 ml-1 min-w-9 inline-block">
               {{ `${match2.teamWins}/${match2.teamSession}` }}
             </text>
           </text>
           <text class="ml-2" v-if="match2.opponentSession">
             <text class="text-red-500">敌方</text>
-            <text class="text-violet-500">
+            <text class="text-violet-500 ml-1">
               {{ `${match2.opponentWins}/${match2.opponentSession}` }}
+            </text>
+          </text>
+          <text class="ml-2" v-if="match2.totalGames">
+            <text class="text-blue-400">胜</text>
+            <text class="text-fuchsia-400 ml-1">
+              {{ match2.totalWins * 2 - match2.totalGames }}
             </text>
           </text>
         </view>
@@ -460,10 +447,10 @@ const userInfos = computed(() =>
     {
       label: "神队友",
       value: (() => {
-        if (item.value.sortHarmfulFriend?.length) {
-          const firend = item.value.sortHarmfulFriend?.[0];
-          if (firend.netVictoryField > 0) {
-            return `${firend.label} 胜${firend.netVictoryField}`;
+        if (item.value.yourMatchPlayersList?.length) {
+          const firend = item.value.yourMatchPlayersList?.[0];
+          if ((firend.totalWins * 2 - firend.totalGames) > 0) {
+            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
           } else {
             return "无";
           }
@@ -478,13 +465,13 @@ const userInfos = computed(() =>
     {
       label: "损友",
       value: (() => {
-        if (item.value.sortHarmfulFriend?.length) {
+        if (item.value.yourMatchPlayersList?.length) {
           const firend =
-            item.value.sortHarmfulFriend?.[
-              item.value.sortHarmfulFriend.length - 1
+            item.value.yourMatchPlayersList?.[
+              item.value.yourMatchPlayersList.length - 1
             ];
-          if (firend.netVictoryField < 0) {
-            return `${firend.label} 胜${firend.netVictoryField}`;
+          if ((firend.totalWins * 2 - firend.totalGames) < 0) {
+            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
           } else {
             return "无";
           }
@@ -539,6 +526,12 @@ function delItem() {
 </script>
 
 <style lang="scss" scoped>
+.share {
+  .record-item {
+    box-shadow: none;
+    border: 1px solid #e5e7eb;
+  }
+}
 .message-detail {
   line-height: 32px;
 

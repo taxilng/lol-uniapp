@@ -561,7 +561,7 @@ function openRolePick4() {
   pickerRef4.value.open();
 }
 function modeconfirm4(e) {
-  console.log("接口地址", e);
+  // console.log("接口地址", e);
   uni.setStorageSync("baseUrl", String(e?.indexs?.[0]));
   baseUrl.value = e?.value?.[0]?.name;
   EventBus.emit("updateBaseUrl");

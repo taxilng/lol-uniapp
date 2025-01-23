@@ -106,7 +106,7 @@ const historyStore = userHistoryStore();
 const recordData = ref({});
 const router = useRouter();
 const shareLoading = ref(false);
-console.log(recordData.value);
+// console.log(recordData.value);
 
 function handleOpenHistoryDetail(item) {
   historyStore.setHistoryDetail(item);
