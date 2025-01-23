@@ -173,7 +173,6 @@
             size="0.875rem"
             :text="`${match2.riotIdGameName}#${match2.riotIdTagline}`"
             overlay
-            direction="bottom"
           ></uv-tooltip>
           <!-- <text class="whitespace-nowrap inline-block min-w-44">
             {{ match2.riotIdGameName }}#{{ match2.riotIdTagline }}

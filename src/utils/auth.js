@@ -409,7 +409,7 @@ export function handlerso1Data(source) {
             teamWins: isYourTeam ? (v.win ? 1 : 0) : 0,
             opponentSession: isYourTeam ? 0 : 1,
             opponentWins: isYourTeam ? 0 : v.win ? 0 : 1,
-            totalWins: v.win ? 1 : 0,
+            totalWins: (isYourTeam && v.win) || (!isYourTeam && !v.win) ? 1 : 0,
           };
         })
         .filter(x => x.puuid !== source.baseInfo?.puuid);
@@ -420,7 +420,8 @@ export function handlerso1Data(source) {
             yourMatchPlayersList.push(v);
           } else {
             yourMatchPlayersList[has].totalGames += 1;
-            yourMatchPlayersList[has].totalWins += v.win ? 1 : 0;
+            yourMatchPlayersList[has].totalWins +=
+              (v.isYourTeam && v.win) || (!v.isYourTeam && !v.win) ? 1 : 0;
             if (v.isYourTeam) {
               yourMatchPlayersList[has].teamSession += 1;
               yourMatchPlayersList[has].teamWins = v.win
