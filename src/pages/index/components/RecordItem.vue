@@ -168,7 +168,7 @@
           class="mt-2 flex items-center"
         >
           <uv-tooltip
-            class="text-base whitespace-nowrap inline-block min-w-44"
+            customClass="text-base whitespace-nowrap inline-block min-w-44"
             color="#6b7280"
             size="0.875rem"
             :text="`${match2.riotIdGameName}#${match2.riotIdTagline}`"

@@ -1,6 +1,7 @@
 <template>
 	<view
 		class="uv-tooltip"
+		:class="customClass"
 		:style="[$uv.addStyle(customStyle)]"
 	>
 		<uv-overlay

@@ -1,5 +1,9 @@
 export default {
 	props: {
+		customClass: {
+      type: String,
+      value: ''
+    },
 		// 需要显示的提示文字
 		text: {
 			type: [String, Number],
