@@ -36,7 +36,7 @@
             v-html="renderImg(recordData.messageDetail)"
           ></view>
         </view>
-        <view class="ml-2 p-2" @click="update3">
+        <view class="ml-2 p-2" v-if="recordData.list" @click="update3">
           <uv-icon name="reload" size="20"></uv-icon>
         </view>
       </view>
