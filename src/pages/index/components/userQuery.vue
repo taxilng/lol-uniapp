@@ -460,7 +460,7 @@ async function getHistoryOne() {
         gameName: nicknameArr[0],
         tagLine: nicknameArr[1],
       });
-      if (res1.success === false) {
+      if (res1?.data?.success === false) {
         uni.showToast({
           title: res1.data?.error?.message,
           icon: "error",
