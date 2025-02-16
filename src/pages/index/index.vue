@@ -108,6 +108,15 @@
             @click="failHistorys"
           ></uv-button>
         </view>
+        <view class="mr-4 ml-2">
+          <uv-button
+            :loading="loading"
+            size="small"
+            type="success"
+            text="在线查询"
+            @click="onLineSubmit"
+          ></uv-button>
+        </view>
         <view>
           <uv-button
             :loading="loading"
@@ -373,6 +382,112 @@ function submit() {
     });
 }
 
+function onLineSubmit() {
+  // 如果有错误，会在catch中返回报错信息数组，校验通过则在then中返回true
+  formRef.value
+    .validate()
+    .then(res => {
+      console.log("输出form", userInfo.value);
+      const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+      console.log("当前地址", batchBaseUrl);
+      if (batchBaseUrl === "地址3") {
+        getNewOnline();
+      } else {
+        getHistorys("online");
+      }
+    })
+    .catch(errors => {
+      console.log("校验失败", errors);
+      uni.showToast({
+        icon: "error",
+        title: "校验失败",
+      });
+    });
+}
+
+async function getNewOnline() {
+  const allrequestParams = options1.value.filter(v =>
+    userInfo.value.role.includes(v.value)
+  );
+  console.log("allrequestParams", allrequestParams);
+  const countList = divideBy200(userInfo.value.num);
+  const allrequest = allrequestParams.map(async (v, idx) => {
+    try {
+      const res1 = await leagueSummoner({
+        area: areaMap[v.areaId]?.name,
+        gameName: v.label,
+        tagLine: v.tagLine,
+      });
+      if (res1.data?.success === false) {
+        uni.showToast({
+          title: res1.data?.error?.message,
+          icon: "error",
+        });
+      }
+      const data = res1?.data?.data;
+      const res3 = await spectator_info({
+        area: areaMap[v.areaId]?.name,
+        puuid: data.puuid,
+      });
+      let currentGame = {};
+      if (res3.data.success && res3.data?.data) {
+        const data = res3.data.data;
+        const puuid = data.playerCredentials.puuid;
+        const nameList = [...data.game.teamOne, ...data.game.teamTwo];
+        const cur = nameList.find(v => v.puuid === puuid);
+        const championId = cur?.championId;
+        currentGame = {
+          ...res3.data?.data,
+          championId,
+        };
+      }
+      return { baseInfo: data, list: [], currentGame };
+    } catch (error) {
+      console.log("错误2", error);
+    }
+  });
+  let resp = null;
+  try {
+    loading.value = true;
+    resp = await Promise.all(allrequest);
+    console.log("相应", resp);
+
+    let newData = resp.map((v, idx) => {
+      return {
+        currentGame: v.currentGame,
+        ...allrequestParams[idx],
+        ...handlerso1Data({
+          ...v,
+          allrequestParams: allrequestParams,
+          ...allrequestParams[idx],
+          dataRange: dataRange.value,
+          competitionType: userInfo.value.competitionType,
+        }),
+      };
+    });
+    newData = handlerMerge(newData);
+    newData.forEach(y => {
+      const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
+      if (findIdx !== -1) {
+        tableData1.value[findIdx] = y;
+      } else {
+        tableData1.value.push(y);
+      }
+    });
+    console.log("中级接口过", newData);
+    uni.showToast({
+      title: "查询成功！！",
+      icon: "success",
+    });
+  } catch (error) {
+    console.log("有错误", error);
+  } finally {
+    // console.log("最终结果新", resp);
+    loading.value = false;
+    // uni.setStorageSync("searchLogs", JSON.stringify(resp));
+  }
+}
+
 function divideBy200(num) {
   const base = 200;
   const result = [];
@@ -515,6 +630,15 @@ watch(
         { value: "3", label: "灵活排位", queueId: 440 },
         { value: "4", label: "匹配赛", queueId: 430 },
         { value: "5", label: "大乱斗", queueId: 450 },
+      ];
+    } else {
+      CompetitionTypeOption.value = [
+        { value: "1", label: "全部比赛" },
+        { value: "2", label: "单双排", queueId: 420 },
+        { value: "3", label: "灵活排位", queueId: 440 },
+        { value: "4", label: "匹配赛", queueId: 430 },
+        { value: "5", label: "大乱斗", queueId: 450 },
+        { value: "6", label: "非人机" },
       ];
     }
   },
@@ -756,7 +880,9 @@ function calculationSessions() {
   }
 }
 
-async function getHistorys() {
+async function getHistorys(searchType = "history") {
+  const allCount = searchType === "history" ? userInfo.value.num : 1;
+  const filter = searchType === "history" ? userInfo.value.competitionType : "1";
   // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;
@@ -766,11 +892,11 @@ async function getHistorys() {
   const allrequest = allrequestParams.map(v =>
     searchPlayerAll({
       nickname: `${v.label}*~*~*${v.tagLine}`,
-      allCount: userInfo.value.num,
+      allCount,
       areaId: v.areaId,
       areaName: areaMap[v.areaId]?.name,
       seleMe: 1,
-      filter: userInfo.value.competitionType,
+      filter,
       openId: "",
       ...sign,
     })

@@ -66,7 +66,6 @@ function tabChange(item) {
   activeTab.value = tabs.value?.find(t => t.value === item.value);
 }
 
-
 const currentTabs3 = ref(0);
 const tabs3 = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
@@ -104,13 +103,10 @@ function initTabs() {
 // })
 
 function sortAllCarry(a, b) {
-  console.log('a', a);
-  console.log('b', b);
+  console.log("a", a);
+  console.log("b", b);
   if (a.totalGames && b.totalGames) {
-    return (
-      (a.mvp + a.svp) / a.totalGames -
-      (b.mvp + b.svp) / b.totalGames
-    );
+    return (a.mvp + a.svp) / a.totalGames - (b.mvp + b.svp) / b.totalGames;
   } else if (!a.totalGames) {
     return -1;
   } else if (!b.totalGames) {
@@ -148,43 +144,41 @@ function sortBlackfield(a, b) {
 }
 
 function sortOnlineTime(a, b) {
-  if(a?.currentGame?.gameName) {
+  if (a?.currentGame?.gameName) {
     return 1;
   }
-  if(b?.currentGame?.gameName) {
+  if (b?.currentGame?.gameName) {
     return -1;
   }
-  return (
-    a.lastGameDate - b.lastGameDate
-  );
+  return a.lastGameDate - b.lastGameDate;
 }
 
 function extractTimeFromText(text) {
-    // 使用正则表达式匹配括号内的内容
-    const regex = /\(([^)]+)\)/;
-    const match = text.match(regex);
-    if (match && match[1]) {
-        return match[1];
-    } else {
-        return null;
-    }
+  // 使用正则表达式匹配括号内的内容
+  const regex = /\(([^)]+)\)/;
+  const match = text?.match(regex);
+  if (match && match[1]) {
+    return match[1];
+  } else {
+    return null;
+  }
 }
 
 function sortOnlineTimeOld(a, b) {
-  console.log('a', a);
-  console.log('b', b);
-  if(a?.currentGame?.curryMap) {
+  console.log("a", a);
+  console.log("b", b);
+  if (a?.currentGame?.curryMap || a?.onlineInfo == '在线') {
     return 1;
   }
-  if(b?.currentGame?.curryMap) {
+  if (b?.currentGame?.curryMap || b?.onlineInfo == '在线') {
     return -1;
   }
   const aTime = extractTimeFromText(a.onlineInfo);
   const bTime = extractTimeFromText(b.onlineInfo);
   if (aTime < bTime) {
-    return -1
+    return -1;
   } else {
-    return 1
+    return 1;
   }
 }
 
