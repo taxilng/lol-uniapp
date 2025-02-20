@@ -117,6 +117,16 @@
             @click="onLineSubmit"
           ></uv-button>
         </view>
+        <view class="mr-4 ml-2">
+          <uv-button
+            v-if="failOnlineData.length"
+            :loading="loading"
+            size="small"
+            type="success"
+            text="再次在线"
+            @click="() => getNewOnline('fail')"
+          ></uv-button>
+        </view>
         <view>
           <uv-button
             :loading="loading"
@@ -405,12 +415,17 @@ function onLineSubmit() {
     });
 }
 
-async function getNewOnline() {
-  const allrequestParams = options1.value.filter(v =>
-    userInfo.value.role.includes(v.value)
-  );
+const failOnlineData = ref([]);
+async function getNewOnline(requestScope = "all") {
+  let allrequestParams = [];
+  if (requestScope === "all") {
+    allrequestParams = options1.value.filter(v =>
+      userInfo.value.role.includes(v.value)
+    );
+  } else {
+    allrequestParams = failOnlineData.value;
+  }
   console.log("allrequestParams", allrequestParams);
-  const countList = divideBy200(userInfo.value.num);
   const allrequest = allrequestParams.map(async (v, idx) => {
     try {
       const res1 = await leagueSummoner({
@@ -444,27 +459,37 @@ async function getNewOnline() {
       return { baseInfo: data, list: [], currentGame };
     } catch (error) {
       console.log("错误2", error);
+      throw error;
     }
   });
   let resp = null;
   try {
     loading.value = true;
-    resp = await Promise.all(allrequest);
-    console.log("相应", resp);
+    resp = await Promise.allSettled(allrequest);
+    console.log("查在线相应", resp);
 
-    let newData = resp.map((v, idx) => {
-      return {
-        currentGame: v.currentGame,
-        ...allrequestParams[idx],
-        ...handlerso1Data({
-          ...v,
-          allrequestParams: allrequestParams,
+    let allData = resp.map((v, idx) => {
+      if (v.status === "fulfilled") {
+        return {
+          currentGame: v.value.currentGame,
           ...allrequestParams[idx],
-          dataRange: dataRange.value,
-          competitionType: userInfo.value.competitionType,
-        }),
-      };
+          ...handlerso1Data({
+            ...v.value,
+            allrequestParams: allrequestParams,
+            ...allrequestParams[idx],
+            dataRange: dataRange.value,
+            competitionType: userInfo.value.competitionType,
+          }),
+          status: v.status,
+        };
+      } else {
+        return { ...v, ...allrequestParams[idx] };
+      }
     });
+    let newData = allData.filter(v => v.status === "fulfilled");
+    failOnlineData.value = allData.filter(v => v.status === "rejected");
+    console.log("失败数据", failOnlineData.value);
+    
     newData = handlerMerge(newData);
     newData.forEach(y => {
       const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
@@ -568,8 +593,8 @@ async function getNewHistorys() {
   let resp = null;
   try {
     loading.value = true;
-    resp = await Promise.all(allrequest);
-    console.log("相应", resp);
+    resp = await Promise.allSettled(allrequest);
+    console.log("相应1", resp);
 
     let newData = resp.map((v, idx) => {
       return {
@@ -882,7 +907,8 @@ function calculationSessions() {
 
 async function getHistorys(searchType = "history") {
   const allCount = searchType === "history" ? userInfo.value.num : 1;
-  const filter = searchType === "history" ? userInfo.value.competitionType : "1";
+  const filter =
+    searchType === "history" ? userInfo.value.competitionType : "1";
   // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;

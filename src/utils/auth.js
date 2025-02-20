@@ -317,7 +317,7 @@ function handlerData(source, dataRange, battleInfo) {
 }
 
 export function handlerso1Data(source) {
-  console.log("来源", source);
+  // console.log("来源", source);
   let baseInfo = {
     iconId: source?.baseInfo?.profileIconId ?? source.icon_id,
     name: source.label,
