@@ -569,7 +569,7 @@ export function handlerso1Data(source) {
         0
       );
     }
-    console.log("新列表", list, baseInfo);
+    // console.log("新列表", list, baseInfo);
     const match2PlayersList = yourMatchPlayersList
       .filter(v => v.totalGames > 2)
       .sort(

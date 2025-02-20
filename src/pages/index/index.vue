@@ -99,13 +99,13 @@
             @click="submit"
           ></uv-button>
         </view>
-        <view class="mr-4" v-if="failRequest.length">
+        <view class="mr-4" v-if="failRequest.length || failHistoryData.length">
           <uv-button
             :loading="loading"
             size="small"
             type="primary"
             text="再次查询"
-            @click="failHistorys"
+            @click="getAllFailHistorys"
           ></uv-button>
         </view>
         <view class="mr-4 ml-2">
@@ -117,9 +117,8 @@
             @click="onLineSubmit"
           ></uv-button>
         </view>
-        <view class="mr-4 ml-2">
+        <view class="mr-4 ml-2" v-if="failOnlineData.length">
           <uv-button
-            v-if="failOnlineData.length"
             :loading="loading"
             size="small"
             type="success"
@@ -489,7 +488,7 @@ async function getNewOnline(requestScope = "all") {
     let newData = allData.filter(v => v.status === "fulfilled");
     failOnlineData.value = allData.filter(v => v.status === "rejected");
     console.log("失败数据", failOnlineData.value);
-    
+
     newData = handlerMerge(newData);
     newData.forEach(y => {
       const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
@@ -536,10 +535,16 @@ function divideBy200(num) {
   return result;
 }
 
-async function getNewHistorys() {
-  const allrequestParams = options1.value.filter(v =>
-    userInfo.value.role.includes(v.value)
-  );
+const failHistoryData = ref([]);
+async function getNewHistorys(requestScope = "all") {
+  let allrequestParams = [];
+  if (requestScope === "all") {
+    allrequestParams = options1.value.filter(v =>
+      userInfo.value.role.includes(v.value)
+    );
+  } else {
+    allrequestParams = failHistoryData.value;
+  }
   console.log("allrequestParams", allrequestParams);
   const countList = divideBy200(userInfo.value.num);
   const allrequest = allrequestParams.map(async (v, idx) => {
@@ -588,27 +593,36 @@ async function getNewHistorys() {
       return { baseInfo: data, list: accumulatedMatches, currentGame };
     } catch (error) {
       console.log("错误2", error);
+      throw error;
     }
   });
   let resp = null;
   try {
     loading.value = true;
     resp = await Promise.allSettled(allrequest);
-    console.log("相应1", resp);
+    console.log("相应战绩列表", resp);
 
-    let newData = resp.map((v, idx) => {
-      return {
-        currentGame: v.currentGame,
-        ...allrequestParams[idx],
-        ...handlerso1Data({
-          ...v,
-          allrequestParams: allrequestParams,
+    let allData = resp.map((v, idx) => {
+      if (v.status === "fulfilled") {
+        return {
+          currentGame: v.value.currentGame,
           ...allrequestParams[idx],
-          dataRange: dataRange.value,
-          competitionType: userInfo.value.competitionType,
-        }),
-      };
+          ...handlerso1Data({
+            ...v.value,
+            allrequestParams: allrequestParams,
+            ...allrequestParams[idx],
+            dataRange: dataRange.value,
+            competitionType: userInfo.value.competitionType,
+          }),
+          status: v.status,
+        };
+      } else {
+        return { ...v, ...allrequestParams[idx] };
+      }
     });
+    let newData = allData.filter(v => v.status === "fulfilled");
+    failHistoryData.value = allData.filter(v => v.status === "rejected");
+    console.log("失败数据2", failHistoryData.value);
     newData = handlerMerge(newData);
     newData.forEach(y => {
       const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
@@ -997,6 +1011,16 @@ async function getHistorys(searchType = "history") {
     console.log("最终结果", resp);
     uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }
+}
+
+function getAllFailHistorys() {
+  const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+      console.log("当前地址", batchBaseUrl);
+      if (batchBaseUrl === "地址3") {
+        getNewHistorys('fail');
+      } else {
+        failHistorys();
+      }
 }
 
 async function failHistorys() {
