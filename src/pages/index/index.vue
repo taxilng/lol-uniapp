@@ -437,6 +437,7 @@ async function getNewOnline(requestScope = "all") {
           title: res1.data?.error?.message,
           icon: "error",
         });
+        return
       }
       const data = res1?.data?.data;
       const res3 = await spectator_info({
@@ -564,6 +565,7 @@ async function getNewHistorys(requestScope = "all") {
           title: res1.data?.error?.message,
           icon: "error",
         });
+        return
       }
       const data = res1?.data?.data;
       const accumulatedMatches = [];
