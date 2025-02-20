@@ -493,12 +493,17 @@ async function getNewOnline(requestScope = "all") {
     newData.forEach(y => {
       const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
       if (findIdx !== -1) {
-        tableData1.value[findIdx] = y;
+        tableData1.value[findIdx] = {
+          ...tableData1.value[findIdx],
+          currentGame: y.currentGame,
+          onlineInfo: y.onlineInfo,
+          lastGameDate: y.lastGameDate,
+        };
       } else {
         tableData1.value.push(y);
       }
     });
-    console.log("中级接口过", newData);
+    // console.log("中级接口过", newData, tableData1.value);
     uni.showToast({
       title: "查询成功！！",
       icon: "success",
@@ -1015,12 +1020,12 @@ async function getHistorys(searchType = "history") {
 
 function getAllFailHistorys() {
   const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
-      console.log("当前地址", batchBaseUrl);
-      if (batchBaseUrl === "地址3") {
-        getNewHistorys('fail');
-      } else {
-        failHistorys();
-      }
+  console.log("当前地址", batchBaseUrl);
+  if (batchBaseUrl === "地址3") {
+    getNewHistorys("fail");
+  } else {
+    failHistorys();
+  }
 }
 
 async function failHistorys() {
