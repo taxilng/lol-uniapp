@@ -433,12 +433,13 @@ async function getNewOnline(requestScope = "all") {
         gameName: v.label,
         tagLine: v.tagLine,
       });
+      // console.log('基础信息', res1);
       if (res1.data?.success === false) {
         uni.showToast({
           title: res1.data?.error?.message,
           icon: "error",
         });
-        return
+        throw new Error(res1.data?.error?.message)
       }
       const data = res1?.data?.data;
       const res3 = await spectator_info({
@@ -566,7 +567,7 @@ async function getNewHistorys(requestScope = "all") {
           title: res1.data?.error?.message,
           icon: "error",
         });
-        return
+        throw new Error(res1.data?.error?.message)
       }
       const data = res1?.data?.data;
       const accumulatedMatches = [];
