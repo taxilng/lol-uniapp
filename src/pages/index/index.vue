@@ -108,7 +108,7 @@
             @click="getAllFailHistorys"
           ></uv-button>
         </view>
-        <view class="mr-4 ml-2">
+        <view class="mr-4">
           <uv-button
             :loading="loading"
             size="small"
@@ -117,7 +117,7 @@
             @click="onLineSubmit"
           ></uv-button>
         </view>
-        <view class="mr-4 ml-2" v-if="failOnlineData.length">
+        <view class="mr-4" v-if="failOnlineData.length">
           <uv-button
             :loading="loading"
             size="small"
@@ -266,6 +266,7 @@ function openRolePick() {
 function confirmRole(data) {
   console.log(data);
   userInfo.value.role = data.map(el => el.value);
+  uni.setStorageSync("selectedUserList", JSON.stringify(userInfo.value.role));
   if (data.length > 2) {
     userInfo.value.names = `${data
       .map(el => el.label)

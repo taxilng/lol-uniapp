@@ -2,7 +2,7 @@
   <view class="max-w-screen-xl mx-auto h-full overflow-y-auto p-4">
     <uv-form labelPosition="top" labelWidth="200">
       <uv-form-item
-        label="批量查询的额外召唤师"
+        label="批量查询的召唤师"
         borderBottom
         @click="openRolePick"
       >
@@ -17,7 +17,7 @@
           <uv-icon name="arrow-right"></uv-icon>
         </template>
       </uv-form-item>
-      <uv-form-item label="默认选中召唤师" borderBottom @click="openRolePick2">
+      <!-- <uv-form-item label="默认选中召唤师" borderBottom @click="openRolePick2">
         <uv-input
           disabled
           disabledColor="#ffffff"
@@ -28,7 +28,7 @@
         <template v-slot:right>
           <uv-icon name="arrow-right"></uv-icon>
         </template>
-      </uv-form-item>
+      </uv-form-item> -->
       <uv-form-item label="默认页面" borderBottom @click="openRolePick3">
         <uv-input
           v-model="defaultPage"

@@ -401,48 +401,7 @@ export const platform2areaId = {
   TJ101: "6",
 };
 
-export const defaultUser = [
-  {
-    label: "大乱斗一坑四",
-    tagLine: "28158",
-    value: "R+jIOLNz0v2qr3JyQdkmBlUrEXheAdDw3mTW89J2kaQ=",
-    puuid: "ba32e870-fc23-510c-a889-896d6be8cd7a",
-    areaId: 4,
-    icon_id: 750,
-  },
-  {
-    label: "太阳把把C",
-    tagLine: "73858",
-    value: "AHj8Wu9dWeEzS7B7sKOIhZx2LfU2Qu5b3mTW89J2kaQ=",
-    puuid: "0818b654-f8d7-5268-a57c-3187d6bcd3e0",
-    areaId: 4,
-    icon_id: 5484,
-  },
-  {
-    label: "一路上挖坑",
-    tagLine: "12037",
-    value: "4K4e1em+slXEsv4ZlMhNxvvUAXyeyfAJ3mTW89J2kaQ=",
-    puuid: "126ba289-b3d2-5e7f-8cee-375d2d88b6ac",
-    areaId: 4,
-    icon_id: 4096,
-  },
-  {
-    label: "坑你到泪流",
-    tagLine: "81828",
-    value: "dVKxXZimaCf/gTsrU7Cip9xSm7pW0j7W3mTW89J2kaQ=",
-    puuid: "88a50f35-c214-55cd-b729-16c67dcb9ff4",
-    areaId: 4,
-    icon_id: 4896,
-  },
-  {
-    label: "坑挖了一路",
-    tagLine: "55049",
-    value: "TLzeXvmbf/B37ipN+errtGGHxQgWwaUF3mTW89J2kaQ=",
-    puuid: "33286fe5-23a7-5ceb-9bbb-61ca60973a54",
-    areaId: 15,
-    icon_id: 1594,
-  },
-];
+export const defaultUser = [];
 
 export const tabList = [
   {
