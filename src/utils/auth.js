@@ -337,6 +337,7 @@ export function handlerso1Data(source) {
     killsMax: 0,
     assistsMax: 0,
     pentaKills: 0,
+    nameInfoNew: `${source?.label}#${source.tagLine}`,
   };
 
   // 战绩是否隐藏
