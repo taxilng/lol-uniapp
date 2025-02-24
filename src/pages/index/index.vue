@@ -507,10 +507,18 @@ async function getNewOnline(requestScope = "all") {
       }
     });
     // console.log("中级接口过", newData, tableData1.value);
-    uni.showToast({
-      title: "查询成功！！",
-      icon: "success",
-    });
+    const hasSuccess = allData.some(v => v.status === "fulfilled");
+    if (hasSuccess) {
+      uni.showToast({
+        title: "查询成功！！",
+        icon: "error",
+      });
+    } else {
+      uni.showToast({
+        title: allData.find(v => v.status === "rejected")?.reason?.message,
+        icon: "error",
+      });
+    }
   } catch (error) {
     console.log("有错误", error);
   } finally {
@@ -642,10 +650,18 @@ async function getNewHistorys(requestScope = "all") {
       }
     });
     console.log("中级接口过", newData);
-    uni.showToast({
-      title: "查询成功！！",
-      icon: "success",
-    });
+    const hasSuccess = allData.some(v => v.status === "fulfilled");
+    if (hasSuccess) {
+      uni.showToast({
+        title: "查询成功！！",
+        icon: "error",
+      });
+    } else {
+      uni.showToast({
+        title: allData.find(v => v.status === "rejected")?.reason?.message,
+        icon: "error",
+      });
+    }
   } catch (error) {
     console.log("有错误", error);
   } finally {
