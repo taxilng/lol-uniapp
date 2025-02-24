@@ -1,5 +1,11 @@
 <template>
-  <view class="record-item p-1 relative bg-white shadow-md rounded-lg">
+  <view
+    class="record-item p-1 relative bg-white shadow-md rounded-lg"
+    :class="{
+      'border-solid border-x border-y border-rose-400': item.totalGames === 0,
+      'border-solid border-x border-y border-green-400': isCurrentMonth(item.startTime),
+    }"
+  >
     <!-- <el-icon
       class="record-close !absolute -top-1 -left-1 text-black !w-5 !h-5 z-10 bg-slate-300 rounded hover:opacity-80 cursor-pointer"
       @click="delItem"
@@ -90,10 +96,7 @@
               ).toFixed(2)}%)`
             }}
           </text>
-          <view
-            v-if="batchBaseUrl === '地址3'"
-            class="flex mt-1 text-xs"
-          >
+          <view v-if="batchBaseUrl === '地址3'" class="flex mt-1 text-xs">
             <view v-if="item.damageMax">
               <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
               {{ percentageConversion(item.damageMax, 0) }}
@@ -225,6 +228,24 @@ const props = defineProps({
 const emits = defineEmits(["delItem"]);
 
 const { item, mode, activeTab, list, editStatus } = toRefs(props);
+
+function isCurrentMonth(dateStr) {
+  // 解析输入的日期字符串
+  const inputDate = new Date(dateStr);
+  // 获取当前日期
+  const currentDate = new Date();
+
+  // 检查输入日期是否有效
+  if (isNaN(inputDate.getTime())) {
+    return false;
+  }
+
+  // 比较年份和月份
+  return (
+    inputDate.getFullYear() === currentDate.getFullYear() &&
+    inputDate.getMonth() === currentDate.getMonth()
+  );
+}
 
 const batchBaseUrl = ref(uni.getStorageSync("batchBaseUrl"));
 
@@ -448,8 +469,10 @@ const userInfos = computed(() =>
       value: (() => {
         if (item.value.yourMatchPlayersList?.length) {
           const firend = item.value.yourMatchPlayersList?.[0];
-          if ((firend.totalWins * 2 - firend.totalGames) > 0) {
-            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
+          if (firend.totalWins * 2 - firend.totalGames > 0) {
+            return `${firend.riotIdGameName} 胜${
+              firend.totalWins * 2 - firend.totalGames
+            }`;
           } else {
             return "无";
           }
@@ -469,8 +492,10 @@ const userInfos = computed(() =>
             item.value.yourMatchPlayersList?.[
               item.value.yourMatchPlayersList.length - 1
             ];
-          if ((firend.totalWins * 2 - firend.totalGames) < 0) {
-            return `${firend.riotIdGameName} 胜${firend.totalWins * 2 - firend.totalGames}`;
+          if (firend.totalWins * 2 - firend.totalGames < 0) {
+            return `${firend.riotIdGameName} 胜${
+              firend.totalWins * 2 - firend.totalGames
+            }`;
           } else {
             return "无";
           }
