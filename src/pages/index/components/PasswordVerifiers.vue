@@ -52,6 +52,7 @@ if (!firstUseTime) {
 function checkPassword() {
   const now = Date.now();
   const fifteenDays = 15 * 24 * 60 * 60 * 1000;
+  const firstUseTime = uni.getStorageSync("firstUseTime");
   const passwordStorage = uni.getStorageSync("password");
   if (now - firstUseTime > fifteenDays && passwordStorage !== "lol2025") {
     showPasswordModal();
