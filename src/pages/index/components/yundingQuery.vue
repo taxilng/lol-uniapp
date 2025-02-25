@@ -130,6 +130,10 @@
       @confirm="typeConfirm"
     ></uv-picker>
   </view>
+  <PasswordVerifiers
+    ref="passwordVerifiersRef"
+    @passwordConfirmed="getHistoryOne"
+  />
 </template>
 
 <script setup>
@@ -144,6 +148,7 @@ import {
   yundingDataProcessing,
 } from "@/utils/auth";
 import YundingRecordCard from "./YundingRecordCard.vue";
+import PasswordVerifiers from "./PasswordVerifiers.vue";
 import { userHistoryStore } from "@/stores/userHistory";
 const historyStore = userHistoryStore();
 
@@ -249,7 +254,10 @@ const roles = ref([...defaultSelectedUser]);
 const searchHistory = ref([]);
 const handleClose = tag => {
   searchHistory.value.splice(searchHistory.value.indexOf(tag), 1);
-  uni.setStorageSync("searchYundingHistoryLocal", JSON.stringify(searchHistory.value));
+  uni.setStorageSync(
+    "searchYundingHistoryLocal",
+    JSON.stringify(searchHistory.value)
+  );
 };
 
 // 选择历史用户tag
@@ -399,6 +407,7 @@ function divideBy200(num) {
   return result;
 }
 
+const passwordVerifiersRef = ref();
 async function getHistoryOne() {
   console.log("大区", userInfo.value.areaId);
   const { name: areaName } = areaMap[userInfo.value.areaId];
@@ -414,6 +423,10 @@ async function getHistoryOne() {
       title: "请输入总局数",
       icon: "error",
     });
+    return;
+  }
+  if (!passwordVerifiersRef.value.checkPassword()) {
+    console.log("密码错误22");
     return;
   }
   const sign = getSign();
@@ -452,8 +465,8 @@ async function getHistoryOne() {
         return;
       }
       if (res.code === 2) {
-        console.log('走不走啊', res?.data?.[0]?.titleTime?.slice(0,7));
-        
+        console.log("走不走啊", res?.data?.[0]?.titleTime?.slice(0, 7));
+
         uni.showToast({
           title: res?.data?.[0]?.titleTime,
           icon: "error",

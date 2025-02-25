@@ -131,6 +131,7 @@
       @confirm="typeConfirm"
     ></uv-picker>
   </view>
+  <PasswordVerifiers ref="passwordVerifiersRef" @passwordConfirmed="getHistoryOne" />
 </template>
 
 <script setup>
@@ -152,6 +153,7 @@ import {
   dataProcessing,
 } from "@/utils/auth";
 import RecordCard from "./RecordCard.vue";
+import PasswordVerifiers from "./PasswordVerifiers.vue";
 import { userHistoryStore } from "@/stores/userHistory";
 const historyStore = userHistoryStore();
 
@@ -426,6 +428,7 @@ function divideBy200(num) {
   return result;
 }
 
+const passwordVerifiersRef = ref();
 async function getHistoryOne() {
   console.log("大区", userInfo.value.areaId);
   const { name: areaName } = areaMap[userInfo.value.areaId];
@@ -441,6 +444,11 @@ async function getHistoryOne() {
       title: "请输入总局数",
       icon: "error",
     });
+    return;
+  }
+
+  if (!passwordVerifiersRef.value.checkPassword()) {
+    console.log("密码错误22");
     return;
   }
 
