@@ -208,6 +208,9 @@ import {
 } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
 import HeroAvatar from "@/components/HeroAvatar.vue";
+import useRewardedVideoAd  from "@/useHooks/use_rewarded_video_ad";
+const { initVideoAd, showVideoAd } = useRewardedVideoAd();
+
 const showTips = ref(uni.getStorageSync("showTips"));
 const props = defineProps({
   recordData: Object,
@@ -217,8 +220,8 @@ const { recordData } = toRefs(props);
 watch(
   props,
   () => {
-    // console.log("recordData.value", recordData.value);
-
+    console.log("recordData.value", recordData.value);
+    initVideoAd()
     if (recordData.value.battleInfo) {
       getRankElo(recordData.value.battleInfo);
     }
@@ -420,13 +423,28 @@ const battleTypes = computed(() => [
 const router = useRouter();
 
 const historyStore = userHistoryStore();
+
 function handleOpenHistory() {
+  // 用户触发广告后，显示激励视频广告
+  /* #ifdef MP-WEIXIN */
+  showVideoAd(() => {
+    console.log("用户完整观看了广告，给予奖励1");
+    uni.setStorageSync("showTips", 1);
+    showTips.value = 1;
+    historyStore.setHistoryList(recordData.value);
+    navigateToWithLimit({
+      url: "/pages/history/index",
+    });
+  });
+  /* #endif */
+  /* #ifdef H5 */
   uni.setStorageSync("showTips", 1);
   showTips.value = 1;
   historyStore.setHistoryList(recordData.value);
   navigateToWithLimit({
     url: "/pages/history/index",
   });
+  /* #endif */
 }
 
 // 跳转到实时战绩

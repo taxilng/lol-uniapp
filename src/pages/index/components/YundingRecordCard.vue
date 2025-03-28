@@ -213,11 +213,23 @@ import {
 } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
 import HeroAvatar from "@/components/HeroAvatar.vue";
+import useRewardedVideoAd from "@/useHooks/use_rewarded_video_ad";
+const { initVideoAd, showVideoAd } = useRewardedVideoAd();
+
+
 const showTips = ref(uni.getStorageSync("showTips"));
 const props = defineProps({
   recordData: Object,
 });
 const { recordData } = toRefs(props);
+
+watch(
+  props,
+  () => {
+    initVideoAd();
+  },
+  { immediate: true, deep: true }
+);
 
 const dataRankEloNum = ref("");
 const loading = ref(false);
@@ -389,12 +401,25 @@ const router = useRouter();
 
 const historyStore = userHistoryStore();
 function handleOpenHistory() {
+  /* #ifdef MP-WEIXIN */
+  showVideoAd(() => {
+    console.log("用户完整观看了广告，给予奖励2");
+    uni.setStorageSync("showTips", 1);
+    showTips.value = 1;
+    historyStore.setHistoryList(recordData.value);
+    navigateToWithLimit({
+      url: "/pages/history/yundingIndex",
+    });
+  });
+  /* #endif */
+  /* #ifdef H5 */
   uni.setStorageSync("showTips", 1);
   showTips.value = 1;
   historyStore.setHistoryList(recordData.value);
   navigateToWithLimit({
     url: "/pages/history/yundingIndex",
   });
+  /* #endif */
 }
 
 // 跳转到实时战绩
