@@ -382,7 +382,7 @@ export function handlerso1Data(source) {
         v =>
           ![
             31, 32, 33, 34, 35, 36, 52, 800, 801, 810, 820, 1830, 840, 850, 870,
-            890,
+            880, 890,
           ].includes(v.queueId)
       );
     }
