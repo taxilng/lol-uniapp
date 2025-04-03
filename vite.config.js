@@ -26,13 +26,13 @@ export default defineConfig({
   server: {
     open: true,
     host: true,
-    // proxy: {
-    //   '/bspapp': {
-    //     target:
-    //       'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/',
-    //     changeOrigin: true,
-    //     rewrite: p => p.replace(/^\/bspapp/, '')
-    //   }
-    // }
+    proxy: {
+      '/bspapp': {
+        target:
+          'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/bspapp/, '')
+      }
+    }
   }
 })
