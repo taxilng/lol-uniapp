@@ -35,8 +35,8 @@ export default {
         return new Response('Internal Server Error', { status: 500 });
       }
     }
-    
+    const ORIGIN_URL = 'https://lol-uniapp-gitlab.pages.dev'; 
     // 非匹配路径直接转发
-    return fetch(request);
+    return fetch(ORIGIN_URL + url.pathname + url.search, request);
   }
 };
