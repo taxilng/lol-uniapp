@@ -21,6 +21,7 @@
 
 <script setup>
 import { ref, defineEmits } from "vue";
+import { PermanentPassword, TemporaryPassword } from './constant'
 const emit = defineEmits(["passwordConfirmed"]);
 const passwordModalRef = ref();
 function showPasswordModal() {
@@ -30,7 +31,10 @@ const password = ref("");
 const toastRef = ref();
 function confirmPassword() {
   console.log("走不密码", password.value);
-  if (password.value !== "lol2025") {
+  // 临时密码
+  const tempPasswordLocalList = uni.getStorageSync("tempPasswordLocalList");
+  const flag = !tempPasswordLocalList?.includes(password.value) && TemporaryPassword.some(v => v.value === password.value)
+  if (!(password.value === PermanentPassword || flag)) {
     toastRef.value.show({
       message: "密码错误",
       type: "error",
@@ -40,6 +44,12 @@ function confirmPassword() {
   }
   passwordModalRef.value.close();
   uni.setStorageSync("password", password.value);
+  if(flag) {
+    uni.setStorageSync("tempPasswordLocalList", [...tempPasswordLocalList, password.value]);
+    const timer = TemporaryPassword.find(v => v.value === password.value)?.time
+    const firstUseTime = Date.now() + (timer - 15) * 24 * 60 * 60 * 1000
+    uni.setStorageSync("firstUseTime", firstUseTime);
+  }
   emit("passwordConfirmed");
 }
 
@@ -48,13 +58,18 @@ const firstUseTime = uni.getStorageSync("firstUseTime");
 if (!firstUseTime) {
   uni.setStorageSync("firstUseTime", Date.now());
 }
+// 临时密码列表
+const tempPasswordLocalList = uni.getStorageSync("tempPasswordLocalList");
+if (!tempPasswordLocalList) {
+  uni.setStorageSync("tempPasswordLocalList", []);
+}
 // 校验是否超过15天
 function checkPassword() {
   const now = Date.now();
   const fifteenDays = 15 * 24 * 60 * 60 * 1000;
   const firstUseTime = uni.getStorageSync("firstUseTime");
   const passwordStorage = uni.getStorageSync("password");
-  if (now - firstUseTime > fifteenDays && passwordStorage !== "lol2025") {
+  if (now - firstUseTime > fifteenDays && passwordStorage !== PermanentPassword) {
     showPasswordModal();
     return;
   }
