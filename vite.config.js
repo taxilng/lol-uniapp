@@ -27,6 +27,12 @@ export default defineConfig({
     open: true,
     host: true,
     proxy: {
+      '/akari': {
+        target:
+          'https://akari.opgg8.com',
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/akari/, '')
+      },
       '/bspapp': {
         target:
           'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/',

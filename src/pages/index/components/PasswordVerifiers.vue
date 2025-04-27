@@ -21,7 +21,7 @@
 
 <script setup>
 import { ref, defineEmits } from "vue";
-import { PermanentPassword, TemporaryPassword } from './constant'
+import { PermanentPassword, TemporaryPassword, expiredTime } from './constant'
 const emit = defineEmits(["passwordConfirmed"]);
 const passwordModalRef = ref();
 function showPasswordModal() {
@@ -47,7 +47,7 @@ function confirmPassword() {
   if(flag) {
     uni.setStorageSync("tempPasswordLocalList", [...tempPasswordLocalList, password.value]);
     const timer = TemporaryPassword.find(v => v.value === password.value)?.time
-    const firstUseTime = Date.now() + (timer - 15) * 24 * 60 * 60 * 1000
+    const firstUseTime = Date.now() + (timer - expiredTime) * 24 * 60 * 60 * 1000
     uni.setStorageSync("firstUseTime", firstUseTime);
   }
   emit("passwordConfirmed");
@@ -63,13 +63,13 @@ const tempPasswordLocalList = uni.getStorageSync("tempPasswordLocalList");
 if (!tempPasswordLocalList) {
   uni.setStorageSync("tempPasswordLocalList", []);
 }
-// 校验是否超过15天
+// 校验是否超过30天
 function checkPassword() {
   const now = Date.now();
-  const fifteenDays = 15 * 24 * 60 * 60 * 1000;
+  const thirtyDays = expiredTime * 24 * 60 * 60 * 1000;
   const firstUseTime = uni.getStorageSync("firstUseTime");
   const passwordStorage = uni.getStorageSync("password");
-  if (now - firstUseTime > fifteenDays && passwordStorage !== PermanentPassword) {
+  if (now - firstUseTime > thirtyDays && passwordStorage !== PermanentPassword) {
     showPasswordModal();
     return;
   }
