@@ -1,156 +1,158 @@
 <template>
   <view class="max-w-screen-sm mx-auto h-full overflow-y-auto bg-slate-50">
     <view class="history">
-      <view class="flex items-center relative p-2 bg-slate-100">
-        <view @click="initUpdateRecord">
-          <LolAvartar
-            :size="40"
-            :iconId="recordData.iconId"
-            :loading="loading"
-          />
-        </view>
+      <scroll-view
+        class="scroll-container"
+        scroll-y
+        @scrolltolower="handleScrollToBottom1"
+      >
+        <view class="flex items-center relative p-2 bg-slate-100">
+          <view @click="initUpdateRecord">
+            <LolAvartar
+              :size="40"
+              :iconId="recordData.iconId"
+              :loading="loading"
+            />
+          </view>
 
-        <view class="ml-2 flex-1">
-          <view class="font-medium flex items-center">
-            <uv-tooltip
-              class="text-base"
-              color="#000"
-              size="1rem"
-              :text="recordData.nameInfoNew"
-              overlay
-              direction="bottom"
-            ></uv-tooltip>
-            <!-- <text class="text-base">{{ recordData.nameInfoNew }}</text> -->
-            <text class="text-xs ml-2 text-gray-800">
-              V{{ recordData.level }}
-            </text>
-          </view>
-          <view class="text-purple-600 text-xs mt-1">
-            {{ rankEloLoading ? "隐藏分" : dataRankEloNum }}
-          </view>
-          <view class="mt-1 text-xs">
-            在线时间: {{ recordData.onlineInfo }}
-          </view>
-          <view
-            class="message-detail text-xs"
-            v-html="renderImg(recordData.messageDetail)"
-          ></view>
-        </view>
-        <view class="ml-2 p-2" v-if="recordData.list" @click="initUpdate">
-          <uv-icon name="reload" size="20"></uv-icon>
-        </view>
-      </view>
-
-      <template v-if="recordData.list">
-        <scroll-view
-          class="scroll-container"
-          scroll-y
-          @scrolltolower="handleScrollToBottom3"
-        >
-          <view
-            v-if="recordData?.currentGame?.gameName"
-            class="flex justify-center bg-violet-200 w-full p-2 items-center"
-            @click="handleOpenCurrentDetail()"
-          >
-            <view class="mr-4">
-              <HeroAvatar
-                :championId="recordData?.currentGame?.championId"
-                :size="32"
-              />
+          <view class="ml-2 flex-1">
+            <view class="font-medium flex items-center">
+              <uv-tooltip
+                class="text-base"
+                color="#000"
+                size="1rem"
+                :text="recordData.nameInfoNew"
+                overlay
+                direction="bottom"
+              ></uv-tooltip>
+              <!-- <text class="text-base">{{ recordData.nameInfoNew }}</text> -->
+              <text class="text-xs ml-2 text-gray-800">
+                V{{ recordData.level }}
+              </text>
             </view>
-            <view>
-              <view class="mb-2">
-                {{
-                  parseTime(
-                    recordData?.currentGame?.playerCredentials?.gameCreateDate,
-                    "{m}月{d}日 {h}:{i}"
-                  )
-                }}
+            <view class="text-purple-600 text-xs mt-1">
+              {{ rankEloLoading ? "隐藏分" : dataRankEloNum }}
+            </view>
+            <view class="mt-1 text-xs">
+              在线时间: {{ recordData.onlineInfo }}
+            </view>
+            <view
+              class="message-detail text-xs"
+              v-html="renderImg(recordData.messageDetail)"
+            ></view>
+          </view>
+          <view class="ml-2 p-2" v-if="recordData.list" @click="initUpdate">
+            <uv-icon name="reload" size="20"></uv-icon>
+          </view>
+        </view>
+
+        <template v-if="recordData.list">
+          <scroll-view
+            class="scroll-container"
+            scroll-y
+            @scrolltolower="handleScrollToBottom3"
+          >
+            <view
+              v-if="recordData?.currentGame?.gameName"
+              class="flex justify-center bg-violet-200 w-full p-2 items-center"
+              @click="handleOpenCurrentDetail()"
+            >
+              <view class="mr-4">
+                <HeroAvatar
+                  :championId="recordData?.currentGame?.championId"
+                  :size="32"
+                />
               </view>
               <view>
-                <text class="mr-2 ml-4 greenRound">
+                <view class="mb-2">
                   {{
-                    levelConfig.game_mod[
-                      recordData?.currentGame?.playerCredentials?.queueId
-                    ] ?? "新模式"
-                  }}
-                </text>
-                <text>
-                  已开始{{
-                    timePassed(
-                      recordData?.currentGame?.playerCredentials?.gameCreateDate
+                    parseTime(
+                      recordData?.currentGame?.playerCredentials
+                        ?.gameCreateDate,
+                      "{m}月{d}日 {h}:{i}"
                     )
-                  }}分钟
-                </text>
-              </view>
-            </view>
-          </view>
-          <view
-            class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
-            :class="{
-              'bg-green-100': item.win === true,
-              'bg-red-100': item.win === false,
-            }"
-            v-for="(item, index) in recordData.list"
-            :key="index"
-            @click="handleOpenHistoryDetail(item)"
-          >
-            <view class="flex items-center cursor-pointer">
-              <HeroAvatar
-                :championId="item.championId"
-                :size="40"
-                :wasMvp="item.wasMvp"
-                :wasSvp="item.wasSvp"
-              />
-              <view class="text-sm ml-2 flex-1">
-                <view class="flex justify-between">
+                  }}
+                </view>
+                <view>
+                  <text class="mr-2 ml-4 greenRound">
+                    {{
+                      levelConfig.game_mod[
+                        recordData?.currentGame?.playerCredentials?.queueId
+                      ] ?? "新模式"
+                    }}
+                  </text>
                   <text>
-                    {{ item.win ? "胜利" : "失败" }}
-                    {{ `${item.kills}/${item.deaths}/${item.assists}` }}
-                  </text>
-                  <text>{{ parseTime(item.gameStartTimestamp) }}</text>
-                </view>
-                <view class="text-xs mt-1 flex justify-between">
-                  <view class="flex items-center">
-                    <text class="text-slate-500">
-                      {{ levelConfig.game_mod[item.queueId] }}
-                    </text>
-                    <i
-                      v-if="item.damageMax"
-                      class="ml-2 honor16 honor16-hurt2"
-                    ></i>
-                    <i
-                      v-if="item.defenseMax"
-                      class="ml-2 honor16 honor16-hurt"
-                    ></i>
-                    <i
-                      v-if="item.killsMax"
-                      class="ml-2 honor16 honor16-kill"
-                    ></i>
-                    <i
-                      v-if="item.assistsMax"
-                      class="ml-2 honor16 honor16-attack"
-                    ></i>
-                    <i
-                      v-if="item.pentaKills"
-                      class="ml-2 honor16 honor16-kill5"
-                    ></i>
-                  </view>
-                  <text class="ml-2">
-                    用时{{ secondsToHms(item.gameDuration) }}
+                    已开始{{
+                      timePassed(
+                        recordData?.currentGame?.playerCredentials
+                          ?.gameCreateDate
+                      )
+                    }}分钟
                   </text>
                 </view>
               </view>
             </view>
-          </view>
-        </scroll-view>
-      </template>
-      <template v-if="recordData.data">
-        <scroll-view
-          class="scroll-container"
-          scroll-y
-          @scrolltolower="handleScrollToBottom1"
-        >
+            <view
+              class="p-2 m-2 shadow-md rounded-lg overflow-hidden"
+              :class="{
+                'bg-green-100': item.win === true,
+                'bg-red-100': item.win === false,
+              }"
+              v-for="(item, index) in recordData.list"
+              :key="index"
+              @click="handleOpenHistoryDetail(item)"
+            >
+              <view class="flex items-center cursor-pointer">
+                <HeroAvatar
+                  :championId="item.championId"
+                  :size="40"
+                  :wasMvp="item.wasMvp"
+                  :wasSvp="item.wasSvp"
+                />
+                <view class="text-sm ml-2 flex-1">
+                  <view class="flex justify-between">
+                    <text>
+                      {{ item.win ? "胜利" : "失败" }}
+                      {{ `${item.kills}/${item.deaths}/${item.assists}` }}
+                    </text>
+                    <text>{{ parseTime(item.gameStartTimestamp) }}</text>
+                  </view>
+                  <view class="text-xs mt-1 flex justify-between">
+                    <view class="flex items-center">
+                      <text class="text-slate-500">
+                        {{ levelConfig.game_mod[item.queueId] }}
+                      </text>
+                      <i
+                        v-if="item.damageMax"
+                        class="ml-2 honor16 honor16-hurt2"
+                      ></i>
+                      <i
+                        v-if="item.defenseMax"
+                        class="ml-2 honor16 honor16-hurt"
+                      ></i>
+                      <i
+                        v-if="item.killsMax"
+                        class="ml-2 honor16 honor16-kill"
+                      ></i>
+                      <i
+                        v-if="item.assistsMax"
+                        class="ml-2 honor16 honor16-attack"
+                      ></i>
+                      <i
+                        v-if="item.pentaKills"
+                        class="ml-2 honor16 honor16-kill5"
+                      ></i>
+                    </view>
+                    <text class="ml-2">
+                      用时{{ secondsToHms(item.gameDuration) }}
+                    </text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </template>
+        <template v-if="recordData.data">
           <view
             v-if="recordData?.curryMap?.gameId"
             class="flex justify-center bg-violet-200 w-full p-2 items-center"
@@ -198,8 +200,8 @@
               </view>
             </view>
           </view>
-        </scroll-view>
-      </template>
+        </template>
+      </scroll-view>
     </view>
   </view>
 </template>
@@ -473,7 +475,7 @@ function handleShare() {
 .scroll-container {
   background-color: #fff;
   border-radius: 10rpx;
-  height: calc(100vh - 150rpx);
+  height: calc(100vh - 10rpx);
 }
 
 .greenRound {
