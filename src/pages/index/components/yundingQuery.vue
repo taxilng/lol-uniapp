@@ -86,7 +86,7 @@
           @click="submit"
         ></uv-button>
       </view>
-      <view class="mr-4">
+      <!-- <view class="mr-4">
         <uv-button
           :loading="loading"
           size="small"
@@ -94,7 +94,7 @@
           text="添加到批量查询"
           @click="insert"
         ></uv-button>
-      </view>
+      </view> -->
       <!-- <view>
         <text @click="toggleCollapse">{{
           collapseVisible ? "收起" : "展开"

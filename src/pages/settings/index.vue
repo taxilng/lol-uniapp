@@ -759,16 +759,16 @@ function mergeConfirm(e) {
   mergeList.value[index][name] = confirmDate?.label;
 }
 
-const activeTab = ref(0);
+const activeTab = ref(1);
 function changtab(item) {
   console.log("item", item);
   activeTab.value = item.index;
 }
 const tabAccountList = [
-  {
-    name: "接口账号",
-    value: "api",
-  },
+  // {
+  //   name: "接口账号",
+  //   value: "api",
+  // },
   {
     name: "同步账号",
     value: "synchronous",

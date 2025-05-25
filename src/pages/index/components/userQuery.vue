@@ -269,8 +269,8 @@ const CompetitionTypeOption = ref([
   { value: "3", label: "灵活排位", queueId: 440 },
   { value: "4", label: "匹配赛", queueId: 430 },
   { value: "5", label: "大乱斗", queueId: 450 },
-  { value: "7", label: "无限火力", queueId: 900 },
-  { value: "8", label: "斗魂竞技场", queueId: 1700 },
+  // { value: "7", label: "无限火力", queueId: 900 },
+  // { value: "8", label: "斗魂竞技场", queueId: 1700 },
 ]);
 
 const defaultSelectedUser = [1, 2, 3, 4, 5];
@@ -453,7 +453,7 @@ async function getHistoryOne() {
   }
 
   const baseUrl = uni.getStorageSync("baseUrl");
-  if (baseUrl === "2") {
+  if (baseUrl === "2" && 0) {
     const nicknameArr = userInfo.value.nickname?.split("#");
     if (nicknameArr.length < 2) {
       uni.showToast({

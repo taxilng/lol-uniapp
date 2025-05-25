@@ -165,12 +165,12 @@ function extractTimeFromText(text) {
 }
 
 function sortOnlineTimeOld(a, b) {
-  console.log("a", a);
-  console.log("b", b);
-  if (a?.currentGame?.curryMap || a?.onlineInfo == '在线') {
+  // console.log("a", a);
+  // console.log("b", b);
+  if (a?.curryMap || a?.onlineInfo == '在线') {
     return 1;
   }
-  if (b?.currentGame?.curryMap || b?.onlineInfo == '在线') {
+  if (b?.curryMap || b?.onlineInfo == '在线') {
     return -1;
   }
   const aTime = extractTimeFromText(a.onlineInfo);

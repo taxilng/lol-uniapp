@@ -293,7 +293,7 @@ function dateConfirm(e) {
   console.log("日期范围", e);
   dataRange.value = e.range;
   userInfo.value.dateRange = `${e.range.before}-${e.range.after}`;
-  userInfo.value.num = calculationSessions();
+  // userInfo.value.num = calculationSessions();
 }
 // 清空日期
 function clearDate() {
@@ -377,7 +377,7 @@ function submit() {
       console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
       console.log("当前地址", batchBaseUrl);
-      if (batchBaseUrl === "地址3") {
+      if (false && batchBaseUrl === "地址3") {
         getNewHistorys();
       } else {
         getHistorys();
@@ -400,7 +400,7 @@ function onLineSubmit() {
       console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
       console.log("当前地址", batchBaseUrl);
-      if (batchBaseUrl === "地址3") {
+      if (false && batchBaseUrl === "地址3") {
         getNewOnline();
       } else {
         getHistorys("online");
@@ -439,7 +439,7 @@ async function getNewOnline(requestScope = "all") {
           title: res1.data?.error?.message,
           icon: "error",
         });
-        throw new Error(res1.data?.error?.message)
+        throw new Error(res1.data?.error?.message);
       }
       const data = res1?.data?.data;
       const res3 = await spectator_info({
@@ -575,7 +575,7 @@ async function getNewHistorys(requestScope = "all") {
           title: res1.data?.error?.message,
           icon: "error",
         });
-        throw new Error(res1.data?.error?.message)
+        throw new Error(res1.data?.error?.message);
       }
       const data = res1?.data?.data;
       const accumulatedMatches = [];
@@ -680,7 +680,7 @@ const CompetitionTypeOption = ref([
   { value: "3", label: "灵活排位", queueId: 440 },
   { value: "4", label: "匹配赛", queueId: 430 },
   { value: "5", label: "大乱斗", queueId: 450 },
-  { value: "6", label: "非人机" },
+  // { value: "6", label: "非人机" },
 ]);
 
 watch(
@@ -814,7 +814,7 @@ function initDate() {
     before: defaultDate.value[0],
     after: defaultDate.value[1],
   };
-  userInfo.value.num = calculationSessions();
+  // userInfo.value.num = calculationSessions();
 }
 
 function addUserOptions() {
@@ -954,7 +954,7 @@ async function getHistorys(searchType = "history") {
   const allrequestParams = options1.value.filter(v =>
     userInfo.value.role.includes(v.value)
   );
-  const allrequest = allrequestParams.map(v =>
+  const allrequest = allrequestParams.map((v, idx) =>
     searchPlayerAll({
       nickname: `${v.label}*~*~*${v.tagLine}`,
       allCount,
@@ -964,12 +964,41 @@ async function getHistorys(searchType = "history") {
       filter,
       openId: "",
       ...sign,
-    })
+    }).then(res => ({ ...res.data, idx }))
   );
-  let resp = null;
+  let resp = [];
   try {
-    resp = await Promise.all(allrequest);
+    for await (const result of allrequest) {
+      console.log("打印接口result", result);
+      if (result.battleInfo) {
+        resp.push(result);
+        let newData = resp.map((x) => {
+          return {
+            ...dataProcessing(x, dataRange.value),
+            ...allrequestParams[x.idx],
+          };
+        });
+        // console.log("我来试试", newData);
+        newData = handlerMergeOld(newData);
+        newData.forEach(y => {
+          const findIdx = tableData1.value.findIndex(
+            v => y.nameInfoNew === v.nameInfoNew
+          );
+          if (findIdx !== -1) {
+            tableData1.value[findIdx] = y;
+          } else {
+            tableData1.value.push(y);
+          }
+        });
+      } else {
+        failRequest.value.push(allrequestParams[result.idx]);
+      }
+      // results.push(result);
+      // renderResults(results); // 每次有新结果就更新UI
+    }
     loading.value = false;
+    return;
+    // resp = await Promise.all(allrequest);
     // console.log(33, resp);
     const res = resp.map(v => {
       if (typeof v === "string") {
@@ -1041,7 +1070,7 @@ async function getHistorys(searchType = "history") {
 function getAllFailHistorys() {
   const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
   console.log("当前地址", batchBaseUrl);
-  if (batchBaseUrl === "地址3") {
+  if (false && batchBaseUrl === "地址3") {
     getNewHistorys("fail");
   } else {
     failHistorys();
