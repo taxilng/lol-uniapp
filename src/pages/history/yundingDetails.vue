@@ -29,9 +29,6 @@
                 parseTime(`${gameData.end_time}000`)
               }}</text>
               <text class="ml-2 text-sm">{{
-                levelConfig.yunding_mod[gameData.game_match_type]
-              }}</text>
-              <text class="ml-2 text-sm">{{
                 secondsToHms(gameData.duration)
               }}</text>
             </view>
