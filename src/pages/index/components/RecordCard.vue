@@ -304,6 +304,11 @@ const descriptionItems = computed(() => [
       : "",
   },
   { label: "综合评价", value: recordData.value.message },
+  { label: "详细评价", value: recordData.value.messageDetail?.replaceAll(
+      '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
+      ""
+    )
+    ?.replaceAll("font-size: 0.36rem;", "") },
   { label: "总局数", value: recordData.value.totalGames },
   { label: "赢", value: recordData.value.wins },
   { label: "输", value: recordData.value.losses },
@@ -364,6 +369,8 @@ const descriptionItems = computed(() => [
   },
   { label: "在线时间", value: recordData.value.onlineInfo },
   { label: "战绩隐藏", value: recordData.value.publicInfo },
+  { label: "性别", value: recordData.value.mlolgender === '♂' ? '男' : recordData.value.mlolgender === '♀' ? '女' : '未知'},
+  { label: "IP", value: recordData.value.mlollatestLocation },
   // {
   //   label: '全部大乱斗',
   //   value: recordData.value.allChaotic

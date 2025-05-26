@@ -3,7 +3,9 @@
     class="record-item p-1 relative bg-white shadow-md rounded-lg"
     :class="{
       'border-solid border-x border-y border-rose-400': item.totalGames === 0,
-      'border-solid border-x border-y border-green-400': isCurrentMonth(item.startTime),
+      'border-solid border-x border-y border-green-400': isCurrentMonth(
+        item.startTime
+      ),
     }"
   >
     <!-- <el-icon
@@ -130,7 +132,8 @@
       v-show="['normal', 'detailed'].includes(mode)"
     >
       <view class="mt-2" v-if="batchBaseUrl !== '地址3' && mode === 'detailed'">
-        最近评分：{{ item.message }}
+        <view class="text-black" v-html="item.message"></view>
+        <view class="text-black mt-4" v-html="handlerStr(item.messageDetail)"></view>
       </view>
       <view class="flex flex-wrap text-sm text-gray-500 gap-2 mt-2">
         <view
@@ -229,12 +232,24 @@ const emits = defineEmits(["delItem"]);
 
 const { item, mode, activeTab, list, editStatus } = toRefs(props);
 
-function isCurrentMonth(dateStr) {
-  // 解析输入的日期字符串
-  const inputDate = new Date(dateStr);
-  // 获取当前日期
-  const currentDate = new Date();
+function handlerStr(str) {
+  return str?.replaceAll(
+      '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
+      ""
+    )
+    ?.replaceAll("font-size: 0.36rem;", "")
+}
 
+function isCurrentMonth(dateStr) {
+  console.log("这个日期dateStr", dateStr);
+  const currentDate = new Date();
+  let inputDate;
+  if(dateStr.length === 5) {
+    const year = currentDate.getFullYear();
+    inputDate = new Date(`${year}-${dateStr}`);
+  } else {
+    inputDate = new Date(dateStr);
+  }
   // 检查输入日期是否有效
   if (isNaN(inputDate.getTime())) {
     return false;
@@ -520,6 +535,16 @@ const userInfos = computed(() =>
     {
       label: "战绩隐藏",
       value: item.value.publicInfo,
+      visible: mode.value === "detailed",
+    },
+    {
+      label: "性别",
+      value: item.value.mlolgender === '♂' ? '男' : item.value.mlolgender === '♀' ? '女' : '未知',
+      visible: mode.value === "detailed",
+    },
+    {
+      label: "IP",
+      value: item.value.mlollatestLocation,
       visible: mode.value === "detailed",
     },
     {
