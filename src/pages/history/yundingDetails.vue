@@ -23,6 +23,7 @@
               userHistory.name ??
               userHistory.riotIdGameName
             }}</text>
+            <text class="ml-2 text-base">{{ gameData.set_name }}</text>
             <view>
               <text class="ml-2 text-sm">{{
                 parseTime(`${gameData.end_time}000`)
@@ -58,10 +59,9 @@
                 :key="idx"
               >
                 <ChessImages
-                  v-if="equipIndex.id"
-                  :iconId="idConvert(gameData.set_name, equipIndex.id)"
+                  v-if="equipIndex.piece_id"
+                  :picture="equipIndex.picture"
                   :season="gameData.set_name"
-                  :basePrice="equipIndex.base_price"
                   :starNum="equipIndex.star_num"
                   :size="60"
                 />
@@ -113,6 +113,7 @@ import ChessHeroAvatar from "@/components/ChessHeroAvatar.vue";
 import ChessImages from "@/components/ChessImages.vue";
 import {
   getYunDingDetailOneInfo,
+  getYunDingDetailInfo,
   searchPlayerAll,
   leagueSummoner,
   history_all,
@@ -396,13 +397,23 @@ async function getHistoryDetails() {
   loading.value = true;
 
   try {
-    const resp = await getYunDingDetailOneInfo({
+    // const resp = await getYunDingDetailOneInfo({
+    //   id: userHistory.value.openId,
+    //   gameId: userHistoryDetails.value.game_id,
+    //   area: userHistory.value.areaId,
+    //   ...getSign(),
+    // });
+    // const res = resp.data;
+
+    const resp1 = await getYunDingDetailInfo({
       id: userHistory.value.openId,
       gameId: userHistoryDetails.value.game_id,
       area: userHistory.value.areaId,
+      areaName: areaMap[userHistory.value.areaId]?.name,
       ...getSign(),
     });
-    const res = resp.data;
+    const res = resp1.data;
+    console.log("这个是res1", res);
 
     if (!res?.data) {
       uni.showToast({

@@ -18,11 +18,11 @@
     </view>
 
     <img
-      v-if="iconId"
+      v-if="picture"
       class="w-6 h-6"
       :class="myclass"
       :style="mystyle"
-      :src="`https://wegame.gtimg.com/g.26-r.c2d3c/helper/tft/${season}/images/chess/${iconId}.png`"
+      :src="picture"
     />
   </view>
 </template>
@@ -32,7 +32,7 @@ import { ref, watch } from "vue";
 const mystyle = ref({});
 const myclass = ref("");
 const props = defineProps({
-  iconId: [String, Number],
+  picture: [String, Number],
   season: [String],
   basePrice: [Number],
   starNum: [Number],

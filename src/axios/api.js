@@ -50,6 +50,13 @@ export const getYunDingDetailOneInfo = data =>
     data,
   });
 
+// 查询云顶战绩详情2
+export const getYunDingDetailInfo = data =>
+  uni.request({
+    url: `${getBaseUrl()}/lzyumi/lol/info/getYunDingDetailInfo`,
+    data,
+  });
+
 const baseUrl3 = "https://akari.opgg8.com";
 
 function requestWithHeader(url, method, data) {
