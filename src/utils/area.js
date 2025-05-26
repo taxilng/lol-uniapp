@@ -116,6 +116,8 @@ export const levelConfig = {
     10: "云顶5周年时光机",
     11: "发条鸟的试炼",
     12: "英雄之黎明",
+    13: "瑞兽再闹新春",
+    14: "回归赛季：强音争霸",
   },
 };
 export const areaMap = {
