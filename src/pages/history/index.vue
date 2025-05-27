@@ -424,7 +424,7 @@ function updateRecord() {
         });
         return;
       }
-      const newData = dataProcessing(res);
+      const newData = dataProcessing(res, null, "unfilteredRestart");
       historyStore.setHistoryList(newData);
       recordData.value = newData;
       // console.log("新格式", newData);

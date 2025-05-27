@@ -131,7 +131,10 @@
       @confirm="typeConfirm"
     ></uv-picker>
   </view>
-  <PasswordVerifiers ref="passwordVerifiersRef" @passwordConfirmed="getHistoryOne" />
+  <PasswordVerifiers
+    ref="passwordVerifiersRef"
+    @passwordConfirmed="getHistoryOne"
+  />
 </template>
 
 <script setup>
@@ -566,7 +569,7 @@ async function getHistoryOne() {
           });
           return;
         }
-        recordData.value = dataProcessing(res);
+        recordData.value = dataProcessing(res, null, "unfilteredRestart");
         handleAfterSuccess();
       })
       .catch(error => {

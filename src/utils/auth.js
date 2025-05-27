@@ -106,7 +106,7 @@ export function addSelectedUserList(userInfo) {
   uni.setStorageSync("selectedUserList", JSON.stringify(list));
 }
 
-export function dataProcessing(data, dataRange) {
+export function dataProcessing(data, dataRange, noFilter) {
   const nameInfoNew = data.battleInfo.nameInfoNew;
   const mapOneInfoList = data.battleInfo.mapOneInfoList;
   const allChaotic = mapOneInfoList.find(v => v.type === "大乱斗");
@@ -138,17 +138,17 @@ export function dataProcessing(data, dataRange) {
     allChaotic,
     allMatching,
     rankingData,
-    ...handlerData(data.data, dataRange, data.battleInfo),
+    ...handlerData(data.data, dataRange, data.battleInfo, noFilter),
   };
 }
 
-function handlerData(source, dataRange, battleInfo) {
+function handlerData(source, dataRange, battleInfo, noFilter) {
   // 第一局的时间
   const titleTime = source[source.length - 1].titleTime;
   const startTime = titleTime.startsWith("20")
     ? titleTime.slice(0, 10)
     : titleTime.slice(0, 5);
-  let effectiveCompetition = source.filter(
+  let effectiveCompetition = noFilter === 'unfilteredRestart' ? source : source.filter(
     v => v.title && !v.title?.includes("重开局")
   );
 
