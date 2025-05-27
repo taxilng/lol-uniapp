@@ -241,7 +241,7 @@ function handlerStr(str) {
 }
 
 function isCurrentMonth(dateStr) {
-  console.log("这个日期dateStr", dateStr);
+  // console.log("这个日期dateStr", dateStr);
   const currentDate = new Date();
   let inputDate;
   if(dateStr.length === 5) {

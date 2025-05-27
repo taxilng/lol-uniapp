@@ -152,7 +152,7 @@ function handlerData(source, dataRange, battleInfo) {
     v => v.title && !v.title?.includes("重开局")
   );
 
-  console.log("有效局", effectiveCompetition);
+  // console.log("有效局", effectiveCompetition);
   if (dataRange?.before) {
     effectiveCompetition = effectiveCompetition.filter(v => {
       const year = new Date().getFullYear();

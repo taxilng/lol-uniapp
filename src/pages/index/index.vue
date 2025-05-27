@@ -105,7 +105,7 @@
             size="small"
             type="primary"
             text="再次查询"
-            @click="getAllFailHistorys"
+            @click="getHistorys('history', 'fail')"
           ></uv-button>
         </view>
         <view class="mr-4">
@@ -123,7 +123,7 @@
             size="small"
             type="success"
             text="再次在线"
-            @click="() => getNewOnline('fail')"
+            @click="() => getHistorys('online', 'fail')"
           ></uv-button>
         </view>
         <view>
@@ -264,7 +264,6 @@ function openRolePick() {
 }
 
 function confirmRole(data) {
-  console.log(data);
   userInfo.value.role = data.map(el => el.value);
   uni.setStorageSync("selectedUserList", JSON.stringify(userInfo.value.role));
   if (data.length > 2) {
@@ -943,17 +942,30 @@ function calculationSessions() {
     return 250;
   }
 }
-
-async function getHistorys(searchType = "history") {
+/**
+ * 
+ * @param searchType history 搜索10次 还是搜索online 1次查在线
+ * @param searchRange = 搜索下拉框all 还是 失败的记录fail
+ */
+async function getHistorys(searchType = "history", searchRange = "all") {
   const allCount = searchType === "history" ? userInfo.value.num : 1;
   const filter =
     searchType === "history" ? userInfo.value.competitionType : "1";
   // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;
-  const allrequestParams = options1.value.filter(v =>
-    userInfo.value.role.includes(v.value)
-  );
+  let allrequestParams = []
+
+  // 默认情况搜索下拉框的值，其他情况搜索失败的记录
+  if (searchRange === "all") {
+    allrequestParams = options1.value.filter(v =>
+      userInfo.value.role.includes(v.value)
+    );
+  } else if (searchType === "history") {
+    allrequestParams = failRequest.value;
+  } else if (searchType === "online") {
+    allrequestParams = failOnlineData.value;
+  }
   const allrequest = allrequestParams.map((v, idx) =>
     searchPlayerAll({
       nickname: `${v.label}*~*~*${v.tagLine}`,
@@ -967,9 +979,10 @@ async function getHistorys(searchType = "history") {
     }).then(res => ({ ...res.data, idx }))
   );
   let resp = [];
+  const failResp = [];
   try {
     for await (const result of allrequest) {
-      console.log("打印接口result", result);
+      // console.log("打印接口result", result);
       if (result.battleInfo) {
         resp.push(result);
         let newData = resp.map((x) => {
@@ -991,69 +1004,24 @@ async function getHistorys(searchType = "history") {
           }
         });
       } else {
-        failRequest.value.push(allrequestParams[result.idx]);
+        failResp.push(allrequestParams[result.idx]);
+      }
+      if (searchType === "history") {
+        failRequest.value = failResp;
+      } else if (searchType === "online") {
+        // 搜索失败的记录
+        failOnlineData.value = failResp;
       }
       // results.push(result);
       // renderResults(results); // 每次有新结果就更新UI
     }
-    loading.value = false;
-    return;
-    // resp = await Promise.all(allrequest);
-    // console.log(33, resp);
-    const res = resp.map(v => {
-      if (typeof v === "string") {
-        try {
-          v = JSON.parse(v);
-        } catch (error) {
-          uni.showToast({
-            title: "解析JSON失败，数据有问题",
-            icon: "error",
-          });
-        }
-      }
-      return v;
-    });
-
-    // 拿到查询失败的查询条件，准备再次查询
-    failRequest.value = allrequestParams.filter(
-      (v, idx) => !res[idx].data.battleInfo
-    );
-    const successNumber = allrequestParams?.length - failRequest.value?.length;
+    const failNumber = searchType === "history" ? failRequest.value?.length : failOnlineData.value?.length;
+    const successNumber = allrequestParams?.length - failNumber;
     uni.showToast({
-      title: `成功${successNumber}，失败${failRequest.value?.length}`,
+      title: `成功${successNumber}，失败${failNumber}`,
       icon: "error",
     });
-    console.log("打印下失败的", failRequest.value);
-    // if (!res?.[0]?.data?.data) {
-    //   uni.showToast({
-    //     title: "查询数据失败，请重试",
-    //     icon: "error",
-    //   });
-    //   return;
-    // }
-    // tableData1.value
-    let newData = res.map((x, idx) => {
-      return {
-        ...dataProcessing(x.data, dataRange.value),
-        ...allrequestParams[idx],
-      };
-    });
-    // console.log("我来试试", newData);
-    newData = handlerMergeOld(newData);
-    newData.forEach(y => {
-      const findIdx = tableData1.value.findIndex(
-        v => y.nameInfoNew === v.nameInfoNew
-      );
-      if (findIdx !== -1) {
-        tableData1.value[findIdx] = y;
-      } else {
-        tableData1.value.push(y);
-      }
-    });
-    // uni.showToast({
-    //   title: "查询数据成功",
-    //   icon: "success",
-    // });
+    loading.value = false;
   } catch (error) {
     console.log("错误", error);
     uni.showToast({
@@ -1074,77 +1042,6 @@ function getAllFailHistorys() {
     getNewHistorys("fail");
   } else {
     failHistorys();
-  }
-}
-
-async function failHistorys() {
-  let resp = null;
-  try {
-    const sign = getSign();
-    loading.value = true;
-    const allrequest = failRequest.value.map(v =>
-      searchPlayerAll({
-        nickname: `${v.label}*~*~*${v.tagLine}`,
-        allCount: userInfo.value.num,
-        areaId: v.areaId,
-        areaName: areaMap[v.areaId]?.name,
-        seleMe: 1,
-        filter: userInfo.value.competitionType,
-        openId: "",
-        ...sign,
-      })
-    );
-    resp = await Promise.all(allrequest);
-    loading.value = false;
-    console.log(44, resp);
-    const res = resp.map(v => {
-      if (typeof v === "string") {
-        try {
-          v = JSON.parse(v);
-        } catch (error) {
-          uni.showToast({
-            title: "解析JSON失败，数据有问题",
-            icon: "error",
-          });
-        }
-      }
-      return v;
-    });
-
-    // 拿到查询失败的查询条件，准备再次查询
-    failRequest.value = failRequest.value.filter(
-      (v, idx) => !res[idx].data.battleInfo
-    );
-    const successNumber = allrequest?.length - failRequest.value?.length;
-    uni.showToast({
-      title: `成功${successNumber}，失败${failRequest.value?.length}`,
-      icon: "error",
-    });
-    // if (!res?.[0]?.data?.data) {
-    //   uni.showToast({
-    //     title: "查询数据失败，请重试",
-    //     icon: "error",
-    //   });
-    //   return;
-    // }
-    const failtableData = res.map((x, idx) => {
-      return { ...dataProcessing(x.data), ...failRequest.value[idx] };
-    });
-    tableData1.value = handlerMergeOld([...tableData1.value, ...failtableData]);
-    // uni.showToast({
-    //   title: "查询数据成功",
-    //   icon: "success",
-    // });
-  } catch (error) {
-    console.log("错误", error);
-    uni.showToast({
-      title: "查询数据失败，请重试",
-      icon: "error",
-    });
-    loading.value = false;
-  } finally {
-    console.log("最终结果", resp);
-    uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }
 }
 </script>
