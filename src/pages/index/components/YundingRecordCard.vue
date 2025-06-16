@@ -213,7 +213,7 @@ import {
 } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
 import HeroAvatar from "@/components/HeroAvatar.vue";
-import useRewardedVideoAd from "@/useHooks/use_rewarded_video_ad";
+// import useRewardedVideoAd from "@/useHooks/use_rewarded_video_ad";
 // const { initVideoAd, showVideoAd } = useRewardedVideoAd();
 
 

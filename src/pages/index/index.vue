@@ -266,6 +266,7 @@ function openRolePick() {
 function confirmRole(data) {
   userInfo.value.role = data.map(el => el.value);
   uni.setStorageSync("selectedUserList", JSON.stringify(userInfo.value.role));
+  addSelectedUser();
   if (data.length > 2) {
     userInfo.value.names = `${data
       .map(el => el.label)
