@@ -50,6 +50,9 @@
       </uv-form-item> -->
       <uv-form-item label="总局数" prop="userInfo.num" borderBottom>
         <uv-number-box
+          inputWidth="100"
+          :showMinus="false"
+          :showPlus="false"
           :step="1"
           :min="1"
           :max="1000"

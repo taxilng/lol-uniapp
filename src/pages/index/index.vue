@@ -48,6 +48,9 @@
       </uv-form-item>
       <uv-form-item label="总局数" prop="userInfo.num" borderBottom>
         <uv-number-box
+          inputWidth="100"
+          :showMinus="false"
+          :showPlus="false"
           :step="1"
           :min="1"
           :max="1000"
@@ -944,7 +947,7 @@ function calculationSessions() {
   }
 }
 /**
- * 
+ *
  * @param searchType history 搜索10次 还是搜索online 1次查在线
  * @param searchRange = 搜索下拉框all 还是 失败的记录fail
  */
@@ -955,7 +958,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
   // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;
-  let allrequestParams = []
+  let allrequestParams = [];
 
   // 默认情况搜索下拉框的值，其他情况搜索失败的记录
   if (searchRange === "all") {
@@ -986,7 +989,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       // console.log("打印接口result", result);
       if (result.battleInfo) {
         resp.push(result);
-        let newData = resp.map((x) => {
+        let newData = resp.map(x => {
           return {
             ...dataProcessing(x, dataRange.value),
             ...allrequestParams[x.idx],
@@ -1016,7 +1019,10 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       // results.push(result);
       // renderResults(results); // 每次有新结果就更新UI
     }
-    const failNumber = searchType === "history" ? failRequest.value?.length : failOnlineData.value?.length;
+    const failNumber =
+      searchType === "history"
+        ? failRequest.value?.length
+        : failOnlineData.value?.length;
     const successNumber = allrequestParams?.length - failNumber;
     uni.showToast({
       title: `成功${successNumber}，失败${failNumber}`,

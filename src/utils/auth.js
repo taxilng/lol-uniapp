@@ -149,7 +149,7 @@ function handlerData(source, dataRange, battleInfo, noFilter) {
     ? titleTime.slice(0, 10)
     : titleTime.slice(0, 5);
   let effectiveCompetition = noFilter === 'unfilteredRestart' ? source : source.filter(
-    v => v.title && !v.title?.includes("重开局")
+    v => v.title && !v.title?.includes("重开局") && !v.title?.includes("人机")
   );
 
   // console.log("有效局", effectiveCompetition);
