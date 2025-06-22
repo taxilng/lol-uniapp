@@ -46,10 +46,11 @@ import RecordItem from "./RecordItem.vue";
 
 const props = defineProps({
   list: Array,
+  listOnline: Array,
   editStatus: Boolean,
   mode: String,
 });
-const { list, editStatus } = toRefs(props);
+const { list, listOnline, editStatus } = toRefs(props);
 const currentTabs = ref(0);
 const tabs = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
@@ -61,7 +62,6 @@ const tabs = ref([
 ]);
 const activeTab = ref(tabs.value?.[0]);
 function tabChange(item) {
-  console.log("item", item);
   currentTabs.value = item.index;
   activeTab.value = tabs.value?.find(t => t.value === item.value);
 }
@@ -72,7 +72,7 @@ const tabs3 = ref([
   { name: "在线时间", value: "onlineTime", sort: sortOnlineTime },
 ]);
 function tabChange3(item) {
-  console.log("item", item);
+  // console.log("item", item);
   currentTabs3.value = item.index;
   activeTab.value = tabs3.value?.find(t => t.value === item.value);
 }
@@ -103,8 +103,8 @@ function initTabs() {
 // })
 
 function sortAllCarry(a, b) {
-  console.log("a", a);
-  console.log("b", b);
+  // console.log("a", a);
+  // console.log("b", b);
   if (a.totalGames && b.totalGames) {
     return (a.mvp + a.svp) / a.totalGames - (b.mvp + b.svp) / b.totalGames;
   } else if (!a.totalGames) {
@@ -210,7 +210,9 @@ function sortField(a, b) {
 // }
 
 const sortList = computed(() => {
-  const result = list.value?.map((item, index) => ({
+  const mylist = activeTab.value.value === 'onlineTimeOld' ? listOnline.value : list.value;
+  
+  const result = mylist?.map((item, index) => ({
     ...item,
     oldIndex: index,
   }));

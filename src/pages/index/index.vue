@@ -184,6 +184,7 @@
         :class="{ share: shareLoading }"
         :mode="mode"
         :list="tableData1"
+        :listOnline="tableDataOnline"
         :editStatus="editStatus"
       />
     </view>
@@ -675,6 +676,7 @@ async function getNewHistorys(requestScope = "all") {
 }
 
 const tableData1 = ref([]);
+const tableDataOnline = ref([]);
 const failRequest = ref([]);
 
 const CompetitionTypeOption = ref([
@@ -726,9 +728,13 @@ const options1 = ref([...defaultUser]);
 
 onMounted(() => {
   const lol = uni.getStorageSync("lol");
+  const lolOnline = uni.getStorageSync("lolOnline");
   try {
     if (lol && Array.isArray(JSON.parse(lol))) {
       tableData1.value = JSON.parse(lol);
+    }
+    if (lolOnline && Array.isArray(JSON.parse(lolOnline))) {
+      tableDataOnline.value = JSON.parse(lolOnline);
     }
   } catch (error) {
     console.log("缓存的默认批量战绩错误", error);
@@ -893,6 +899,7 @@ function save() {
       return { ...v, list };
     });
     uni.setStorageSync("lol", JSON.stringify(tableDataLocal));
+    uni.setStorageSync("lolOnline", JSON.stringify(tableDataOnline.value));
     uni.showToast({
       title: "缓存成功",
       icon: "success",
@@ -910,6 +917,7 @@ function save() {
 function clear() {
   tableData1.value = [];
   uni.removeStorageSync("lol");
+  uni.removeStorageSync("lolOnline");
 }
 
 // 编辑
@@ -997,14 +1005,15 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         });
         // console.log("我来试试", newData);
         newData = handlerMergeOld(newData);
+        const myTableData = searchType === "history" ? tableData1.value : tableDataOnline.value;
         newData.forEach(y => {
-          const findIdx = tableData1.value.findIndex(
+          const findIdx = myTableData.findIndex(
             v => y.nameInfoNew === v.nameInfoNew
           );
           if (findIdx !== -1) {
-            tableData1.value[findIdx] = y;
+            myTableData[findIdx] = y;
           } else {
-            tableData1.value.push(y);
+            myTableData.push(y);
           }
         });
       } else {
