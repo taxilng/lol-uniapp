@@ -369,7 +369,7 @@ const descriptionItems = computed(() => [
   },
   { label: "在线时间", value: recordData.value.onlineInfo },
   { label: "战绩隐藏", value: recordData.value.publicInfo },
-  { label: "性别", value: recordData.value.mlolgender === '♂' ? '男' : recordData.value.mlolgender === '♀' ? '女' : '未知'},
+  { label: "性别", value: recordData.value.mlolgender === '♂' ? '男' : recordData.value.mlolgender === '♀' ? '女' : ''},
   { label: "IP", value: recordData.value.mlollatestLocation },
   // {
   //   label: '全部大乱斗',

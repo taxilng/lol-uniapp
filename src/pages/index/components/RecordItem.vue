@@ -46,7 +46,7 @@
           <text class="text-xs ml-2 text-gray-400">
             <template v-if="mode === 'mini'">
               {{
-                item.onlineInfo?.length < 5
+                item.onlineInfo?.length < 10
                   ? item.onlineInfo
                   : item.onlineInfo?.length === 19
                   ? item.onlineInfo?.slice(5, 16)

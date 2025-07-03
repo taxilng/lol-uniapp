@@ -167,10 +167,10 @@ function extractTimeFromText(text) {
 function sortOnlineTimeOld(a, b) {
   // console.log("a", a);
   // console.log("b", b);
-  if (a?.curryMap || a?.onlineInfo == '在线') {
+  if (a?.curryMap || ['在线', '不在游戏中'].includes(a?.onlineInfo)) {
     return 1;
   }
-  if (b?.curryMap || b?.onlineInfo == '在线') {
+  if (b?.curryMap || ['在线', '不在游戏中'].includes(b?.onlineInfo)) {
     return -1;
   }
   const aTime = extractTimeFromText(a.onlineInfo);

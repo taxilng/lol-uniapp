@@ -148,7 +148,8 @@ function handlerData(source, dataRange, battleInfo, noFilter) {
   const startTime = titleTime.startsWith("20")
     ? titleTime.slice(0, 10)
     : titleTime.slice(0, 5);
-  let effectiveCompetition = noFilter === 'unfilteredRestart' ? source : source.filter(
+  let effectiveCompetition = noFilter === 'unfilteredRestart' ? source.filter(
+    v => v.gameId) : source.filter(
     v => v.title && !v.title?.includes("重开局") && !v.title?.includes("人机")
   );
 
