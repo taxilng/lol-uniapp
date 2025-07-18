@@ -54,11 +54,12 @@ const { list, listOnline, editStatus } = toRefs(props);
 const currentTabs = ref(0);
 const tabs = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
+  { name: "在线时间", value: "onlineTimeOld", sort: sortOnlineTimeOld },
+  { name: "总胜率", value: "TotalWinRate", sort: sortTotalWinRateField },
   { name: "总CARRY", value: "allCarry", sort: sortAllCarry },
   { name: "黑胜场", value: "blackField", sort: sortBlackfield },
   // { name: "黑胜率", value: "rate", sort: sortRate },
   { name: "黑CARRY", value: "carry", sort: sortBlackCarry },
-  { name: "在线时间", value: "onlineTimeOld", sort: sortOnlineTimeOld },
 ]);
 const activeTab = ref(tabs.value?.[0]);
 function tabChange(item) {
@@ -127,6 +128,10 @@ function sortBlackCarry(a, b) {
   }
 }
 
+// 总胜率
+function sortTotalWinRateField(a, b) {
+  return a.rate - b.rate
+}
 function sortRate(a, b) {
   if (a.blackoutTimes && b.blackoutTimes) {
     return a.blackoutWins / a.blackoutTimes - b.blackoutWins / b.blackoutTimes;
