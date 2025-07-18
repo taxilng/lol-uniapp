@@ -167,10 +167,10 @@ function extractTimeFromText(text) {
 function sortOnlineTimeOld(a, b) {
   // console.log("a", a);
   // console.log("b", b);
-  if (a?.curryMap || ['在线', '不在游戏中'].includes(a?.onlineInfo)) {
+  if (a?.curryMap || ["在线", "不在游戏中"].includes(a?.onlineInfo)) {
     return 1;
   }
-  if (b?.curryMap || ['在线', '不在游戏中'].includes(b?.onlineInfo)) {
+  if (b?.curryMap || ["在线", "不在游戏中"].includes(b?.onlineInfo)) {
     return -1;
   }
   const aTime = extractTimeFromText(a.onlineInfo);
@@ -210,8 +210,9 @@ function sortField(a, b) {
 // }
 
 const sortList = computed(() => {
-  const mylist = activeTab.value.value === 'onlineTimeOld' ? listOnline.value : list.value;
-  
+  const mylist =
+    activeTab.value.value === "onlineTimeOld" ? listOnline.value : list.value;
+
   const result = mylist?.map((item, index) => ({
     ...item,
     oldIndex: index,
@@ -222,10 +223,15 @@ const sortList = computed(() => {
 });
 
 function handleDelItem(index) {
-  list.value.splice(index, 1);
+  const mylist =
+    activeTab.value.value === "onlineTimeOld" ? listOnline.value : list.value;
+  mylist.splice(index, 1);
 
   if (uni.getStorageSync("lol")) {
     uni.setStorageSync("lol", JSON.stringify(props.list));
+  }
+  if (uni.getStorageSync("lolOnline")) {
+    uni.setStorageSync("lolOnline", JSON.stringify(listOnline.value));
   }
 }
 </script>
