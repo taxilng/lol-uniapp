@@ -232,7 +232,7 @@ function submit() {
   formRef.value
     .validate()
     .then(res => {
-      console.log("输出form", userInfo.value);
+      // console.log("输出form", userInfo.value);
       getHistoryOne();
     })
     .catch(errors => {

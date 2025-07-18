@@ -175,6 +175,8 @@ function sortOnlineTimeOld(a, b) {
   }
   const aTime = extractTimeFromText(a.onlineInfo);
   const bTime = extractTimeFromText(b.onlineInfo);
+  if (!aTime) return -1;
+  if (!bTime) return 1;
   if (aTime < bTime) {
     return -1;
   } else {

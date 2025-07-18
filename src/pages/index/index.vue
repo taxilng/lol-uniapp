@@ -102,12 +102,12 @@
             @click="submit"
           ></uv-button>
         </view>
-        <view class="mr-4" v-if="failRequest.length || failHistoryData.length">
+        <view class="mr-4" v-if="failRequest.length">
           <uv-button
             :loading="loading"
             size="small"
             type="primary"
-            text="再次查询"
+            :text="`再次查询(${failRequest.length})`"
             @click="getHistorys('history', 'fail')"
           ></uv-button>
         </view>
@@ -125,7 +125,7 @@
             :loading="loading"
             size="small"
             type="success"
-            text="再次在线"
+            :text="`再次在线(${failOnlineData.length})`"
             @click="() => getHistorys('online', 'fail')"
           ></uv-button>
         </view>
@@ -378,9 +378,9 @@ function submit() {
   formRef.value
     .validate()
     .then(res => {
-      console.log("输出form", userInfo.value);
+      // console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
-      console.log("当前地址", batchBaseUrl);
+      // console.log("当前地址", batchBaseUrl);
       if (false && batchBaseUrl === "地址3") {
         getNewHistorys();
       } else {
@@ -401,9 +401,9 @@ function onLineSubmit() {
   formRef.value
     .validate()
     .then(res => {
-      console.log("输出form", userInfo.value);
+      // console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
-      console.log("当前地址", batchBaseUrl);
+      // console.log("当前地址", batchBaseUrl);
       if (false && batchBaseUrl === "地址3") {
         getNewOnline();
       } else {
@@ -916,6 +916,7 @@ function save() {
 
 function clear() {
   tableData1.value = [];
+  tableDataOnline.value = [];
   uni.removeStorageSync("lol");
   uni.removeStorageSync("lolOnline");
 }
@@ -1019,11 +1020,14 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       } else {
         failResp.push(allrequestParams[result.idx]);
       }
+      
       if (searchType === "history") {
-        failRequest.value = failResp;
+        failRequest.value = [...failResp];
+        console.log('失败1', failRequest.value);
       } else if (searchType === "online") {
         // 搜索失败的记录
-        failOnlineData.value = failResp;
+        failOnlineData.value = [...failResp];
+        console.log('失败2', failOnlineData.value)
       }
       // results.push(result);
       // renderResults(results); // 每次有新结果就更新UI
@@ -1039,6 +1043,15 @@ async function getHistorys(searchType = "history", searchRange = "all") {
     });
     loading.value = false;
   } catch (error) {
+    failResp.push(allrequestParams[result.idx]);
+    if (searchType === "history") {
+      failRequest.value = [...failResp];
+      console.log('失败3', failRequest.value);
+      } else if (searchType === "online") {
+        // 搜索失败的记录
+        failOnlineData.value = [...failResp];
+        console.log('失败4', failOnlineData.value)
+      }
     console.log("错误", error);
     uni.showToast({
       title: "查询数据失败，请重试",
