@@ -105,9 +105,15 @@
                 <LolAbility class="mt-1" :iconId="player.detailRune2" />
               </view>
 
-              <view class="ml-1">
+              <view class="">
                 <LolRunesperk :iconId="player.detailSperk1" />
-                <LolRunesperk class="mt-1" :iconId="player.detailSperk2" />
+                <LolRunesperk class="" :iconId="player.detailSperk2" />
+                <LolRunesperk class="" :iconId="player.detailSperk3" />
+              </view>
+              <view class="">
+                <LolRunesperk class="" :iconId="player.detailSperk4" />
+                <LolRunesperk class="" :iconId="player.detailSperk5" />
+                <LolRunesperk class="" :iconId="player.detailSperk6" />
               </view>
 
               <view class="ml-1 w-full">
@@ -140,6 +146,9 @@
               <text class="ml-1">
                 <text class="text-sm">攻</text>
                 <text>{{ player.totalDamageDealt }}k</text>
+                <text class="text-red-400 ml-1">
+                  {{ getDamagePer(player.totalDamageDealt, item) }}
+                </text>
               </text>
               <text class="ml-1">
                 <text class="text-sm">承</text>
@@ -472,6 +481,15 @@ function getGamePlayers(item) {
   return gameData.value.wgBattleDetailInfo.filter(
     v => v.teamId === item.teamId
   );
+}
+
+// 该玩家的伤害占比
+function getDamagePer(curDamage, item) {
+  const totalDamageDealt = gameData.value.wgBattleDetailInfo
+    .filter(v => v.teamId === item.teamId)
+    .reduce((acc, current) => acc + current.totalDamageDealt, 0);
+  console.log("总商会", totalDamageDealt);
+  return `${((curDamage / totalDamageDealt) * 100).toFixed(0)}%`;
 }
 
 function getGameLevel(eloScore) {

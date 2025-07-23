@@ -4,10 +4,10 @@
  * @Description: lol-天赋图标
 -->
 <template>
-  <view class="shadow-sm bg-gray-200 w-6 h-6">
+  <view class="shadow-sm bg-gray-200 w-5 h-5">
     <img
       v-if="iconId"
-      class="w-6 h-6"
+      class="w-5 h-5"
       :src="`https://wegame.gtimg.com/g.26-r.c2d3c/helper/lol/assis/images/resources/runesperk/${iconId}.png`"
     />
   </view>

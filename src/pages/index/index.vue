@@ -961,7 +961,7 @@ function calculationSessions() {
  * @param searchRange = 搜索下拉框all 还是 失败的记录fail
  */
 async function getHistorys(searchType = "history", searchRange = "all") {
-  const allCount = searchType === "history" ? userInfo.value.num : 1;
+  const allCount = searchType === "history" ? userInfo.value.num : 10;
   const filter =
     searchType === "history" ? userInfo.value.competitionType : "1";
   // console.log(323, userInfo.value.num, options1.value);
@@ -1006,7 +1006,8 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         });
         // console.log("我来试试", newData);
         newData = handlerMergeOld(newData);
-        const myTableData = searchType === "history" ? tableData1.value : tableDataOnline.value;
+        const myTableData =
+          searchType === "history" ? tableData1.value : tableDataOnline.value;
         newData.forEach(y => {
           const findIdx = myTableData.findIndex(
             v => y.nameInfoNew === v.nameInfoNew
@@ -1020,14 +1021,14 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       } else {
         failResp.push(allrequestParams[result.idx]);
       }
-      
+
       if (searchType === "history") {
         failRequest.value = [...failResp];
-        console.log('失败1', failRequest.value);
+        console.log("失败1", failRequest.value);
       } else if (searchType === "online") {
         // 搜索失败的记录
         failOnlineData.value = [...failResp];
-        console.log('失败2', failOnlineData.value)
+        console.log("失败2", failOnlineData.value);
       }
       // results.push(result);
       // renderResults(results); // 每次有新结果就更新UI
@@ -1046,12 +1047,12 @@ async function getHistorys(searchType = "history", searchRange = "all") {
     failResp.push(allrequestParams[result.idx]);
     if (searchType === "history") {
       failRequest.value = [...failResp];
-      console.log('失败3', failRequest.value);
-      } else if (searchType === "online") {
-        // 搜索失败的记录
-        failOnlineData.value = [...failResp];
-        console.log('失败4', failOnlineData.value)
-      }
+      console.log("失败3", failRequest.value);
+    } else if (searchType === "online") {
+      // 搜索失败的记录
+      failOnlineData.value = [...failResp];
+      console.log("失败4", failOnlineData.value);
+    }
     console.log("错误", error);
     uni.showToast({
       title: "查询数据失败，请重试",
