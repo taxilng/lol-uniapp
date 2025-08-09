@@ -964,6 +964,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
   const allCount = searchType === "history" ? userInfo.value.num : 10;
   const filter =
     searchType === "history" ? userInfo.value.competitionType : "1";
+  const dataRangeFilter = searchType === "history" ? dataRange.value : {};
   // console.log(323, userInfo.value.num, options1.value);
   const sign = getSign();
   loading.value = true;
@@ -1000,7 +1001,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         resp.push(result);
         let newData = resp.map(x => {
           return {
-            ...dataProcessing(x, dataRange.value),
+            ...dataProcessing(x, dataRangeFilter),
             ...allrequestParams[x.idx],
           };
         });

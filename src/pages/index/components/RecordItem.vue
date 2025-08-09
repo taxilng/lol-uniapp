@@ -2,7 +2,7 @@
   <view
     class="record-item p-1 relative bg-white shadow-md rounded-lg"
     :class="{
-      'border-solid border-x border-y border-rose-400': item.totalGames === 0,
+      'border-solid border-x border-y border-rose-400': activeTab?.name === '总胜场' && item.totalGames === 0,
       'border-solid border-x border-y border-green-400': isCurrentMonth(
         item.startTime
       ),
@@ -241,6 +241,9 @@ function handlerStr(str) {
 }
 
 function isCurrentMonth(dateStr) {
+  if (activeTab.value?.name !== '总胜场') {
+    return false;
+  }
   // console.log("这个日期dateStr", dateStr);
   const currentDate = new Date();
   let inputDate;
