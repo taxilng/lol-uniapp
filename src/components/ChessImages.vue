@@ -24,6 +24,13 @@
       :style="mystyle"
       :src="picture"
     />
+    <img
+      v-if="iconId"
+      class="w-6 h-6"
+      :class="myclass"
+      :style="mystyle"
+      :src="iconId"
+    />
   </view>
 </template>
 
@@ -32,8 +39,8 @@ import { ref, watch } from "vue";
 const mystyle = ref({});
 const myclass = ref("");
 const props = defineProps({
+  iconId: [String, Number],
   picture: [String, Number],
-  season: [String],
   basePrice: [Number],
   starNum: [Number],
   size: [String, Number],

@@ -56,9 +56,15 @@
                 :key="idx"
               >
                 <ChessImages
+                  v-if="equipIndex.id"
+                  :iconId="idConvert(gameData.set_name, equipIndex.id)"
+                  :basePrice="equipIndex.base_price"
+                  :starNum="equipIndex.star_num"
+                  :size="60"
+                />
+                <ChessImages
                   v-if="equipIndex.piece_id"
                   :picture="equipIndex.picture"
-                  :season="gameData.set_name"
                   :starNum="equipIndex.star_num"
                   :size="60"
                 />
@@ -131,6 +137,8 @@ import {
   levelConfig,
   platformMap,
   S5ChessList,
+  getYundingYxInfo,
+  getYundingYxInfoBack,
 } from "@/utils/area.js";
 import { userHistoryStore } from "@/stores/userHistory";
 
@@ -179,9 +187,15 @@ function idConvert(set_name, id) {
   // console.log("哇哈哈哈", set_name, id);
 
   if (set_name === "s5") {
-    return S5ChessList.find(v => v.chessId === String(id))?.TFTID;
+    return S5ChessList.find(v => v.chessId === String(id))?.name;
+  } else {
+    const imgUrl = getYundingYxInfo(id);
+    if (imgUrl) {
+      return imgUrl;
+    } else {
+     return getYundingYxInfoBack(id)
+    }
   }
-  return id;
 }
 
 function goHistoryList(player) {
@@ -386,7 +400,12 @@ function getGameLevel(eloScore) {
 
 const userHistoryDetails = ref({});
 
-async function getHistoryDetails() {
+function getHistoryDetails(){
+  getSimpleDetails()
+  getComplexDetails()
+}
+
+async function getSimpleDetails() {
   console.log("打印下", userHistoryDetails.value);
   if (!userHistoryDetails.value.game_id) {
     return;
@@ -394,14 +413,41 @@ async function getHistoryDetails() {
   loading.value = true;
 
   try {
-    // const resp = await getYunDingDetailOneInfo({
-    //   id: userHistory.value.openId,
-    //   gameId: userHistoryDetails.value.game_id,
-    //   area: userHistory.value.areaId,
-    //   ...getSign(),
-    // });
-    // const res = resp.data;
+    const resp = await getYunDingDetailOneInfo({
+      id: userHistory.value.openId,
+      gameId: userHistoryDetails.value.game_id,
+      area: userHistory.value.areaId,
+      ...getSign(),
+    });
+    const res = resp.data;
+    console.log("这个是res2", res);
 
+    if (!res?.data) {
+      uni.showToast({
+        title: "查询数据失败，请重试",
+        icon: "error",
+      });
+      return;
+    }
+
+    historyStore.setHistoryDetailObj({
+      gameId: userHistoryDetails.value.game_id,
+      value: res,
+    });
+    gameData.value = res.data;
+  } catch (error) {
+    console.log("错误", error);
+  } finally {
+    loading.value = false;
+  }
+}
+async function getComplexDetails() {
+  console.log("打印下", userHistoryDetails.value);
+  if (!userHistoryDetails.value.game_id) {
+    return;
+  }
+
+  try {
     const resp1 = await getYunDingDetailInfo({
       id: userHistory.value.openId,
       gameId: userHistoryDetails.value.game_id,
@@ -427,8 +473,6 @@ async function getHistoryDetails() {
     gameData.value = res.data;
   } catch (error) {
     console.log("错误", error);
-  } finally {
-    loading.value = false;
   }
 }
 
