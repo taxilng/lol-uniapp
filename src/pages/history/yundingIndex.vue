@@ -1,5 +1,13 @@
 <template>
   <view class="max-w-screen-sm mx-auto h-full overflow-y-auto bg-slate-50">
+    <template v-if="!recordData.iconId">
+      <uv-button
+        size="small"
+        type="success"
+        text="返回首页"
+        @click="goHome"
+      ></uv-button>
+    </template>
     <view class="history">
       <view
         @click="updateRecord"
@@ -112,6 +120,12 @@ function handleOpenHistoryDetail(item) {
   historyStore.setHistoryDetail(item);
   navigateToWithLimit({
     url: "/pages/history/yundingDetails",
+  });
+}
+
+function goHome() {
+  navigateToWithLimit({
+    url: "/pages/index/index",
   });
 }
 

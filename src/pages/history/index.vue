@@ -7,13 +7,16 @@
         @scrolltolower="handleScrollToBottom1"
       >
         <view class="flex items-center relative p-2 bg-slate-100">
-          <view @click="initUpdateRecord">
+          <view class="flex flex-col items-center">
             <LolAvartar
+              @click="goHistoryList"
               :size="40"
               :iconId="recordData.iconId"
               :loading="loading"
             />
+            <uv-icon @click="initUpdateRecord" class="mt-2" name="moments" color="#2979ff" size="28"></uv-icon>
           </view>
+          
 
           <view class="ml-2 flex-1">
             <view class="font-medium flex items-center">
@@ -152,6 +155,14 @@
             </view>
           </scroll-view>
         </template>
+        <template v-if="!recordData.data">
+          <uv-button
+            size="small"
+            type="success"
+            text="返回首页"
+            @click="goHome"
+          ></uv-button>
+        </template>
         <template v-if="recordData.data">
           <view
             v-if="recordData?.curryMap?.gameId"
@@ -194,7 +205,9 @@
                 <view>{{ item.titleTime }}</view>
                 <view class="mt-1">
                   <rich-text
-                    :nodes="`${item.title}${item.battleTypeStr}`"
+                    :nodes="`${replaceStrings(item.title)}${
+                      item.battleTypeStr
+                    }`"
                   ></rich-text>
                 </view>
               </view>
@@ -207,7 +220,7 @@
 </template>
 
 <script setup>
-import { ref, onActivated, onMounted } from "vue";
+import { ref, onActivated, onMounted, watch } from "vue";
 import { throttle } from "lodash";
 import LolAvartar from "@/components/LolAvartar.vue";
 import HeroAvatar from "@/components/HeroAvatar.vue";
@@ -239,6 +252,101 @@ const recordData = ref({});
 const router = useRouter();
 const shareLoading = ref(false);
 // console.log(recordData.value);
+watch(
+  recordData.value,
+  val => {
+    console.log("幼稚吗", val);
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
+
+
+function goHistoryList() {
+  const userHistory = historyStore.historyList ?? {};
+  const { name: areaName } = areaMap[userHistory.areaId];
+  loading.value = true;
+  searchPlayerAll({
+    nickname: userHistory.nameInfoNew?.replace("#", "*~*~*"),
+    allCount: 10,
+    areaId: userHistory.areaId,
+    areaName,
+    openId: userHistory.openId,
+    seleMe: 1,
+    filter: 1,
+    openId: "",
+    ...getSign(),
+  })
+    .then(resp => {
+      let res = resp.data;
+      // 有时候会包裹了2层JSON，需要再次解析下
+      if (typeof res === "string") {
+        try {
+          res = JSON.parse(res);
+        } catch (error) {
+          uni.showToast({
+            title: "解析JSON失败，数据有问题",
+            icon: "error",
+          });
+        }
+      }
+      if (!res.data) {
+        uni.showToast({
+          title: "查询数据失败，请重试",
+          icon: "error",
+        });
+        return;
+      }
+      if (res.code === 2) {
+        uni.showToast({
+          title: res?.data?.[0]?.titleTime,
+          icon: "error",
+        });
+        return;
+      }
+      const newData = dataProcessing(res);
+      historyStore.setSingleData(newData);
+      console.log("新格式", newData);
+      navigateToWithLimit({
+        url: "/pages/index/index?activeTab=0",
+      });
+    })
+    .finally(() => {
+      loading.value = false;
+    });
+}
+
+function goHome() {
+  navigateToWithLimit({
+    url: "/pages/index/index",
+  });
+}
+
+// 翻译几黑
+function replaceStrings(str) {
+  // 定义替换规则数组，按长度从长到短排序避免部分匹配问题
+  const replacements = [
+    { search: "满载SUV", replace: "五黑" },
+    { search: "五子登科", replace: "五黑" },
+    { search: "四大天王", replace: "四黑" },
+    { search: "面包车", replace: "四黑" },
+    { search: "三蹦子", replace: "三黑" },
+    { search: "桃园三结", replace: "三黑" },
+    { search: "自行车", replace: "二黑" },
+    { search: "双剑合璧", replace: "二黑" },
+    { search: "独轮车", replace: "单排" },
+    { search: "独闯天涯", replace: "单排" },
+  ];
+
+  let result = str;
+  // 遍历替换规则进行替换
+  replacements.forEach(item => {
+    result = result.replace(item.search, item.replace);
+  });
+  return result;
+}
 
 // 滚动到底部
 const beginIdx = ref(0);
@@ -269,6 +377,8 @@ const handleScrollToBottom1 = throttle(
 );
 
 function initUpdateRecord() {
+  console.log(232);
+  
   allCount.value = 10;
   updateRecord();
 }
@@ -366,7 +476,7 @@ async function update3(init) {
 onMounted(() => {
   const userHistory = historyStore.historyList ?? {};
   recordData.value = { ...userHistory };
-  // console.log("能触发吗？", userHistory);
+  console.log("列表能触发吗？", userHistory);
   if (userHistory.openId) {
     getRankElo(userHistory);
   }

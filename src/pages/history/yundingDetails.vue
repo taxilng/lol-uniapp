@@ -2,6 +2,14 @@
   <view
     class="max-w-screen-md mx-auto overflow-y-auto bg-slate-50 h-full flex flex-col"
   >
+    <template v-if="!userHistoryDetails.game_id">
+      <uv-button
+        size="small"
+        type="success"
+        text="返回首页"
+        @click="goHome"
+      ></uv-button>
+    </template>
     <view class="history-details">
       <view
         class="flex justify-between items-center p-1 bg-blue-100"
@@ -149,6 +157,12 @@ const gameData = ref({
   teamDetails: [],
 });
 
+function goHome() {
+  navigateToWithLimit({
+    url: "/pages/index/index",
+  });
+}
+
 watch(
   gameData,
   val => {
@@ -193,7 +207,7 @@ function idConvert(set_name, id) {
     if (imgUrl) {
       return imgUrl;
     } else {
-     return getYundingYxInfoBack(id)
+      return getYundingYxInfoBack(id);
     }
   }
 }
@@ -400,9 +414,9 @@ function getGameLevel(eloScore) {
 
 const userHistoryDetails = ref({});
 
-function getHistoryDetails(){
-  getSimpleDetails()
-  getComplexDetails()
+function getHistoryDetails() {
+  getSimpleDetails();
+  getComplexDetails();
 }
 
 async function getSimpleDetails() {

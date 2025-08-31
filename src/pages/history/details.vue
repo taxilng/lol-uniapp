@@ -2,6 +2,14 @@
   <view
     class="max-w-screen-md mx-auto overflow-y-auto bg-slate-50 h-full flex flex-col"
   >
+    <template v-if="!userHistoryDetails1.competitionType">
+      <uv-button
+        size="small"
+        type="success"
+        text="返回首页"
+        @click="goHome"
+      ></uv-button>
+    </template>
     <view class="history-details">
       <view class="flex justify-between items-center p-1 bg-blue-100">
         <view class="flex items-center">
@@ -87,6 +95,9 @@
             v-for="(player, playerIndex) in getGamePlayers(item)"
             :key="playerIndex"
           >
+            <view class="text-sm mb-2 myborder" v-if="Number(player.playerSubteamPlacement) > 0 && (playerIndex % 2 === 0)">
+              名次：{{ player.playerSubteamPlacement }}
+            </view>
             <view class="flex">
               <view class="shrink-0">
                 <HeroAvatar
@@ -285,6 +296,12 @@ const gameData = ref({
   teamDetails: [],
 });
 
+function goHome() {
+  navigateToWithLimit({
+    url: "/pages/index/index",
+  });
+}
+
 watch(
   gameData,
   val => {
@@ -478,9 +495,12 @@ function getGameInfo(item) {
 const shareLoading = ref(false);
 
 function getGamePlayers(item) {
-  return gameData.value.wgBattleDetailInfo.filter(
+  const grouping = gameData.value.wgBattleDetailInfo.filter(
     v => v.teamId === item.teamId
   );
+  console.log('分组', grouping);
+  const sortGrouping = [...grouping].sort((a, b) => a.playerSubteamPlacement - b.playerSubteamPlacement);
+  return sortGrouping
 }
 
 // 该玩家的伤害占比
@@ -611,5 +631,9 @@ onMounted(() => {
 <style lang="scss" scoped>
 .team-info + .team-info {
   margin-left: 6px;
+}
+
+.myborder {
+  border-top: 1px solid #ccc;
 }
 </style>
