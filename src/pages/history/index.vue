@@ -338,6 +338,8 @@ function replaceStrings(str) {
     { search: "双剑合璧", replace: "二黑" },
     { search: "独轮车", replace: "单排" },
     { search: "独闯天涯", replace: "单排" },
+    { search: "满堂彩", replace: "五黑之上" },
+    { search: "全军出击", replace: "五黑之上" },
   ];
 
   let result = str;
