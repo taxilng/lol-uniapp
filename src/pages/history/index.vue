@@ -333,7 +333,7 @@ function replaceStrings(str) {
     { search: "四大天王", replace: "四黑" },
     { search: "面包车", replace: "四黑" },
     { search: "三蹦子", replace: "三黑" },
-    { search: "桃园三结", replace: "三黑" },
+    { search: "桃园三杰", replace: "三黑" },
     { search: "自行车", replace: "二黑" },
     { search: "双剑合璧", replace: "二黑" },
     { search: "独轮车", replace: "单排" },
