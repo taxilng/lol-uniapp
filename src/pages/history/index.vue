@@ -179,7 +179,7 @@
               <view class="mb-2">{{ recordData?.curryMap?.titleTime }}</view>
               <view>
                 <view class="mr-2 ml-4 greenRound">
-                  <view v-html="recordData?.curryMap?.title"></view>
+                  <view v-html="replaceStrings(recordData?.curryMap?.title)"></view>
                 </view>
               </view>
             </view>
@@ -231,6 +231,7 @@ import {
   secondsToHms,
   timePassed,
   navigateToWithLimit,
+  replaceStrings,
 } from "@/utils/auth";
 import {
   searchPlayerAll,
@@ -322,32 +323,6 @@ function goHome() {
   navigateToWithLimit({
     url: "/pages/index/index",
   });
-}
-
-// 翻译几黑
-function replaceStrings(str) {
-  // 定义替换规则数组，按长度从长到短排序避免部分匹配问题
-  const replacements = [
-    { search: "满载SUV", replace: "五黑" },
-    { search: "五子登科", replace: "五黑" },
-    { search: "四大天王", replace: "四黑" },
-    { search: "面包车", replace: "四黑" },
-    { search: "三蹦子", replace: "三黑" },
-    { search: "桃园三杰", replace: "三黑" },
-    { search: "自行车", replace: "二黑" },
-    { search: "双剑合璧", replace: "二黑" },
-    { search: "独轮车", replace: "单排" },
-    { search: "独闯天涯", replace: "单排" },
-    { search: "满堂彩", replace: "五黑之上" },
-    { search: "全军出击", replace: "五黑之上" },
-  ];
-
-  let result = str;
-  // 遍历替换规则进行替换
-  replacements.forEach(item => {
-    result = result.replace(item.search, item.replace);
-  });
-  return result;
 }
 
 // 滚动到底部

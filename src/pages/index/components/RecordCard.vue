@@ -101,7 +101,7 @@
             <view class="mb-2">{{ recordData?.curryMap?.titleTime }}</view>
             <view>
               <view class="mr-2 ml-4 greenRound">
-                <view v-html="recordData?.curryMap?.title"></view>
+                <view v-html="replaceStrings(recordData?.curryMap?.title)"></view>
               </view>
             </view>
           </view>
@@ -204,6 +204,7 @@ import {
   getSign,
   parseTime,
   timePassed,
+  replaceStrings,
   navigateToWithLimit,
 } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
