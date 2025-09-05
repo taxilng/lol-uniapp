@@ -1,5 +1,5 @@
 <template>
-  <view class="shadow-sm" v-if="iconId">
+  <view class="shadow-sm" v-if="iconId" @click="handleClick">
     <img class="w-10 h-10 rounded-full" :class="{ myrotate: loading }" :src="baseUrl" />
   </view>
 </template>
@@ -11,6 +11,12 @@ const props = defineProps({
   iconId: [String, Number],
   loading: Boolean,
 })
+
+const emit = defineEmits(['click'])
+
+const handleClick = () => {
+  emit('click')
+}
 
 const baseUrl = computed(
   () =>
