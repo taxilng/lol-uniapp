@@ -453,10 +453,10 @@ async function getHistoryOne() {
     return;
   }
 
-  if (!passwordVerifiersRef.value.checkPassword()) {
-    console.log("密码错误22");
-    return;
-  }
+  // if (!passwordVerifiersRef.value.checkPassword()) {
+  //   console.log("密码错误22");
+  //   return;
+  // }
 
   const baseUrl = uni.getStorageSync("baseUrl");
   if (baseUrl === "2" && 0) {

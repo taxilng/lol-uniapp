@@ -428,10 +428,10 @@ async function getHistoryOne() {
     });
     return;
   }
-  if (!passwordVerifiersRef.value.checkPassword()) {
-    console.log("密码错误22");
-    return;
-  }
+  // if (!passwordVerifiersRef.value.checkPassword()) {
+  //   console.log("密码错误22");
+  //   return;
+  // }
   const sign = getSign();
   loading.value = true;
   searchPlayerAll({
