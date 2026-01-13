@@ -227,10 +227,11 @@ const props = defineProps({
   activeTab: Object,
   list: Array,
   editStatus: Boolean,
+  dataRange: String,
 });
 const emits = defineEmits(["delItem"]);
 
-const { item, mode, activeTab, list, editStatus } = toRefs(props);
+const { item, mode, activeTab, list, editStatus, dataRange } = toRefs(props);
 
 function handlerStr(str) {
   return str?.replaceAll(
@@ -241,6 +242,7 @@ function handlerStr(str) {
 }
 
 function isCurrentMonth(dateStr) {
+  // console.log("当前日期范围dataRange", dataRange.value);
   if (activeTab.value?.name !== '总胜场') {
     return false;
   }
@@ -253,11 +255,14 @@ function isCurrentMonth(dateStr) {
   } else {
     inputDate = new Date(dateStr);
   }
+  // console.log("输入日期inputDate", inputDate, dateStr);
   // 检查输入日期是否有效
   if (isNaN(inputDate.getTime())) {
     return false;
   }
-
+  if (dataRange.value?.before) {
+    return inputDate.getTime() >= new Date(dataRange.value?.before).getTime();
+  }
   // 比较年份和月份
   return (
     inputDate.getFullYear() === currentDate.getFullYear() &&

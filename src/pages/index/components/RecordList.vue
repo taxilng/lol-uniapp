@@ -33,6 +33,7 @@
         :activeTab="activeTab"
         :list="sortList"
         :editStatus="editStatus"
+        :dataRange="dataRange"
         @delItem="handleDelItem"
       />
     </view>
@@ -49,8 +50,9 @@ const props = defineProps({
   listOnline: Array,
   editStatus: Boolean,
   mode: String,
+  dataRange: String,
 });
-const { list, listOnline, editStatus } = toRefs(props);
+const { list, listOnline, editStatus, dataRange } = toRefs(props);
 const currentTabs = ref(0);
 const tabs = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },

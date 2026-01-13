@@ -184,6 +184,7 @@
         :class="{ share: shareLoading }"
         :mode="mode"
         :list="tableData1"
+        :dataRange="dataRange"
         :listOnline="tableDataOnline"
         :editStatus="editStatus"
       />
