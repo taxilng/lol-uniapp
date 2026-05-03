@@ -5,5 +5,5 @@
 
 [[redirects]]
   from = "/bspapp/*"
-  to = "https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/:splat"
+  to = "https://fund-api-url.rabt.top/http/user-center/:splat"
   status = 200

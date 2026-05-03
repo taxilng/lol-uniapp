@@ -1,19 +1,15 @@
-import { defineConfig } from 'vite'
-import tailwindcss from 'tailwindcss';
-import uni from '@dcloudio/vite-plugin-uni'
-import uniTailwind from '@uni-helper/vite-plugin-uni-tailwind';
+import { defineConfig } from "vite";
+import tailwindcss from "tailwindcss";
+import uni from "@dcloudio/vite-plugin-uni";
+import uniTailwind from "@uni-helper/vite-plugin-uni-tailwind";
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    uni(), uniTailwind(),
-  ],
-  publicDir: 'public',
+  plugins: [uni(), uniTailwind()],
+  publicDir: "public",
   //全局css注册
   css: {
     postcss: {
-      plugins: [
-        tailwindcss(),
-      ],
+      plugins: [tailwindcss()],
     },
     // preprocessorOptions: {
     //     scss: {
@@ -27,18 +23,16 @@ export default defineConfig({
     open: true,
     host: true,
     proxy: {
-      '/akari': {
-        target:
-          'https://akari.opgg8.com',
+      "/akari": {
+        target: "https://akari.opgg8.com",
         changeOrigin: true,
-        rewrite: p => p.replace(/^\/akari/, '')
+        rewrite: p => p.replace(/^\/akari/, ""),
       },
-      '/bspapp': {
-        target:
-          'https://2955b122-0e37-42a7-a4ee-4ddd503fe6b6.bspapp.com/http/user-center/',
+      "/bspapp": {
+        target: "https://fund-api-url.rabt.top/http/user-center/",
         changeOrigin: true,
-        rewrite: p => p.replace(/^\/bspapp/, '')
-      }
-    }
-  }
-})
+        rewrite: p => p.replace(/^\/bspapp/, ""),
+      },
+    },
+  },
+});

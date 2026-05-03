@@ -867,17 +867,18 @@ function syncLoginIN() {
   })
     .then(res => {
       console.log("登陆后", res);
-      if (res.data?.code === 0) {
+      const data = res.data
+      if (data?.code === 0) {
         uni.showToast({
           title: "登陆成功",
           icon: "success",
         });
-        syncUsernameLogged.value = res.data?.username;
-        uni.setStorageSync("syncToken", res.data?.token);
-        uni.setStorageSync("syncUserName", res.data?.username);
+        syncUsernameLogged.value = data?.userInfo?.username;
+        uni.setStorageSync("syncToken", data?.token);
+        uni.setStorageSync("syncUserName", data?.userInfo?.username);
       } else {
         uni.showToast({
-          title: res.data?.error?.message,
+          title: data?.error?.message,
           icon: "error",
         });
       }
