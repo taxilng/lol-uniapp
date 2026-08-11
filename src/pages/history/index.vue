@@ -514,7 +514,27 @@ function updateRecord() {
       const newData = dataProcessing(res, null, "unfilteredRestart");
       historyStore.setHistoryList(newData);
       recordData.value = newData;
-      // console.log("新格式", newData);
+
+      // 先取出已缓存的 lolOnline，再根据 openId 更新对应项后保存
+      const matchOpenId = newData.openId || userHistory.openId;
+      try {
+        const lolOnlineRaw = uni.getStorageSync("lolOnline");
+        const lolOnlineArr = lolOnlineRaw ? JSON.parse(lolOnlineRaw) : [];
+        if (Array.isArray(lolOnlineArr) && matchOpenId) {
+          const idx = lolOnlineArr.findIndex(
+            v => v.openId === matchOpenId
+          );
+          if (idx !== -1) {
+            lolOnlineArr[idx] = newData;
+          } else {
+            lolOnlineArr.push(newData);
+          }
+          uni.setStorageSync("lolOnline", JSON.stringify(lolOnlineArr));
+        }
+      } catch (error) {
+        console.log("更新 lolOnline 缓存失败", error);
+      }
+
       uni.showToast({
         title: "更新战绩成功",
         icon: "success",
