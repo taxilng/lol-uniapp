@@ -225,7 +225,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onActivated, nextTick, watch } from "vue";
+import { ref, computed, onMounted, nextTick, watch } from "vue";
 import { onShow, onLoad } from "@dcloudio/uni-app";
 import omit from "lodash/omit";
 import {
@@ -727,7 +727,8 @@ watch(
 
 const options1 = ref([...defaultUser]);
 
-onMounted(() => {
+// 从缓存读取战绩列表，每次显示页面都会刷新（如从 history 页 updateRecord 更新后回到本页）
+function refreshCacheData() {
   const lol = uni.getStorageSync("lol");
   const lolOnline = uni.getStorageSync("lolOnline");
   try {
@@ -740,7 +741,9 @@ onMounted(() => {
   } catch (error) {
     console.log("缓存的默认批量战绩错误", error);
   }
+}
 
+onMounted(() => {
   const defaultPage = uni.getStorageSync("defaultPage");
   try {
     if (
@@ -753,6 +756,7 @@ onMounted(() => {
   } catch (error) {
     console.log("默认页面", error);
   }
+  refreshCacheData();
   addSelectedUser();
   initDisplayMode();
   // 初始化日期
@@ -783,7 +787,8 @@ function initBatchGameMode() {
 }
 
 onShow(() => {
-  // console.log("onShow能触发吗");
+  // 每次显示都刷新缓存战绩，保证从 history 页 updateRecord 更新后回到本页自动同步
+  refreshCacheData();
   addUserOptions();
 });
 onLoad(options => {
