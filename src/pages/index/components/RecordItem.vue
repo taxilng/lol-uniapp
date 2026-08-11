@@ -2,7 +2,8 @@
   <view
     class="record-item p-1 relative bg-white shadow-md rounded-lg"
     :class="{
-      'border-solid border-x border-y border-rose-400': activeTab?.name === '总胜场' && item.totalGames === 0,
+      'border-solid border-x border-y border-rose-400':
+        activeTab?.name === '总胜场' && item.totalGames === 0,
       'border-solid border-x border-y border-green-400': isCurrentMonth(
         item.startTime
       ),
@@ -46,7 +47,9 @@
           <text class="text-xs ml-2 text-gray-400">
             <template v-if="mode === 'mini'">
               {{
-                item.onlineInfo?.length < 10
+                item.onlineInfo === null
+                  ? item.effectiveCompetition?.[0]?.titleTime?.slice(0, 11)
+                  : item.onlineInfo?.length < 10
                   ? item.onlineInfo
                   : item.onlineInfo?.length === 19
                   ? item.onlineInfo?.slice(5, 16)
@@ -122,7 +125,12 @@
           </view>
         </view>
         <view v-if="mode !== 'mini'" class="mt-1 text-xs">
-          在线时间: {{ item.onlineInfo }}
+          在线时间:
+          {{
+            item.onlineInfo === null
+              ? item.effectiveCompetition?.[0]?.titleTime?.slice(0, 11)
+              : item.onlineInfo
+          }}
         </view>
       </view>
     </view>
@@ -133,7 +141,10 @@
     >
       <view class="mt-2" v-if="batchBaseUrl !== '地址3' && mode === 'detailed'">
         <view class="text-black" v-html="item.message"></view>
-        <view class="text-black mt-4" v-html="handlerStr(item.messageDetail)"></view>
+        <view
+          class="text-black mt-4"
+          v-html="handlerStr(item.messageDetail)"
+        ></view>
       </view>
       <view class="flex flex-wrap text-sm text-gray-500 gap-2 mt-2">
         <view
@@ -234,22 +245,23 @@ const emits = defineEmits(["delItem"]);
 const { item, mode, activeTab, list, editStatus, dataRange } = toRefs(props);
 
 function handlerStr(str) {
-  return str?.replaceAll(
+  return str
+    ?.replaceAll(
       '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
       ""
     )
-    ?.replaceAll("font-size: 0.36rem;", "")
+    ?.replaceAll("font-size: 0.36rem;", "");
 }
 
 function isCurrentMonth(dateStr) {
   // console.log("当前日期范围dataRange", dataRange.value);
-  if (activeTab.value?.name !== '总胜场') {
+  if (activeTab.value?.name !== "总胜场") {
     return false;
   }
   // console.log("这个日期dateStr", dateStr);
   const currentDate = new Date();
   let inputDate;
-  if(dateStr.length === 5) {
+  if (dateStr.length === 5) {
     const year = currentDate.getFullYear();
     inputDate = new Date(`${year}-${dateStr}`);
   } else {
@@ -547,7 +559,12 @@ const userInfos = computed(() =>
     },
     {
       label: "性别",
-      value: item.value.mlolgender === '♂' ? '男' : item.value.mlolgender === '♀' ? '女' : '未知',
+      value:
+        item.value.mlolgender === "♂"
+          ? "男"
+          : item.value.mlolgender === "♀"
+          ? "女"
+          : "未知",
       visible: mode.value === "detailed",
     },
     {

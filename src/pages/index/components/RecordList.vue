@@ -132,7 +132,7 @@ function sortBlackCarry(a, b) {
 
 // 总胜率
 function sortTotalWinRateField(a, b) {
-  return a.rate - b.rate
+  return a.rate - b.rate;
 }
 function sortRate(a, b) {
   if (a.blackoutTimes && b.blackoutTimes) {
@@ -180,8 +180,24 @@ function sortOnlineTimeOld(a, b) {
   if (b?.curryMap || ["在线", "不在游戏中"].includes(b?.onlineInfo)) {
     return -1;
   }
-  const aTime = extractTimeFromText(a.onlineInfo);
-  const bTime = extractTimeFromText(b.onlineInfo);
+  const aTime =
+    a.onlineInfo === null
+      ? a.effectiveCompetition?.[0]?.titleTime
+        ? `${new Date().getFullYear()}-${a.effectiveCompetition[0].titleTime.slice(
+            0,
+            13
+          )}`
+        : null
+      : extractTimeFromText(a.onlineInfo);
+  const bTime =
+    b.onlineInfo === null
+      ? b.effectiveCompetition?.[0]?.titleTime
+        ? `${new Date().getFullYear()}-${b.effectiveCompetition[0].titleTime.slice(
+            0,
+            13
+          )}`
+        : null
+      : extractTimeFromText(b.onlineInfo);
   if (!aTime) return -1;
   if (!bTime) return 1;
   if (aTime < bTime) {
