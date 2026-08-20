@@ -1,6 +1,6 @@
 import pick from "lodash/pick";
 import { md5 } from "@/utils/md5";
-import { baseUrlList, lzyumiA, platform2areaId } from "@/utils/area.js";
+import { baseUrlList, lzyumiA, lzelo, platform2areaId } from "@/utils/area.js";
 
 function md5Sign(signMonth, signDay, signHours, signMinutes, signSeconds) {
   if (signMonth < 10) signMonth = "0" + signMonth;
@@ -763,7 +763,7 @@ export function handlerMergeOld(source) {
 
 export function getBaseUrl() {
   const idx = uni.getStorageSync("baseUrl");
-  const baseUrl = baseUrlList?.[idx]?.value ?? lzyumiA;
+  const baseUrl = baseUrlList?.[idx]?.value ?? lzelo;
   return baseUrl;
 }
 

@@ -429,6 +429,8 @@ export const DisplayMode = [
 
 export const lzyumiA = `https://a.lzyumi.top`;
 
+export const lzelo = `https://6.lzelo.top`;
+
 export const baseUrlList = [
   {
     name: "地址1",
