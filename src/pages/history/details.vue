@@ -95,7 +95,13 @@
             v-for="(player, playerIndex) in getGamePlayers(item)"
             :key="playerIndex"
           >
-            <view class="text-sm mb-2 myborder" v-if="Number(player.playerSubteamPlacement) > 0 && (playerIndex % 2 === 0)">
+            <view
+              class="text-sm mb-2 myborder"
+              v-if="
+                Number(player.playerSubteamPlacement) > 0 &&
+                playerIndex % 2 === 0
+              "
+            >
               名次：{{ player.playerSubteamPlacement }}
             </view>
             <view class="flex">
@@ -117,14 +123,37 @@
               </view>
 
               <view class="">
-                <LolRunesperk :iconId="player.detailSperk1" />
-                <LolRunesperk class="" :iconId="player.detailSperk2" />
-                <LolRunesperk class="" :iconId="player.detailSperk3" />
+                <LolRunesperk
+                  v-if="player.detailSperk1"
+                  :iconId="player.detailSperk1"
+                />
+                <LolRunesperk
+                  v-if="player.detailSperk2"
+                  class=""
+                  :iconId="player.detailSperk2"
+                />
+                <LolRunesperk
+                  v-if="player.detailSperk3"
+                  class=""
+                  :iconId="player.detailSperk3"
+                />
               </view>
               <view class="">
-                <LolRunesperk class="" :iconId="player.detailSperk4" />
-                <LolRunesperk class="" :iconId="player.detailSperk5" />
-                <LolRunesperk class="" :iconId="player.detailSperk6" />
+                <LolRunesperk
+                  v-if="player.detailSperk4"
+                  class=""
+                  :iconId="player.detailSperk4"
+                />
+                <LolRunesperk
+                  v-if="player.detailSperk5"
+                  class=""
+                  :iconId="player.detailSperk5"
+                />
+                <LolRunesperk
+                  v-if="player.detailSperk6"
+                  class=""
+                  :iconId="player.detailSperk6"
+                />
               </view>
 
               <view class="ml-1 w-full">
@@ -140,7 +169,7 @@
                     class="cursor-pointer"
                     :class="{
                       'text-fuchsia-500': player.nickName?.includes(
-                        userHistory.name
+                        userHistory.name,
                       ),
                     }"
                   >
@@ -233,7 +262,7 @@
                   class="cursor-pointer"
                   :class="{
                     'text-fuchsia-500': player.riotIdGameName?.includes(
-                      userHistoryDetails1.riotIdGameName
+                      userHistoryDetails1.riotIdGameName,
                     ),
                   }"
                 >
@@ -307,7 +336,7 @@ watch(
   val => {
     console.log("gameData", val);
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 );
 
 watch(
@@ -315,7 +344,7 @@ watch(
   val => {
     console.log("我的加载值", val);
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 );
 
 // 段位颜色
@@ -496,11 +525,13 @@ const shareLoading = ref(false);
 
 function getGamePlayers(item) {
   const grouping = gameData.value.wgBattleDetailInfo.filter(
-    v => v.teamId === item.teamId
+    v => v.teamId === item.teamId,
   );
-  console.log('分组', grouping);
-  const sortGrouping = [...grouping].sort((a, b) => a.playerSubteamPlacement - b.playerSubteamPlacement);
-  return sortGrouping
+  console.log("分组", grouping);
+  const sortGrouping = [...grouping].sort(
+    (a, b) => a.playerSubteamPlacement - b.playerSubteamPlacement,
+  );
+  return sortGrouping;
 }
 
 // 该玩家的伤害占比
@@ -588,7 +619,7 @@ async function getHistoryDetails() {
 function handleShare() {
   shareLoading.value = true;
   screenshot(".history-details", "战绩详情").finally(
-    () => (shareLoading.value = false)
+    () => (shareLoading.value = false),
   );
 }
 
