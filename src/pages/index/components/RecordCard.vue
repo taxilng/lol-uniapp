@@ -64,7 +64,7 @@
               {{
                 parseTime(
                   recordData?.currentGame?.playerCredentials?.gameCreateDate,
-                  "{m}月{d}日 {h}:{i}"
+                  "{m}月{d}日 {h}:{i}",
                 )
               }}
             </view>
@@ -79,7 +79,7 @@
               <text>
                 已开始{{
                   timePassed(
-                    recordData?.currentGame?.playerCredentials?.gameCreateDate
+                    recordData?.currentGame?.playerCredentials?.gameCreateDate,
                   )
                 }}分钟
               </text>
@@ -101,7 +101,9 @@
             <view class="mb-2">{{ recordData?.curryMap?.titleTime }}</view>
             <view>
               <view class="mr-2 ml-4 greenRound">
-                <view v-html="replaceStrings(recordData?.curryMap?.title)"></view>
+                <view
+                  v-html="replaceStrings(recordData?.curryMap?.title)"
+                ></view>
               </view>
             </view>
           </view>
@@ -209,8 +211,8 @@ import {
 } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
 import HeroAvatar from "@/components/HeroAvatar.vue";
-// import useRewardedVideoAd  from "@/useHooks/use_rewarded_video_ad";
-// const { initVideoAd, showVideoAd } = useRewardedVideoAd();
+import useRewardedVideoAd from "@/useHooks/use_rewarded_video_ad";
+const { initVideoAd, showVideoAd } = useRewardedVideoAd();
 
 const showTips = ref(uni.getStorageSync("showTips"));
 const props = defineProps({
@@ -222,12 +224,12 @@ watch(
   props,
   () => {
     console.log("recordData.value", recordData.value);
-    // initVideoAd()
+    initVideoAd();
     if (recordData.value.battleInfo) {
       getRankElo(recordData.value.battleInfo);
     }
   },
-  { immediate: true, deep: true }
+  { immediate: true, deep: true },
 );
 
 const dataRankEloNum = ref("");
@@ -305,11 +307,15 @@ const descriptionItems = computed(() => [
       : "",
   },
   { label: "综合评价", value: recordData.value.message },
-  { label: "详细评价", value: recordData.value.messageDetail?.replaceAll(
-      '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
-      ""
-    )
-    ?.replaceAll("font-size: 0.36rem;", "") },
+  {
+    label: "详细评价",
+    value: recordData.value.messageDetail
+      ?.replaceAll(
+        '<img style="margin-left:0.1rem;width: 0.36rem;" src="./image/zd.png">',
+        "",
+      )
+      ?.replaceAll("font-size: 0.36rem;", ""),
+  },
   { label: "总局数", value: recordData.value.totalGames },
   { label: "赢", value: recordData.value.wins },
   { label: "输", value: recordData.value.losses },
@@ -370,7 +376,15 @@ const descriptionItems = computed(() => [
   },
   { label: "在线时间", value: recordData.value.onlineInfo },
   { label: "战绩隐藏", value: recordData.value.publicInfo },
-  { label: "性别", value: recordData.value.mlolgender === '♂' ? '男' : recordData.value.mlolgender === '♀' ? '女' : ''},
+  {
+    label: "性别",
+    value:
+      recordData.value.mlolgender === "♂"
+        ? "男"
+        : recordData.value.mlolgender === "♀"
+          ? "女"
+          : "",
+  },
   { label: "IP", value: recordData.value.mlollatestLocation },
   // {
   //   label: '全部大乱斗',
@@ -385,7 +399,7 @@ const battleTypes = computed(() => [
     title: "总局数",
     totalText: `${recordData.value?.battleInfo?.seasonInfoMap?.totalGames}场`,
     rate: Number(
-      recordData.value?.battleInfo?.seasonInfoMap?.totalRate?.replace("%", "")
+      recordData.value?.battleInfo?.seasonInfoMap?.totalRate?.replace("%", ""),
     ),
     additionalText: [
       `胜${recordData.value.battleInfo?.seasonInfoMap?.totalRate}`,
@@ -432,7 +446,45 @@ const router = useRouter();
 
 const historyStore = userHistoryStore();
 
-function handleOpenHistory() {
+// function handleOpenHistory() {
+//   uni.setStorageSync("showTips", 1);
+//   showTips.value = 1;
+//   historyStore.setHistoryList(recordData.value);
+//   navigateToWithLimit({
+//     url: "/pages/history/index",
+//   });
+// }
+// 免费查看战绩次数，用完才需要看广告
+const FREE_VIEW_COUNT_KEY = "freeViewCount";
+const FREE_VIEW_COUNT_DEFAULT = 10;
+
+function getFreeViewCount() {
+  let count = uni.getStorageSync(FREE_VIEW_COUNT_KEY);
+  if (count === "" || count === null || count === undefined) {
+    uni.setStorageSync(FREE_VIEW_COUNT_KEY, FREE_VIEW_COUNT_DEFAULT);
+    count = FREE_VIEW_COUNT_DEFAULT;
+  }
+  return Number(count);
+}
+
+function consumeFreeViewCount() {
+  const count = getFreeViewCount();
+  if (count > 0) {
+    uni.setStorageSync(FREE_VIEW_COUNT_KEY, count - 1);
+    return true;
+  }
+  return false;
+}
+
+// 看完一次广告奖励 10 次免费查看次数
+function rewardFreeViewCount() {
+  uni.setStorageSync(
+    FREE_VIEW_COUNT_KEY,
+    getFreeViewCount() + FREE_VIEW_COUNT_DEFAULT,
+  );
+}
+
+function openHistory() {
   uni.setStorageSync("showTips", 1);
   showTips.value = 1;
   historyStore.setHistoryList(recordData.value);
@@ -440,28 +492,24 @@ function handleOpenHistory() {
     url: "/pages/history/index",
   });
 }
-// function handleOpenHistory() {
-//   // 用户触发广告后，显示激励视频广告
-//   /* #ifdef MP-WEIXIN */
-//   showVideoAd(() => {
-//     console.log("用户完整观看了广告，给予奖励1");
-//     uni.setStorageSync("showTips", 1);
-//     showTips.value = 1;
-//     historyStore.setHistoryList(recordData.value);
-//     navigateToWithLimit({
-//       url: "/pages/history/index",
-//     });
-//   });
-//   /* #endif */
-//   /* #ifdef H5 */
-//   uni.setStorageSync("showTips", 1);
-//   showTips.value = 1;
-//   historyStore.setHistoryList(recordData.value);
-//   navigateToWithLimit({
-//     url: "/pages/history/index",
-//   });
-//   /* #endif */
-// }
+
+function handleOpenHistory() {
+  /* #ifdef MP-WEIXIN */
+  // 还有免费次数时直接跳转，次数用完才显示激励视频广告
+  if (consumeFreeViewCount()) {
+    openHistory();
+    return;
+  }
+  showVideoAd(() => {
+    console.log("用户完整观看了广告，给予奖励1");
+    rewardFreeViewCount();
+    openHistory();
+  });
+  /* #endif */
+  /* #ifdef H5 */
+  openHistory();
+  /* #endif */
+}
 
 // 跳转到实时战绩
 function handleOpenCurrentDetail() {
@@ -535,7 +583,9 @@ function handleOpenCurrentDetailCorn() {
   z-index: 10071;
   left: -50px;
   margin-top: -44px;
-  transition: opacity 0.3s ease-out, -webkit-transform ease-out,
+  transition:
+    opacity 0.3s ease-out,
+    -webkit-transform ease-out,
     transform ease-out;
   transform-origin: 50% 50%;
   display: flex;
