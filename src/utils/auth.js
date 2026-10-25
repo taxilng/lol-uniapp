@@ -763,7 +763,7 @@ export function handlerMergeOld(source) {
 
 export function getBaseUrl() {
   const idx = uni.getStorageSync("baseUrl");
-  const baseUrl = baseUrlList?.[idx]?.value ?? lzelo;
+  const baseUrl = baseUrlList?.[idx]?.value ?? lzyumiA;
   return baseUrl;
 }
 
