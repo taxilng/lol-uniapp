@@ -159,7 +159,7 @@
         ></uv-input>
       </view>
 
-      <view class="mt-4">过期时间 {{ expireTime }} </view>
+      <view class="mt-4">剩余次数 {{ quotaRemaining }} </view>
       <view class="flex flex-wrap items-center mt-2">
         <view class="mr-4"  v-if="!registerFlag">
           <uv-button
@@ -385,7 +385,7 @@ import { getGuid } from "@/utils/auth.js";
 import { EventBus } from "@/utils/event-bus.js";
 import multipleSelect from "@/components/multiple-select";
 import { getBspapp } from "@/axios/api.js";
-import { lesoLogin, lesoMe, lesoRegister } from "@/api/leso";
+import { lesoLogin, lesoMe, lesoMySubscription, lesoRegister } from "@/api/leso";
 
 const jsonviewKey = ref(0);
 
@@ -487,15 +487,28 @@ function loginIN() {
     });
 }
 
-const expireTime = ref("");
+const quotaRemaining = ref("--");
 // 获取用户信息（搜联盟 /user/me，cookie 会话）
 function getProfile() {
   lesoMe()
     .then(res => {
       console.log("用户信息", res);
-      expireTime.value = "--";
       uni.setStorageSync("authorization", JSON.stringify(res));
       getStorageStr();
+      // 查询剩余次数（联盟每日免费额度）
+      lesoMySubscription()
+        .then(sub => {
+          const quota = sub?.[0]?.freeQuota;
+          if (quota) {
+            quotaRemaining.value = `${quota.remainingQuantity}/${quota.totalQuantity}`;
+          } else {
+            quotaRemaining.value = "--";
+          }
+        })
+        .catch(err => {
+          console.log("查询剩余次数失败", err);
+          quotaRemaining.value = "--";
+        });
     })
     .catch(err => {
       console.log("查询用户信息失败", err);
@@ -769,6 +782,19 @@ const activeTab = ref(1);
 function changtab(item) {
   console.log("item", item);
   activeTab.value = item.index;
+  // 切到接口账号 tab 时刷新剩余次数
+  if (item.index === 0) {
+    lesoMySubscription()
+      .then(sub => {
+        const quota = sub?.[0]?.freeQuota;
+        quotaRemaining.value = quota
+          ? `${quota.remainingQuantity}/${quota.totalQuantity}`
+          : "--";
+      })
+      .catch(() => {
+        quotaRemaining.value = "--";
+      });
+  }
 }
 const tabAccountList = [
   {

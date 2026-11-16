@@ -63,6 +63,11 @@ export function lesoMe() {
   return lesoRequest("/user/me");
 }
 
+// 我的订阅与免费额度（data[0].freeQuota 为联盟查询每日额度）
+export function lesoMySubscription() {
+  return lesoRequest("/subscription/my");
+}
+
 // 查询玩家（返回 puuid / server_id / 等级），player 格式：游戏名#tagLine
 export function lesoQueryRecords(params = {}) {
   const { page = 1, pageSize = 8, player, group = true } = params;
