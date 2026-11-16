@@ -187,6 +187,7 @@
         :dataRange="dataRange"
         :listOnline="tableDataOnline"
         :editStatus="editStatus"
+        @activeTabChange="onRecordTabChange"
       />
     </view>
     <uv-calendars
@@ -898,14 +899,19 @@ function formatMsToDate(ms) {
   }
 }
 
+// 静默写入本地缓存（查询成功后自动调用，无提示）
+function saveData() {
+  const tableDataLocal = tableData1.value?.map(v => {
+    const list = v.list?.map(x => omit(x, "participants"));
+    return { ...v, list };
+  });
+  uni.setStorageSync("lol", JSON.stringify(tableDataLocal));
+  uni.setStorageSync("lolOnline", JSON.stringify(tableDataOnline.value));
+}
+
 function save() {
   try {
-    const tableDataLocal = tableData1.value?.map(v => {
-      const list = v.list?.map(x => omit(x, "participants"));
-      return { ...v, list };
-    });
-    uni.setStorageSync("lol", JSON.stringify(tableDataLocal));
-    uni.setStorageSync("lolOnline", JSON.stringify(tableDataOnline.value));
+    saveData();
     uni.showToast({
       title: "缓存成功",
       icon: "success",
@@ -921,10 +927,20 @@ function save() {
 }
 
 function clear() {
-  tableData1.value = [];
-  tableDataOnline.value = [];
-  uni.removeStorageSync("lol");
-  uni.removeStorageSync("lolOnline");
+  // 根据 RecordList 当前排序 tab 清空：在线时间清 lolOnline，其他清 lol
+  if (recordSortTab.value === "onlineTimeOld") {
+    tableDataOnline.value = [];
+    uni.removeStorageSync("lolOnline");
+  } else {
+    tableData1.value = [];
+    uni.removeStorageSync("lol");
+  }
+}
+
+// RecordList 内部排序 tab（总胜场/在线时间等），决定当前展示的是哪份数据
+const recordSortTab = ref("TotalVictoryField");
+function onRecordTabChange(tabValue) {
+  recordSortTab.value = tabValue;
 }
 
 // 编辑
@@ -1045,6 +1061,14 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         ? failRequest.value?.length
         : failOnlineData.value?.length;
     const successNumber = allrequestParams?.length - failNumber;
+    // 查询有成功返回数据时，自动静默缓存一次
+    if (successNumber > 0) {
+      try {
+        saveData();
+      } catch (saveError) {
+        console.log("自动缓存失败", saveError);
+      }
+    }
     uni.showToast({
       title: `成功${successNumber}，失败${failNumber}`,
       icon: "error",

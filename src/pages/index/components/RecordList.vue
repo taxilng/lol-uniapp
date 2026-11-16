@@ -69,6 +69,13 @@ function tabChange(item) {
   activeTab.value = tabs.value?.find(t => t.value === item.value);
 }
 
+const emit = defineEmits(["activeTabChange"]);
+watch(
+  () => activeTab.value?.value,
+  val => emit("activeTabChange", val),
+  { immediate: true }
+);
+
 const currentTabs3 = ref(0);
 const tabs3 = ref([
   { name: "总胜场", value: "TotalVictoryField", sort: sortField },
