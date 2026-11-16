@@ -28,6 +28,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: p => p.replace(/^\/akari/, ""),
       },
+      "/leso": {
+        target: "https://r1.lolso1.com",
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/leso/, ""),
+      },
       "/bspapp": {
         target: "https://fund-api-url.rabt.top/http/user-center/",
         changeOrigin: true,

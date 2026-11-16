@@ -148,6 +148,7 @@ import {
   history_all,
   spectator_info,
 } from "@/axios/api.js";
+import { lesoFetchPlayerFull } from "@/api/leso";
 import { EventBus } from "@/utils/event-bus.js";
 import { areaMap, defaultUser } from "@/utils/area.js";
 import {
@@ -459,7 +460,7 @@ async function getHistoryOne() {
   // }
 
   const baseUrl = uni.getStorageSync("baseUrl");
-  if (baseUrl === "2" && 0) {
+  if (baseUrl === "2") {
     const nicknameArr = userInfo.value.nickname?.split("#");
     if (nicknameArr.length < 2) {
       uni.showToast({
@@ -469,54 +470,17 @@ async function getHistoryOne() {
       return;
     }
     try {
-      const res1 = await leagueSummoner({
-        area: areaName,
+      // 搜联盟链路（地址3）：server_info → overview + match_analysis 分页拉战绩
+      const full = await lesoFetchPlayerFull({
         gameName: nicknameArr[0],
         tagLine: nicknameArr[1],
+        count: userInfo.value.num,
       });
-      if (res1?.data?.success === false) {
-        uni.showToast({
-          title: res1.data?.error?.message,
-          icon: "error",
-        });
-      }
-      const data = res1?.data?.data;
-      const accumulatedMatches = [];
-      const countList = divideBy200(userInfo.value.num);
-      for (let i = 0; i < countList.length; i++) {
-        const res2 = await history_all({
-          area: areaName,
-          puuid: data.puuid,
-          beginIdx: 200 * i,
-          count: countList[i],
-          tag: userInfo.value?.queueId,
-        });
-        accumulatedMatches.push(...res2?.data?.data);
-      }
-      const res3 = await spectator_info({
-        area: areaName,
-        puuid: data.puuid,
-      });
-      let currentGame = {};
-      if (res3.data.success && res3.data?.data) {
-        const data = res3.data.data;
-        const puuid = data.playerCredentials.puuid;
-        const nameList = [...data.game.teamOne, ...data.game.teamTwo];
-        const cur = nameList.find(v => v.puuid === puuid);
-        const championId = cur?.championId;
-        currentGame = {
-          ...res3.data?.data,
-          championId,
-        };
-      }
-      console.log("实施战斗", res3);
-
       recordData.value = {
-        currentGame,
         ...handlerso1Data({
-          baseInfo: data,
+          baseInfo: full.base,
           allrequestParams: [],
-          list: accumulatedMatches,
+          list: full.matchHistory,
           dataRange: dataRange.value,
         }),
         label: nicknameArr[0],
@@ -524,6 +488,8 @@ async function getHistoryOne() {
         nameInfoNew: userInfo.value.nickname,
         value: userInfo.value.nickname,
         areaId: userInfo.value.areaId,
+        puuid: full.puuid,
+        serverId: full.serverId,
       };
 
       handleAfterSuccess();

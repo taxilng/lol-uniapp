@@ -108,7 +108,7 @@
             size="small"
             type="primary"
             :text="`再次查询(${failRequest.length})`"
-            @click="getHistorys('history', 'fail')"
+            @click="getAllFailHistorys"
           ></uv-button>
         </view>
         <view class="mr-4">
@@ -126,7 +126,7 @@
             size="small"
             type="success"
             :text="`再次在线(${failOnlineData.length})`"
-            @click="() => getHistorys('online', 'fail')"
+            @click="getAllFailOnline"
           ></uv-button>
         </view>
         <view>
@@ -255,6 +255,7 @@ import {
   navigateToWithLimit,
   dataProcessing,
 } from "@/utils/auth";
+import { lesoFetchPlayerFull } from "@/api/leso";
 import multipleSelect from "@/components/multiple-select";
 import screenshot from "@/utils/screenshot";
 
@@ -383,7 +384,7 @@ function submit() {
       // console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
       // console.log("当前地址", batchBaseUrl);
-      if (false && batchBaseUrl === "地址3") {
+      if (batchBaseUrl === "地址3") {
         getNewHistorys();
       } else {
         getHistorys();
@@ -406,7 +407,7 @@ function onLineSubmit() {
       // console.log("输出form", userInfo.value);
       const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
       // console.log("当前地址", batchBaseUrl);
-      if (false && batchBaseUrl === "地址3") {
+      if (batchBaseUrl === "地址3") {
         getNewOnline();
       } else {
         getHistorys("online");
@@ -434,37 +435,51 @@ async function getNewOnline(requestScope = "all") {
   console.log("allrequestParams", allrequestParams);
   const allrequest = allrequestParams.map(async (v, idx) => {
     try {
-      const res1 = await leagueSummoner({
-        area: areaMap[v.areaId]?.name,
-        gameName: v.label,
-        tagLine: v.tagLine,
-      });
-      // console.log('基础信息', res1);
-      if (res1.data?.success === false) {
-        uni.showToast({
-          title: res1.data?.error?.message,
-          icon: "error",
-        });
-        throw new Error(res1.data?.error?.message);
-      }
-      const data = res1?.data?.data;
-      const res3 = await spectator_info({
-        area: areaMap[v.areaId]?.name,
-        puuid: data.puuid,
-      });
+      let baseInfo;
       let currentGame = {};
-      if (res3.data.success && res3.data?.data) {
-        const data = res3.data.data;
-        const puuid = data.playerCredentials.puuid;
-        const nameList = [...data.game.teamOne, ...data.game.teamTwo];
-        const cur = nameList.find(v => v.puuid === puuid);
-        const championId = cur?.championId;
-        currentGame = {
-          ...res3.data?.data,
-          championId,
-        };
+      if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+        // 搜联盟链路：server_info → overview + match_analysis（无实时对局接口，currentGame 为空）
+        const full = await lesoFetchPlayerFull({
+          gameName: v.label,
+          tagLine: v.tagLine,
+        });
+        baseInfo = full.base;
+        baseInfo.puuid = full.puuid;
+        baseInfo.serverId = full.serverId;
+        // 在线查询也带上战绩列表，否则单独点"在线查询"后跳历史页列表为空
+        return { baseInfo, list: full.matchHistory, currentGame };
+      } else {
+        const res1 = await leagueSummoner({
+          area: areaMap[v.areaId]?.name,
+          gameName: v.label,
+          tagLine: v.tagLine,
+        });
+        // console.log('基础信息', res1);
+        if (res1.data?.success === false) {
+          uni.showToast({
+            title: res1.data?.error?.message,
+            icon: "error",
+          });
+          throw new Error(res1.data?.error?.message);
+        }
+        baseInfo = res1?.data?.data;
+        const res3 = await spectator_info({
+          area: areaMap[v.areaId]?.name,
+          puuid: baseInfo.puuid,
+        });
+        if (res3.data.success && res3.data?.data) {
+          const data = res3.data.data;
+          const puuid = data.playerCredentials.puuid;
+          const nameList = [...data.game.teamOne, ...data.game.teamTwo];
+          const cur = nameList.find(v => v.puuid === puuid);
+          const championId = cur?.championId;
+          currentGame = {
+            ...res3.data?.data,
+            championId,
+          };
+        }
       }
-      return { baseInfo: data, list: [], currentGame };
+      return { baseInfo, list: [], currentGame };
     } catch (error) {
       console.log("错误2", error);
       throw error;
@@ -488,6 +503,8 @@ async function getNewOnline(requestScope = "all") {
             dataRange: dataRange.value,
             competitionType: userInfo.value.competitionType,
           }),
+          // 搜联盟链路记录 serverId，历史页刷新/滚动加载需要
+          serverId: v.value?.baseInfo?.serverId,
           status: v.status,
         };
       } else {
@@ -571,49 +588,63 @@ async function getNewHistorys(requestScope = "all") {
   const countList = divideBy200(userInfo.value.num);
   const allrequest = allrequestParams.map(async (v, idx) => {
     try {
-      const res1 = await leagueSummoner({
-        area: areaMap[v.areaId]?.name,
-        gameName: v.label,
-        tagLine: v.tagLine,
-      });
-      if (res1.data?.success === false) {
-        uni.showToast({
-          title: res1.data?.error?.message,
-          icon: "error",
+      let baseInfo;
+      let currentGame = {};
+      let accumulatedMatches = [];
+      if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+        // 搜联盟链路：server_info → overview + match_analysis 分页拉战绩
+        const full = await lesoFetchPlayerFull({
+          gameName: v.label,
+          tagLine: v.tagLine,
+          count: userInfo.value.num,
         });
-        throw new Error(res1.data?.error?.message);
-      }
-      const data = res1?.data?.data;
-      const accumulatedMatches = [];
-      for (let i = 0; i < countList.length; i++) {
-        const res2 = await history_all({
+        baseInfo = full.base;
+        baseInfo.puuid = full.puuid;
+        baseInfo.serverId = full.serverId;
+        accumulatedMatches = full.matchHistory;
+      } else {
+        const res1 = await leagueSummoner({
           area: areaMap[v.areaId]?.name,
-          puuid: data.puuid,
-          beginIdx: 200 * i,
-          count: countList[i],
-          tag: userInfo.value?.queueId,
+          gameName: v.label,
+          tagLine: v.tagLine,
         });
-        if (res2.data.success && res2?.data?.data?.length) {
-          accumulatedMatches.push(...res2?.data?.data);
+        if (res1.data?.success === false) {
+          uni.showToast({
+            title: res1.data?.error?.message,
+            icon: "error",
+          });
+          throw new Error(res1.data?.error?.message);
+        }
+        baseInfo = res1?.data?.data;
+        for (let i = 0; i < countList.length; i++) {
+          const res2 = await history_all({
+            area: areaMap[v.areaId]?.name,
+            puuid: baseInfo.puuid,
+            beginIdx: 200 * i,
+            count: countList[i],
+            tag: userInfo.value?.queueId,
+          });
+          if (res2.data.success && res2?.data?.data?.length) {
+            accumulatedMatches.push(...res2?.data?.data);
+          }
+        }
+        const res3 = await spectator_info({
+          area: areaMap[v.areaId]?.name,
+          puuid: baseInfo.puuid,
+        });
+        if (res3.data.success && res3.data?.data) {
+          const data = res3.data.data;
+          const puuid = data.playerCredentials.puuid;
+          const nameList = [...data.game.teamOne, ...data.game.teamTwo];
+          const cur = nameList.find(v => v.puuid === puuid);
+          const championId = cur?.championId;
+          currentGame = {
+            ...res3.data?.data,
+            championId,
+          };
         }
       }
-      const res3 = await spectator_info({
-        area: areaMap[v.areaId]?.name,
-        puuid: data.puuid,
-      });
-      let currentGame = {};
-      if (res3.data.success && res3.data?.data) {
-        const data = res3.data.data;
-        const puuid = data.playerCredentials.puuid;
-        const nameList = [...data.game.teamOne, ...data.game.teamTwo];
-        const cur = nameList.find(v => v.puuid === puuid);
-        const championId = cur?.championId;
-        currentGame = {
-          ...res3.data?.data,
-          championId,
-        };
-      }
-      return { baseInfo: data, list: accumulatedMatches, currentGame };
+      return { baseInfo, list: accumulatedMatches, currentGame };
     } catch (error) {
       console.log("错误2", error);
       throw error;
@@ -637,6 +668,8 @@ async function getNewHistorys(requestScope = "all") {
             dataRange: dataRange.value,
             competitionType: userInfo.value.competitionType,
           }),
+          // 搜联盟链路记录 serverId，历史页刷新/滚动加载需要
+          serverId: v.value?.baseInfo?.serverId,
           status: v.status,
         };
       } else {
@@ -1099,10 +1132,19 @@ async function getHistorys(searchType = "history", searchRange = "all") {
 function getAllFailHistorys() {
   const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
   console.log("当前地址", batchBaseUrl);
-  if (false && batchBaseUrl === "地址3") {
+  if (batchBaseUrl === "地址3") {
     getNewHistorys("fail");
   } else {
-    failHistorys();
+    getHistorys("history", "fail");
+  }
+}
+
+function getAllFailOnline() {
+  const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+  if (batchBaseUrl === "地址3") {
+    getNewOnline("fail");
+  } else {
+    getHistorys("online", "fail");
   }
 }
 </script>

@@ -431,6 +431,9 @@ export const lzyumiA = `https://a.lzyumi.top`;
 
 export const lzelo = `https://6.lzelo.top`;
 
+// 搜联盟（lolso1.com）接口地址，走 vite 代理 /leso -> https://r1.lolso1.com
+export const lesoBase = `https://r1.lolso1.com`;
+
 export const baseUrlList = [
   {
     name: "地址1",
@@ -440,10 +443,10 @@ export const baseUrlList = [
     name: "地址2",
     value: "https://6.lzelo.top",
   },
-  // {
-  //   name: "地址3",
-  //   value: lzyumiA,
-  // },
+  {
+    name: "地址3",
+    value: lesoBase,
+  },
 ];
 
 export const S5ChessList = [

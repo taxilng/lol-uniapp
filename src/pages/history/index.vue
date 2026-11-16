@@ -240,6 +240,10 @@ import {
   history_all,
   spectator_info,
 } from "@/axios/api";
+import {
+  lesoFetchPlayerFull,
+  lesoMatchAnalysis,
+} from "@/api/leso";
 import { areaMap, levelConfig, platformMap } from "@/utils/area.js";
 import { dataProcessing, handlerso1Data } from "@/utils/auth.js";
 import screenshot from "@/utils/screenshot";
@@ -392,6 +396,38 @@ async function update3(init) {
   try {
     loading.value = true;
     const area = areaMap[userHistory.areaId]?.name;
+    if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+      // 搜联盟链路：nameInfoNew（名字#tag）→ resolve → overview + match_analysis 分页
+      const [gameName, tagLine] = (recordData.value.nameInfoNew ?? "").split("#");
+      if (init) {
+        const full = await lesoFetchPlayerFull({ gameName, tagLine, count: 20 });
+        recordData.value = {
+          ...handlerso1Data({
+            baseInfo: full.base,
+            allrequestParams: [{ label: gameName, tagLine }],
+            list: full.matchHistory,
+          }),
+          serverId: full.serverId,
+        };
+      } else {
+        // 滚动加载：按页增量拉取（每页 20 场）
+        const page = beginIdx.value / 20 + 1;
+        const match = await lesoMatchAnalysis({
+          serverId: recordData.value.serverId,
+          puuid: recordData.value.puuid,
+          page,
+          size: 20,
+          tag: -1,
+        });
+        const newData = handlerso1Data({
+          baseInfo: recordData.value,
+          allrequestParams: [{ label: gameName, tagLine }],
+          list: match?.matchHistory ?? [],
+        });
+        recordData.value.list = [...recordData.value.list, ...newData?.list];
+      }
+      return;
+    }
     const res1 = await querySummonerProfile({
       area,
       puuid: userHistory.puuid,

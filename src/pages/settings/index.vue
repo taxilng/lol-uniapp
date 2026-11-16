@@ -381,10 +381,11 @@ import {
   baseUrlList,
   DisplayMode,
 } from "@/utils/area.js";
-import { parseTime, getGuid } from "@/utils/auth.js";
+import { getGuid } from "@/utils/auth.js";
 import { EventBus } from "@/utils/event-bus.js";
 import multipleSelect from "@/components/multiple-select";
-import { joinUN_USE, userLogin, profile, getBspapp } from "@/axios/api.js";
+import { getBspapp } from "@/axios/api.js";
+import { lesoLogin, lesoMe, lesoRegister } from "@/api/leso";
 
 const jsonviewKey = ref(0);
 
@@ -440,63 +441,69 @@ function usernameChange(val) {
 // 注册按钮控制
 const registerFlag = ref(false)
 function register() {
-  joinUN_USE({
-    ...userInfo.value,
+  lesoRegister({
+    username: userInfo.value.username,
+    phone: userInfo.value.phone,
+    email: userInfo.value.email,
     password: "123456",
-    gender: 1,
-    inviteCode: "",
-  }).then(res => {
-    console.log("注册成功", res);
-    if (res?.data?.success === false) {
+  })
+    .then(res => {
+      console.log("注册成功", res);
       uni.showToast({
-        title: res.data?.error?.message,
+        title: "注册成功",
+        icon: "success",
+      });
+      loginIN();
+    })
+    .catch(err => {
+      console.log("注册失败", err);
+      uni.showToast({
+        title: err.message || "注册失败",
         icon: "error",
       });
-    } else {
-      loginIN();
-    }
-  });
+    });
 }
 
-// 登录
+// 登录（搜联盟 lolso1，account 即用户名）
 function loginIN() {
-  userLogin({
-    username: userInfo.value.username,
+  lesoLogin({
+    account: userInfo.value.username,
     password: "123456",
-  }).then(res => {
-    console.log("登陆后", res);
-    if (res.data?.success) {
+  })
+    .then(res => {
+      console.log("登陆后", res);
       uni.showToast({
         title: "登陆成功",
         icon: "success",
       });
-      uni.setStorageSync("m3-authorization", res.data?.data?.wt);
       getProfile();
-    } else {
+    })
+    .catch(err => {
+      console.log("登陆失败", err);
       uni.showToast({
-        title: res.data?.error?.message,
+        title: err.message || "登陆失败",
         icon: "error",
       });
-    }
-  });
+    });
 }
 
 const expireTime = ref("");
-// 获取用户信息
+// 获取用户信息（搜联盟 /user/me，cookie 会话）
 function getProfile() {
-  profile().then(res => {
-    console.log("用户信息", res);
-    if (res.data?.success) {
-      expireTime.value = parseTime(res?.data?.data?.expireTime);
-      uni.setStorageSync("authorization", JSON.stringify(res.data?.data));
+  lesoMe()
+    .then(res => {
+      console.log("用户信息", res);
+      expireTime.value = "--";
+      uni.setStorageSync("authorization", JSON.stringify(res));
       getStorageStr();
-    } else {
+    })
+    .catch(err => {
+      console.log("查询用户信息失败", err);
       uni.showToast({
-        title: res.data?.error?.message,
+        title: err.message || "查询用户信息失败",
         icon: "error",
       });
-    }
-  });
+    });
 }
 
 const authObj = ref({});
@@ -506,7 +513,6 @@ function initAuth() {
     if (auth && typeof auth === "object") {
       authObj.value = auth;
       userInfo.value.username = auth.username;
-      expireTime.value = parseTime(auth?.expireTime);
     }
   } catch (error) {
     console.log("查询登录账号报错", error);
@@ -765,10 +771,10 @@ function changtab(item) {
   activeTab.value = item.index;
 }
 const tabAccountList = [
-  // {
-  //   name: "接口账号",
-  //   value: "api",
-  // },
+  {
+    name: "接口账号",
+    value: "api",
+  },
   {
     name: "同步账号",
     value: "synchronous",
