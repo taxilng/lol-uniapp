@@ -351,6 +351,12 @@ const allCount = ref(10);
 const handleScrollToBottom1 = throttle(
   () => {
     console.log("滚动到底部");
+    // 地址1、地址2 走 updateRecord；地址3 走 update3
+    if (getBatchBaseUrlName() === "地址3") {
+      beginIdx.value += 20;
+      update3();
+      return;
+    }
     allCount.value += 10;
     updateRecord();
   },
