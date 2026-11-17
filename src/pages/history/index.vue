@@ -232,6 +232,7 @@ import {
   timePassed,
   navigateToWithLimit,
   replaceStrings,
+  getBatchBaseUrlName,
 } from "@/utils/auth";
 import {
   searchPlayerAll,
@@ -396,7 +397,7 @@ async function update3(init) {
   try {
     loading.value = true;
     const area = areaMap[userHistory.areaId]?.name;
-    if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+    if (getBatchBaseUrlName() === "地址3") {
       // 搜联盟链路：nameInfoNew（名字#tag）→ resolve → overview + match_analysis 分页
       const [gameName, tagLine] = (recordData.value.nameInfoNew ?? "").split("#");
       if (init) {

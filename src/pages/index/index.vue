@@ -75,23 +75,6 @@
           <uv-icon name="arrow-right"></uv-icon>
         </template>
       </uv-form-item>
-      <uv-form-item
-        label="接口地址"
-        prop="userInfo.competitionType"
-        borderBottom
-        @click="openAddress"
-      >
-        <uv-input
-          v-model="userInfo.batchBaseUrl"
-          disabled
-          disabledColor="#ffffff"
-          placeholder="请选择接口"
-          border="none"
-        ></uv-input>
-        <template v-slot:right>
-          <uv-icon name="arrow-right"></uv-icon>
-        </template>
-      </uv-form-item>
       <view class="flex flex-wrap items-center mt-2">
         <view class="mr-4 ml-2">
           <uv-button
@@ -208,12 +191,6 @@
       keyName="label"
       @confirm="typeConfirm"
     ></uv-picker>
-    <uv-picker
-      ref="addressPickerRef"
-      :columns="[baseUrlList]"
-      keyName="name"
-      @confirm="addressConfirm"
-    ></uv-picker>
   </view>
   <userQuery v-if="activeTab === 0" @updataTableData="updataTableData" />
   <yundingQuery v-if="activeTab === 1" @updataTableData="updataTableData" />
@@ -240,7 +217,6 @@ import {
   defaultUser,
   tabList,
   DisplayMode,
-  baseUrlList,
 } from "@/utils/area.js";
 import { EventBus } from "@/utils/event-bus.js";
 import { useRouter } from "vue-router";
@@ -249,6 +225,7 @@ import userQuery from "./components/userQuery.vue";
 import yundingQuery from "./components/yundingQuery.vue";
 import {
   getSign,
+  getBatchBaseUrlName,
   handlerso1Data,
   handlerMerge,
   handlerMergeOld,
@@ -340,18 +317,7 @@ function typeConfirm(e) {
   userInfo.value.queueId = e.value?.[0]?.queueId;
 }
 
-// 批量查询接口地址
-const addressPickerRef = ref();
-function openAddress() {
-  addressPickerRef.value.open();
-}
-function addressConfirm(e) {
-  console.log("批量查询接口地址", e);
-  uni.setStorageSync("batchBaseUrl", e.value?.[0]?.name);
-  userInfo.value.batchBaseUrl = e.value?.[0]?.name;
-  EventBus.emit("updateBatchBaseUrl");
-}
-
+// 接口地址统一走设置页，batchBaseUrl 仅用于本页展示与监听
 const userInfo = ref({
   names: "",
   role: [1, 2, 3, 4, 5],
@@ -382,7 +348,7 @@ function submit() {
     .validate()
     .then(res => {
       // console.log("输出form", userInfo.value);
-      const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+      const batchBaseUrl = getBatchBaseUrlName();
       // console.log("当前地址", batchBaseUrl);
       if (batchBaseUrl === "地址3") {
         getNewHistorys();
@@ -405,7 +371,7 @@ function onLineSubmit() {
     .validate()
     .then(res => {
       // console.log("输出form", userInfo.value);
-      const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+      const batchBaseUrl = getBatchBaseUrlName();
       // console.log("当前地址", batchBaseUrl);
       if (batchBaseUrl === "地址3") {
         getNewOnline();
@@ -437,7 +403,7 @@ async function getNewOnline(requestScope = "all") {
     try {
       let baseInfo;
       let currentGame = {};
-      if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+      if (getBatchBaseUrlName() === "地址3") {
         // 搜联盟链路：server_info → overview + match_analysis（无实时对局接口，currentGame 为空）
         const full = await lesoFetchPlayerFull({
           gameName: v.label,
@@ -591,7 +557,7 @@ async function getNewHistorys(requestScope = "all") {
       let baseInfo;
       let currentGame = {};
       let accumulatedMatches = [];
-      if (uni.getStorageSync("batchBaseUrl") === "地址3") {
+      if (getBatchBaseUrlName() === "地址3") {
         // 搜联盟链路：server_info → overview + match_analysis 分页拉战绩
         const full = await lesoFetchPlayerFull({
           gameName: v.label,
@@ -805,12 +771,16 @@ onMounted(() => {
   initBatchGameMode();
 });
 
+// 接口地址统一走设置页，batchBaseUrl 实时取设置页的 baseUrl 下标
 function initBatchBaseUrl() {
-  const url = uni.getStorageSync("batchBaseUrl");
-  // console.log("基础url", url, typeof url);
-
-  userInfo.value.batchBaseUrl = url || "地址1";
+  userInfo.value.batchBaseUrl = getBatchBaseUrlName();
 }
+
+// 设置页切换接口地址后同步（RecordList/RecordItem 监听 updateBatchBaseUrl 刷新）
+EventBus.on("updateBaseUrl", () => {
+  initBatchBaseUrl();
+  EventBus.emit("updateBatchBaseUrl");
+});
 
 // 从缓存获取 游戏模式
 function initBatchGameMode() {
@@ -1041,24 +1011,17 @@ async function getHistorys(searchType = "history", searchRange = "all") {
   } else if (searchType === "online") {
     allrequestParams = failOnlineData.value;
   }
-  // 批量查询按本页选择的「接口地址」请求（地址3 走搜联盟链路，不会进入本函数）
-  const batchBaseValue =
-    baseUrlList.find(v => v.name === uni.getStorageSync("batchBaseUrl"))
-      ?.value ?? baseUrlList[0].value;
   const allrequest = allrequestParams.map((v, idx) =>
-    searchPlayerAll(
-      {
-        nickname: `${v.label}*~*~*${v.tagLine}`,
-        allCount,
-        areaId: v.areaId,
-        areaName: areaMap[v.areaId]?.name,
-        seleMe: 1,
-        filter,
-        openId: "",
-        ...sign,
-      },
-      batchBaseValue
-    ).then(res => ({ ...res.data, idx }))
+    searchPlayerAll({
+      nickname: `${v.label}*~*~*${v.tagLine}`,
+      allCount,
+      areaId: v.areaId,
+      areaName: areaMap[v.areaId]?.name,
+      seleMe: 1,
+      filter,
+      openId: "",
+      ...sign,
+    }).then(res => ({ ...res.data, idx }))
   );
   let resp = [];
   const failResp = [];
@@ -1143,7 +1106,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
 }
 
 function getAllFailHistorys() {
-  const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+  const batchBaseUrl = getBatchBaseUrlName();
   console.log("当前地址", batchBaseUrl);
   if (batchBaseUrl === "地址3") {
     getNewHistorys("fail");
@@ -1153,7 +1116,7 @@ function getAllFailHistorys() {
 }
 
 function getAllFailOnline() {
-  const batchBaseUrl = uni.getStorageSync("batchBaseUrl");
+  const batchBaseUrl = getBatchBaseUrlName();
   if (batchBaseUrl === "地址3") {
     getNewOnline("fail");
   } else {

@@ -767,6 +767,12 @@ export function getBaseUrl() {
   return baseUrl;
 }
 
+// 接口地址名称（统一取设置页 baseUrl 下标，默认「地址1」）
+export function getBatchBaseUrlName() {
+  const idx = uni.getStorageSync("baseUrl");
+  return baseUrlList?.[idx]?.name ?? "地址1";
+}
+
 // 日期格式化
 export function parseTime(time, pattern) {
   if (arguments.length === 0 || !time) {

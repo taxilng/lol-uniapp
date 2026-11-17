@@ -43,6 +43,7 @@
 <script setup>
 import { ref, computed, toRefs, watch } from "vue";
 import { EventBus } from "@/utils/event-bus.js";
+import { getBatchBaseUrlName } from "@/utils/auth";
 import RecordItem from "./RecordItem.vue";
 
 const props = defineProps({
@@ -87,10 +88,10 @@ function tabChange3(item) {
   activeTab.value = tabs3.value?.find(t => t.value === item.value);
 }
 
-const batchBaseUrl = ref(uni.getStorageSync("batchBaseUrl"));
+const batchBaseUrl = ref(getBatchBaseUrlName());
 EventBus.on("updateBatchBaseUrl", () => {
   // console.log("baseurl地址触发更新哦");
-  batchBaseUrl.value = uni.getStorageSync("batchBaseUrl");
+  batchBaseUrl.value = getBatchBaseUrlName();
   initTabs();
 });
 initTabs();

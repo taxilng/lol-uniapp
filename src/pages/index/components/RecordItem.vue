@@ -227,7 +227,7 @@ import { ref, toRefs, computed } from "vue";
 import LolAvartar from "@/components/LolAvartar.vue";
 import { EventBus } from "@/utils/event-bus.js";
 import { areaMap } from "@/utils/area.js";
-import { navigateToWithLimit } from "@/utils/auth";
+import { navigateToWithLimit, getBatchBaseUrlName } from "@/utils/auth";
 import { userHistoryStore } from "@/stores/userHistory";
 
 const props = defineProps({
@@ -282,11 +282,11 @@ function isCurrentMonth(dateStr) {
   );
 }
 
-const batchBaseUrl = ref(uni.getStorageSync("batchBaseUrl"));
+const batchBaseUrl = ref(getBatchBaseUrlName());
 
 EventBus.on("updateBaseUrl", () => {
   console.log("baseurl地址触发更新哦");
-  batchBaseUrl.value = uni.getStorageSync("batchBaseUrl");
+  batchBaseUrl.value = getBatchBaseUrlName();
 });
 
 function percentageConversion(val, decimal = 2) {
