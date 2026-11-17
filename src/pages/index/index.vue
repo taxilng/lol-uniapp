@@ -1082,7 +1082,6 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       title: `成功${successNumber}，失败${failNumber}`,
       icon: "error",
     });
-    loading.value = false;
   } catch (error) {
     failResp.push(allrequestParams[result.idx]);
     if (searchType === "history") {
@@ -1098,8 +1097,8 @@ async function getHistorys(searchType = "history", searchRange = "all") {
       title: "查询数据失败，请重试",
       icon: "error",
     });
-    loading.value = false;
   } finally {
+    loading.value = false;
     console.log("最终结果", resp);
     uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }

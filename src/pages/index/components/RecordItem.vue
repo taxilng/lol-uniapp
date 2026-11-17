@@ -359,6 +359,10 @@ function getRanking(item, index) {
   }
 }
 
+// 字段存在且非空（undefined / null / 空字符串视为无数据）
+const hasValue = (...vals) =>
+  vals.every(v => v !== undefined && v !== null && v !== "");
+
 const userInfos = computed(() =>
   [
     {
@@ -372,7 +376,7 @@ const userInfos = computed(() =>
       value: item.value.blackoutWins * 2 - item.value.blackoutTimes,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.blackoutWins, item.value.blackoutTimes),
     },
     {
       label: "胜率",
@@ -386,7 +390,9 @@ const userInfos = computed(() =>
         ((item.value.blackoutWins / item.value.blackoutTimes) * 100).toFixed(
           2
         ) + "%",
-      visible: mode.value === "detailed" && !(batchBaseUrl.value === "地址3"),
+      visible:
+        mode.value === "detailed" &&
+        hasValue(item.value.blackoutWins, item.value.blackoutTimes),
     },
     {
       label: "单排胜率",
@@ -396,7 +402,14 @@ const userInfos = computed(() =>
             (item.value.totalGames - item.value.blackoutTimes)) *
           100
         ).toFixed(2) + "%",
-      visible: mode.value === "detailed" && !(batchBaseUrl.value === "地址3"),
+      visible:
+        mode.value === "detailed" &&
+        hasValue(
+          item.value.wins,
+          item.value.blackoutWins,
+          item.value.totalGames,
+          item.value.blackoutTimes
+        ),
     },
     {
       label: "开黑CARRY",
@@ -412,7 +425,11 @@ const userInfos = computed(() =>
         "%)",
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(
+          item.value.blackMvp,
+          item.value.blackSvp,
+          item.value.blackoutTimes
+        ),
     },
     {
       label: "总CARRY",
@@ -427,7 +444,7 @@ const userInfos = computed(() =>
         "%)",
       visible:
         (mode.value === "detailed" || !activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.mvp, item.value.svp, item.value.totalGames),
     },
     {
       label: "KDA",
@@ -455,42 +472,42 @@ const userInfos = computed(() =>
       value: item.value.avgGame_score,
       visible:
         (mode.value === "detailed" || !activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.avgGame_score),
     },
     {
       label: "二黑",
       value: item.value.twoBlackWins + "/" + item.value.twoBlack,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.twoBlackWins, item.value.twoBlack),
     },
     {
       label: "三黑",
       value: item.value.threeBlackWins + "/" + item.value.threeBlack,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.threeBlackWins, item.value.threeBlack),
     },
     {
       label: "四黑",
       value: item.value.fourBlackWins + "/" + item.value.fourBlack,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.fourBlackWins, item.value.fourBlack),
     },
     {
       label: "五黑",
       value: item.value.fiveBlackWins + "/" + item.value.fiveBlack,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.fiveBlackWins, item.value.fiveBlack),
     },
     {
       label: "开黑场次",
       value: item.value.blackoutTimes,
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
-        !(batchBaseUrl.value === "地址3"),
+        hasValue(item.value.blackoutTimes),
     },
     {
       label: "有效场次",
@@ -517,7 +534,7 @@ const userInfos = computed(() =>
       })(),
       visible:
         ["normal", "detailed"].includes(mode.value) &&
-        batchBaseUrl.value === "地址3",
+        !!item.value.yourMatchPlayersList?.length,
     },
     {
       label: "损友",
@@ -540,7 +557,7 @@ const userInfos = computed(() =>
       })(),
       visible:
         ["normal", "detailed"].includes(mode.value) &&
-        batchBaseUrl.value === "地址3",
+        !!item.value.yourMatchPlayersList?.length,
     },
     {
       label: "首场时间",
@@ -579,7 +596,7 @@ const userInfos = computed(() =>
       }净胜场 / ${item.value.allChaotic?.wins}胜 / ${
         item.value.allChaotic?.losses
       }负 / ${item.value.allChaotic?.rate}胜率`,
-      visible: mode.value === "detailed" && !(batchBaseUrl.value === "地址3"),
+      visible: mode.value === "detailed" && !!item.value.allChaotic,
     },
   ].filter(item => item.visible)
 );
