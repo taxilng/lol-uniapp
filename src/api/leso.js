@@ -10,6 +10,21 @@ import { lesoNeedSign, lesoSignHeaders } from "@/utils/lesoSign";
 
 const LESO_BASE = "/leso";
 
+// 搜联盟账号池：fx1 ~ fx10，密码统一 123456
+// 当前使用的账号下标持久化到本地，供后续额度用尽时自动切换到下一个账号
+export const LESO_ACCOUNT_POOL = Array.from({ length: 10 }, (_, i) => `fx${i + 1}`);
+const LESO_ACCOUNT_INDEX_KEY = "lesoAccountIndex";
+
+export function getLesoAccountIndex() {
+  const idx = Number(uni.getStorageSync(LESO_ACCOUNT_INDEX_KEY));
+  return idx >= 0 && idx < LESO_ACCOUNT_POOL.length ? idx : 0;
+}
+
+// 当前使用的账号（默认 fx1）
+export function getLesoCurrentAccount() {
+  return LESO_ACCOUNT_POOL[getLesoAccountIndex()];
+}
+
 export function lesoUrl(path, query = {}) {
   const qs = Object.entries(query)
     .filter(([, v]) => v !== undefined && v !== null && v !== "")
@@ -18,7 +33,10 @@ export function lesoUrl(path, query = {}) {
   return qs ? `${path}?${qs}` : path;
 }
 
-async function lesoRequest(pathWithQuery, { method = "GET", body } = {}) {
+async function lesoRawRequest(
+  pathWithQuery,
+  { method = "GET", body } = {}
+) {
   const path = pathWithQuery.split("?")[0];
   const header = { "Content-Type": "application/json" };
   if (lesoNeedSign(path)) {
@@ -30,7 +48,71 @@ async function lesoRequest(pathWithQuery, { method = "GET", body } = {}) {
     data: body,
     header,
   });
-  const resData = res?.data ?? {};
+  return res?.data ?? {};
+}
+
+let loginPromise = null;
+
+// 自动登录：用账号池中当前账号登录搜联盟（密码统一 123456）
+// 并发请求共享同一个登录过程，避免重复登录互相顶掉会话
+function ensureLesoLogin() {
+  if (!loginPromise) {
+    loginPromise = lesoRawRequest("/user/login", {
+      method: "POST",
+      body: {
+        account: getLesoCurrentAccount(),
+        password: "123456",
+        rememberMe: true,
+      },
+    })
+      .then(resData => {
+        if (resData.errCode !== "0000" && resData.errCode !== 0) {
+          const err = new Error(
+            resData.message || "搜联盟自动登录失败"
+          );
+          err.errCode = resData.errCode;
+          throw err;
+        }
+        return resData.data;
+      })
+      .finally(() => {
+        loginPromise = null;
+      });
+  }
+  return loginPromise;
+}
+
+let switchingPromise = null;
+
+// 额度用尽：切换到账号池下一个账号并重新登录（循环使用）
+// 并发请求共享同一次切换，避免同时触发时连跳多个账号
+function switchToNextAccount() {
+  if (!switchingPromise) {
+    const nextIdx = (getLesoAccountIndex() + 1) % LESO_ACCOUNT_POOL.length;
+    uni.setStorageSync(LESO_ACCOUNT_INDEX_KEY, nextIdx);
+    console.log("搜联盟额度用尽，切换账号：", getLesoCurrentAccount());
+    switchingPromise = ensureLesoLogin().finally(() => {
+      switchingPromise = null;
+    });
+  }
+  return switchingPromise;
+}
+
+async function lesoRequest(pathWithQuery, { method = "GET", body } = {}) {
+  const path = pathWithQuery.split("?")[0];
+  let resData = await lesoRawRequest(pathWithQuery, { method, body });
+  // 登录接口本身不做登录态/额度处理，避免死循环
+  if (path !== "/user/login") {
+    if (resData.errCode === "ERR_UNAUTHORIZED") {
+      // 会话失效：自动登录一次并重试
+      await ensureLesoLogin();
+      resData = await lesoRawRequest(pathWithQuery, { method, body });
+    } else if (resData.errCode === "ERR_SUBSCRIPTION_MEMBERSHIP_EXPIRED") {
+      // 当前账号额度用尽：切换到下一个账号并重试
+      await switchToNextAccount();
+      resData = await lesoRawRequest(pathWithQuery, { method, body });
+    }
+  }
   if (resData.errCode === "0000" || resData.errCode === 0) {
     return resData.data;
   }

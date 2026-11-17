@@ -155,7 +155,7 @@
             </view>
           </scroll-view>
         </template>
-        <template v-if="!recordData.data">
+        <template v-if="!recordData.data && !recordData.list">
           <uv-button
             size="small"
             type="success"

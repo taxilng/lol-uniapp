@@ -2,7 +2,7 @@
   <view
     class="max-w-screen-md mx-auto overflow-y-auto bg-slate-50 h-full flex flex-col"
   >
-    <template v-if="!userHistoryDetails1.competitionType">
+    <template v-if="!userHistoryDetails1.championId">
       <uv-button
         size="small"
         type="success"

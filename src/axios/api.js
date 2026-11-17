@@ -1,8 +1,8 @@
 import { getBaseUrl } from "@/utils/auth";
 import { CustomRequesHeader } from "@/utils/crypt";
 
-export const searchPlayerAll = data =>
-  uni.request({ url: `${getBaseUrl()}/lzyumi/lol/info`, data });
+export const searchPlayerAll = (data, baseUrl = getBaseUrl()) =>
+  uni.request({ url: `${baseUrl}/lzyumi/lol/info`, data });
 
 // 查询战绩列表
 // openId: HKrfJ4eSdQZsr9zzTJKVww==

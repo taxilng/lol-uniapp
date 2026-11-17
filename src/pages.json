@@ -78,6 +78,10 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "u2ni-app",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "backgroundColor": "#F8F8F8",
+    // rpx 缩放上限：超过 480px 的屏幕按 375 基准计算，避免中宽屏字体过大
+    "rpxCalcMaxDeviceWidth": 480,
+    "rpxCalcBaseDeviceWidth": 375,
+    "rpxCalcIncludeWidth": 750
   }
 }

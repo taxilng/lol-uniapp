@@ -691,6 +691,12 @@ async function getNewHistorys(requestScope = "all") {
     console.log("中级接口过", newData);
     const hasSuccess = allData.some(v => v.status === "fulfilled");
     if (hasSuccess) {
+      // 查询有成功返回数据时，自动静默缓存一次
+      try {
+        saveData();
+      } catch (saveError) {
+        console.log("自动缓存失败", saveError);
+      }
       uni.showToast({
         title: "查询成功！！",
         icon: "error",
@@ -1035,17 +1041,24 @@ async function getHistorys(searchType = "history", searchRange = "all") {
   } else if (searchType === "online") {
     allrequestParams = failOnlineData.value;
   }
+  // 批量查询按本页选择的「接口地址」请求（地址3 走搜联盟链路，不会进入本函数）
+  const batchBaseValue =
+    baseUrlList.find(v => v.name === uni.getStorageSync("batchBaseUrl"))
+      ?.value ?? baseUrlList[0].value;
   const allrequest = allrequestParams.map((v, idx) =>
-    searchPlayerAll({
-      nickname: `${v.label}*~*~*${v.tagLine}`,
-      allCount,
-      areaId: v.areaId,
-      areaName: areaMap[v.areaId]?.name,
-      seleMe: 1,
-      filter,
-      openId: "",
-      ...sign,
-    }).then(res => ({ ...res.data, idx }))
+    searchPlayerAll(
+      {
+        nickname: `${v.label}*~*~*${v.tagLine}`,
+        allCount,
+        areaId: v.areaId,
+        areaName: areaMap[v.areaId]?.name,
+        seleMe: 1,
+        filter,
+        openId: "",
+        ...sign,
+      },
+      batchBaseValue
+    ).then(res => ({ ...res.data, idx }))
   );
   let resp = [];
   const failResp = [];
