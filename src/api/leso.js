@@ -181,10 +181,20 @@ export function lesoOverview({ serverId, puuid }) {
 
 // 对局分析（matchHistory: Riot Match-V5 格式，每页最多 20 场）
 // tag: 队列过滤（-1 全部），page 从 1 开始
+// 搜联盟 participants 用 championID（大写），这里统一补一份 championId 供下游使用
 export function lesoMatchAnalysis({ serverId, puuid, page = 1, size = 20, tag = -1 }) {
   return lesoRequest("/league/player/match_analysis", {
     method: "POST",
     body: { serverId, puuid, page, size, tag },
+  }).then(data => {
+    (data?.matchHistory ?? []).forEach(m => {
+      (m.participants ?? []).forEach(p => {
+        if (p.championId === undefined && p.championID !== undefined) {
+          p.championId = p.championID;
+        }
+      });
+    });
+    return data;
   });
 }
 
@@ -217,12 +227,6 @@ export async function lesoFetchPlayerFull({ gameName, tagLine, count = 20 }) {
     .forEach(m => {
       if (m?.gameId && !seen.has(m.gameId)) {
         seen.add(m.gameId);
-        // 搜联盟 participants 用 championID（大写），下游统一用 championId
-        (m.participants ?? []).forEach(p => {
-          if (p.championId === undefined && p.championID !== undefined) {
-            p.championId = p.championID;
-          }
-        });
         matchHistory.push(m);
       }
     });
