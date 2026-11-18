@@ -40,6 +40,7 @@
             disabledColor="#ffffff"
             placeholder="请选择日期范围"
             border="none"
+            style="width: 180px"
           ></uv-input>
         </view>
         <template v-slot:right>
