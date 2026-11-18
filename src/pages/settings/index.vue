@@ -68,6 +68,20 @@
           <uv-icon name="arrow-right"></uv-icon>
         </template>
       </uv-form-item>
+      <uv-form-item label="vConsole调试" borderBottom>
+        <uv-radio-group
+          v-model="vconsoleEnabled"
+          placement="row"
+          @change="onVconsoleChange"
+        >
+          <uv-radio
+            :customStyle="{ marginRight: '16px' }"
+            label="关闭"
+            :name="false"
+          ></uv-radio>
+          <uv-radio label="开启" :name="true"></uv-radio>
+        </uv-radio-group>
+      </uv-form-item>
     </uv-form>
     <view class="mb-2">
       <text class="mr-2">数据合并</text>
@@ -402,6 +416,7 @@ function init() {
   // initDisplayMode();
   initMergeList();
   initSyncAccount();
+  initVconsole();
 }
 
 const user = ref([]);
@@ -592,6 +607,54 @@ function initBaseUrl() {
   const idx = uni.getStorageSync("baseUrl");
   const urlName = baseUrlList?.[idx]?.name ?? "地址1";
   baseUrl.value = urlName;
+}
+
+// vConsole 调试开关（通过 CDN 动态加载）
+const VCONSOLE_CDN = "https://unpkg.com/vconsole@3.15.1/dist/vconsole.min.js";
+const vconsoleEnabled = ref(false);
+let vconsoleInstance = null;
+
+function loadVconsoleScript() {
+  return new Promise((resolve, reject) => {
+    if (typeof window !== "undefined" && window.VConsole) return resolve();
+    const script = document.createElement("script");
+    script.src = VCONSOLE_CDN;
+    script.onload = resolve;
+    script.onerror = () => reject(new Error("vConsole脚本加载失败"));
+    document.head.appendChild(script);
+  });
+}
+
+async function setVconsole(enabled) {
+  if (enabled) {
+    try {
+      await loadVconsoleScript();
+      if (!vconsoleInstance) {
+        vconsoleInstance = new window.VConsole();
+      } else {
+        vconsoleInstance.show();
+      }
+    } catch (error) {
+      console.log("加载vConsole失败", error);
+      uni.showToast({
+        title: "加载vConsole失败",
+        icon: "error",
+      });
+    }
+  } else if (vconsoleInstance) {
+    vconsoleInstance.destroy();
+    vconsoleInstance = null;
+  }
+}
+
+function onVconsoleChange(val) {
+  uni.setStorageSync("vconsole", val ? "1" : "0");
+  setVconsole(val);
+}
+
+function initVconsole() {
+  vconsoleEnabled.value = uni.getStorageSync("vconsole") === "1";
+  if (vconsoleEnabled.value) setVconsole(true);
 }
 
 const show = ref(false);
