@@ -1,0 +1,76 @@
+{
+    "errCode": "0000",
+    "data": {
+        "base": {
+            "puuid": "f8fe63cb-e4ac-57e1-974d-56b5bba39de2",
+            "profileIconId": 7126,
+            "privacy": "PUBLIC",
+            "level": 84,
+            "expPoints": 914,
+            "expToNextLevel": 3072,
+            "levelAndXpVersion": 804,
+            "lastGameDate": 1794663434000,
+            "gameName": "大乱斗指定演员",
+            "tagLine": "43716"
+        },
+        "ranked": {
+            "queues": {
+                "JADE_RANKED_SOLO_5x5": {
+                    "provisionalGameThreshold": 0,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 0,
+                    "queueType": "JADE_RANKED_SOLO_5x5"
+                },
+                "RANKED_SOLO_5x5": {
+                    "provisionalGameThreshold": 5,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 5,
+                    "queueType": "RANKED_SOLO_5x5"
+                },
+                "RANKED_FLEX_SR": {
+                    "provisionalGameThreshold": 5,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 5,
+                    "queueType": "RANKED_FLEX_SR"
+                },
+                "RANKED_TFT": {
+                    "provisionalGameThreshold": 5,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 5,
+                    "queueType": "RANKED_TFT"
+                },
+                "RANKED_TFT_DOUBLE_UP": {
+                    "provisionalGameThreshold": 5,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 5,
+                    "queueType": "RANKED_TFT_DOUBLE_UP"
+                },
+                "RANKED_PREMADE_5x5": {
+                    "provisionalGameThreshold": 5,
+                    "leaguePoints": 0,
+                    "cumulativeLp": 0,
+                    "wins": 0,
+                    "losses": 0,
+                    "provisionalGamesRemaining": 5,
+                    "queueType": "RANKED_PREMADE_5x5"
+                }
+            }
+        }
+    },
+    "requestID": "c6595a75-00b8-4383-88d7-28a189fe1a1e"
+}

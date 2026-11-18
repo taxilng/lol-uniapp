@@ -200,9 +200,10 @@ export function lesoMatchAnalysis({ serverId, puuid, page = 1, size = 20, tag = 
 
 /**
  * 获取玩家完整数据（对齐 akari 链路的 baseInfo + list 结构）
- * 返回 { puuid, serverId, base, matchHistory }
+ * 返回 { puuid, serverId, base, matchHistory, statistics }
  * base 与 akari leagueSummoner 的 baseInfo 字段同构（含 lastGameDate/privacy/level）
  * matchHistory 与 akari history_all 的对局数组同构（participants/gameDuration/queueId 等）
+ * statistics.summary 为多页汇总（按场次加权平均）
  */
 export async function lesoFetchPlayerFull({ gameName, tagLine, count = 20 }) {
   const { puuid, serverId } = await lesoResolveSummoner({ gameName, tagLine });
@@ -231,7 +232,42 @@ export async function lesoFetchPlayerFull({ gameName, tagLine, count = 20 }) {
       }
     });
   matchHistory.sort((a, b) => b.gameStartTimestamp - a.gameStartTimestamp);
-  return { puuid, serverId, base: overview?.base ?? {}, matchHistory };
+
+  // 每页 statistics.summary 只统计该页的场次，需按场次加权：
+  // 如 40 场分两页，(19% × 20 + 24% × 20) / (20 + 20) = 21.5%
+  const summaries = matchPages
+    .map(m => m?.statistics?.summary)
+    .filter(s => s && Number(s.count) > 0);
+  const averageOf = key => {
+    // 只对返回了该字段的页做加权，避免缺失值被当作 0 稀释结果
+    const valid = summaries.filter(s => Number.isFinite(Number(s[key])));
+    const weight = valid.reduce((acc, s) => acc + Number(s.count), 0);
+    return weight
+      ? valid.reduce((acc, s) => acc + Number(s[key]) * Number(s.count), 0) /
+          weight
+      : undefined;
+  };
+  const statistics = summaries.length
+    ? {
+        summary: {
+          count: summaries.reduce((acc, s) => acc + Number(s.count), 0),
+          averageDamageDealtToChampionShareOfTeam: averageOf(
+            "averageDamageDealtToChampionShareOfTeam"
+          ),
+          averageDamageTakenShareOfTeam: averageOf(
+            "averageDamageTakenShareOfTeam"
+          ),
+        },
+      }
+    : undefined;
+
+  return {
+    puuid,
+    serverId,
+    base: overview?.base ?? {},
+    matchHistory,
+    statistics,
+  };
 }
 
 // 战绩卡数据

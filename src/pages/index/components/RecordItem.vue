@@ -454,6 +454,24 @@ const userInfos = computed(() =>
       visible:
         mode.value === "detailed" || !activeTab.value.name?.includes("黑"),
     },
+    {
+      label: "伤害占比",
+      value: hasValue(item.value.avgDamageShareOfTeam)
+        ? (item.value.avgDamageShareOfTeam * 100).toFixed(0) + "%"
+        : "",
+      visible:
+        (mode.value === "detailed" || !activeTab.value.name?.includes("黑")) &&
+        hasValue(item.value.avgDamageShareOfTeam),
+    },
+    {
+      label: "承伤占比",
+      value: hasValue(item.value.avgDamageTakenShareOfTeam)
+        ? (item.value.avgDamageTakenShareOfTeam * 100).toFixed(0) + "%"
+        : "",
+      visible:
+        (mode.value === "detailed" || !activeTab.value.name?.includes("黑")) &&
+        hasValue(item.value.avgDamageTakenShareOfTeam),
+    },
     // {
     //   label: '击杀',
     //   value: item.value.avgkills,

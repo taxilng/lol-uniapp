@@ -347,6 +347,15 @@ export function handlerso1Data(source) {
     nameInfoNew: `${source?.label}#${source.tagLine}`,
   };
 
+  // 搜联盟 statistics.summary 派生指标（仅地址3链路提供）
+  const summary = source?.statistics?.summary;
+  if (summary) {
+    baseInfo.avgDamageShareOfTeam =
+      summary.averageDamageDealtToChampionShareOfTeam;
+    baseInfo.avgDamageTakenShareOfTeam =
+      summary.averageDamageTakenShareOfTeam;
+  }
+
   // 战绩是否隐藏
   const publicInfo = source.baseInfo?.privacy === "PUBLIC" ? "公开" : "隐藏";
   // 最后的游戏时间

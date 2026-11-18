@@ -414,7 +414,12 @@ async function getNewOnline(requestScope = "all") {
         baseInfo.puuid = full.puuid;
         baseInfo.serverId = full.serverId;
         // 在线查询也带上战绩列表，否则单独点"在线查询"后跳历史页列表为空
-        return { baseInfo, list: full.matchHistory, currentGame };
+        return {
+          baseInfo,
+          list: full.matchHistory,
+          currentGame,
+          statistics: full.statistics,
+        };
       } else {
         const res1 = await leagueSummoner({
           area: areaMap[v.areaId]?.name,
@@ -558,6 +563,7 @@ async function getNewHistorys(requestScope = "all") {
       let baseInfo;
       let currentGame = {};
       let accumulatedMatches = [];
+      let statistics;
       if (getBatchBaseUrlName() === "地址3") {
         // 搜联盟链路：server_info → overview + match_analysis 分页拉战绩
         const full = await lesoFetchPlayerFull({
@@ -569,6 +575,7 @@ async function getNewHistorys(requestScope = "all") {
         baseInfo.puuid = full.puuid;
         baseInfo.serverId = full.serverId;
         accumulatedMatches = full.matchHistory;
+        statistics = full.statistics;
       } else {
         const res1 = await leagueSummoner({
           area: areaMap[v.areaId]?.name,
@@ -611,7 +618,7 @@ async function getNewHistorys(requestScope = "all") {
           };
         }
       }
-      return { baseInfo, list: accumulatedMatches, currentGame };
+      return { baseInfo, list: accumulatedMatches, currentGame, statistics };
     } catch (error) {
       console.log("错误2", error);
       throw error;
