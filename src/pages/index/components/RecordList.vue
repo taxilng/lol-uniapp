@@ -2,6 +2,7 @@
   <view>
     <uv-tabs
       class="tabc"
+      :key="`tabsMain-${tabsRenderKey}`"
       v-if="batchBaseUrl !== '地址3'"
       :list="tabs"
       @click="tabChange"
@@ -9,6 +10,7 @@
     ></uv-tabs>
     <uv-tabs
       class="tabc"
+      :key="`tabs3-${tabsRenderKey}`"
       v-if="batchBaseUrl === '地址3'"
       :list="tabs3"
       @click="tabChange3"
@@ -89,20 +91,25 @@ function tabChange3(item) {
 }
 
 const batchBaseUrl = ref(getBatchBaseUrlName());
+// 页面重新显示时递增 key，强制 uv-tabs 重挂载并重新测量滑块位置
+const tabsRenderKey = ref(0);
 EventBus.on("updateBatchBaseUrl", () => {
   // console.log("baseurl地址触发更新哦");
   batchBaseUrl.value = getBatchBaseUrlName();
   initTabs();
 });
+EventBus.on("resizeTabs", () => {
+  tabsRenderKey.value++;
+});
 initTabs();
 
 function initTabs() {
+  // 切换地址后重置对应 tab 组的选中状态，保证高亮与 activeTab 一致
   if (batchBaseUrl.value === "地址3") {
-    activeTab.value = {
-      name: "总胜场",
-      value: "TotalVictoryField",
-      sort: sortField,
-    };
+    activeTab.value = tabs3.value?.[0];
+    currentTabs3.value = 0;
+  } else {
+    activeTab.value = tabs.value?.[0];
     currentTabs.value = 0;
   }
 }

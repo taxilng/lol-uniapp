@@ -808,6 +808,8 @@ onShow(() => {
   // 每次显示都刷新缓存战绩，保证从 history 页 updateRecord 更新后回到本页自动同步
   refreshCacheData();
   addUserOptions();
+  // 页面重新可见后让 RecordList 重挂载 tabs，重新测量滑块位置（避免在后台时量出 0 宽度导致滑块停在最左边）
+  EventBus.emit("resizeTabs");
 });
 onLoad(options => {
   // console.log("接收到的参数:", options);
