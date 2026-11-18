@@ -345,6 +345,28 @@
         ></uv-button>
       </view>
     </view>
+    <!-- 搜联盟账号池使用情况 -->
+    <view class="mb-4 mt-4">
+      <text class="font-bold" @click="onPoolTitleClick">搜联盟账号池</text>
+      <view class="mt-2 text-sm">
+        <view class="flex border-b border-gray-300 py-1">
+          <text class="w-24">账号</text>
+          <text class="flex-1">状态</text>
+          <text class="w-28">剩余次数</text>
+        </view>
+        <view
+          v-for="acc in lesoAccountRows"
+          :key="acc.name"
+          class="flex py-1"
+          :class="acc.current ? 'bg-blue-100 font-bold' : ''"
+          @click="onAccountClick(acc)"
+        >
+          <text class="w-24">{{ acc.name }}</text>
+          <text class="flex-1">{{ acc.status }}</text>
+          <text class="w-28">{{ acc.quotaText }}</text>
+        </view>
+      </view>
+    </view>
     <view class="mb-4 mt-4" v-if="showLogs">
       <sv-json-view :obj="searchLogs" :key="jsonviewKey"></sv-json-view>
     </view>
@@ -399,7 +421,16 @@ import { getGuid } from "@/utils/auth.js";
 import { EventBus } from "@/utils/event-bus.js";
 import multipleSelect from "@/components/multiple-select";
 import { getBspapp } from "@/axios/api.js";
-import { lesoLogin, lesoMe, lesoMySubscription, lesoRegister } from "@/api/leso";
+import {
+  lesoLogin,
+  lesoMe,
+  lesoMySubscription,
+  lesoRegister,
+  lesoSelectPoolAccount,
+  LESO_ACCOUNT_POOL,
+  getLesoAccountIndex,
+  getLesoAccountStatus,
+} from "@/api/leso";
 
 const jsonviewKey = ref(0);
 
@@ -547,7 +578,72 @@ function initAuth() {
   }
 }
 
-onShow(() => {});
+// 搜联盟账号池使用情况表格（登录过/已用完，高亮当前账号）
+const lesoAccountRows = ref([]);
+function refreshLesoAccounts() {
+  const status = getLesoAccountStatus();
+  const curIdx = getLesoAccountIndex();
+  lesoAccountRows.value = LESO_ACCOUNT_POOL.map((name, idx) => {
+    const quota = status[name]?.quota;
+    return {
+      name,
+      current: idx === curIdx,
+      status: status[name]?.exhausted
+        ? "已用完"
+        : status[name]?.logged
+          ? "已登录"
+          : "未登录",
+      quotaText: quota ? `${quota.remaining}/${quota.total}` : "--",
+    };
+  });
+}
+
+// 点击账号行：切到该账号自动登录并查询剩余额度
+async function onAccountClick(acc) {
+  uni.showLoading({ title: "登录查询中..." });
+  try {
+    const quota = await lesoSelectPoolAccount(acc.name);
+    refreshLesoAccounts();
+    uni.showToast({
+      title: quota
+        ? `${acc.name} 剩余 ${quota.remaining}/${quota.total}`
+        : `${acc.name} 未查询到额度`,
+      icon: "none",
+    });
+  } catch (err) {
+    console.log("查询账号额度失败", err);
+    uni.showToast({
+      title: err.message || "登录或查询失败",
+      icon: "error",
+    });
+  } finally {
+    uni.hideLoading();
+  }
+}
+
+// 点击标题：遍历账号池，逐个登录并查询剩余额度（每查完一个立即刷新表格）
+async function onPoolTitleClick() {
+  let failCount = 0;
+  for (const name of LESO_ACCOUNT_POOL) {
+    uni.showLoading({ title: `查询 ${name}...` });
+    try {
+      await lesoSelectPoolAccount(name);
+    } catch (err) {
+      failCount++;
+      console.log("查询账号额度失败", name, err);
+    }
+    refreshLesoAccounts();
+  }
+  uni.hideLoading();
+  uni.showToast({
+    title: failCount ? `查询完成，${failCount} 个失败` : "全部账号查询完成",
+    icon: "none",
+  });
+}
+
+onShow(() => {
+  refreshLesoAccounts();
+});
 
 // 默认页面
 const pickerRef = ref();

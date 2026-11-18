@@ -12,7 +12,7 @@ const LESO_BASE = "/leso";
 
 // 搜联盟账号池：fx1 ~ fx10，密码统一 123456
 // 当前使用的账号下标持久化到本地，供后续额度用尽时自动切换到下一个账号
-export const LESO_ACCOUNT_POOL = Array.from({ length: 10 }, (_, i) => `fx${i + 1}`);
+export const LESO_ACCOUNT_POOL = Array.from({ length: 20 }, (_, i) => `fx${i + 1}`);
 const LESO_ACCOUNT_INDEX_KEY = "lesoAccountIndex";
 
 export function getLesoAccountIndex() {
@@ -23,6 +23,54 @@ export function getLesoAccountIndex() {
 // 当前使用的账号（默认 fx1）
 export function getLesoCurrentAccount() {
   return LESO_ACCOUNT_POOL[getLesoAccountIndex()];
+}
+
+// 账号池状态：记录哪些账号登录过、哪些额度已用完（持久化到本地）
+// 结构：{ fx1: { logged: true, exhausted: true }, ... }
+const LESO_ACCOUNT_STATUS_KEY = "lesoAccountStatus";
+
+function getAccountStatusMap() {
+  try {
+    const obj = JSON.parse(uni.getStorageSync(LESO_ACCOUNT_STATUS_KEY));
+    return obj && typeof obj === "object" ? obj : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function setAccountStatus(account, patch) {
+  const map = getAccountStatusMap();
+  map[account] = { ...map[account], ...patch };
+  uni.setStorageSync(LESO_ACCOUNT_STATUS_KEY, JSON.stringify(map));
+}
+
+// 供设置页展示账号池使用情况
+export function getLesoAccountStatus() {
+  return getAccountStatusMap();
+}
+
+// 手动选择账号池中某个账号登录（设置页点击账号行），并查询其剩余额度
+// 注意：重复登录会顶掉旧会话，登录后当前会话即为该账号
+export async function lesoSelectPoolAccount(account) {
+  const idx = LESO_ACCOUNT_POOL.indexOf(account);
+  if (idx < 0) {
+    throw new Error("账号不在账号池中");
+  }
+  uni.setStorageSync(LESO_ACCOUNT_INDEX_KEY, idx);
+  await ensureLesoLogin();
+  const sub = await lesoMySubscription();
+  const quota = sub?.[0]?.freeQuota;
+  const quotaInfo = quota
+    ? { remaining: quota.remainingQuantity, total: quota.totalQuantity }
+    : undefined;
+  if (quotaInfo) {
+    // 顺带按真实额度修正 exhausted 标记（额度按天重置，本地标记可能过期）
+    setAccountStatus(account, {
+      quota: quotaInfo,
+      exhausted: Number(quota.remainingQuantity) <= 0,
+    });
+  }
+  return quotaInfo;
 }
 
 export function lesoUrl(path, query = {}) {
@@ -57,10 +105,11 @@ let loginPromise = null;
 // 并发请求共享同一个登录过程，避免重复登录互相顶掉会话
 function ensureLesoLogin() {
   if (!loginPromise) {
+    const account = getLesoCurrentAccount();
     loginPromise = lesoRawRequest("/user/login", {
       method: "POST",
       body: {
-        account: getLesoCurrentAccount(),
+        account,
         password: "123456",
         rememberMe: true,
       },
@@ -73,6 +122,8 @@ function ensureLesoLogin() {
           err.errCode = resData.errCode;
           throw err;
         }
+        // 记录该账号登录过
+        setAccountStatus(account, { logged: true });
         return resData.data;
       })
       .finally(() => {
@@ -88,6 +139,8 @@ let switchingPromise = null;
 // 并发请求共享同一次切换，避免同时触发时连跳多个账号
 function switchToNextAccount() {
   if (!switchingPromise) {
+    // 标记当前账号额度已用完，再切换到下一个账号
+    setAccountStatus(getLesoCurrentAccount(), { exhausted: true });
     const nextIdx = (getLesoAccountIndex() + 1) % LESO_ACCOUNT_POOL.length;
     uni.setStorageSync(LESO_ACCOUNT_INDEX_KEY, nextIdx);
     console.log("搜联盟额度用尽，切换账号：", getLesoCurrentAccount());
@@ -164,11 +217,39 @@ export function lesoQueryRecord(body) {
 }
 
 // 解析召唤师：游戏名 + tagLine → { puuid, serverId }
-export function lesoResolveSummoner({ gameName, tagLine }) {
-  return lesoRequest("/league/player/server_info", {
+// 结果按 `gameName#tagLine` 缓存到本地，命中后不再请求接口
+const SUMMONER_CACHE_KEY = "lesoSummonerCache";
+
+function getSummonerCache() {
+  try {
+    const obj = JSON.parse(uni.getStorageSync(SUMMONER_CACHE_KEY));
+    return obj && typeof obj === "object" ? obj : {};
+  } catch (error) {
+    return {};
+  }
+}
+
+function setSummonerCache(key, value) {
+  const cache = getSummonerCache();
+  cache[key] = value;
+  uni.setStorageSync(SUMMONER_CACHE_KEY, JSON.stringify(cache));
+}
+
+export async function lesoResolveSummoner({ gameName, tagLine }) {
+  const key = `${gameName}#${tagLine}`;
+  const cached = getSummonerCache()[key];
+  if (cached?.puuid && cached?.serverId) {
+    return cached;
+  }
+  const data = await lesoRequest("/league/player/server_info", {
     method: "POST",
     body: { gameName, tagLine },
   });
+  const value = { puuid: data?.puuid, serverId: data?.serverId };
+  if (value.puuid && value.serverId) {
+    setSummonerCache(key, value);
+  }
+  return value;
 }
 
 // 玩家总览（base: puuid/profileIconId/privacy/level/lastGameDate/gameName/tagLine）

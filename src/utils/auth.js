@@ -359,7 +359,7 @@ export function handlerso1Data(source) {
   // 战绩是否隐藏
   const publicInfo = source.baseInfo?.privacy === "PUBLIC" ? "公开" : "隐藏";
   // 最后的游戏时间
-  const onlineInfo = parseTime(source.baseInfo?.lastGameDate - 8 * 3600 * 1000);
+  const onlineInfo = parseTime(source.baseInfo?.lastGameDate);
   // 最新一局比赛
   const firstGame = source.list[0];
   if (firstGame) {
