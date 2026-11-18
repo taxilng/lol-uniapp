@@ -244,9 +244,13 @@
               <LolAbility class="mt-1" :iconId="player.spell2Id" />
             </view>
 
-            <view class="ml-1">
-              <LolRunesperk :iconId="player.perks1" />
-              <LolRunesperk class="mt-1" :iconId="player.perks2" />
+            <view class="ml-1" v-if="player.perks1 || player.perks2">
+              <LolRunesperk v-if="player.perks1" :iconId="player.perks1" />
+              <LolRunesperk
+                v-if="player.perks2"
+                class="mt-1"
+                :iconId="player.perks2"
+              />
             </view>
 
             <view class="ml-1">
@@ -275,6 +279,9 @@
                   <text class="text-sm">攻</text>
                   <text :class="{ 'text-red-500': player.damageMax }">
                     {{ (player.damageAll / 1000).toFixed(1) }}k
+                  </text>
+                  <text class="text-red-400 ml-1">
+                    {{ getSO1DamagePer(player) }}
                   </text>
                 </text>
                 <text class="ml-1">
@@ -541,6 +548,22 @@ function getDamagePer(curDamage, item) {
     .reduce((acc, current) => acc + current.totalDamageDealt, 0);
   console.log("总商会", totalDamageDealt);
   return `${((curDamage / totalDamageDealt) * 100).toFixed(0)}%`;
+}
+
+// 地址3 该玩家的伤害占比（只按所在队伍 5 人 damageAll 求和）
+function getSO1DamagePer(player) {
+  const participants = userHistoryDetails1.value?.participants || [];
+  const idx = participants.indexOf(player);
+  if (idx < 0) return "0%";
+  // participants 按队伍顺序排列，5 人一组（0-4 / 5-9）
+  const teamStart = Math.floor(idx / 5) * 5;
+  const teamPlayers = participants.slice(teamStart, teamStart + 5);
+  const total = teamPlayers.reduce(
+    (acc, v) => acc + (Number(v.damageAll) || 0),
+    0,
+  );
+  if (!total) return "0%";
+  return `${(((Number(player.damageAll) || 0) / total) * 100).toFixed(0)}%`;
 }
 
 function getGameLevel(eloScore) {

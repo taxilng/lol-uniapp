@@ -396,12 +396,14 @@ const userInfos = computed(() =>
     },
     {
       label: "单排胜率",
-      value:
-        (
-          ((item.value.wins - item.value.blackoutWins) /
-            (item.value.totalGames - item.value.blackoutTimes)) *
+      value: (() => {
+        const soloGames = item.value.totalGames - item.value.blackoutTimes;
+        if (!soloGames) return "0%";
+        return (
+          ((item.value.wins - item.value.blackoutWins) / soloGames) *
           100
-        ).toFixed(2) + "%",
+        ).toFixed(2) + "%";
+      })(),
       visible:
         mode.value === "detailed" &&
         hasValue(
@@ -582,12 +584,13 @@ const userInfos = computed(() =>
           : item.value.mlolgender === "♀"
           ? "女"
           : "未知",
-      visible: mode.value === "detailed",
+      visible: mode.value === "detailed" && hasValue(item.value.mlolgender),
     },
     {
       label: "IP",
       value: item.value.mlollatestLocation,
-      visible: mode.value === "detailed",
+      visible:
+        mode.value === "detailed" && hasValue(item.value.mlollatestLocation),
     },
     {
       label: "全部大乱斗",

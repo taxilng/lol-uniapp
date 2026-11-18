@@ -365,8 +365,12 @@ const handleScrollToBottom1 = throttle(
 );
 
 function initUpdateRecord() {
-  console.log(232);
-  
+  // 地址3（recordData.list）走 update3，地址1/2（recordData.data）走 updateRecord
+  if (recordData.value?.list) {
+    beginIdx.value = 0;
+    update3(true);
+    return;
+  }
   allCount.value = 10;
   updateRecord();
 }
