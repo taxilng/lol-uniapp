@@ -145,6 +145,24 @@
                         v-if="item.pentaKills"
                         class="ml-2 honor16 honor16-kill5"
                       ></i>
+                      <text class="ml-2">
+                        <text class="text-sm">攻</text>
+                        <!-- <text :class="{ 'text-red-500': item.damageMax }">
+                          {{ ((item.damageAll || 0) / 1000).toFixed(1) }}k
+                        </text> -->
+                        <text class="text-red-400 ml-1">
+                          {{ item.damageAllPer }}
+                        </text>
+                      </text>
+                      <text class="ml-2">
+                        <text class="text-sm">承</text>
+                        <!-- <text :class="{ 'text-cyan-500': item.defenseMax }">
+                          {{ ((item.bearingInjuries || 0) / 1000).toFixed(1) }}k
+                        </text> -->
+                        <text class="text-cyan-400 ml-1">
+                          {{ item.bearingInjuriesPer }}
+                        </text>
+                      </text>
                     </view>
                     <text class="ml-2">
                       用时{{ secondsToHms(item.gameDuration) }}

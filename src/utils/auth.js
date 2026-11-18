@@ -530,6 +530,30 @@ export function handlerso1Data(source) {
         x => x.puuid === source.baseInfo?.puuid
       );
       const mys = participants[yoursIndex];
+      // 所在队伍 5 人的伤害 / 承伤总和（participants 按队伍顺序排列，5 人一组）
+      const teamParticipants = participants.slice(
+        yoursIndex >= 5 ? 5 : 0,
+        yoursIndex >= 5 ? 10 : 5
+      );
+      const totalDamageAll = teamParticipants.reduce(
+        (acc, x) => acc + (Number(x.damageAll) || 0),
+        0
+      );
+      const totalBearingInjuries = teamParticipants.reduce(
+        (acc, x) => acc + (Number(x.bearingInjuries) || 0),
+        0
+      );
+      const damageAllPer = totalDamageAll
+        ? `${(((Number(mys?.damageAll) || 0) / totalDamageAll) * 100).toFixed(
+            0
+          )}%`
+        : "0%";
+      const bearingInjuriesPer = totalBearingInjuries
+        ? `${(
+            ((Number(mys?.bearingInjuries) || 0) / totalBearingInjuries) *
+            100
+          ).toFixed(0)}%`
+        : "0%";
       // 计算总的助攻次数，火盾次数
       baseInfo = {
         ...baseInfo,
@@ -565,6 +589,10 @@ export function handlerso1Data(source) {
         defenseMax: mys?.defenseMax,
         killsMax: mys?.killsMax,
         assistsMax: mys?.assistsMax,
+        damageAll: mys?.damageAll,
+        bearingInjuries: mys?.bearingInjuries,
+        damageAllPer,
+        bearingInjuriesPer,
         participants,
       };
     });
