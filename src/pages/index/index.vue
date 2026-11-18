@@ -206,7 +206,7 @@
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from "vue";
 import { onShow, onLoad } from "@dcloudio/uni-app";
-import omit from "lodash/omit";
+import pick from "lodash/pick";
 import {
   searchPlayerAll,
   leagueSummoner,
@@ -916,10 +916,44 @@ function formatMsToDate(ms) {
   }
 }
 
+// 缓存到 localStorage 时只保留 details.vue 详情页需要的参与者字段（全量 participants 过大）
+const PARTICIPANT_CACHE_FIELDS = [
+  "win",
+  "championId",
+  "spell1Id",
+  "spell2Id",
+  "item0",
+  "item1",
+  "item2",
+  "item3",
+  "item4",
+  "item5",
+  "item6",
+  "riotIdGameName",
+  "riotIdTagline",
+  "kills",
+  "deaths",
+  "assists",
+  "pentaKills",
+  "perks1",
+  "perks2",
+  "damageMax",
+  "defenseMax",
+  "killsMax",
+  "assistsMax",
+  "damageAll",
+  "bearingInjuries",
+];
+
 // 静默写入本地缓存（查询成功后自动调用，无提示）
 function saveData() {
   const tableDataLocal = tableData1.value?.map(v => {
-    const list = v.list?.map(x => omit(x, "participants"));
+    const list = v.list?.map(x => ({
+      ...x,
+      participants: x.participants?.map(p =>
+        pick(p, PARTICIPANT_CACHE_FIELDS)
+      ),
+    }));
     return { ...v, list };
   });
   uni.setStorageSync("lol", JSON.stringify(tableDataLocal));
