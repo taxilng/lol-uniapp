@@ -1,11 +1,7 @@
 <template>
-  <view class="max-w-screen-sm mx-auto h-full overflow-y-auto bg-slate-50">
-    <view class="history">
-      <scroll-view
-        class="scroll-container"
-        scroll-y
-        @scrolltolower="handleScrollToBottom1"
-      >
+  <view class="max-w-screen-sm mx-auto min-h-screen bg-slate-50">
+    <view class="history bg-white">
+      <view>
         <view class="flex items-center relative p-2 bg-slate-100">
           <view class="flex flex-col items-center">
             <LolAvartar
@@ -50,11 +46,7 @@
         </view>
 
         <template v-if="recordData.list">
-          <scroll-view
-            class="scroll-container"
-            scroll-y
-            @scrolltolower="handleScrollToBottom3"
-          >
+          <view>
             <view
               v-if="recordData?.currentGame?.gameName"
               class="flex justify-center bg-violet-200 w-full p-2 items-center"
@@ -171,7 +163,7 @@
                 </view>
               </view>
             </view>
-          </scroll-view>
+          </view>
         </template>
         <template v-if="!recordData.data && !recordData.list">
           <uv-button
@@ -232,13 +224,14 @@
             </view>
           </view>
         </template>
-      </scroll-view>
+      </view>
     </view>
   </view>
 </template>
 
 <script setup>
 import { ref, onActivated, onMounted, watch } from "vue";
+import { onReachBottom } from "@dcloudio/uni-app";
 import { throttle } from "lodash";
 import LolAvartar from "@/components/LolAvartar.vue";
 import HeroAvatar from "@/components/HeroAvatar.vue";
@@ -535,6 +528,16 @@ function renderImg(messageDetail) {
 
 const loading = ref(false);
 
+// 页面滚动到底部：地址3（recordData.list）走 update3，地址1/2（recordData.data）走 updateRecord
+onReachBottom(() => {
+  if (loading.value) return;
+  if (recordData.value?.list) {
+    handleScrollToBottom3();
+    return;
+  }
+  handleScrollToBottom1();
+});
+
 function updateRecord() {
   const userHistory = historyStore.historyList ?? {};
   const { name: areaName } = areaMap[userHistory.areaId];
@@ -644,12 +647,6 @@ function handleShare() {
 </script>
 
 <style lang="scss" scoped>
-.scroll-container {
-  background-color: #fff;
-  border-radius: 10rpx;
-  height: calc(100vh - 10rpx);
-}
-
 .greenRound {
   position: relative;
 
