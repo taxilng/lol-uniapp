@@ -479,7 +479,6 @@ async function getNewOnline(requestScope = "all") {
   } finally {
     // console.log("最终结果新", resp);
     loading.value = false;
-    // uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }
 }
 
@@ -578,7 +577,6 @@ async function getNewHistorys(requestScope = "all") {
   } finally {
     // console.log("最终结果新", resp);
     loading.value = false;
-    // uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }
 }
 
@@ -1036,7 +1034,6 @@ async function getHistorys(searchType = "history", searchRange = "all") {
   } finally {
     loading.value = false;
     console.log("最终结果", resp);
-    uni.setStorageSync("searchLogs", JSON.stringify(resp));
   }
 }
 

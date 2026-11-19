@@ -299,14 +299,6 @@
         <uv-button
           size="small"
           type="primary"
-          text="显示日志"
-          @click="showLogs = !showLogs"
-        ></uv-button>
-      </view>
-      <view class="mr-4">
-        <uv-button
-          size="small"
-          type="primary"
           text="部分清除缓存"
           @click="clearpart"
         ></uv-button>
@@ -366,9 +358,6 @@
           <text class="flex-1">{{ acc.quotaText }}</text>
         </view>
       </view>
-    </view>
-    <view class="mb-4 mt-4" v-if="showLogs">
-      <sv-json-view :obj="searchLogs" :key="jsonviewKey"></sv-json-view>
     </view>
     <multiple-select
       v-model="show"
@@ -432,8 +421,6 @@ import {
   getLesoAccountStatus,
 } from "@/api/leso";
 
-const jsonviewKey = ref(0);
-
 onMounted(() => {
   init();
 });
@@ -454,12 +441,9 @@ const user = ref([]);
 const userOptions = ref([]);
 const allUserOptions = ref([...defaultUser]);
 
-const searchLogs = uni.getStorageSync("searchLogs");
-
 // 清除缓存
 function clearpart() {
   uni.removeStorageSync("singlePlayerRecord");
-  uni.removeStorageSync("searchLogs");
   uni.removeStorageSync("lol");
   uni.removeStorageSync("userHistory");
   uni.removeStorageSync("userHistoryDetails");
@@ -468,8 +452,6 @@ function clearpart() {
 function clearAll() {
   uni.clearStorage();
 }
-// 日志展示
-const showLogs = ref(false);
 
 // 注册账号
 const userInfo = ref({

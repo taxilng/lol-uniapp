@@ -446,7 +446,6 @@ async function getHistoryOne() {
     ...sign,
   })
     .then(resp => {
-      uni.setStorageSync("searchLogs", JSON.stringify(resp));
       loading.value = false;
       const res = resp.data;
       // 有时候会包裹了2层JSON，需要再次解析下
@@ -481,7 +480,6 @@ async function getHistoryOne() {
     })
     .catch(error => {
       console.log("错误", error);
-      uni.setStorageSync("searchLogs", JSON.stringify(error));
       uni.showToast({
         message: "查询数据失败，请重试",
         type: "error",
