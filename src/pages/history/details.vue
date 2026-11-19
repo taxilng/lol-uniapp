@@ -309,10 +309,8 @@ import LolRunesperk from "@/components/LolRunesperk.vue";
 import {
   searchPlayerHistory,
   searchPlayerAll,
-  leagueSummoner,
-  history_all,
-  spectator_info,
 } from "@/axios/api";
+import { lesoFetchPlayerFull } from "@/api/leso";
 import {
   getSign,
   dataProcessing,
@@ -322,7 +320,7 @@ import {
   navigateToWithLimit,
 } from "@/utils/auth";
 import screenshot from "@/utils/screenshot";
-import { areaMap, levelConfig, platformMap } from "@/utils/area.js";
+import { areaMap, levelConfig } from "@/utils/area.js";
 import { userHistoryStore } from "@/stores/userHistory";
 
 const historyStore = userHistoryStore();
@@ -427,61 +425,32 @@ function goHistoryList(player) {
 }
 
 async function goSO1HistoryList(player) {
-  if (
-    !(
-      userHistoryDetails1.value?.platformId &&
-      player.riotIdGameName &&
-      player.riotIdTagline
-    )
-  ) {
+  if (!(player.riotIdGameName && player.riotIdTagline)) {
     return;
   }
-  const userHistoryDetails = historyStore.historyDetail ?? {};
-  const area = platformMap[userHistoryDetails.platformId];
   try {
     loading.value = true;
-    const res1 = await leagueSummoner({
-      area,
+    // 接口3（搜联盟）：resolve → overview + match_analysis，无实时对局接口
+    const full = await lesoFetchPlayerFull({
       gameName: player.riotIdGameName,
       tagLine: player.riotIdTagline,
-    });
-    if (res1.data?.success === false) {
-      uni.showToast({
-        title: res1.data?.error?.message,
-        icon: "error",
-      });
-    }
-    const data = res1?.data?.data;
-    const res2 = await history_all({
-      area,
-      puuid: data.puuid,
-      beginIdx: 0,
       count: 20,
     });
-    const res3 = await spectator_info({
-      area,
-      puuid: data.puuid,
-    });
-    let currentGame = {};
-    if (res3.data.success && res3.data?.data) {
-      const data = res3.data.data;
-      const puuid = data.playerCredentials.puuid;
-      const nameList = [...data.game.teamOne, ...data.game.teamTwo];
-      const cur = nameList.find(v => v.puuid === puuid);
-      const championId = cur?.championId;
-      currentGame = {
-        ...res3.data?.data,
-        championId,
-      };
-    }
-    console.log("返回返沪i", res1, res2);
     const recordData = {
       ...handlerso1Data({
-        baseInfo: data,
+        baseInfo: {
+          ...full.base,
+          puuid: full.puuid,
+          serverId: full.serverId,
+        },
+        label: player.riotIdGameName,
+        tagLine: player.riotIdTagline,
         allrequestParams: [],
-        list: res2.data?.data,
+        list: full.matchHistory,
+        statistics: full.statistics,
       }),
-      currentGame,
+      serverId: full.serverId,
+      currentGame: {},
     };
     historyStore.setSingleData(recordData);
     navigateToWithLimit({

@@ -144,7 +144,6 @@
 import { ref, computed, onMounted, onActivated, nextTick, watch } from "vue";
 import {
   searchPlayerAll,
-  leagueSummoner,
   history_all,
   spectator_info,
 } from "@/axios/api.js";

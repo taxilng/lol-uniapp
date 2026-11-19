@@ -350,9 +350,9 @@
       <text class="font-bold" @click="onPoolTitleClick">搜联盟账号池</text>
       <view class="mt-2 text-sm">
         <view class="flex border-b border-gray-300 py-1">
-          <text class="w-24">账号</text>
+          <text class="flex-1">账号</text>
           <text class="flex-1">状态</text>
-          <text class="w-28">剩余次数</text>
+          <text class="flex-1">剩余次数</text>
         </view>
         <view
           v-for="acc in lesoAccountRows"
@@ -361,9 +361,9 @@
           :class="acc.current ? 'bg-blue-100 font-bold' : ''"
           @click="onAccountClick(acc)"
         >
-          <text class="w-24">{{ acc.name }}</text>
+          <text class="flex-1">{{ acc.name }}</text>
           <text class="flex-1">{{ acc.status }}</text>
-          <text class="w-28">{{ acc.quotaText }}</text>
+          <text class="flex-1">{{ acc.quotaText }}</text>
         </view>
       </view>
     </view>
@@ -585,14 +585,18 @@ function refreshLesoAccounts() {
   const curIdx = getLesoAccountIndex();
   lesoAccountRows.value = LESO_ACCOUNT_POOL.map((name, idx) => {
     const quota = status[name]?.quota;
+    const current = idx === curIdx;
+    // 同一时间只有一个账号真正处于登录态，其余登录过的账号标记为「待切换」
+    let statusText = "未登录";
+    if (status[name]?.exhausted) {
+      statusText = "已用完";
+    } else if (status[name]?.logged) {
+      statusText = current ? "已登录" : "待切换";
+    }
     return {
       name,
-      current: idx === curIdx,
-      status: status[name]?.exhausted
-        ? "已用完"
-        : status[name]?.logged
-          ? "已登录"
-          : "未登录",
+      current,
+      status: statusText,
       quotaText: quota ? `${quota.remaining}/${quota.total}` : "--",
     };
   });

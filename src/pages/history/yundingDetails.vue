@@ -126,7 +126,6 @@ import {
   getYunDingDetailOneInfo,
   getYunDingDetailInfo,
   searchPlayerAll,
-  leagueSummoner,
   history_all,
   spectator_info,
 } from "@/axios/api";
@@ -267,73 +266,7 @@ function goHistoryList(player) {
     });
 }
 
-async function goSO1HistoryList(player) {
-  if (
-    !(
-      userHistoryDetails.value?.platformId &&
-      player.riotIdGameName &&
-      player.riotIdTagline
-    )
-  ) {
-    return;
-  }
-  const detail = historyStore.historyDetail ?? {};
-  const area = platformMap[detail.platformId];
-  try {
-    loading.value = true;
-    const res1 = await leagueSummoner({
-      area,
-      gameName: player.riotIdGameName,
-      tagLine: player.riotIdTagline,
-    });
-    if (res1.data?.success === false) {
-      uni.showToast({
-        title: res1.data?.error?.message,
-        icon: "error",
-      });
-    }
-    const data = res1?.data?.data;
-    const res2 = await history_all({
-      area,
-      puuid: data.puuid,
-      beginIdx: 0,
-      count: 20,
-    });
-    const res3 = await spectator_info({
-      area,
-      puuid: data.puuid,
-    });
-    let currentGame = {};
-    if (res3.data.success && res3.data?.data) {
-      const data = res3.data.data;
-      const puuid = data.playerCredentials.puuid;
-      const nameList = [...data.game.teamOne, ...data.game.teamTwo];
-      const cur = nameList.find(v => v.puuid === puuid);
-      const championId = cur?.championId;
-      currentGame = {
-        ...res3.data?.data,
-        championId,
-      };
-    }
-    console.log("返回返沪i", res1, res2);
-    const recordData = {
-      ...handlerso1Data({
-        baseInfo: data,
-        allrequestParams: [],
-        list: res2.data?.data,
-      }),
-      currentGame,
-    };
-    historyStore.setSingleData(recordData);
-    navigateToWithLimit({
-      url: "/pages/index/index?activeTab=0",
-    });
-  } catch (error) {
-    console.log("错误2", error);
-  } finally {
-    loading.value = false;
-  }
-}
+
 
 function getGameInfo(item) {
   return [

@@ -129,14 +129,6 @@ export const generate_captcha = () =>
     url: `https://air.m3zz.com/v1/common/generate_captcha?width=100&height=32`,
   });
 // 查询用户基本信息
-export const leagueSummoner = data =>
-  requestWithAkali(`/lol/query-summoner-profile-by-game-name`, "post", data);
-// uni.request({
-//   url: `${baseUrl3}/lol/query-summoner-profile-by-game-name`,
-//   method: "post",
-//   data,
-//   header: { "m3-authorization": uni.getStorageSync("m3-authorization") },
-// });
 export const querySummonerProfile = data =>
   requestWithAkali(`/lol/query-summoner-profile`, "post", data);
 // uni.request({
