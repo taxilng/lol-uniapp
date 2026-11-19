@@ -33,6 +33,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: p => p.replace(/^\/leso/, ""),
       },
+      "/czj": {
+        target: "https://chazhanji.cn",
+        changeOrigin: true,
+        rewrite: p => p.replace(/^\/czj/, ""),
+      },
       "/bspapp": {
         target: "https://fund-api-url.rabt.top/http/user-center/",
         changeOrigin: true,

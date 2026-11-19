@@ -435,6 +435,9 @@ export const lzelo = `https://6.lzelo.top`;
 // 搜联盟（lolso1.com）接口地址，走 vite 代理 /leso -> https://r1.lolso1.com
 export const lesoBase = `https://r1.lolso1.com`;
 
+// 峡谷查个分（chazhanji.cn）接口地址，走 vite 代理 /czj -> https://chazhanji.cn
+export const czjBase = `https://chazhanji.cn`;
+
 export const baseUrlList = [
   {
     name: "地址1",
@@ -447,6 +450,10 @@ export const baseUrlList = [
   {
     name: "地址3",
     value: lesoBase,
+  },
+  {
+    name: "地址4",
+    value: czjBase,
   },
 ];
 

@@ -86,10 +86,10 @@
           <text class="mt-1 text-xs mr-2">
             胜: {{ item.wins - item.losses }}
           </text>
-          <text v-if="batchBaseUrl !== '地址3'" class="mt-1 text-xs mr-2">
+          <text v-if="!['地址3', '地址4'].includes(batchBaseUrl)" class="mt-1 text-xs mr-2">
             胜率: {{ `${item.rate}%` }}
           </text>
-          <text v-if="batchBaseUrl === '地址3'" class="mt-1 text-xs">
+          <text v-if="['地址3', '地址4'].includes(batchBaseUrl)" class="mt-1 text-xs">
             总场次: {{ item.totalGames }}
           </text>
           <text v-else class="mt-1 text-xs">
@@ -102,12 +102,12 @@
             }}
           </text>
           <text
-            v-if="batchBaseUrl === '地址3' && item.avgDamageShareOfTeam"
+            v-if="['地址3', '地址4'].includes(batchBaseUrl) && item.avgDamageShareOfTeam"
             class="mt-1 text-xs mx-1"
           >
             输: {{ (item.avgDamageShareOfTeam * 100).toFixed(0) }}%
           </text>
-          <view v-if="batchBaseUrl === '地址3'" class="flex mt-1 text-xs">
+          <view v-if="['地址3', '地址4'].includes(batchBaseUrl)" class="flex mt-1 text-xs">
             <view v-if="item.damageMax">
               <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
               {{ percentageConversion(item.damageMax, 0) }}
@@ -145,7 +145,7 @@
       class="mt-2 text-sm text-gray-500"
       v-show="['normal', 'detailed'].includes(mode)"
     >
-      <view class="mt-2" v-if="batchBaseUrl !== '地址3' && mode === 'detailed'">
+      <view class="mt-2" v-if="!['地址3', '地址4'].includes(batchBaseUrl) && mode === 'detailed'">
         <view class="text-black" v-html="item.message"></view>
         <view
           class="text-black mt-4"
@@ -162,7 +162,7 @@
           <text class="ml-2 text-blue-400">{{ info.value }}</text>
         </view>
       </view>
-      <template v-if="batchBaseUrl === '地址3' && mode === 'detailed'">
+      <template v-if="['地址3', '地址4'].includes(batchBaseUrl) && mode === 'detailed'">
         <view class="flex flex-wrap mt-1 text-sm">
           <view v-if="item.damageMax">
             <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
@@ -303,7 +303,7 @@ function percentageConversion(val, decimal = 2) {
 }
 
 function getRanking(item, index) {
-  if (batchBaseUrl.value === "地址3") {
+  if (batchBaseUrl.value === "地址3" || batchBaseUrl.value === "地址4") {
     if (activeTab.value?.name?.includes("总胜场")) {
       return (
         list.value?.findIndex(v => v.netVictoryField === item.netVictoryField) +

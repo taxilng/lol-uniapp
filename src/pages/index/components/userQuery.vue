@@ -148,6 +148,7 @@ import {
   spectator_info,
 } from "@/axios/api.js";
 import { lesoFetchPlayerFull } from "@/api/leso";
+import { czjFetchPlayerFull } from "@/api/czj";
 import { EventBus } from "@/utils/event-bus.js";
 import { areaMap, defaultUser } from "@/utils/area.js";
 import {
@@ -459,7 +460,7 @@ async function getHistoryOne() {
   // }
 
   const baseUrl = uni.getStorageSync("baseUrl");
-  if (baseUrl === "2") {
+  if (baseUrl === "2" || baseUrl === "3") {
     const nicknameArr = userInfo.value.nickname?.split("#");
     if (nicknameArr.length < 2) {
       uni.showToast({
@@ -469,12 +470,19 @@ async function getHistoryOne() {
       return;
     }
     try {
-      // 搜联盟链路（地址3）：server_info → overview + match_analysis 分页拉战绩
-      const full = await lesoFetchPlayerFull({
-        gameName: nicknameArr[0],
-        tagLine: nicknameArr[1],
-        count: userInfo.value.num,
-      });
+      // 地址3（搜联盟）/地址4（峡谷查个分）：解析召唤师后分页拉战绩
+      const full =
+        baseUrl === "3"
+          ? await czjFetchPlayerFull({
+              gameName: nicknameArr[0],
+              tagLine: nicknameArr[1],
+              count: userInfo.value.num,
+            })
+          : await lesoFetchPlayerFull({
+              gameName: nicknameArr[0],
+              tagLine: nicknameArr[1],
+              count: userInfo.value.num,
+            });
       recordData.value = {
         ...handlerso1Data({
           baseInfo: full.base,

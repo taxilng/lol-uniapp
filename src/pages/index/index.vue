@@ -229,6 +229,7 @@ import {
   dataProcessing,
 } from "@/utils/auth";
 import { lesoFetchPlayerFull } from "@/api/leso";
+import { czjFetchPlayerFull } from "@/api/czj";
 import multipleSelect from "@/components/multiple-select";
 import screenshot from "@/utils/screenshot";
 
@@ -346,7 +347,7 @@ function submit() {
       // console.log("输出form", userInfo.value);
       const batchBaseUrl = getBatchBaseUrlName();
       // console.log("当前地址", batchBaseUrl);
-      if (batchBaseUrl === "地址3") {
+      if (batchBaseUrl === "地址3" || batchBaseUrl === "地址4") {
         getNewHistorys();
       } else {
         getHistorys();
@@ -369,7 +370,7 @@ function onLineSubmit() {
       // console.log("输出form", userInfo.value);
       const batchBaseUrl = getBatchBaseUrlName();
       // console.log("当前地址", batchBaseUrl);
-      if (batchBaseUrl === "地址3") {
+      if (batchBaseUrl === "地址3" || batchBaseUrl === "地址4") {
         getNewOnline();
       } else {
         getHistorys("online");
@@ -397,11 +398,17 @@ async function getNewOnline(requestScope = "all") {
   console.log("allrequestParams", allrequestParams);
   const allrequest = allrequestParams.map(async (v, idx) => {
     try {
-      // 搜联盟链路：server_info → overview + match_analysis（无实时对局接口，currentGame 为空）
-      const full = await lesoFetchPlayerFull({
-        gameName: v.label,
-        tagLine: v.tagLine,
-      });
+      // 地址3（搜联盟）/地址4（峡谷查个分）链路：无实时对局接口，currentGame 为空
+      const full =
+        getBatchBaseUrlName() === "地址4"
+          ? await czjFetchPlayerFull({
+              gameName: v.label,
+              tagLine: v.tagLine,
+            })
+          : await lesoFetchPlayerFull({
+              gameName: v.label,
+              tagLine: v.tagLine,
+            });
       const baseInfo = full.base;
       baseInfo.puuid = full.puuid;
       baseInfo.serverId = full.serverId;
@@ -495,12 +502,19 @@ async function getNewHistorys(requestScope = "all") {
   console.log("allrequestParams", allrequestParams);
   const allrequest = allrequestParams.map(async v => {
     try {
-      // 搜联盟链路：server_info → overview + match_analysis 分页拉战绩
-      const full = await lesoFetchPlayerFull({
-        gameName: v.label,
-        tagLine: v.tagLine,
-        count: userInfo.value.num,
-      });
+      // 地址3（搜联盟）/地址4（峡谷查个分）链路：解析召唤师后分页拉战绩
+      const full =
+        getBatchBaseUrlName() === "地址4"
+          ? await czjFetchPlayerFull({
+              gameName: v.label,
+              tagLine: v.tagLine,
+              count: userInfo.value.num,
+            })
+          : await lesoFetchPlayerFull({
+              gameName: v.label,
+              tagLine: v.tagLine,
+              count: userInfo.value.num,
+            });
       const baseInfo = full.base;
       baseInfo.puuid = full.puuid;
       baseInfo.serverId = full.serverId;
@@ -597,7 +611,7 @@ watch(
   () => userInfo.value,
   val => {
     // console.log("接口地址", val?.batchBaseUrl);
-    if (val?.batchBaseUrl !== "地址3") {
+    if (val?.batchBaseUrl !== "地址3" && val?.batchBaseUrl !== "地址4") {
       CompetitionTypeOption.value = [
         { value: "1", label: "全部比赛" },
         { value: "2", label: "单双排", queueId: 420 },
@@ -1040,7 +1054,7 @@ async function getHistorys(searchType = "history", searchRange = "all") {
 function getAllFailHistorys() {
   const batchBaseUrl = getBatchBaseUrlName();
   console.log("当前地址", batchBaseUrl);
-  if (batchBaseUrl === "地址3") {
+  if (batchBaseUrl === "地址3" || batchBaseUrl === "地址4") {
     getNewHistorys("fail");
   } else {
     getHistorys("history", "fail");
@@ -1049,7 +1063,7 @@ function getAllFailHistorys() {
 
 function getAllFailOnline() {
   const batchBaseUrl = getBatchBaseUrlName();
-  if (batchBaseUrl === "地址3") {
+  if (batchBaseUrl === "地址3" || batchBaseUrl === "地址4") {
     getNewOnline("fail");
   } else {
     getHistorys("online", "fail");

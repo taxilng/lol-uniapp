@@ -160,6 +160,20 @@
                       用时{{ secondsToHms(item.gameDuration) }}
                     </text>
                   </view>
+                  <view
+                    v-if="item.augmentIds?.length"
+                    class="flex items-center mt-1"
+                  >
+                    <img
+                      v-for="aug in augmentList(item.augmentIds)"
+                      :key="aug.id"
+                      class="augment-icon mr-1"
+                      :src="aug.icon"
+                      @error="hideBrokenIcon"
+                      @mouseenter.stop="showAugmentTip($event, aug.id)"
+                      @mouseleave="hideAugmentTip"
+                    />
+                  </view>
                 </view>
               </view>
             </view>
@@ -226,6 +240,21 @@
         </template>
       </view>
     </view>
+    <view
+      v-if="augmentTip.visible"
+      class="augment-tip"
+      :style="{ left: augmentTip.x + 'px', top: augmentTip.y + 'px' }"
+    >
+      <view class="augment-tip__name">
+        {{ augmentTip.name }}
+        <text v-if="augmentTip.rarity" class="augment-tip__rarity">
+          {{ augmentTip.rarity }}
+        </text>
+      </view>
+      <view class="augment-tip__desc">
+        {{ augmentTip.desc || "暂无说明" }}
+      </view>
+    </view>
   </view>
 </template>
 
@@ -256,6 +285,8 @@ import {
   lesoFetchPlayerFull,
   lesoMatchAnalysis,
 } from "@/api/leso";
+import { czjFetchPlayerFull, czjMatchPage } from "@/api/czj";
+import { getAugment } from "@/utils/augment";
 import { areaMap, levelConfig, platformMap } from "@/utils/area.js";
 import { dataProcessing, handlerso1Data } from "@/utils/auth.js";
 import screenshot from "@/utils/screenshot";
@@ -362,8 +393,8 @@ const allCount = ref(10);
 const handleScrollToBottom1 = throttle(
   () => {
     console.log("滚动到底部");
-    // 地址1、地址2 走 updateRecord；地址3 走 update3
-    if (getBatchBaseUrlName() === "地址3") {
+    // 地址1、地址2 走 updateRecord；地址3、地址4 走 update3
+    if (getBatchBaseUrlName() === "地址3" || getBatchBaseUrlName() === "地址4") {
       beginIdx.value += 20;
       update3();
       return;
@@ -409,6 +440,49 @@ function handleOpenCurrentDetailCorn() {
   });
 }
 
+const augmentTip = ref({
+  visible: false,
+  x: 0,
+  y: 0,
+  name: "",
+  rarity: "",
+  desc: "",
+});
+
+function augmentList(ids) {
+  return (ids || []).map(id => getAugment(id)).filter(aug => aug.icon);
+}
+
+function showAugmentTip(e, id) {
+  const meta = getAugment(id);
+  const point = e?.touches?.[0] ?? e ?? {};
+  const { windowWidth = 375, windowHeight = 667 } = uni.getSystemInfoSync();
+  const tipWidth = 260;
+  const tipHeight = 120;
+  const x = Number(point.clientX ?? point.pageX ?? 0);
+  const y = Number(point.clientY ?? point.pageY ?? 0);
+  const top =
+    y + tipHeight + 16 > windowHeight
+      ? Math.max(8, y - tipHeight - 8)
+      : y + 16;
+  augmentTip.value = {
+    visible: true,
+    x: Math.max(8, Math.min(x + 12, windowWidth - tipWidth - 8)),
+    y: top,
+    name: meta.name,
+    rarity: meta.rarityText,
+    desc: meta.desc,
+  };
+}
+
+function hideAugmentTip() {
+  augmentTip.value.visible = false;
+}
+
+function hideBrokenIcon(e) {
+  if (e?.target) e.target.style.display = "none";
+}
+
 // 接口3 列表更新
 async function update3(init) {
   if (!recordData.value?.puuid) {
@@ -418,11 +492,15 @@ async function update3(init) {
   try {
     loading.value = true;
     const area = areaMap[userHistory.areaId]?.name;
-    if (getBatchBaseUrlName() === "地址3") {
-      // 搜联盟链路：nameInfoNew（名字#tag）→ resolve → overview + match_analysis 分页
+    const baseName = getBatchBaseUrlName();
+    if (baseName === "地址3" || baseName === "地址4") {
+      // 地址3（搜联盟）/地址4（峡谷查个分）：nameInfoNew（名字#tag）→ resolve → 分页拉战绩
+      const isCzj = baseName === "地址4";
       const [gameName, tagLine] = (recordData.value.nameInfoNew ?? "").split("#");
       if (init) {
-        const full = await lesoFetchPlayerFull({ gameName, tagLine, count: 20 });
+        const full = isCzj
+          ? await czjFetchPlayerFull({ gameName, tagLine, count: 20 })
+          : await lesoFetchPlayerFull({ gameName, tagLine, count: 20 });
         recordData.value = {
           ...handlerso1Data({
             baseInfo: full.base,
@@ -434,17 +512,26 @@ async function update3(init) {
       } else {
         // 滚动加载：按页增量拉取（每页 20 场）
         const page = beginIdx.value / 20 + 1;
-        const match = await lesoMatchAnalysis({
-          serverId: recordData.value.serverId,
-          puuid: recordData.value.puuid,
-          page,
-          size: 20,
-          tag: -1,
-        });
+        const matchList = isCzj
+          ? await czjMatchPage({
+              region: recordData.value.serverId,
+              puuid: recordData.value.puuid,
+              page,
+              size: 20,
+            })
+          : (
+              await lesoMatchAnalysis({
+                serverId: recordData.value.serverId,
+                puuid: recordData.value.puuid,
+                page,
+                size: 20,
+                tag: -1,
+              })
+            )?.matchHistory ?? [];
         const newData = handlerso1Data({
           baseInfo: recordData.value,
           allrequestParams: [{ label: gameName, tagLine }],
-          list: match?.matchHistory ?? [],
+          list: matchList,
         });
         recordData.value.list = [...recordData.value.list, ...newData?.list];
       }
@@ -690,5 +777,44 @@ function handleShare() {
   right: 12px;
   top: 12px;
   z-index: 10;
+}
+
+.augment-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #424245;
+}
+
+.augment-tip {
+  position: fixed;
+  z-index: 9999;
+  width: 260px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.95);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  &__name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__rarity {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #fbbf24;
+  }
+
+  &__desc {
+    margin-top: 4px;
+    color: #e5e7eb;
+    white-space: pre-wrap;
+  }
 }
 </style>

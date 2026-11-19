@@ -311,12 +311,14 @@ import {
   searchPlayerAll,
 } from "@/axios/api";
 import { lesoFetchPlayerFull } from "@/api/leso";
+import { czjFetchPlayerFull } from "@/api/czj";
 import {
   getSign,
   dataProcessing,
   parseTime,
   secondsToHms,
   handlerso1Data,
+  getBatchBaseUrlName,
   navigateToWithLimit,
 } from "@/utils/auth";
 import screenshot from "@/utils/screenshot";
@@ -430,12 +432,19 @@ async function goSO1HistoryList(player) {
   }
   try {
     loading.value = true;
-    // 接口3（搜联盟）：resolve → overview + match_analysis，无实时对局接口
-    const full = await lesoFetchPlayerFull({
-      gameName: player.riotIdGameName,
-      tagLine: player.riotIdTagline,
-      count: 20,
-    });
+    // 地址3（搜联盟）/地址4（峡谷查个分）：解析召唤师后拉战绩，无实时对局接口
+    const full =
+      getBatchBaseUrlName() === "地址4"
+        ? await czjFetchPlayerFull({
+            gameName: player.riotIdGameName,
+            tagLine: player.riotIdTagline,
+            count: 20,
+          })
+        : await lesoFetchPlayerFull({
+            gameName: player.riotIdGameName,
+            tagLine: player.riotIdTagline,
+            count: 20,
+          });
     const recordData = {
       ...handlerso1Data({
         baseInfo: {

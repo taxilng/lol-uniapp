@@ -1,0 +1,3602 @@
+{
+  "1": {
+    "name": "加速巫术",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/acceleratingsorcery_large.png",
+    "rarityText": "棱彩",
+    "desc": "使用一个技能时提供X技能急速，可无限叠加，这个效果会在每回合重置。"
+  },
+  "2": {
+    "name": "尖端发明家",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/apexinventor_large.png",
+    "rarityText": "金色",
+    "desc": "获得X装备急速(相当于X%装备冷却缩减)。\n\n装备急速可缩减所有装备技能的冷却时间。"
+  },
+  "3": {
+    "name": "虚无强化符文",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/canttouchthis_large.png",
+    "rarityText": "银色",
+    "desc": "虚无"
+  },
+  "4": {
+    "name": "回归基本功",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/backtobasics_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的终极技能已被封印。获得X%技能伤害、治疗效果、护盾和X技能急速。"
+  },
+  "5": {
+    "name": "号令之旗",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bannerofcommand_large.png",
+    "rarityText": "金色",
+    "desc": "你的友军获得额外的X%生命值、攻击力、法术强度、攻击速度和体型，持续X秒。"
+  },
+  "6": {
+    "name": "利刃华尔兹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bladewaltz_large.png",
+    "rarityText": "棱彩",
+    "desc": "让你进入不可被选取状态，在此期间对敌人进行突进并造成X伤害X次(造成50%附带伤害)。"
+  },
+  "7": {
+    "name": "大力",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bluntforce_large.png",
+    "rarityText": "银色",
+    "desc": "获得X% (X) 攻击力。"
+  },
+  "8": {
+    "name": "雪橇战术",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/buckleup_small.png",
+    "rarityText": "银色",
+    "desc": "在每场战斗回合开始时，生成一个【战地雪橇】。"
+  },
+  "9": {
+    "name": "霸符兄弟",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/buffbuddies_large.png",
+    "rarityText": "银色",
+    "desc": "你获得余烬之冠和洞悉之冠。\n\n余烬之冠：普攻对敌方英雄造成灼烧和减速。在非战斗状态下回复你的一部分最大生命值。\n\n洞悉之冠：获得技能急速，并且每秒回复法力值和能量值。"
+  },
+  "10": {
+    "name": "炮灰",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/cannonfodder_large.png",
+    "rarityText": "银色",
+    "desc": "你会被一门大炮给发射进战斗中。"
+  },
+  "11": {
+    "name": "你摸不到",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/canttouchthis_large.png",
+    "rarityText": "棱彩",
+    "desc": "施放你的终极技能会使你进入持续X秒的的免疫伤害状态(X秒冷却时间)。"
+  },
+  "12": {
+    "name": "王车易位",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/castle_large.png",
+    "rarityText": "银色",
+    "desc": "获得召唤师技能王车易位。\n\n与你的友军交换位置，并为你俩都提供X%移动速度和X护盾值，持续X秒。"
+  },
+  "13": {
+    "name": "星界躯体",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/celestialbody_large.png",
+    "rarityText": "金色",
+    "desc": "获得X生命值，但你造成的伤害降低X%。"
+  },
+  "14": {
+    "name": "专属司机",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/chauffeur_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{ Cherry_ChauffeurX_Tooltip }}"
+  },
+  "15": {
+    "name": "死亡之环",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/circleofdeath_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的治疗效果和生命回复效果会对相距最近的那个敌方英雄造成X%该数额的魔法伤害。\n\n已造成的伤害：X"
+  },
+  "16": {
+    "name": "连招大师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/combomaster_large.png",
+    "rarityText": "金色",
+    "desc": "获得电刑和相位猛冲基石符文。\n电刑 - 3秒内命中3个单独的攻击或技能，会造成爆发性的伤害。\n相位猛冲 - 4秒内命中3个单独的攻击或技能，会为你提供持续若干秒的移动速度和减速抗性。"
+  },
+  "17": {
+    "name": "职业杀手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/contractkiller_large.png",
+    "rarityText": "银色",
+    "desc": "每一回合，标记一个对方英雄。\n\n该英雄承受X%额外伤害并且在被击杀时提供+X金币。"
+  },
+  "18": {
+    "name": "巨像的勇气",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/courageofthecolossus_large.png",
+    "rarityText": "棱彩",
+    "desc": "定身或缚地一个敌方英雄后获得X护盾值。\n\n这个回合已生成的护盾值：X\n已生成护盾值的总和：X"
+  },
+  "19": {
+    "name": "全凭身法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dashing_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的冲刺、跳跃、闪烁或传送类技能获得X技能急速。"
+  },
+  "20": {
+    "name": "黎明使者的坚决",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dawnbringersresolve_large.png",
+    "rarityText": "金色",
+    "desc": "{{Cherry_DawnbringersResolve_Summary}}"
+  },
+  "21": {
+    "name": "防御计略",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/defensivemaneuvers_large.png",
+    "rarityText": "金色",
+    "desc": "对你的战队施放屏障和治疗术。提供X护盾值，回复X生命值并提供持续1秒的X%移动速度。"
+  },
+  "22": {
+    "name": "灵巧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/deft_large.png",
+    "rarityText": "银色",
+    "desc": "获得 X%攻击速度。"
+  },
+  "23": {
+    "name": "魔鬼之舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/demonsdance_large.png",
+    "rarityText": "金色",
+    "desc": "获得迅捷步法和不灭之握基石符文。\n迅捷步法：攻击和移动会积攒能量层数。在100层时，你的下次攻击会治疗你并提升移动速度。不灭之握：每X层，你对一个英雄发起的下一次普攻将会造成额外魔法伤害、治疗你、并永久提升你的生命值。\n\n已造成治疗效果的总和：X\n已获得最大生命值：X"
+  },
+  "24": {
+    "name": "择日赴死",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dieanotherday_large.png",
+    "rarityText": "金色",
+    "desc": "赐福你脚下的大地4秒，防止其中的任一单位跌到10%最大生命值以下。在效果结束时，其中的单位们都会被治疗X生命值。"
+  },
+  "25": {
+    "name": "俯冲轰炸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/divebomber_large.png",
+    "rarityText": "银色",
+    "desc": "在你阵亡时爆炸，对附近的敌人们造成目标X%最大生命值的真实伤害。\n\n已造成的伤害：X"
+  },
+  "26": {
+    "name": "唯快不破",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dontblink_large.png",
+    "rarityText": "银色",
+    "desc": "你每比目标多10移动速度，就会获得X%额外伤害。\n\n额外伤害：X"
+  },
+  "27": {
+    "name": "大地苏醒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/earthwake_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的冲刺、跳跃、闪烁或传送类技能会留下一条在1秒后爆炸的轨迹，造成X物理伤害。\n\n已造成伤害的总和：X"
+  },
+  "28": {
+    "name": "侵蚀",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/erosion_large.png",
+    "rarityText": "银色",
+    "desc": "对敌人造成伤害时会施加一层持续X秒的X%护甲和魔法抗性击碎效果，至多在X层时击碎X%。"
+  },
+  "29": {
+    "name": "虚幻武器",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/etherealweapon_large.png",
+    "rarityText": "金色",
+    "desc": "你的技能可施加{{ Item_Keyword_OnHit }}。每个目标有1秒冷却时间。\n\n已触发的次数：X"
+  },
+  "30": {
+    "name": "尤里卡",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/eureka_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X技能急速。"
+  },
+  "31": {
+    "name": "活力焕发",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/evocation_small.png",
+    "rarityText": "银色",
+    "desc": "让你进行引导来回复生命值和法力值。然后你会获得持续X秒的X%移动速度。\n\n这个回合造成的治疗效果：X\n造成治疗效果的总和：X"
+  },
+  "32": {
+    "name": "裁决使",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/executioner_large.png",
+    "rarityText": "银色",
+    "desc": "对生命值低于X%的敌人们多造成X%伤害。在参与击杀后重置你的基础技能。\n\n这个回合的额外伤害：X\n额外伤害总和：X"
+  },
+  "33": {
+    "name": "弹簧飞爪",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/extendoarm_large.png",
+    "rarityText": "金色",
+    "desc": "自动施放每12秒朝一个附近的敌方英雄发射一个布里茨的飞爪。\n\n飞爪的命中次数：X"
+  },
+  "34": {
+    "name": "堕落圣盾",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fallenaegis_large.png",
+    "rarityText": "银色",
+    "desc": "带着一个持续X秒且可吸收X魔法伤害的黑暗之盾开始战斗。黑暗之盾会阻挡限制效果和定身效果，直到它被打破。\n\n已生成的护盾值总和：X\n已阻挡的定身类技能总数：X"
+  },
+  "35": {
+    "name": "感受燃烧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/feeltheburn_large.png",
+    "rarityText": "棱彩",
+    "desc": "对附近的所有敌方英雄施放引燃和虚弱。"
+  },
+  "36": {
+    "name": "火上浇油",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firebrand_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击还会灼烧敌人，在X秒的持续时间里每秒持续造成X%最大生命值的魔法伤害。这个灼烧可无限叠加。\n\n已造成的伤害：X"
+  },
+  "37": {
+    "name": "急救用具",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firstaidkit_large.png",
+    "rarityText": "银色",
+    "desc": "获得X%治疗和护盾强度。"
+  },
+  "38": {
+    "name": "有始有终",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frombeginningtoend_large.png",
+    "rarityText": "金色",
+    "desc": "获得先攻和黑暗收割基石符文。\n先攻：当你率先进入英雄战斗后，在X秒内可以造成X%额外伤害，并且基于造成的伤害获得金币。\n黑暗收割：伤害一名低生命值的英雄时会造成自适应伤害并从该猎物身上收割灵魂。\n\n已造成伤害的总和：X\n已获得金币的总和：X"
+  },
+  "39": {
+    "name": "冰霜 幽灵",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frostwraith_large.png",
+    "rarityText": "银色",
+    "desc": "每X秒，自动施放X秒禁锢给附近的敌人们。\n\n已禁锢敌人：X"
+  },
+  "40": {
+    "name": "冰封地基",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frozenfoundations_large.png",
+    "rarityText": "银色",
+    "desc": "获得召唤师技能冰封地基。\n\n冰封地基会在一个位置上召唤一道冰墙。"
+  },
+  "41": {
+    "name": "歌利亚巨人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goliath_large.png",
+    "rarityText": "棱彩",
+    "desc": "体型变大，获得X%生命值和X%适应之力。"
+  },
+  "42": {
+    "name": "恶趣味",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/guiltypleasure_large.png",
+    "rarityText": "银色",
+    "desc": "定身或缚地敌方英雄时回复X生命值。\n\n这个回合已造成的治疗效果：X\n已造成治疗效果的总和：X"
+  },
+  "43": {
+    "name": "位移魔术",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/nowyouseeme_large.png",
+    "rarityText": "银色",
+    "desc": "被动：每当你使用一个移动技能时留下一个标记。\n\n主动：回到你最后留下的那个标记的位置。然后你会获得持续X秒的X%移动速度。"
+  },
+  "44": {
+    "name": "冰寒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/icecold_large.png",
+    "rarityText": "银色",
+    "desc": "你的减速效果可使移动速度降低额外的X。"
+  },
+  "45": {
+    "name": "炼狱导管",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infernalconduit_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能会施加一层可无限叠加的灼烧，在X秒的持续时间里每秒造成X魔法伤害。\n\n你的所有灼烧效果会在对敌方英雄造成伤害时使你的各基础技能的冷却时间缩短X秒。\n\n已造成的伤害：X"
+  },
+  "46": {
+    "name": "炼狱龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infernalsoul_large.png",
+    "rarityText": "银色",
+    "desc": "你获得炼狱龙魂，使用技能或攻击命中敌人时造成额外伤害。"
+  },
+  "47": {
+    "name": "关键暴击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/itscritical_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%暴击几率。"
+  },
+  "48": {
+    "name": "珠光护手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/jeweledgauntlet_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能可产生暴击以造成X%额外伤害。\n\n获得X%暴击几率。\n\n已对英雄造成的伤害：X"
+  },
+  "49": {
+    "name": "果汁盒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/juicebox_large.png",
+    "rarityText": "银色",
+    "desc": "每回合，你的战队中的每个人都获得X饮品。"
+  },
+  "50": {
+    "name": "基石法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/keystoneconjurer_large.png",
+    "rarityText": "金色",
+    "desc": "获得召唤：艾黎和奥术彗星基石符文。\n召唤：艾黎：你的攻击和技能会向目标派出艾黎，来对敌方英雄造成伤害或为友方英雄套上护盾。奥术彗星：用一个技能对一名英雄造成伤害时，会在其位置处召唤一颗彗星。\n\n已造成的伤害：X\n已产生的护盾值：X"
+  },
+  "51": {
+    "name": "点亮他们！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightemup_large.png",
+    "rarityText": "银色",
+    "desc": "每第4次攻击造成额外X魔法伤害{{ Item_Keyword_OnHit }}。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "52": {
+    "name": "闪电打击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightningstrikes_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%总攻击速度。\n\n在每秒X攻击次数时，获得X 魔法伤害 {{ Item_Keyword_OnHit }}。\n\n总攻击速度会被计为你的额外攻击速度的一个乘数。\n\n已造成的附带特效魔法伤害：X"
+  },
+  "53": {
+    "name": "科学狂人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/madscientist_large.png",
+    "rarityText": "棱彩",
+    "desc": "每次重生时，你的体型要么变大(获得X%适应之力和X%生命值)，要么变小(获得X技能急速和X%移动速度)。"
+  },
+  "54": {
+    "name": "物法皆修",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/masterofduality_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的每次攻击为你提供可叠加的X法术强度，并且你的每次技能在伤害敌人时为你提供可叠加的X攻击力，\n\n这个增益可无限叠加并刷新，但有X秒的持续时间。"
+  },
+  "55": {
+    "name": "午夜快递",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/midnightexpress_small.png",
+    "rarityText": "银色",
+    "desc": "每12秒自动施放以朝你的友军投掷一个灯笼。\n\n友军可通过点击灯笼来位移到你身边。"
+  },
+  "56": {
+    "name": "由心及物",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mindtomatter_large.png",
+    "rarityText": "银色",
+    "desc": "获得X生命值。"
+  },
+  "57": {
+    "name": "山脉龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mountainsoul_large.png",
+    "rarityText": "银色",
+    "desc": "你获得【山脉龙魂】，在脱离战斗之后获得持续一小段时间的护盾值。\n\n已生成的护盾值总和：X"
+  },
+  "58": {
+    "name": "秘术冲拳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mysticpunch_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{ Item_Keyword_OnHit }}使你的各个技能的冷却时间缩减X秒。"
+  },
+  "59": {
+    "name": "神话化身",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/mythical_small.png",
+    "rarityText": "金色",
+    "desc": "你可以购买任意数量的神话装备。"
+  },
+  "60": {
+    "name": "海洋龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/oceansoul_large.png",
+    "rarityText": "银色",
+    "desc": "获得海洋龙魂，在对敌方英雄造成伤害后提供高额的生命和法力回复。"
+  },
+  "61": {
+    "name": "回力OK镖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/okboomerang_large.png",
+    "rarityText": "金色",
+    "desc": "每X秒朝着一个附近的敌人自动施放投掷一个回力镖，对命中的敌人们造成X自适应伤害。\n\n已造成的伤害：X"
+  },
+  "62": {
+    "name": "全能龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/omnisoul_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X个随机龙魂。"
+  },
+  "63": {
+    "name": "狂徒豪气",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/outlawsgrit_large.png",
+    "rarityText": "金色",
+    "desc": "在使用一次冲刺、闪烁或传送之后，你获得X护甲和魔法抗性，这个效果至多可在X层时叠加至X。\n每X秒重置。"
+  },
+  "64": {
+    "name": "坚韧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/perseverance_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%基础生命回复，在低于25%生命值时提升至X%基础生命回复。\n\n已造成治疗效果的总和：X"
+  },
+  "65": {
+    "name": "超凡邪恶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/phenomenalevil_large.png",
+    "rarityText": "金色",
+    "desc": "在你用一个技能命中敌人时永久提供X法术强度。\n\n每个技能有X秒冷却时间。\n\n如果在X回合之后拿取，则获得X法术强度。"
+  },
+  "66": {
+    "name": "量子计算",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quantumcomputing_large.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒在你周围自动施放一次巨型斩击，造成X物理伤害。被外沿命中的敌人会被施加在X秒里持续衰减的X%减速，并受到额外的X最大生命值的物理伤害。你回复相当于X%已造成英雄伤害的生命值。\n\n已造成治疗效果的总和：X"
+  },
+  "67": {
+    "name": "古式佳酿",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/rabblerousing_large.png",
+    "rarityText": "金色",
+    "desc": "使用【{{SpellName}}】技能时回复X生命值\n\n已获得的总治疗量：X\n治疗量等同于X，对于冷却时间较长的技能，该数值还会提升至X%。"
+  },
+  "68": {
+    "name": "循环往复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/recursion_large.png",
+    "rarityText": "金色",
+    "desc": "获得X技能急速。"
+  },
+  "69": {
+    "name": "退敌力场",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/repulsor_large.png",
+    "rarityText": "银色",
+    "desc": "在你跌下X%生命值时，对附近的敌人们造成击退和持续X秒的X%减速。(X秒冷却时间或在阵亡时重置)"
+  },
+  "70": {
+    "name": "无休回复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/restlessrestoration_large.png",
+    "rarityText": "金色",
+    "desc": "你每移动1000码距离就会回复X生命值。\n\n这个回合已造成的治疗效果：X\n已造成治疗效果的总和：X"
+  },
+  "71": {
+    "name": "更万用的瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopierweapons_large.png",
+    "rarityText": "金色",
+    "desc": "获得X攻击距离。"
+  },
+  "72": {
+    "name": "炽烈黎明",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/searingdawn_large.png",
+    "rarityText": "金色",
+    "desc": "你的技能会标记敌人，使其在被你的友军的下一个攻击或技能命中时会受到额外X魔法伤害。\n\n已造成伤害的总和：X"
+  },
+  "73": {
+    "name": "暗影疾奔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/shadowrunner_large.png",
+    "rarityText": "银色",
+    "desc": "在使用一个冲刺、闪烁或传送类技能或离开潜行状态之后，获得持续X秒的X移动速度。"
+  },
+  "74": {
+    "name": "缩小射线",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/shrinkray_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击会对敌人造成持续3秒的X%伤害削减效果。\n\n已削减的伤害：X"
+  },
+  "75": {
+    "name": "慢炖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowcooker_large.png",
+    "rarityText": "棱彩",
+    "desc": "每一秒，对附近的敌方英雄们施加一层可无限叠加的灼烧，在X秒的持续时间里每秒造成X魔法伤害。\n\n已造成的伤害：X"
+  },
+  "76": {
+    "name": "天音爆",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/sonicboom_large.png",
+    "rarityText": "银色",
+    "desc": "在为你的友军提供增益效果、治疗效果或护盾效果时，会对其附近的敌人们造成X真实伤害和持续X秒的X%减速。\n\n每次施放有X秒冷却时间。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "77": {
+    "name": "灵魂虹吸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/soulsiphon_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%暴击几率和作用于暴击的X%生命偷取。\n\n已造成治疗效果的总和：X"
+  },
+  "78": {
+    "name": "灵魂连接",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spiritlink_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Cherry_SpiritLink_Summary}}\n\n已转移的伤害值总和：X\n已造成的治疗效果总和：X"
+  },
+  "79": {
+    "name": "战争交响乐",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/symphonyofwar_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得致命节奏和征服者基石符文。\n致命节奏 - 攻击英雄提供攻击速度，至多叠加6层。在6层时，你的攻击发射造成额外伤害的一个弩箭。\n征服者：攻击敌方英雄时提供适应之力层数。在达到X层后，将你的一部分伤害转化为等额的治疗效果。"
+  },
+  "80": {
+    "name": "会心防守",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tankitorleaveit_large.png",
+    "rarityText": "银色",
+    "desc": "你可以使用你的暴击几率(最大X%几率)来进行会心防御，使你有一定几率来使所受伤害降低X。\n\n获得X%暴击几率。"
+  },
+  "81": {
+    "name": "踢踏舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tapdancer_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的攻击会为你提供X移动速度。获得X攻击速度。\n\n这个增益可无限叠加并刷新，但有X秒的持续时间。"
+  },
+  "82": {
+    "name": "残暴之力",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/thebrutalizer_large.png",
+    "rarityText": "银色",
+    "desc": "获得X攻击力、X技能急速和X穿甲。"
+  },
+  "83": {
+    "name": "窃贼手套",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/thiefsgloves_large.png",
+    "rarityText": "棱彩",
+    "desc": "每回合移除你当前的装备，然后获得随机的装备作为替代。额外属性和装备伤害提升X%。"
+  },
+  "84": {
+    "name": "穿针引线",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/threadtheneedle_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%护甲穿透和法术穿透。"
+  },
+  "85": {
+    "name": "折磨之叉",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tormentor_large.png",
+    "rarityText": "银色",
+    "desc": "定身或缚地敌方英雄时还会施加一层灼烧，在X秒的持续时间里每秒持续造成X%最大生命值的魔法伤害。 这个灼烧可无限叠加。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "86": {
+    "name": "精准奇才",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/trueshotprodigy_large.png",
+    "rarityText": "棱彩",
+    "desc": "在你从X码外对一名敌人造成伤害时， 发射一道精准弹幕，造成X魔法伤害。每个目标X秒冷却时间。\n\n已对英雄造成伤害的总和：X"
+  },
+  "87": {
+    "name": "台风",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/typhoon_large.png",
+    "rarityText": "银色",
+    "desc": "你的攻击会对一个额外目标发射一个飞弹，从而造成X%伤害并施加{{ Item_Keyword_OnHit }}。"
+  },
+  "88": {
+    "name": "终极刷新",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultimaterevolution_large.png",
+    "rarityText": "棱彩",
+    "desc": "每回合一次，在你施放终极技能后将其刷新。"
+  },
+  "89": {
+    "name": "遁入暗影",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/vanish_large.png",
+    "rarityText": "金色",
+    "desc": "进入潜行状态，持续X秒或直到你进行攻击或施放技能为止。"
+  },
+  "90": {
+    "name": "复仇",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/vengeance_large.png",
+    "rarityText": "金色",
+    "desc": "{{Cherry_Vengeance_Summary}}"
+  },
+  "91": {
+    "name": "良性循环",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/virtuouscycle_large.png",
+    "rarityText": "银色",
+    "desc": "你的治疗效果提供额外的X%护盾，而你的护盾提供额外的X%治疗效果。\n\n已造成治疗效果的总和：X\n已生成护盾值的总和：X"
+  },
+  "92": {
+    "name": "易损",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/vulnerability_large.png",
+    "rarityText": "金色",
+    "desc": "你的装备效果和持续伤害效果可以暴击来造成X%额外伤害。\n\n获得X%暴击几率。\n\n已造成的伤害：X"
+  },
+  "93": {
+    "name": "热身动作",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/warmuproutine_large.png",
+    "rarityText": "银色",
+    "desc": "获得召唤师技能热身动作。\n\n引导你的内在之舞，每秒使你的伤害提升2%，至多至X%。"
+  },
+  "94": {
+    "name": "自愿牺牲",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/willingsacrifice_large.png",
+    "rarityText": "金色",
+    "desc": "当一名友方英雄首次跌到X%生命值以下时，将你的X%当前生命值换成护盾值来提供给你的友军，等同于你的X%当前生命值。"
+  },
+  "95": {
+    "name": "风语者的祝福",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/windspeakersblessing_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的治疗效果和护盾效果还会提升目标X护甲和魔法抗性，这些加成持续3秒。"
+  },
+  "96": {
+    "name": "时光之智慧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/wisdomofages_large.png",
+    "rarityText": "棱彩",
+    "desc": "立刻提升1级，并且每隔1回合额外提升1级。\n\n你的等级上限已被移除。\n\n如果在X回合后选取，获得X额外等级。\n\n将该强化符文升级会立刻提升你的等级"
+  },
+  "97": {
+    "name": "巫师式思考",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/witchfulthinking_large.png",
+    "rarityText": "银色",
+    "desc": "获得X法术强度。"
+  },
+  "98": {
+    "name": "急急小子",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/withhaste_large.png",
+    "rarityText": "金色",
+    "desc": "获得X移动速度。"
+  },
+  "99": {
+    "name": "中娅显灵",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/zhonyasepiphany_small.png",
+    "rarityText": "棱彩",
+    "desc": "将你置于持续3秒的凝滞状态，使你在此期间变得不可被选取且免疫伤害但无法进行任何行动，此外，重置你各个基础技能的冷却时间。"
+  },
+  "102": {
+    "name": "请勿追击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dontchase_large.png",
+    "rarityText": "银色",
+    "desc": "你无视单位的碰撞体积并在身后留下一条剧毒踪迹，对其中的敌人造成每秒X魔法伤害。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "103": {
+    "name": "面包和黄油",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/breadandbutter_large.png",
+    "rarityText": "金色",
+    "desc": "你的【{{SpellName}}】技能获得X技能急速。"
+  },
+  "104": {
+    "name": "仆从大师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/minionmancer_large.png",
+    "rarityText": "金色",
+    "desc": "你的召唤物获得X%体型提升、生命值和伤害。"
+  },
+  "105": {
+    "name": "家园卫士",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/homeguard_large.png",
+    "rarityText": "银色",
+    "desc": "获得X%移动速度，在受到伤害后失效X秒。"
+  },
+  "107": {
+    "name": "接二连三",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/twicethrice_large.png",
+    "rarityText": "金色",
+    "desc": "每X次攻击，你的{{ Item_Keyword_OnHit }}效果会触发第二次。"
+  },
+  "108": {
+    "name": "自我毁灭",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/selfdestruct_large.png",
+    "rarityText": "银色",
+    "desc": "每X秒，在你自己身上黏附一个炸弹。在X秒后，它会爆炸，造成X%目标最大生命值的真实伤害和X秒击飞效果。\n\n已造成伤害的总和：X"
+  },
+  "109": {
+    "name": "誓约者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/oathsworn_large.png",
+    "rarityText": "金色",
+    "desc": "将闪人替换为命运的召唤。\n\n命运的召唤会将你的友军变为不可被选取状态，持续至多4秒。你的友军可以自行脱身，从而击退敌人们。"
+  },
+  "110": {
+    "name": "晾衣绳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/clothesline_large.png",
+    "rarityText": "银色",
+    "desc": "有一条灵链连接着你的战队，不断地对它触碰到的那些敌人们造成每秒X魔法伤害。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "112": {
+    "name": "终极不可阻挡",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultimateunstoppable_large.png",
+    "rarityText": "银色",
+    "desc": "在你使用你的终极技能后，你获得持续X秒的控制免疫。 (X秒冷却时间)。"
+  },
+  "113": {
+    "name": "老练狙神",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/skilledsniper_large.png",
+    "rarityText": "金色",
+    "desc": "用一个非终极技能狙击一个敌人时，返还该技能X%冷却时间(周期性技能返还X%)。\n\n狙击 - 从X码外对敌人造成伤害"
+  },
+  "115": {
+    "name": "最万用的瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopiestweapons_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X攻击距离。"
+  },
+  "116": {
+    "name": "闪现向前",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flashy_large.png",
+    "rarityText": "金色",
+    "desc": "你的闪现有X层充能。在X秒后，再次获得所有充能。"
+  },
+  "118": {
+    "name": "会心治疗",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/criticalhealing_large.png",
+    "rarityText": "金色",
+    "desc": "{{Cherry_CriticalHealing_Summary}}"
+  },
+  "120": {
+    "name": "超越死亡的效劳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/servebeyonddeath_large.png",
+    "rarityText": "银色",
+    "desc": "在你每回合第一次即将阵亡时，转而回满生命值并在X秒里持续衰减。\n\n在你的生命值正在衰减的状态下，参与击杀一名敌方英雄后，会使衰减停止并将你的生命值设置为X%最大生命值。"
+  },
+  "123": {
+    "name": "召唤师峡谷的轮盘",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/summonersroulette_large.png",
+    "rarityText": "棱彩",
+    "desc": "将你的召唤师技能用随机召唤师技能替换。\n\n当你施放了一个召唤师技能后，将其替换为另一个随机召唤师技能并拥有X秒冷却时间。"
+  },
+  "125": {
+    "name": "副本BOSS",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/raidboss_large.png",
+    "rarityText": "棱彩",
+    "desc": "你每个回合开始时都会被封印在竞技场中心，无法进行任何行动。在被封印的状态下，你拥有至多X%伤害减免并持续获得体型、生命值、攻击力和法术强度(最大值为X%)。\n\n在X秒之后或在达到X%生命值时，你会打破封印，击退敌人们并获得X%最大生命值的护盾值。"
+  },
+  "129": {
+    "name": "神射法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/marksmage_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击造成额外X物理伤害。\n\n已造成的伤害：X"
+  },
+  "133": {
+    "name": "魔法飞弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/magicmissile_large.png",
+    "rarityText": "金色",
+    "desc": "造成技能伤害会对命中的每个敌人发射X个飞弹，基于飞行距离，每个造成至多X%最大生命值的真实伤害。\n\n已造成的伤害：X"
+  },
+  "134": {
+    "name": "亮出你的剑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/drawyoursword_large.png",
+    "rarityText": "棱彩",
+    "desc": "你现在是近战状态。获得X%攻击力、X%生命值、X%攻击速度、X%生命偷取和X%移动速度 (每个属性都已基于攻击距离的损失而进一步提升)。"
+  },
+  "135": {
+    "name": "法术苏醒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spellwake_large.png",
+    "rarityText": "棱彩",
+    "desc": "用主动技能命中敌人时会从你的位置生成一道通向命中敌人位置的震波，来造成X魔法伤害。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "136": {
+    "name": "扇巴掌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slaparound_large.png",
+    "rarityText": "银色",
+    "desc": "每当你定身或缚地一个敌人时，获得一层可叠加的X适应之力。阵亡时损失X%层数。"
+  },
+  "138": {
+    "name": "渴血",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goredrink_large.png",
+    "rarityText": "银色",
+    "desc": "获得X%全能吸血。"
+  },
+  "141": {
+    "name": "全心为你",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/allforyou_large.png",
+    "rarityText": "金色",
+    "desc": "你的治疗和护盾在用在一个友军身上时会变强X%。"
+  },
+  "149": {
+    "name": "不动如山",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/impassable_large.png",
+    "rarityText": "金色",
+    "desc": "获得余震和冰川增幅基石符文。\n余震：在你定身一个敌方英雄后提供防御属性，稍后会在你的周围造成爆发性的魔法伤害。冰川增幅：定身一名敌方英雄时会生成X道冰川射线来减速附近的敌人们并降低他们对你的队友们的伤害。"
+  },
+  "150": {
+    "name": "面包和果酱",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/breadandjam_large.png",
+    "rarityText": "金色",
+    "desc": "你的W获得X技能急速。"
+  },
+  "151": {
+    "name": "面包和奶酪",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/breadandcheese_large.png",
+    "rarityText": "金色",
+    "desc": "你的E获得X技能急速。"
+  },
+  "152": {
+    "name": "任务：钢化你心",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_steelyourheart_large.png",
+    "rarityText": "金色",
+    "desc": "任务：需求：持有【心之钢】且层数在X层或以上。\n\n奖励：将你的心之钢层数乘以X。"
+  },
+  "154": {
+    "name": "任务：海牛阿福的勇士",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_urfschampion_large.png",
+    "rarityText": "金色",
+    "desc": "{{Kiwi_Quest_UrfsChampion_Summary}}\n\n参与击杀：X"
+  },
+  "156": {
+    "name": "任务：沃格勒特的巫师帽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_woogletswitchcap_large.png",
+    "rarityText": "棱彩",
+    "desc": "立刻：获得无用大棒。\n\n需求：持有灭世者的死亡之帽和中娅沙漏。\n\n奖励:获得沃格勒特的巫师帽。"
+  },
+  "165": {
+    "name": "重启",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/restart_large.png",
+    "rarityText": "金色",
+    "desc": "你的非终极技能每X秒刷新一次。"
+  },
+  "166": {
+    "name": "连锁闪电",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/chainlightning_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Cherry_ChainLightning_Summary}}"
+  },
+  "170": {
+    "name": "万用瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopedweapons_large.png",
+    "rarityText": "银色",
+    "desc": "获得X攻击距离。"
+  },
+  "171": {
+    "name": "去质",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dematerialize_large.png",
+    "rarityText": "银色",
+    "desc": "{{Cherry_Dematerialize_Summary}}"
+  },
+  "172": {
+    "name": "镜花水月",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mirrorimage_large.png",
+    "rarityText": "银色",
+    "desc": "当你跌下X%生命值时，暂时进入隐形状态然后生成你自己的一个复制体。"
+  },
+  "174": {
+    "name": "镭射眼",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lasereyes_large.png",
+    "rarityText": "棱彩",
+    "desc": "你正在面对的方向会出现一道镭射光束，可每秒造成X魔法伤害。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "175": {
+    "name": "寄生关系",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/parasiticrelationship_large.png",
+    "rarityText": "金色",
+    "desc": "{{ Cherry_ParasiticRelationship_Summary }}\n\n这个回合的治疗效果：X\n治疗效果总和：X"
+  },
+  "176": {
+    "name": "雪球大战！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/snowballfight_large.png",
+    "rarityText": "银色",
+    "desc": "将召唤师技能【闪人】替换为【标记】。\n\n扔出一团雪球来标记命中的第一个敌人并造成伤害。再次施放来冲刺到被标记敌人的位置。"
+  },
+  "177": {
+    "name": "套娃",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/nestingdoll_large.png",
+    "rarityText": "棱彩",
+    "desc": "你在X秒后自动开始复活你自己，并且你可以被额外复活X次。你每次复活时，都会变得更小并且具有X%最大生命值。\n\n在你复活时，击退你周围的敌人们。"
+  },
+  "180": {
+    "name": "超强大脑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bigbrain_large.png",
+    "rarityText": "金色",
+    "desc": "获得X护盾值。阵亡时或耗尽后70秒重置。"
+  },
+  "181": {
+    "name": "重量级打击手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/heavyhitter_large.png",
+    "rarityText": "银色",
+    "desc": "你的攻击造成额外X物理伤害。"
+  },
+  "187": {
+    "name": "闪光弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flashbang_large.png",
+    "rarityText": "银色",
+    "desc": "你的【闪现】会引发一次爆炸，造成X伤害和减速（阵亡时重置）。\n\n已造成的伤害：X"
+  },
+  "192": {
+    "name": "任务：惩戒天使",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_angelofretribution_large.png",
+    "rarityText": "金色",
+    "desc": "需求：给友军治疗或预防X伤害。\n\n奖励：获得X%攻击速度，并且你的攻击造成相当于X%治疗/护盾强度的额外X魔法伤害。\n\n已治疗或预防的伤害：X\n已造成的伤害：X"
+  },
+  "193": {
+    "name": "星原之准",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/centeroftheuniverse_large.png",
+    "rarityText": "棱彩",
+    "desc": "多个卫星环绕于你，对途经的敌人们造成X魔法伤害。 \n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "194": {
+    "name": "精怪魔法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/feymagic_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的终极技能的伤害会对敌人造成X秒变形效果(X秒冷却时间)。"
+  },
+  "195": {
+    "name": "巨人杀手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/giantslayer_large.png",
+    "rarityText": "棱彩",
+    "desc": "体型变小，获得X%移动速度，并基于敌方英雄体型大于你的程度造成X%到X%额外伤害。\n\n已造成的伤害：X"
+  },
+  "198": {
+    "name": "圣火",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/holyfire_large.png",
+    "rarityText": "金色",
+    "desc": "你的治疗或护盾会对一个附近的敌人施加一层无限叠加的灼烧，在X秒里持续造成至多X%最大生命值的魔法伤害(最小值X%)。\n\n这个伤害基于治疗或护盾对被援助英雄的最大生命值的相对占比。\n\n已造成的伤害：X"
+  },
+  "200": {
+    "name": "血亲兄弟",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bloodbrother_large.png",
+    "rarityText": "金色",
+    "desc": "获得德莱厄斯的出血被动。\n\n攻击和伤害型技能会使目标出血，在X秒里持续造成共X物理伤害，至多可叠加X层。\n\n德莱文在出血达到X层时会获得X攻击力。"
+  },
+  "204": {
+    "name": "叠角龙",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stackosaurusrex_large.png",
+    "rarityText": "银色",
+    "desc": "{{ Cherry_StackosaurusRex_Summary }}\n\n已获得的层数：X"
+  },
+  "205": {
+    "name": "物理转魔法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/adapt_large.png",
+    "rarityText": "银色",
+    "desc": "将额外攻击力转化为法术强度，并获得X法术强度。\n\n当前转化：X\n\n每点攻击力转化为X法术强度。"
+  },
+  "206": {
+    "name": "魔法转物理",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/escapade_large.png",
+    "rarityText": "银色",
+    "desc": "将法术强度转化为额外攻击力，并获得X攻击力。\n\n当前转化：X\n\n每点法术强度转化为X攻击力。"
+  },
+  "207": {
+    "name": "纹丝不动",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/holdverystill_large.png",
+    "rarityText": "银色",
+    "desc": "获得游击队军备\n\n在原地不动X秒后，获得隐形，持续到你移动为止。在你离开这个隐形状态时，获得持续X秒的X攻击速度和X%持续衰减的移动速度。下一次攻击造成额外的X魔法伤害。"
+  },
+  "208": {
+    "name": "轨道镭射",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/orbitallaser_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Kiwi_OrbitalLaser_Summary}}\n\n已造成伤害的总和：X"
+  },
+  "211": {
+    "name": "杀戮时间到了",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/itskillingtime_large.png",
+    "rarityText": "金色",
+    "desc": "在施放你的终极技能后，将所有敌人打上死亡标记。这个标记会将对其造成的X%伤害储存起来，然后在X秒后引爆，造成已储存的伤害(X秒冷却时间)。"
+  },
+  "213": {
+    "name": "完全自动化",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/fullyautomated_small.png",
+    "rarityText": "银色",
+    "desc": "你的自动施放的冷却时间缩短X秒并受益于你的技能急速。"
+  },
+  "214": {
+    "name": "旋转至胜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spintowin_large.png",
+    "rarityText": "银色",
+    "desc": "{{ Kiwi_SpinToWin_Summary }}\n\n已造成的伤害：X"
+  },
+  "215": {
+    "name": "黑暗赐福",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/darkblessing_large.png",
+    "rarityText": "金色",
+    "desc": "在你为一个友军提供治疗或护盾时，获得X诅咒能量。\n\n获得X技能急速(你X%的诅咒能量)。\n\n每次施放有X秒冷却时间。\n\n{{ Cherry_CurseShared }}"
+  },
+  "216": {
+    "name": "恐惧使者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/plaguebearer_large.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒，从每个附近的敌方英雄那里获得X诅咒能量。\n\n获得X生命值 (你的X%诅咒能量)。\n\n{{ Cherry_CurseShared }}"
+  },
+  "217": {
+    "name": "死亡触摸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/deathtouch_large.png",
+    "rarityText": "金色",
+    "desc": "攻击敌方英雄时提供X诅咒能量。\n\n你的攻击造成额外的X魔法伤害 (你的X%诅咒能量)。\n\n{{ Cherry_CurseShared }}"
+  },
+  "218": {
+    "name": "亵渎者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/desecrator_large.png",
+    "rarityText": "银色",
+    "desc": "定身敌方英雄时为你提供X诅咒能量。\n\n获得X护甲和X魔法抗性 (你的X%诅咒能量)。\n\n{{ Cherry_CurseShared }}"
+  },
+  "219": {
+    "name": "末日预言者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/doomsayer_large.png",
+    "rarityText": "棱彩",
+    "desc": "用一个技能命中一个英雄，可为你提供永久的X诅咒能量。\n\n获得X适应之力 (你的X%诅咒能量)。\n\n{{ Cherry_CurseShared }}"
+  },
+  "220": {
+    "name": "连拨击锤",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fanthehammer_large.png",
+    "rarityText": "棱彩",
+    "desc": "在你攻击敌方英雄时，发射X个飞弹，每个造成X物理伤害，基于移动的距离至多提升至X%。每个基本方向都有单独的X秒冷却时间。\n\n每个弩箭都能暴击并且附带X%效能的攻击特效。\n\n已造成的伤害：X"
+  },
+  "221": {
+    "name": "引路者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/trailblazer_large.png",
+    "rarityText": "银色",
+    "desc": "在你冲刺或闪烁时，灼烧一名附近的敌方英雄，在X秒里持续造成X%最大生命值的魔法伤害。\n\n这个回合已造成的伤害： X\n这局游戏已造成的伤害：X"
+  },
+  "222": {
+    "name": "你的劳动果实",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fruitarian_large.png",
+    "rarityText": "银色",
+    "desc": "{{Cherry_FruitsOfYourLabor_Summary}}"
+  },
+  "223": {
+    "name": "召唤师革新",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/summonerrevolution_large.png",
+    "rarityText": "金色",
+    "desc": "你的召唤师技能获得X层额外的充能。\n\n闪现每回合都会重置。"
+  },
+  "224": {
+    "name": "棱彩蛋",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_prismaticegg_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Cherry_PrismaticEgg_Summary}}"
+  },
+  "225": {
+    "name": "双刀流",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dualwield_large.png",
+    "rarityText": "棱彩",
+    "desc": "在你攻击时，发射一个弩箭，它造成X%伤害并以X%效能施加你的{{ Item_Keyword_OnHit }}。\n\n获得X% 总攻击速度。"
+  },
+  "226": {
+    "name": "属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stats_large.png",
+    "rarityText": "银色",
+    "desc": "获得X个【属性锻造器】！"
+  },
+  "227": {
+    "name": "属性叠属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/statsonstats_large.png",
+    "rarityText": "金色",
+    "desc": "获得X个【属性锻造器】！"
+  },
+  "228": {
+    "name": "属性叠属性叠属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/statsonstatsonstats_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X个【属性锻造器】！"
+  },
+  "229": {
+    "name": "火爆甩卖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firesale_large.png",
+    "rarityText": "银色",
+    "desc": "立刻售出你的所有非任务装备，换取它们的X%直购价格。对那些打折购买的锻造器来说非常不错。\n\n在被移除或被替换时，获得+ X金币，相当于来自火爆甩卖的X%金币获取额。"
+  },
+  "230": {
+    "name": "弹幕天堂",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/bulletheaven_small.png",
+    "rarityText": "棱彩",
+    "desc": "在你的攻击计时器上，无前摇地自动攻击相距最近的那个敌人。你的攻击还会被替换为飞弹来命中所有周围的敌人，并且每第三颗飞弹造成X%伤害。\n\n你依然可以手动攻击植物和陷阱。"
+  },
+  "231": {
+    "name": "光明守望者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightwarden_large.png",
+    "rarityText": "金色",
+    "desc": "每X秒，朝你的友军自动施放一道防护之光，为你自身及其途经的友军提供X护盾值，然后折返并重复该效果。"
+  },
+  "232": {
+    "name": "史莱姆时间",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slimetime_large.png",
+    "rarityText": "银色",
+    "desc": "每X秒，自动施放来自你身体的一团粘液，对附近的敌人们造成X外加X最大生命值的魔法伤害。如果你命中了一个英雄，则会分泌出一个液团。走到液团上会回复X生命值，而敌人可以摧毁该液团。"
+  },
+  "233": {
+    "name": "终极转盘",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultimaterevolution_large.png",
+    "rarityText": "棱彩",
+    "desc": "将闪人替换成一个随机英雄的终极技能。在施放这个终极技能后，会将它随机替换为另一个终极技能。\n\n这些技能仍然属于终极技能。"
+  },
+  "234": {
+    "name": "财运锻造器",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/thiefsgloves_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X金币并降低所有锻造器的价格。\n\n棱彩锻造器：-X金币\n传说锻造器：-X金币\n属性锻造器：-X金币\n\n从锻造器中获得的装备的售价降低500金币。"
+  },
+  "236": {
+    "name": "诡术恶魔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tricksterdemon_large.png",
+    "rarityText": "金色",
+    "desc": "{{ Cherry_TricksterDemon_Summary }}\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "237": {
+    "name": "质变：黄金阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmutegold_large.png",
+    "rarityText": "银色",
+    "desc": "获得1个随机黄金阶强化符文。"
+  },
+  "238": {
+    "name": "质变：棱彩阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmuteprismatic_large.png",
+    "rarityText": "金色",
+    "desc": "获得1个随机棱彩阶强化符文。"
+  },
+  "239": {
+    "name": "共生突变",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/symbioticmutation_large.png",
+    "rarityText": "金色",
+    "desc": "每回合，这个会转变为你友军的强化符文之一。 \n\n仅会突变为你能够刷新到的强化符文。"
+  },
+  "240": {
+    "name": "寄生突变",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/parasiticmutation_large.png",
+    "rarityText": "银色",
+    "desc": "每回合，这个会突变为你对手们的强化符文之一。\n\n仅会突变为你能够刷新到的强化符文。"
+  },
+  "241": {
+    "name": "帽子戏法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/hattrick_large.png",
+    "rarityText": "金色",
+    "desc": "即刻获得X顶帽子，并且【帽子饮品】的价格降低X。\n\n在受到将使你的生命值跌入X%以下的伤害时，获得X%移动速度和X护盾值，持续X秒，但失去一顶帽子。X秒冷却时间。\n\n你回合失败时不再损失帽子。"
+  },
+  "242": {
+    "name": "榨汁机",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/juicepress_large.png",
+    "rarityText": "银色",
+    "desc": "你的队伍会从各饮品中获得额外效果，并且增益类饮品的花费降低X%。\n\n威能饮品：X% 护甲穿透或法术穿透\n活力饮品：X%治疗和护盾强度\n急速饮品： X%移动速度\n帽子饮品：额外的X顶帽子。"
+  },
+  "243": {
+    "name": "质变：混沌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmutechaos_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X个随机强化符文。"
+  },
+  "250": {
+    "name": "一板一眼",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowandsteady_large.png",
+    "rarityText": "金色",
+    "desc": "{{Kiwi_SlowAndSteady_Summary}}\n\n当前获取：X 攻击力"
+  },
+  "251": {
+    "name": "疼痛钝感",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/numbtopain_large.png",
+    "rarityText": "银色",
+    "desc": "你所受的X%伤害会转而在X秒里持续发生(远程英雄为X%)。"
+  },
+  "301": {
+    "name": "神圣干预",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowactingpainkillers_large.png",
+    "rarityText": "金色",
+    "desc": "每X秒，自动施放一颗护体星星缓慢降临在你身上。在它着陆时，你和附近的友军们进入持续X秒的免疫伤害状态。"
+  },
+  "302": {
+    "name": "献祭：换取白银阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/gohsacrificefor_large.png",
+    "rarityText": "银色",
+    "desc": ""
+  },
+  "303": {
+    "name": "献祭：换取黄金阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/gohsacrificeforgold_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "304": {
+    "name": "献祭：换取棱彩阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/gohsacrificeforprismatic_large.png",
+    "rarityText": "棱彩",
+    "desc": ""
+  },
+  "305": {
+    "name": "练腿日",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/legday_large.png",
+    "rarityText": "银色",
+    "desc": "获得X移动速度和X%减速抗性。"
+  },
+  "306": {
+    "name": "招架",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dontblink_large.png",
+    "rarityText": "银色",
+    "desc": "招架"
+  },
+  "307": {
+    "name": "昏睡吹箭",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/combomaster_large.png",
+    "rarityText": "金色",
+    "desc": "每当你进入草丛时，你的下一次攻击将会使目标昏睡X秒。一个单位每X秒仅会被昏睡一次。"
+  },
+  "308": {
+    "name": "火狐",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firfox_large.png",
+    "rarityText": "银色",
+    "desc": "自动施放：每X秒，获得X%移动速度并召唤3道烈焰环绕于你，瞄准距离内相距最近的那个可见英雄并造成X自适应伤害。后续命中造成X%伤害。\n\n已造成伤害的总和：X"
+  },
+  "309": {
+    "name": "还有我的斧头！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/andmyaxe_large.png",
+    "rarityText": "金色",
+    "desc": "自动施放：每X秒朝相距最近的那个对手投掷一柄斧头，从而对目标造成X物理伤害、持续X秒的X%减速、以及持续X秒的X%护甲击碎效果和魔抗击碎效果。\n\n拾取这柄斧头会降低其冷却时间()至X秒。"
+  },
+  "310": {
+    "name": "小丑学院",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/clowncollege_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得召唤师技能欺诈魔术。\n获得背刺被动。\n\n在你阵亡时，对附近的敌人们造成大量真实伤害和恐惧。"
+  },
+  "311": {
+    "name": "溢流",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/overflow_large.png",
+    "rarityText": "金色",
+    "desc": "你的法力值消耗翻倍。你的技能的治疗效果、护盾效果和伤害的效能提升X。"
+  },
+  "312": {
+    "name": "我们马上就回来",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/wellberightback_large.png",
+    "rarityText": "金色",
+    "desc": "时间停止：所有附近的英雄都被置入持续X秒的凝滞状态，对你则持续X秒。在此效果期间，你回复X%已损失生命值。"
+  },
+  "313": {
+    "name": "坦克引擎",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tankengine_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀时，获得一个层数，使你的体型增大X%并提升X%最大生命值。阵亡时损失X%层数。\n\n已获得生命值的总和：X"
+  },
+  "314": {
+    "name": "解脱者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/unshackled_large.png",
+    "rarityText": "金色",
+    "desc": "{{ Cherry_Unshackled_Summary }}"
+  },
+  "315": {
+    "name": "盈能施法者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/etherealweapon_large.png",
+    "rarityText": "金色",
+    "desc": "你的盈能攻击还会使你的自动施放效果触发X次。\n\n触发时，【神圣干预】不会被自动施放，而是减少X秒冷却时间。"
+  },
+  "316": {
+    "name": "烈性毒液",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/grevious_venmon_small.png",
+    "rarityText": "银色",
+    "desc": ""
+  },
+  "317": {
+    "name": "潘朵拉的盒子",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pandoras_box_large.png",
+    "rarityText": "棱彩",
+    "desc": "将你的所有强化符文变为随机的棱彩阶强化符文。"
+  },
+  "318": {
+    "name": "任务：疯狂帽子人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mad_hatter_large.png",
+    "rarityText": "金色",
+    "desc": "需求：在战斗结束时戴着X顶帽子。\n\n奖励：从每顶帽子获得X适应之力、X护甲和魔法抗性、X%韧性，以及X移动速度。\n\n当前提供：X适应之力、X护甲和魔法抗性、X%韧性，以及X移动速度。\n\n当你输掉一个回合时，失去你一半的帽子。"
+  },
+  "319": {
+    "name": "任务：三圣宝",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/threesacredtreasures_large.png",
+    "rarityText": "金色",
+    "desc": "需求：持有【无尽之刃】、【困惑】和【海克斯科技枪刃】。\n\n奖励：芸阿娜的攻击被替换为激光，造成X物理伤害 + X魔法伤害并施加两次攻击特效。"
+  },
+  "320": {
+    "name": "精算风险",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/calculated_risk_large.png",
+    "rarityText": "银色",
+    "desc": "{{ Cherry_CalculatedRisk_Summary }}"
+  },
+  "321": {
+    "name": "保镖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bodyguard_large.png",
+    "rarityText": "金色",
+    "desc": "使用一次冲刺、闪烁或传送时可为你自己和你途经的一个友军提供一个持续X秒的护盾。\n\n护盾值取决于你的技能在1级时的基础冷却时间。护盾值会在那些至少拥有X秒冷却时间的技能上达到最大值。"
+  },
+  "322": {
+    "name": "强化之能量",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/augmented_power_large.png",
+    "rarityText": "银色",
+    "desc": "{{ Cherry_AugmentedPower_Summary }}\n\n这个回合的伤害提升：X\n已提升的伤害总和：X"
+  },
+  "323": {
+    "name": "地狱三头犬",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/cerberus_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得丛刃和强攻基石符文。\n丛刃 - 你的最初3次攻击获得巨幅提升过的攻击速度。\n强攻 - 对相同敌人命中3次攻击后，会造成爆发性的伤害并提升你的伤害，直到你离开战斗。"
+  },
+  "324": {
+    "name": "勇中最勇",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bravestofthebrave_large.png",
+    "rarityText": "银色",
+    "desc": "将未来的强化符文供应提升X阶。如果该强化符文的位阶已经是棱彩阶，则获得X金币。"
+  },
+  "326": {
+    "name": "灵之灌注",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spirit_infusion_large.png",
+    "rarityText": "银色",
+    "desc": "获得X%治疗和护盾强度。\n\n施放你的终极技能时，提升X%治疗和护盾强度，持续X秒(X秒冷却时间)。"
+  },
+  "327": {
+    "name": "不灭守护",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dawnbringersresolve_large.png",
+    "rarityText": "金色",
+    "desc": "在激活不落之志的复活时，亚恒环绕他自身进行横扫，造成X外加X%当前生命值的物理伤害并击退所有敌人。\n \n随后，亚恒变得免疫来自横扫范围外敌人造成的伤害并获得X%移动速度，持续X秒。"
+  },
+  "328": {
+    "name": "恶火束链",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quantumcomputing_large.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒在每个方向自动施放锁链，造成魔法伤害并吸附住敌人们。锁链在X秒之后断裂，造成更多魔法伤害和持续X秒的禁锢。\n\n如果被铐住的敌人离得足够远，那么锁链会提前结束且不产生效果。"
+  },
+  "329": {
+    "name": "死灵法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/windspeakersblessing_large.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒在附近召唤X个墓碑(冷却时间随着你的额外法力回复而缩短)。对你自身提供治疗或护盾时，会从墓碑中生成食尸鬼去攻击你的敌人们。\n\n食尸鬼生命值：X\n食尸鬼攻击力：X\n食尸鬼移动速度：X\n食尸鬼攻击速度：X"
+  },
+  "330": {
+    "name": "剥夺",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/desecrator_large.png",
+    "rarityText": "银色",
+    "desc": "冲刺或闪烁会为你提供X诅咒能量，前提是有一个敌人在附近。获得受益于你的诅咒能量的移动速度。\n\n获得X移动速度 (你的X%诅咒能量)。\n\n{{ Cherry_CurseShared }}"
+  },
+  "331": {
+    "name": "多功能工具",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/multitool_large.png",
+    "rarityText": "金色",
+    "desc": "将【多功能工具】加入你的装备栏。在每个购物环节期间，从5个随机装备中选择1件，【多功能工具】会在下个对战回合变为那件装备。\n\n在X回合，【多功能工具】可随出棱彩装备。"
+  },
+  "332": {
+    "name": "鲜血法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/centeroftheuniverse_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能消耗X%生命值而非法力值/能量值，并且基于你的已损失生命值造成至多X%额外伤害(在X%生命值时达到最大值)。获得X%全能吸血。"
+  },
+  "333": {
+    "name": "任务：熔铸之神的仪式",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_rite_of_the_forge_god_large.png",
+    "rarityText": "棱彩",
+    "desc": "需求：购买X个装备锻造器。\n\n奖励：你的所有装备升级为杰作装备，提高其X%属性。"
+  },
+  "334": {
+    "name": "幻像",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/bulletheaven_small.png",
+    "rarityText": "棱彩",
+    "desc": "在每个战斗回合开始时，召唤你自己的一个复制体。\n\n复制体受到来自所有来源的X%伤害。其造成你X%攻击伤害并施加你的攻击特效。可使用Alt+点击来对其下达指令以进行攻击和移动。"
+  },
+  "335": {
+    "name": "避难所",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/panic_room_large.png",
+    "rarityText": "银色",
+    "desc": "每场战斗仅触发一次，当你即将阵亡时，转而化为一个精魂，将你自身设置为X%生命值，并传送到竞技场内的一个随机地点。"
+  },
+  "336": {
+    "name": "瞄准脑袋",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/aim_for_the_head_large.png",
+    "rarityText": "金色",
+    "desc": "{{Cherry_AimForTheHead_Summary}}\n\n额外暴击伤害总和：X%"
+  },
+  "338": {
+    "name": "蜂巢思维",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/hive_mind_large.png",
+    "rarityText": "棱彩",
+    "desc": "每回合开始时有X只【小蜜蜂】。通过收集花朵来获得【小蜜蜂】。伤害一个敌方英雄时，将派出一只【小蜜蜂】，它在抵达后的X秒里持续造成X魔法伤害，然后会折返。"
+  },
+  "340": {
+    "name": "获得一个棱彩阶属性锻造器",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/crafting_prisstatanvil_small.png",
+    "rarityText": "",
+    "desc": "获得一个棱彩阶属性锻造器，提供来自这个列表的任意一项。\n\n+暴击伤害\n+生命值和体型提升\n+护甲穿透\n+法术穿透\n+移动速度和体型缩减\n+韧性\n+治疗和护盾强度\n+全能吸血\n+金币"
+  },
+  "341": {
+    "name": "获得一个强化符文栏位",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/crafting_slot_small.png",
+    "rarityText": "",
+    "desc": "{{ Cherry_CraftingAugmentSlot_Summary }}"
+  },
+  "342": {
+    "name": "等级类强化符文",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/crafting_sellaug_small.png",
+    "rarityText": "",
+    "desc": "移除一个 强化符文。\n\n获得X个随机 强化符文等级。\n\n你拥有X个 可升级的强化符文。"
+  },
+  "343": {
+    "name": "正义之怒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/righteous_fury_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Cherry_RighteousFury_Summary}}\n\n每个技能施放、强化符文和装备有X秒冷却时间。"
+  },
+  "344": {
+    "name": "能量充沛",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/energetic_large.png",
+    "rarityText": "银色",
+    "desc": "盈能的获取加快X%。触发盈能时会发射一个魔法飞弹，基于飞行距离至多造成X%最大生命值的真实伤害。\n\n这个回合已造成的【魔法飞弹】伤害：X\n已造成【魔法飞弹】伤害的总和：X"
+  },
+  "345": {
+    "name": "魔法少女",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/magic_girl_small.png",
+    "rarityText": "棱彩",
+    "desc": "每回合，一颗星星在X秒里持续坠落。在拾取它后，你会变身为一个魔法少女，击退附近的敌人们，使其跳舞X秒，同时为你提供X适应之力和X护盾值。\n\n作为一个魔法少女，每X-X秒就会有X颗星星从天而降，砸在你和你的每个敌人周围，对命中的敌人造成X魔法伤害。\n\n正在跳舞的敌人处于伤害免疫状态。\n星星会更频繁地降落在处于你X码内的敌人上。"
+  },
+  "346": {
+    "name": "面包三明治",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/bread_sandwhich_small.png",
+    "rarityText": "棱彩",
+    "desc": "获得X技能急速。\n\n施放一个技能持续会提供持续X秒的X%移动速度。\n\n你已经成为人人恐惧之人，你已经成为食品科学之终极。人们大声要求更多的配料，而你却低声说“不”。"
+  },
+  "347": {
+    "name": "炼金科技纯化器",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/chemtechpurifier_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "348": {
+    "name": "夺命剃刀",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/bloodrazor_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "349": {
+    "name": "去质器",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/dematerializer_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "350": {
+    "name": "附魔药瓶",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/crystallineflask_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "351": {
+    "name": "冰霜之锤",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/frozenmallet_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "354": {
+    "name": "监视残存物",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/remnantofthewatchers_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "355": {
+    "name": "获得属性锻造器",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/gain_stat_anvil_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "356": {
+    "name": "银汤匙",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/silver_spoon_small.png",
+    "rarityText": "银色",
+    "desc": "你每有1个白银阶强化符文，就会获得X%伤害提升。\n\n你获得X%伤害提升。"
+  },
+  "357": {
+    "name": "双管齐下",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/hybrid_large.png",
+    "rarityText": "金色",
+    "desc": "当你用一次攻击造成伤害时，你的下一个技能造成的伤害提升X%。\n\n当你用一个技能造成伤害时，你的下一次攻击造成的伤害提升X%。"
+  },
+  "358": {
+    "name": "狼灵狂热",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/wolf_small.png",
+    "rarityText": "",
+    "desc": "失去你固有的复活。\n\n提升你X%生命值。\n\n如果你造成的伤害会使一个英雄跌到X%最大生命值以下，则将其处决。"
+  },
+  "359": {
+    "name": "羊灵生息",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/lamb_small.png",
+    "rarityText": "",
+    "desc": "获得X次额外复活，并且将复活所需的时间减半。"
+  },
+  "361": {
+    "name": "与【恶魔】结盟",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/yonedemon_small.png",
+    "rarityText": "",
+    "desc": "为你的战队投票，选择与【恶魔】结盟。\n\n与【恶魔】结盟，会在一个【猎人】战队被淘汰时提供一个强化符文等级。"
+  },
+  "362": {
+    "name": "与【猎人】结盟",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/yonehunter_small.png",
+    "rarityText": "",
+    "desc": "为你的战队投票，选择与【恶魔猎人】结盟。\n\n与【恶魔猎人】结盟，会在你击败一个【恶魔】战队时为你提供+X额外金币。"
+  },
+  "364": {
+    "name": "替换强化符文",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/replace_augment_small.png",
+    "rarityText": "",
+    "desc": "将你的其中一个强化符文替换为X更高位阶。"
+  },
+  "365": {
+    "name": "戒绝财富",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/wealth_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "366": {
+    "name": "戒绝权力",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/power_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "367": {
+    "name": "戒绝风险",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/risk_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "368": {
+    "name": "渴望财富",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/wealth_large.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "369": {
+    "name": "渴望权力",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/power_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "370": {
+    "name": "渴望风险",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/risk_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "371": {
+    "name": "强求财富",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/wealth_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "372": {
+    "name": "强求权力",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/power_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "373": {
+    "name": "强求风险",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/risk_small.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "374": {
+    "name": "米饭和鸡肉",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/rice_and_chicken_small.png",
+    "rarityText": "金色",
+    "desc": "你的X提升X%伤害、X%治疗效果和护盾效果。\n\n你的X失去X技能急速。"
+  },
+  "375": {
+    "name": "米饭和鱼肉",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/rice_and_fish_small.png",
+    "rarityText": "金色",
+    "desc": "你的X提升X%伤害、X%治疗效果和护盾效果。\n\n你的X失去X技能急速。"
+  },
+  "376": {
+    "name": "米饭和猪肉",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/rice_and_pork_small.png",
+    "rarityText": "金色",
+    "desc": "你的X提升X%伤害、X%治疗效果和护盾效果。\n\n你的X失去X技能急速。"
+  },
+  "377": {
+    "name": "炒饭组合",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/combination_fried_rice_small.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能提升X%伤害、X%治疗效果和护盾效果。\n\n失去X技能急速。\n\n施放一个技能时获得X%移动速度，持续X秒。\n\n你已经成为饕餮之盛宴，医生大声要求你吃更多的蔬菜，而你却低声说“不”。"
+  },
+  "378": {
+    "name": "质变：白银阶",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/transmute_silver_small.png",
+    "rarityText": "棱彩",
+    "desc": "将你剩余强化符文的栏位用白银阶强化符文填充。"
+  },
+  "379": {
+    "name": "野火",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/wild_fire_small.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒，自动施放抛出一个弹跳的火球。\n\n这个火球造成X魔法伤害，并且可以在你和敌方英雄间弹射至多X次。"
+  },
+  "380": {
+    "name": "仁慈",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/mercy_small.png",
+    "rarityText": "金色",
+    "desc": "在你的战队触发了敌人的连招破坏者时，你变为激怒状态，从而使你的定身效果造成X魔法伤害。\n\n这个会在回合结束时重置。"
+  },
+  "381": {
+    "name": "拾荒者",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/scavenger_small.png",
+    "rarityText": "金色",
+    "desc": "{{Cherry_Scavenger_Summary}}\n\n如果他们的强化符文没有可用的，你会转而获得X金币。"
+  },
+  "383": {
+    "name": "恶魔之握",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/demonic_clasp_small.png",
+    "rarityText": "金色",
+    "desc": "主动：向前召唤X个爪子，从而往你的方向拉拽敌人们并造成X魔法伤害。"
+  },
+  "384": {
+    "name": "法术工艺",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/spell_craft_small.png",
+    "rarityText": "棱彩",
+    "desc": "主动：蓄力并释放出一阵爆发性的能量波，在锥形范围内造成魔法伤害。\n\n该技能会在你选择额外强化符文时获得增强。\n: +伤害\n: +控制\n: +治疗"
+  },
+  "387": {
+    "name": "大龙能量",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frombeginningtoend_large.png",
+    "rarityText": "金色",
+    "desc": "开始战斗时拥有满额龙怒并且它在魔龙形态下不再衰减。\n\n在魔龙形态下，【焚焰打击】的最后一段打击造成X%伤害。"
+  },
+  "388": {
+    "name": "炫彩跃动",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/chroma_flux_small.png",
+    "rarityText": "金色",
+    "desc": "每X秒自动施放以发射一颗魔法球体，吸附住首个命中的英雄、建筑物或史诗级野怪，持续X秒。\n\n用技能或攻击命中该目标，就会将球体引爆，从而造成X魔法伤害，并为你提供持续X秒的X移动速度、X护甲和魔抗。\n\nX ：造成xX额外伤害。\nX ：获得xX移动速度。\nX ：获得xX护甲与魔抗，持续X秒。"
+  },
+  "389": {
+    "name": "变废为宝",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/trash_treasure_small.png",
+    "rarityText": "银色",
+    "desc": "当变废为宝被移除或替换时，会获得一次棱彩阶强化符文选择。"
+  },
+  "390": {
+    "name": "不稳定突变",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/unstabletransmutation_small.png",
+    "rarityText": "金色",
+    "desc": "在每回合开始时，该强化符文会转变为处于满级的随机强化符文。"
+  },
+  "391": {
+    "name": "白手起家",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/rags_to_riches_small.png",
+    "rarityText": "银色",
+    "desc": "当白手起家被移除或被替换时，获得+ X金币。"
+  },
+  "392": {
+    "name": "诈骗者之球",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/swindlers_orb_item_large.png",
+    "rarityText": "",
+    "desc": ""
+  },
+  "393": {
+    "name": "艾卡西亚的陷落",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_voidimmolation_large.png",
+    "rarityText": "棱彩",
+    "desc": ""
+  },
+  "394": {
+    "name": "变废为宝",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/cherry/augments/icons/dust_to_diamonds_small.png",
+    "rarityText": "银色",
+    "desc": "当变废为宝被移除或替换时，会获得X个棱彩阶属性锻造器。"
+  },
+  "396": {
+    "name": "死亡交易者",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/death_dealer_small.png",
+    "rarityText": "棱彩",
+    "desc": "将闪人替换为死亡交易者。\n\n主动施放：你和目标英雄进入死者领域X秒。\n\n进入死者领域会使你们变得隐形，至多持续X秒。"
+  },
+  "397": {
+    "name": "他们心里有只狗",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/got_that_dog_small.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒在附近生成一个热狗，可供任何人拾取，从而使其可以喷火X秒，每秒造成X魔法伤害。\n\n如果你在喷火状态下阵亡，那么你会爆炸以造成每层X魔法伤害。\n\n如果任何敌方英雄拾取了一个热狗，那么其火焰造成X%伤害并且会伤害其友军。"
+  },
+  "404": {
+    "name": "404 强化符文未找到",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/augment404_large.png",
+    "rarityText": "银色",
+    "desc": "你怎么找到这个的？！？！？\n\n获得X顶帽子。"
+  },
+  "405": {
+    "name": "强化符文405",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/augment405_large.png",
+    "rarityText": "棱彩",
+    "desc": "你每穿戴一顶帽子，就会获得X%伤害。"
+  },
+  "1001": {
+    "name": "泰坦的坚决",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/iamthejuggernaut_large.png",
+    "rarityText": "棱彩",
+    "desc": "在承受或造成伤害时获得层数。每层，获得适应之力、护甲、魔法抗性、体型和韧性。"
+  },
+  "1002": {
+    "name": "尖端发明家",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/apexinventor_large.png",
+    "rarityText": "金色",
+    "desc": "获得装备急速(相当于装备冷却缩减)。"
+  },
+  "1004": {
+    "name": "回归基本功",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/backtobasics_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的终极技能已被封印。获得技能伤害、治疗效果、护盾，和技能急速。"
+  },
+  "1005": {
+    "name": "喂呜喂呜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/weewooweewoo_large.png",
+    "rarityText": "金色",
+    "desc": "在朝着低生命值的友军移动时，获得移动速度。你的治疗和护盾获得提升，基于你目标的低生命值程度。"
+  },
+  "1006": {
+    "name": "利刃华尔兹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bladewaltz_large.png",
+    "rarityText": "棱彩",
+    "desc": "让你进入不可被选取状态，在此期间对敌人进行突进并造成物理伤害次(造成50%附带伤害)。"
+  },
+  "1007": {
+    "name": "大力",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bluntforce_large.png",
+    "rarityText": "银色",
+    "desc": "获得 攻击力。"
+  },
+  "1009": {
+    "name": "霸符兄弟",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/buffbuddies_large.png",
+    "rarityText": "银色",
+    "desc": "你获得余烬之冠和洞悉之冠。\n\n余烬之冠：普攻对敌方英雄造成灼烧和减速。在非战斗状态下回复你的一部分最大生命值。\n\n洞悉之冠：获得技能急速，并且每秒回复法力值和能量值。"
+  },
+  "1011": {
+    "name": "你摸不到",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/canttouchthis_large.png",
+    "rarityText": "棱彩",
+    "desc": "施放你的终极技能会使你进入持续秒的的免疫伤害状态(秒冷却时间)。"
+  },
+  "1013": {
+    "name": "星界躯体",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/celestialbody_large.png",
+    "rarityText": "金色",
+    "desc": "获得生命值，但你造成的伤害降低。"
+  },
+  "1015": {
+    "name": "死亡之环",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/circleofdeath_large.png",
+    "rarityText": "棱彩",
+    "desc": "你造成的治疗效果和生命回复效果会对相距最近的那个敌方英雄造成该治疗数额的魔法伤害。"
+  },
+  "1018": {
+    "name": "巨像的勇气",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/courageofthecolossus_large.png",
+    "rarityText": "棱彩",
+    "desc": "定身或缚地一个敌方英雄后获得护盾值。"
+  },
+  "1019": {
+    "name": "全凭身法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dashing_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的冲刺、跳跃、闪烁或传送类技能获得技能急速。"
+  },
+  "1020": {
+    "name": "黎明使者的坚决",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dawnbringersresolve_large.png",
+    "rarityText": "金色",
+    "desc": "在跌到生命值以下时，在3秒里持续回复共最大生命值。"
+  },
+  "1022": {
+    "name": "灵巧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/deft_large.png",
+    "rarityText": "银色",
+    "desc": "获得攻击速度。"
+  },
+  "1023": {
+    "name": "魔鬼之舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/demonsdance_large.png",
+    "rarityText": "金色",
+    "desc": "获得迅捷步法和不灭之握基石符文。\n迅捷步法：攻击和移动会积攒能量层数。在100层时，你的下次攻击会治疗你并提升移动速度。不灭之握：每X层，你对一个英雄发起的下一次普攻将会造成额外魔法伤害、治疗你、并永久提升你的生命值。\n\n已造成治疗效果的总和：X\n已获得最大生命值：X"
+  },
+  "1025": {
+    "name": "俯冲轰炸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/divebomber_large.png",
+    "rarityText": "银色",
+    "desc": "在你阵亡时爆炸，对附近的敌人们造成目标最大生命值的真实伤害。"
+  },
+  "1026": {
+    "name": "唯快不破",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dontblink_large.png",
+    "rarityText": "银色",
+    "desc": "你每比目标多10移动速度，则对其多造成额外伤害。"
+  },
+  "1027": {
+    "name": "大地苏醒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/earthwake_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的冲刺、闪烁或传送类技能会留下一条在秒后爆炸的轨迹。"
+  },
+  "1028": {
+    "name": "侵蚀",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/erosion_large.png",
+    "rarityText": "银色",
+    "desc": "对敌人造成伤害时会施加一层持续秒的护甲和魔法抗性击碎效果，至多在层时击碎。"
+  },
+  "1029": {
+    "name": "虚幻武器",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/etherealweapon_large.png",
+    "rarityText": "金色",
+    "desc": "你的技能可施加。每个目标有1秒冷却时间。"
+  },
+  "1030": {
+    "name": "尤里卡",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/eureka_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得相当于法术强度的技能急速。"
+  },
+  "1032": {
+    "name": "裁决使",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/executioner_large.png",
+    "rarityText": "金色",
+    "desc": "对生命值低于X%的敌人们多造成X%伤害。在参与击杀后重置你的基础技能。\n\n这个回合的额外伤害：X\n额外伤害总和：X"
+  },
+  "1034": {
+    "name": "防护面纱",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/poltergeist_large.png",
+    "rarityText": "银色",
+    "desc": "获得一层法术护盾来格挡下一个敌方技能。秒冷却时间。"
+  },
+  "1035": {
+    "name": "感受燃烧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/feeltheburn_large.png",
+    "rarityText": "棱彩",
+    "desc": "对附近的所有敌方英雄施放引燃和虚弱。"
+  },
+  "1036": {
+    "name": "火上浇油",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firebrand_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击还会灼烧敌人，在秒的持续时间里每秒持续造成最大生命值的魔法伤害。灼烧可无限叠加。"
+  },
+  "1037": {
+    "name": "急救用具",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firstaidkit_large.png",
+    "rarityText": "银色",
+    "desc": "获得治疗和护盾强度。"
+  },
+  "1038": {
+    "name": "有始有终",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frombeginningtoend_large.png",
+    "rarityText": "金色",
+    "desc": "获得先攻和黑暗收割基石符文。先攻：当你率先进入英雄战斗后，在秒内可以造成额外伤害，并且基于造成的伤害获得金币。黑暗收割：伤害一名低生命值的英雄时会造成自适应伤害并从该猎物身上收割灵魂。"
+  },
+  "1039": {
+    "name": "冰霜 幽灵",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/frostwraith_large.png",
+    "rarityText": "银色",
+    "desc": "每X秒，自动施放X秒禁锢给附近的敌人们。\n\n已禁锢敌人：X"
+  },
+  "1041": {
+    "name": "歌利亚巨人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goliath_large.png",
+    "rarityText": "棱彩",
+    "desc": "体型变大，获得生命值和适应之力。"
+  },
+  "1042": {
+    "name": "恶趣味",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/guiltypleasure_large.png",
+    "rarityText": "银色",
+    "desc": "定身或缚地敌方英雄时回复X生命值。\n\n这个回合已造成的治疗效果：X\n已造成治疗效果的总和：X"
+  },
+  "1044": {
+    "name": "冰寒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/icecold_large.png",
+    "rarityText": "银色",
+    "desc": "你的减速效果可使移动速度降低额外的100。"
+  },
+  "1045": {
+    "name": "炼狱导管",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infernalconduit_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能会施加一层可无限叠加的灼烧，在秒的持续时间里每秒造成魔法伤害。"
+  },
+  "1046": {
+    "name": "炼狱龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infernalsoul_large.png",
+    "rarityText": "银色",
+    "desc": "你获得炼狱龙魂，使用技能或攻击命中敌人时造成额外伤害。"
+  },
+  "1047": {
+    "name": "关键暴击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/itscritical_large.png",
+    "rarityText": "金色",
+    "desc": "获得暴击几率。"
+  },
+  "1048": {
+    "name": "珠光护手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/jeweledgauntlet_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能可以造成暴击，造成总伤害。获得暴击几率。获得额外暴击几率。"
+  },
+  "1050": {
+    "name": "基石法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/keystoneconjurer_large.png",
+    "rarityText": "金色",
+    "desc": "获得召唤：艾黎和奥术彗星基石符文。\n召唤：艾黎：你的攻击和技能会向目标派出艾黎，来对敌方英雄造成伤害或为友方英雄套上护盾。奥术彗星：用一个技能对一名英雄造成伤害时，会在其位置处召唤一颗彗星。\n\n已造成的伤害：X\n已产生的护盾值：X"
+  },
+  "1051": {
+    "name": "点亮他们！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightemup_large.png",
+    "rarityText": "银色",
+    "desc": "每第4次攻击发射4个飞弹以造成魔法伤害。"
+  },
+  "1052": {
+    "name": "闪电打击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightningstrikes_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%总攻击速度。\n\n在每秒X攻击次数时，获得X 魔法伤害 {{ Item_Keyword_OnHit }}。\n\n总攻击速度会被计为你的额外攻击速度的一个乘数。\n\n已造成的附带特效魔法伤害：X"
+  },
+  "1053": {
+    "name": "科学狂人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/madscientist_large.png",
+    "rarityText": "棱彩",
+    "desc": "在回合开始时，你的体型要么变大(获得适应之力和生命值)要么变小(获得技能急速和移动速度)。"
+  },
+  "1054": {
+    "name": "物法皆修",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/masterofduality_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的每次攻击为你提供可叠加的法术强度，并且你的每次技能为你提供可叠加的攻击力，"
+  },
+  "1056": {
+    "name": "由心及物",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mindtomatter_large.png",
+    "rarityText": "银色",
+    "desc": "使你的最大生命值提升，数额相当于你一半的法力值。"
+  },
+  "1057": {
+    "name": "山脉龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mountainsoul_large.png",
+    "rarityText": "银色",
+    "desc": "你获得山脉龙魂，在脱离战斗之后获得一个持续一小段时间的护盾。"
+  },
+  "1058": {
+    "name": "秘术冲拳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mysticpunch_large.png",
+    "rarityText": "棱彩",
+    "desc": "使你的各个基础技能的冷却时间缩减其剩余冷却时间。"
+  },
+  "1060": {
+    "name": "海洋龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/oceansoul_large.png",
+    "rarityText": "银色",
+    "desc": "获得【海洋龙魂】，在对敌方英雄造成伤害后提供高额的生命和法力回复。"
+  },
+  "1061": {
+    "name": "回力OK镖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/okboomerang_large.png",
+    "rarityText": "金色",
+    "desc": "每秒朝着一个附近的敌人自动施放投掷一个回力镖，对命中的敌人们造成自适应伤害。"
+  },
+  "1062": {
+    "name": "全能龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/omnisoul_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得3个随机龙魂。"
+  },
+  "1063": {
+    "name": "狂徒豪气",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/outlawsgrit_large.png",
+    "rarityText": "金色",
+    "desc": "你的冲刺、跳跃、闪烁或传送类技能会为你提供护甲和魔法抗性，这个效果至多可叠加至层(至多提供双抗)。每秒重置。"
+  },
+  "1064": {
+    "name": "坚韧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/perseverance_large.png",
+    "rarityText": "金色",
+    "desc": "获得X%基础生命回复，在低于25%生命值时提升至X%基础生命回复。\n\n已造成治疗效果的总和：X"
+  },
+  "1066": {
+    "name": "量子计算",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quantumcomputing_large.png",
+    "rarityText": "棱彩",
+    "desc": "每X秒在你周围自动施放一次巨型斩击，造成X物理伤害。被外沿命中的敌人会被施加在X秒里持续衰减的X%减速，并受到额外的X最大生命值的物理伤害。你回复相当于X%已造成英雄伤害的生命值。\n\n已造成治疗效果的总和：X"
+  },
+  "1067": {
+    "name": "活力焕发",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/rabblerousing_large.png",
+    "rarityText": "金色",
+    "desc": "使用技能时回复生命值。"
+  },
+  "1068": {
+    "name": "循环往复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/recursion_large.png",
+    "rarityText": "金色",
+    "desc": "任务：用【技能】命中敌方英雄次奖励：【技能】获得技能急速，基于任务等级，至多至。"
+  },
+  "1069": {
+    "name": "退敌力场",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/repulsor_large.png",
+    "rarityText": "银色",
+    "desc": "在你跌下X%生命值时，对附近的敌人们造成击退和持续X秒的X%减速。(X秒冷却时间或在阵亡时重置)"
+  },
+  "1070": {
+    "name": "无休回复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/restlessrestoration_large.png",
+    "rarityText": "金色",
+    "desc": "你每移动1000码距离就会回复X生命值。\n\n这个回合已造成的治疗效果：X\n已造成治疗效果的总和：X"
+  },
+  "1071": {
+    "name": "更万用的瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopierweapons_large.png",
+    "rarityText": "金色",
+    "desc": "获得攻击距离。"
+  },
+  "1072": {
+    "name": "炽烈黎明",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/searingdawn_large.png",
+    "rarityText": "金色",
+    "desc": "你的技能会标记敌人，使其在被你的友军的下一个攻击或技能命中时会受到额外魔法伤害。"
+  },
+  "1073": {
+    "name": "暗影疾奔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/shadowrunner_large.png",
+    "rarityText": "银色",
+    "desc": "在使用一个冲刺、跳跃、闪烁或传送类技能或离开潜行状态之后，获得持续秒的移动速度。"
+  },
+  "1074": {
+    "name": "缩小射线",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/shrinkray_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击会对敌人造成持续3秒的伤害削减效果。"
+  },
+  "1075": {
+    "name": "慢炖",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowcooker_large.png",
+    "rarityText": "棱彩",
+    "desc": "每一秒，对附近的敌方英雄们施加一层可无限叠加的灼烧，在X秒的持续时间里每秒造成X魔法伤害。\n\n已造成的伤害：X"
+  },
+  "1076": {
+    "name": "天音爆",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/sonicboom_large.png",
+    "rarityText": "银色",
+    "desc": "在为你的友军提供增益效果、治疗效果或护盾效果时，会对其附近的敌人们造成真实伤害和持续2秒的减速。(秒冷却时间)"
+  },
+  "1077": {
+    "name": "灵魂虹吸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/soulsiphon_large.png",
+    "rarityText": "金色",
+    "desc": "获得暴击几率和作用于暴击的生命偷取。"
+  },
+  "1079": {
+    "name": "战争交响乐",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/symphonyofwar_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得致命节奏和征服者基石符文。致命节奏：攻击一个敌方英雄会为你提供攻击速度，至多至层。在满层时，获得50额外攻击距离，并且将攻速上限提升至。征服者：攻击敌方英雄时提供适应之力层数。在达到层后，将你的一部分伤害转化为等额的治疗效果。"
+  },
+  "1080": {
+    "name": "会心防御",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tankitorleaveit_large.png",
+    "rarityText": "银色",
+    "desc": "你可以使用你的暴击几率(最大几率)来进行会心防御，使你有一定几率来使所受伤害降低。获得暴击几率。"
+  },
+  "1081": {
+    "name": "踢踏舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tapdancer_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的攻击会为你提供移动速度。获得攻击速度。"
+  },
+  "1082": {
+    "name": "残暴之力",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/thebrutalizer_large.png",
+    "rarityText": "银色",
+    "desc": "获得X攻击力、X技能急速和X穿甲。"
+  },
+  "1084": {
+    "name": "穿针引线",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/threadtheneedle_large.png",
+    "rarityText": "金色",
+    "desc": "获得护甲穿透和法术穿透。"
+  },
+  "1085": {
+    "name": "折磨者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tormentor_large.png",
+    "rarityText": "银色",
+    "desc": "定身或缚地敌方英雄时还会施加一层灼烧，在X秒的持续时间里每秒持续造成X%最大生命值的魔法伤害。 这个灼烧可无限叠加。\n\n这个回合已造成的伤害：X\n已造成伤害的总和：X"
+  },
+  "1086": {
+    "name": "精准奇才",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/trueshotprodigy_large.png",
+    "rarityText": "棱彩",
+    "desc": "在你从X码外对一名敌人造成伤害时， 发射一道精准弹幕，造成X魔法伤害。每个目标X秒冷却时间。\n\n已对英雄造成伤害的总和：X"
+  },
+  "1087": {
+    "name": "台风",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/typhoon_large.png",
+    "rarityText": "银色",
+    "desc": "你的攻击会对一个额外目标发射一个飞弹，从而造成削减过的伤害并施加。"
+  },
+  "1088": {
+    "name": "终极刷新",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultimaterevolution_large.png",
+    "rarityText": "棱彩",
+    "desc": "在施放终极技能后刷新你的终极技能。(秒冷却时间或阵亡时重置)"
+  },
+  "1092": {
+    "name": "易损",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/vulnerability_large.png",
+    "rarityText": "金色",
+    "desc": "你的装备效果和持续伤害效果可以暴击来造成额外伤害。获得暴击几率。"
+  },
+  "1095": {
+    "name": "风语者的祝福",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/windspeakersblessing_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的治疗效果和 护盾效果还会提升目标的 护甲和 魔法抗性，这些加成 持续3秒。"
+  },
+  "1097": {
+    "name": "巫师式思考",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/witchfulthinking_large.png",
+    "rarityText": "银色",
+    "desc": "获得法术强度。"
+  },
+  "1098": {
+    "name": "急急小子",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/withhaste_large.png",
+    "rarityText": "金色",
+    "desc": "获得移动速度，相当于你的技能急速。"
+  },
+  "1103": {
+    "name": "面包和黄油",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "你的Q获得技能急速。"
+  },
+  "1104": {
+    "name": "仆从大师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/minionmancer_large.png",
+    "rarityText": "金色",
+    "desc": "你的召唤物获得体型提升、生命值和伤害。"
+  },
+  "1105": {
+    "name": "家园卫士",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/homeguard_large.png",
+    "rarityText": "银色",
+    "desc": "获得移动速度，在受到伤害后失效秒。"
+  },
+  "1107": {
+    "name": "接二连三",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/twicethrice_large.png",
+    "rarityText": "金色",
+    "desc": "每X次攻击，你的{{ Item_Keyword_OnHit }}效果会触发第二次。"
+  },
+  "1108": {
+    "name": "自我毁灭",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/selfdestruct_large.png",
+    "rarityText": "银色",
+    "desc": "每X秒，在你自己身上黏附一个炸弹。在X秒后，它会爆炸，造成X%目标最大生命值的真实伤害和X秒击飞效果。\n\n已造成伤害的总和：X"
+  },
+  "1112": {
+    "name": "终极不可阻挡",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultimateunstoppable_large.png",
+    "rarityText": "银色",
+    "desc": "在你使用你的终极技能后，你获得持续秒的控制免疫。 (秒冷却时间)。"
+  },
+  "1113": {
+    "name": "老练狙神",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/skilledsniper_large.png",
+    "rarityText": "金色",
+    "desc": "用一个非终极技能狙击一个敌人时，返还该技能冷却时间(周期性技能返还)。"
+  },
+  "1115": {
+    "name": "最万用的瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopiestweapons_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得攻击距离，如果你是远程英雄则降低至攻击距离。"
+  },
+  "1116": {
+    "name": "闪现向前",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flashy_large.png",
+    "rarityText": "金色",
+    "desc": "你的闪现有层充能，并且冷却时间为秒。层数拥有秒充能时间。"
+  },
+  "1118": {
+    "name": "会心治疗",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/criticalhealing_large.png",
+    "rarityText": "金色",
+    "desc": "你的治疗和护盾可以暴击，获得额外数额的效果。获得暴击几率。"
+  },
+  "1129": {
+    "name": "神射法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/marksmage_large.png",
+    "rarityText": "金色",
+    "desc": "你的攻击造成相当于你100%法术强度的额外物理伤害。"
+  },
+  "1133": {
+    "name": "魔法飞弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/magicmissile_large.png",
+    "rarityText": "金色",
+    "desc": "造成技能伤害会对其发射个飞弹，每个造成基于飞行距离的百分比最大生命值的真实伤害。"
+  },
+  "1134": {
+    "name": "亮出你的剑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/drawyoursword_large.png",
+    "rarityText": "棱彩",
+    "desc": "变为近战状态，并且获得攻击力、生命值、攻击速度、生命偷取和移动速度 (每个属性都基于舍弃的攻击距离而进一步提升)。"
+  },
+  "1136": {
+    "name": "扇巴掌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slaparound_large.png",
+    "rarityText": "银色",
+    "desc": "每当你定身或缚地一个敌人时，获得一层可叠加的适应之力。阵亡时损失层数。"
+  },
+  "1138": {
+    "name": "渴血",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goredrink_large.png",
+    "rarityText": "银色",
+    "desc": "获得全能吸血。"
+  },
+  "1141": {
+    "name": "全心为你",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/allforyou_large.png",
+    "rarityText": "金色",
+    "desc": "你的治疗和护盾在用在一个友军身上时会变强。"
+  },
+  "1149": {
+    "name": "不动如山",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/impassable_large.png",
+    "rarityText": "金色",
+    "desc": "获得余震和冰川增幅基石符文。余震：在你定身一个敌方英雄后提供防御属性，稍后会在你的周围造成爆发性的魔法伤害。冰川增幅：定身一名敌方英雄时会引发道冰川射线来减速附近的敌人们并降低他们对你的队友们的伤害。"
+  },
+  "1150": {
+    "name": "面包和果酱",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "你的技能获得技能急速。"
+  },
+  "1151": {
+    "name": "面包和奶酪",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "你的技能获得技能急速。"
+  },
+  "1152": {
+    "name": "钢化你心",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_steelyourheart_large.png",
+    "rarityText": "金色",
+    "desc": "任务：持有【心之钢】且层数在层或以上。"
+  },
+  "1154": {
+    "name": "海牛阿福的勇士",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_urfschampion_large.png",
+    "rarityText": "棱彩",
+    "desc": "任务：参与击杀次。"
+  },
+  "1156": {
+    "name": "沃格勒特的巫师帽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_woogletswitchcap_large.png",
+    "rarityText": "棱彩",
+    "desc": "立刻获得一个无用大棒。"
+  },
+  "1170": {
+    "name": "万用瞄准镜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/scopedweapons_large.png",
+    "rarityText": "银色",
+    "desc": "获得攻击距离。"
+  },
+  "1180": {
+    "name": "超强大脑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bigbrain_large.png",
+    "rarityText": "金色",
+    "desc": "获得护盾值。阵亡时重置。"
+  },
+  "1181": {
+    "name": "重量级打击手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/heavyhitter_large.png",
+    "rarityText": "银色",
+    "desc": "你的攻击造成相当于你最大生命值的额外物理伤害。"
+  },
+  "1187": {
+    "name": "闪光弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flashbang_large.png",
+    "rarityText": "银色",
+    "desc": "闪现时引发爆炸，造成伤害和减速。每次阵亡时重置闪现。"
+  },
+  "1194": {
+    "name": "精怪魔法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/feymagic_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的终极技能的伤害会对敌人造成持续若干秒的变形效果。"
+  },
+  "1195": {
+    "name": "巨人杀手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/giantslayer_large.png",
+    "rarityText": "棱彩",
+    "desc": "体型变小，获得移动速度，并基于敌方英雄体型大于你的程度造成到额外伤害。"
+  },
+  "1198": {
+    "name": "圣火",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/holyfire_large.png",
+    "rarityText": "金色",
+    "desc": "你的治疗或护盾会对一个附近的敌人施加一层无限叠加的灼烧，在X秒里持续造成至多X%最大生命值的魔法伤害(最小值X%)。\n\n这个伤害基于治疗或护盾对被援助英雄的最大生命值的相对占比。\n\n已造成的伤害：X"
+  },
+  "1204": {
+    "name": "叠角龙",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stackosaurusrex_large.png",
+    "rarityText": "银色",
+    "desc": "在你获得一个技能、强化符文或装备的永久层数时，多获得！"
+  },
+  "1205": {
+    "name": "物理转魔法",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/adapt_large.png",
+    "rarityText": "银色",
+    "desc": "将额外攻击力转化为法术强度，并获得法术强度。"
+  },
+  "1206": {
+    "name": "魔法转物理",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/escapade_large.png",
+    "rarityText": "银色",
+    "desc": "将法术强度转化为额外攻击力，并获得攻击力。"
+  },
+  "1208": {
+    "name": "轨道镭射",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/orbitallaser_large.png",
+    "rarityText": "棱彩",
+    "desc": "{{Kiwi_OrbitalLaser_Summary}}\n\n已造成伤害的总和：X"
+  },
+  "1211": {
+    "name": "杀戮时间到了",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/itskillingtime_large.png",
+    "rarityText": "金色",
+    "desc": "在施放你的终极技能后，将所有敌人打上死亡标记。这个标记会将对其造成的伤害储存起来，然后在秒后引爆，造成已储存的伤害(秒冷却时间)。"
+  },
+  "1214": {
+    "name": "旋转至胜",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spintowin_large.png",
+    "rarityText": "银色",
+    "desc": "你的旋转类技能获得技能急速并且多造成伤害！"
+  },
+  "1220": {
+    "name": "连拨击锤",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fanthehammer_large.png",
+    "rarityText": "棱彩",
+    "desc": "在你攻击敌方英雄时，发射X个飞弹，每个造成X物理伤害，基于移动的距离至多提升至X%。每个基本方向都有单独的X秒冷却时间。\n\n每个弩箭都能暴击并且附带X%效能的攻击特效。\n\n已造成的伤害：X"
+  },
+  "1225": {
+    "name": "双刀流",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dualwield_large.png",
+    "rarityText": "棱彩",
+    "desc": "在攻击时，发射一根次级弩箭，造成效能削减的附带。获得总攻击速度。"
+  },
+  "1237": {
+    "name": "质变：黄金阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmutegold_large.png",
+    "rarityText": "银色",
+    "desc": "获得1个随机黄金阶强化符文。"
+  },
+  "1238": {
+    "name": "质变：棱彩阶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmuteprismatic_large.png",
+    "rarityText": "金色",
+    "desc": "获得1个随机棱彩阶强化符文。"
+  },
+  "1243": {
+    "name": "质变：混沌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/transmutechaos_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得2个随机的强化符文。"
+  },
+  "1250": {
+    "name": "一板一眼",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowandsteady_large.png",
+    "rarityText": "金色",
+    "desc": "{{Kiwi_SlowAndSteady_Summary}}\n\n当前获取：X 攻击力"
+  },
+  "1301": {
+    "name": "神圣干预",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slowactingpainkillers_large.png",
+    "rarityText": "金色",
+    "desc": "在战斗开始秒后，召唤一颗护体星星缓慢地降落在你身上。在它着陆时，你和附近的友军们进入持续若干秒的免疫伤害状态。随后每秒自动施放这个效果。"
+  },
+  "1305": {
+    "name": "练腿日",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/legday_large.png",
+    "rarityText": "银色",
+    "desc": "获得移动速度和减速抗性。"
+  },
+  "1308": {
+    "name": "火狐",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/firfox_large.png",
+    "rarityText": "银色",
+    "desc": "自动施放：每秒，获得移动速度并召唤3道烈焰环绕于你，瞄准距离内相距最近的那个可见英雄并造成自适应伤害。后续命中造成伤害。"
+  },
+  "1310": {
+    "name": "小丑学院",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/clowncollege_large.png",
+    "rarityText": "棱彩",
+    "desc": "背刺：你从背后袭击敌人时，会造成额外物理伤害。"
+  },
+  "1311": {
+    "name": "溢流",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/overflow_large.png",
+    "rarityText": "金色",
+    "desc": "你的法力值消耗翻倍。你的技能的治疗效果、护盾效果和伤害获得提升，提升幅度基于你的最大法力值。"
+  },
+  "1313": {
+    "name": "作弊：我能回城！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/cheating_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "1314": {
+    "name": "强力护盾",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mightyshield_large.png",
+    "rarityText": "银色",
+    "desc": "当你获得护盾时，获得适应之力，持续秒。(秒冷却时间)"
+  },
+  "1315": {
+    "name": "快中求稳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/swiftandsafe_large.png",
+    "rarityText": "银色",
+    "desc": "在冲刺或闪烁后，获得持续秒的护盾值。 (秒冷却时间)"
+  },
+  "1316": {
+    "name": "刃下生风",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/windbeneathblade_large.png",
+    "rarityText": "银色",
+    "desc": "从固定护甲穿透和法术穿透中获得X移动速度。每拥有X%护甲穿透和法术穿透，就获得X移动速度。\n\n获得X移动速度。"
+  },
+  "1317": {
+    "name": "升级：弯刀",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradecutlass_large.png",
+    "rarityText": "银色",
+    "desc": "【幽魂弯刀】和【救生索】的冷却时间降低至X秒。主动效果激活时，获得X%伤害增幅。"
+  },
+  "1318": {
+    "name": "升级：中娅",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradezh_large.png",
+    "rarityText": "银色",
+    "desc": "【中娅沙漏】的冷却时间降低至秒。你现在可以在【中娅沙漏】、【探索者的护臂】或【沃格勒特的巫师帽】主动效果持续期间移动。"
+  },
+  "1319": {
+    "name": "升级：献祭",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradeimmolate_large.png",
+    "rarityText": "银色",
+    "desc": "【璀璨回响】和【日炎圣盾】每当有目标受到【献祭】效果影响时，提供 金币 。获得250金币。"
+  },
+  "1320": {
+    "name": "升级：收集者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradecollector_large.png",
+    "rarityText": "银色",
+    "desc": "使用【收集者】的被动处决敌人时的处决阈值提升，并且提供额外金币。"
+  },
+  "1321": {
+    "name": "砍伤",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/darksteeltalons_small.png",
+    "rarityText": "棱彩",
+    "desc": "获得X%攻击速度。攻击施加{{ Item_Melee_Ranged_Split_Dynamic }}真实伤害 {{ Item_Keyword_OnHit }}。\n\n已对英雄造成伤害的总和：X"
+  },
+  "1322": {
+    "name": "罪恶快感",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/getexcited_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀后，获得持续秒的移动速度和攻击速度。"
+  },
+  "1323": {
+    "name": "残忍",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/cruelty_large.png",
+    "rarityText": "棱彩",
+    "desc": "定身或缚地一个敌方英雄时，召唤一颗彗星至敌人上方。彗星会在秒后着陆，在区域内造成魔法伤害。这个效果对每次技能施放和每个目标都有秒冷却时间。"
+  },
+  "1324": {
+    "name": "蛋白粉奶昔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/proteinshake_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得治疗和护盾强度，基于额外护甲和魔法抗性。"
+  },
+  "1325": {
+    "name": "玻璃大炮",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/glasscannon_large.png",
+    "rarityText": "棱彩",
+    "desc": "减少最大生命值。造成额外真实伤害。"
+  },
+  "1326": {
+    "name": "夜狩",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/nightstalking_large.png",
+    "rarityText": "金色",
+    "desc": "在对敌人造成伤害的秒内参与击杀该敌人会使你进入秒的隐身状态。"
+  },
+  "1327": {
+    "name": "坚若磐石",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/adamant_large.png",
+    "rarityText": "银色",
+    "desc": "每当你定身或缚地一个敌人时，获得持续X秒的X护甲和魔抗(至多至X层)。"
+  },
+  "1328": {
+    "name": "暴击律动",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/criticalrhythm_large.png",
+    "rarityText": "金色",
+    "desc": "获得暴击几率。你的普攻在暴击时获得可叠加的攻击速度。(至多至层)"
+  },
+  "1329": {
+    "name": "史上最大雪球",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/biggestsnowballever_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的雪球获得技能急速。"
+  },
+  "1330": {
+    "name": "活力再生",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mobiuscoil_large.png",
+    "rarityText": "银色",
+    "desc": "获得一次盈能攻击，能够造成相当于X%目标当前生命值的伤害。你的盈能攻击充能数会得到全额返还，如果目标与你前一次攻击的目标不是同一个。\n\n已返还的充能数：X"
+  },
+  "1331": {
+    "name": "至高天诺言",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/empyreampromise_large.png",
+    "rarityText": "棱彩",
+    "desc": "警惕传送至你的友军并在着陆时提供持续秒的护盾值。"
+  },
+  "1332": {
+    "name": "不祥契约",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/wisdomofages_large.png",
+    "rarityText": "棱彩",
+    "desc": "基于已损失生命值，获得法术强度，移动速度和全能吸血。施放技能会消耗你的当前生命值。"
+  },
+  "1333": {
+    "name": "逃跑计划",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/escapeplan_large.png",
+    "rarityText": "银色",
+    "desc": "在降至生命值时，获得巨量持续衰减的护盾、持续衰减的移动速度和持续衰减的缩小效果。(秒冷却时间)"
+  },
+  "1334": {
+    "name": "升级：雪球",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/snowballupgrade_large.png",
+    "rarityText": "金色",
+    "desc": "你的雪球获得X技能急速。\n击中时会产生一片区域，使其中的敌人受到X减速效果，以及在X秒的持续时间里每秒造成X魔法伤害(总计X魔法伤害)。"
+  },
+  "1335": {
+    "name": "夺金",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goldrend_large.png",
+    "rarityText": "棱彩",
+    "desc": "用攻击或技能对一个英雄造成伤害时会造成额外魔法伤害，并为你提供金币和持续秒的移动速度(每个英雄有秒冷却时间)。"
+  },
+  "1336": {
+    "name": "升级：无尽之刃",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradeie_large.png",
+    "rarityText": "金色",
+    "desc": "获得 暴击几率和500金币。装备【无尽之刃】后，你的暴击会随机造成额外暴击伤害，最高可至你暴击几率的。"
+  },
+  "1337": {
+    "name": "尊我为王",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/kingme_large.png",
+    "rarityText": "棱彩",
+    "desc": "当你第一次携带一件传说级装备并乘坐敌人的传送门时，你会加冕为王，升级你的装备并获得一个随机棱彩阶强化符文。"
+  },
+  "1338": {
+    "name": "升级：狂妄",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradehubris_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀时，【狂妄】回复你的X%最大生命值+X%已损失生命值，并且在增益持续时间提供X+X移动速度，治疗量和移动速度均随层数增长。\n\n获得+250金币。"
+  },
+  "1339": {
+    "name": "激光治疗",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/laseheal_large.png",
+    "rarityText": "棱彩",
+    "desc": "施放一个持续2.5秒的治疗激光，治疗友军X生命值，对敌人造成X魔法伤害并使敌人减速X%。\n\n已造成的伤害：X\n已造成治疗效果的总和：X"
+  },
+  "1340": {
+    "name": "升级：米凯尔的祝福",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgrademikaelsblessing_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得【米凯尔的祝福】。将【米凯尔的祝福】的冷却时间缩减至X秒。\n\n使用【米凯尔的祝福】的主动效果时，对附近的友军施放一道光波，清除其限制和定身效果，回复X生命值，并且提供持续X秒的X%韧性。"
+  },
+  "1341": {
+    "name": "帽上加帽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/hatonahat_large.png",
+    "rarityText": "银色",
+    "desc": "头戴式装备和帽子提供X法术强度和X魔法抗性。\n帽子饮品提供X法术强度和X魔法抗性。\n\n你的头戴式装备和帽子当前已提供：X法术强度X魔法抗性"
+  },
+  "1342": {
+    "name": "雪球扭蛋机",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/snowballroulette_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "1343": {
+    "name": "王中王，靴中靴",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/sneakerhead_large.png",
+    "rarityText": "棱彩",
+    "desc": "完成以下的任务即可获得一份超级大奖：\n\n任务1：装备【狂战士胫甲】时，攻击X/X次\n任务2：装备【轻灵之靴】时，移动X/X步\n任务3：装备【明朗之靴】时，施放X/X次技能\n任务4：装备【水银之靴】时，受到控制效果X/X次\n任务5：装备【铁板靴】时，减少X/X攻击伤害\n任务6：装备【法师之靴】时，造成X/X技能伤害"
+  },
+  "1344": {
+    "name": "最终形态",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/finalform_large.png",
+    "rarityText": "棱彩",
+    "desc": "在施放你的终极技能时，获得持续秒的最大生命值护盾、全能吸血和额外移动速度。(秒冷却时间)"
+  },
+  "1345": {
+    "name": "心灵净化",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spiritualpurification_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀时，产生一次爆炸，对附近敌人们造成相当于他们X%当前生命值的伤害并留下一个减速区域。区域内的敌人们会受到持续X秒的X%减速。"
+  },
+  "1346": {
+    "name": "吸血习性",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/vampired_large.png",
+    "rarityText": "金色",
+    "desc": "你不再能够被友军治疗或获得生命回复。获得X%全能吸血。"
+  },
+  "1347": {
+    "name": "吵闹鬼",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/poltergeist_large.png",
+    "rarityText": "银色",
+    "desc": "获得【吵闹鬼】召唤师技能。"
+  },
+  "1348": {
+    "name": "闪闪现现",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flash2_large.png",
+    "rarityText": "银色",
+    "desc": "获得第二个【闪现】召唤师技能和召唤师技能急速。"
+  },
+  "1349": {
+    "name": "终极唤醒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/zerohour_large.png",
+    "rarityText": "棱彩",
+    "desc": "在施放你的终极技能后，重置你所有基础技能的冷却时间。(秒冷却时间)"
+  },
+  "1353": {
+    "name": "坦克引擎",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/tank_engine_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀时，获得一个层数，使你的体型增大并提升最大生命值。阵亡时损失层数。"
+  },
+  "1356": {
+    "name": "暴击飞弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/criticalmissile_large.png",
+    "rarityText": "金色",
+    "desc": "当你暴击时，发射1+X个飞弹，每个造成X魔法伤害。\n\n获得 X%暴击几率。"
+  },
+  "1358": {
+    "name": "弹球",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pinballsnowball_large.png",
+    "rarityText": "金色",
+    "desc": "你的雪球获得技能急速并且造成额外的 真实伤害。它可以从墙体上反弹，从而提升它的体型和伤害，并缩短它的冷却时间。"
+  },
+  "1361": {
+    "name": "艾卡西亚的陷落",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/quest_voidimmolation_large.png",
+    "rarityText": "棱彩",
+    "desc": "即刻：获得1个【斑比的熔渣】。\n\n任务：持有日炎圣盾和 璀璨回响。\n\n奖励：将【日炎圣盾】 和【璀璨回响】 合成为【虚空献祭】 。"
+  },
+  "1372": {
+    "name": "小猫咪找妈妈",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/babykitty_large.png",
+    "rarityText": "棱彩",
+    "desc": "站在一个友军的附近并将其标记为你的妈妈。\n当朝着妈妈移动时，获得X%移动速度。当靠近你的妈妈时，获得X%移动速度、X治疗和护盾强度。"
+  },
+  "1373": {
+    "name": "缩小引擎",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/shrinkengine_large.png",
+    "rarityText": "金色",
+    "desc": "参与击杀后会让你变小并且获得技能急速和移动速度。"
+  },
+  "1375": {
+    "name": "吞噬灵魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/souleater_large.png",
+    "rarityText": "金色",
+    "desc": "定身一个敌方英雄时会提供最大生命值。"
+  },
+  "1379": {
+    "name": "升级：花晓之剑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgrademikaelsblessing_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的攻击造成更少伤害但你获得大幅攻击速度。使来自【花晓之剑】的治疗效果提升。"
+  },
+  "1384": {
+    "name": "捐赠",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/donation_large.png",
+    "rarityText": "金色",
+    "desc": "获得金币。无需多问。"
+  },
+  "1386": {
+    "name": "转得我眩晕了",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/youspinmerightround_large.png",
+    "rarityText": "银色",
+    "desc": "将一个召唤师技能替换为骄行荡寇。"
+  },
+  "1388": {
+    "name": "无限循环往复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infiniterecursion_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得技能急速，外加每次参与击杀技能急速。"
+  },
+  "1389": {
+    "name": "男爵之手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/handofbaron_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得适应之力。附近友方小兵都获得极大增强。"
+  },
+  "1390": {
+    "name": "超凡邪恶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/aram_phenomenalevil_large.png",
+    "rarityText": "金色",
+    "desc": "在你用技能命中敌人时永久获得法术强度。"
+  },
+  "1391": {
+    "name": "红包",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/redenvelopes_large.png",
+    "rarityText": "金色",
+    "desc": "红包会每X秒随机出现在你周围。拾取它们会给你X到X金币，外加持续X秒的X移动速度。\n\n你已打开了X个红包并且获得了来自它们的X金币。\n\n已获得的额外属性：\n 技能急速：X\n 移动速度：X\n 攻击力：X\n 法术强度：X\n 护甲：X\n 魔法抗性：X\n 生命值：X\n 攻击速度：X%\n 穿甲：X\n 法术穿透：X"
+  },
+  "1392": {
+    "name": "神圣雪球",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/goldensnowball_large.png",
+    "rarityText": "棱彩",
+    "desc": "雪球获得技能急速。"
+  },
+  "1397": {
+    "name": "地狱三头犬",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/cerberus_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得丛刃和强攻基石符文。\n丛刃 - 你的最初3次攻击获得巨幅提升过的攻击速度。\n强攻 - 对相同敌人命中3次攻击后，会造成爆发性的伤害并提升你的伤害，直到你离开战斗。"
+  },
+  "1400": {
+    "name": "最终都市列车",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/nightstalking_large.png",
+    "rarityText": "金色",
+    "desc": "在你阵亡时，朝击杀你的敌人发动一辆列车，对它命中的每个敌人造成X物理伤害。这个列车不会停下。\n\n你的火车头已对X个敌方英雄造成了总计X伤害。\n它“意外”击杀了X个。"
+  },
+  "1401": {
+    "name": "生机迸发",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/growthspurt_large.png",
+    "rarityText": "金色",
+    "desc": "获得【生机迸发】召唤师技能。【生机迸发】会猛然提升你的体型，击飞附近的敌人们并提供最大生命值。"
+  },
+  "1402": {
+    "name": "属性叠属性叠属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/statsonstatsonstats_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得4个【属性锻造器】！"
+  },
+  "1403": {
+    "name": "属性叠属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/statsonstats_large.png",
+    "rarityText": "金色",
+    "desc": "获得3个【属性锻造器】！"
+  },
+  "1404": {
+    "name": "属性！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stats_large.png",
+    "rarityText": "银色",
+    "desc": "获得2个【属性锻造器】！"
+  },
+  "1405": {
+    "name": "速度恶魔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/speeddemon_large.png",
+    "rarityText": "银色",
+    "desc": "用一个技能对一个敌方英雄造成伤害时，获得在X秒里持续衰减的X移动速度。"
+  },
+  "1406": {
+    "name": "祖母的辣椒油",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/grandmaschilioil_large.png",
+    "rarityText": "金色",
+    "desc": "普攻和技能在命中敌人时会对其施加一个灼烧，这个效果会在X秒内持续造成共X魔法伤害。施加一个灼烧时，会在附近掉落一滩X秒的辣椒油。辣椒油每秒都会回复X生命值并灼烧敌人们造成X魔法伤害。\n\n你施加的每个灼烧都会使辣椒油效果变得更强。\n灼烧伤害相当于X+Xx灼烧来源数，至多至10个来源。"
+  },
+  "1409": {
+    "name": "魄罗爆破手",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/poroblast_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "1411": {
+    "name": "升级：荆棘之甲",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradecollector_large.png",
+    "rarityText": "银色",
+    "desc": "在脱离战斗X秒后，你的【荆棘之甲】或【棘刺背心】会生成一个甲壳来回敬X伤害给攻击者。"
+  },
+  "1413": {
+    "name": "和我一起困在这里",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stuckinherewithme_large.png",
+    "rarityText": "棱彩",
+    "desc": "使用你的终极技能时会嘲讽附近的敌人们并提供给你持续若干秒的伤害减免。"
+  },
+  "1414": {
+    "name": "卡皮巴拉空投",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/orbitallaser_large.png",
+    "rarityText": "棱彩",
+    "desc": ""
+  },
+  "1415": {
+    "name": "双生火焰",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/twinfire_large.png",
+    "rarityText": "银色",
+    "desc": "造成技能伤害时，发射1+个飞弹，每个造成魔法伤害。"
+  },
+  "1416": {
+    "name": "海克斯科技龙魂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/infernalsoul_large.png",
+    "rarityText": "银色",
+    "desc": "周期性地使你的下一个伤害型技能或攻击触发一道闪电爆裂，连锁穿过敌人以造成伤害和减速。"
+  },
+  "1418": {
+    "name": "砸开那颗蛋",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/crackopenthategg_large.png",
+    "rarityText": "银色",
+    "desc": "当一个保护你的护盾到期或被打破时，生成一次爆炸，造成X%该护盾最大生命值的魔法伤害。\n\n已造成的伤害：X"
+  },
+  "1420": {
+    "name": "咏叹奏鸣",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/sonata_large.png",
+    "rarityText": "金色",
+    "desc": "以一个不断交替的旋律来自动施放【坚毅咏叹调】和【迅捷奏鸣曲】。"
+  },
+  "1421": {
+    "name": "舞会女王",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/promqueen_large.png",
+    "rarityText": "棱彩",
+    "desc": "周期性地自动施放一道聚光灯降临在你身上。当它着陆时，获得洛的终极技能，魅惑你碰到的敌人们。"
+  },
+  "1424": {
+    "name": "？？？",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/missingping_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的敌人消失信号将发射一个飞弹至被信号标记的位置，这个飞弹会对敌人造成X + X%已损失生命值的魔法伤害并治疗友军X + X%已损失生命值。"
+  },
+  "1996": {
+    "name": "升级：耀光",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradesheen_large.png",
+    "rarityText": "金色",
+    "desc": "你的【咒刃】效果造成额外目标最大生命值物理伤害并治疗你自身。此外，获得250金币。"
+  },
+  "2001": {
+    "name": "当心小蛋糕！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/watchoutgrapefruit_large.png",
+    "rarityText": "棱彩",
+    "desc": "周期性地出现一个小蛋糕快速飞越整个大桥。接住小蛋糕会获得X 金币。小蛋糕还会为你和附近的友军回复X + X已损失生命值，但你们会被施加持续X秒的X减速。\n\n你的小蛋糕每治疗X生命值，就会提供X 金币。\n\n获得治疗的总和：X\n已赚取的金币：X"
+  },
+  "2002": {
+    "name": "虚空裂隙",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/voidrift_large.png",
+    "rarityText": "棱彩",
+    "desc": "用技能对敌人造成伤害时，会制造一道持续X秒的虚空伤痕。如果附近有另一道虚空裂痕，则它们都会被消耗，以在它们之间生成一道裂隙，对其中的敌人们造成X魔法伤害和在X秒里持续衰减的X减速。(X秒冷却时间)\n\n已造成的伤害：X"
+  },
+  "2003": {
+    "name": "魄罗之王的弹跳",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/poroking_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得魄罗之王的弹跳！\n\n魄罗之王的弹跳：变形为【魄罗之王】X秒！你现在处于不可阻挡和幽灵状态。获得X伤害减免和X移动速度，但被沉默且无法攻击。\n\n此外，每1秒都会弹跳，在着陆时对附近的敌方英雄们造成X物理伤害和击退。\n\n【魄罗之王】的每次施放仅能对同一敌人造成一次击退。\n\n已防止的伤害：X\n已造成的伤害：X\n被弹跳的敌人数：X"
+  },
+  "2004": {
+    "name": "信念者的强化",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/empoweredbythefaithful_large.png",
+    "rarityText": "棱彩",
+    "desc": "为友军提供治疗或护盾会积攒【虔诚】。在攒满【虔诚】时，释放一道冲击波来处决低生命值的敌人们。"
+  },
+  "2005": {
+    "name": "扳机炼狱",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/madscientist_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得悍勇本色。在你达到S评价等级时，自动使用炼狱扳机。 悍勇本色 - 使用与前一个不同的技能或攻击对敌人造成伤害时，会获得评价等级 (从F到S)。从每评价等级中获得移动速度。 炼狱扳机 - 倾泻出大量的子弹，对附近的敌人们造成物理伤害。"
+  },
+  "2006": {
+    "name": "飞身踢",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dropkick_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的攻击和技能会处决低于X最大生命值的敌方英雄, 回复你X生命值并击退该目标。\n\n在与一个敌人或地形产生碰撞、或达到其终点时，这个被击退的敌人将爆炸，对附近的敌人们造成X魔法伤害。\n\n这些爆炸可以连锁。\n\n被飞身踢的敌人数量：X\n获得治疗的总和：X\n已造成的伤害：X"
+  },
+  "2007": {
+    "name": "你肩上的恶魔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/littledevil_large.png",
+    "rarityText": "棱彩",
+    "desc": "你已与【大魔王】本尊签订了一个契约。他每秒汲取你X当前生命值，如果附近有敌人则提升至X当前生命值。\n\n作为回报，他会增幅你的攻击和技能以造成额外的X真实伤害，并且它们还会使生命残片出现在附近X秒。\n\n吸收一个生命残片会治疗你X生命值并为你提供持续X秒的X移动速度。\n\n被汲取的生命值：X\n已造成的伤害：X\n已获取的残片：X\n已回复的生命值：X\n周期性伤害有X秒冷却时间"
+  },
+  "2008": {
+    "name": "负重爆气",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/weightedpopoffs_large.png",
+    "rarityText": "银色",
+    "desc": "用技能击中敌方英雄时，会为你提供持续X秒的爆气层数(最大：X)。\n\n每层爆气使你的各个非终极技能冷却时间降低至X，这个降低数额在X层时提升至X。\n\n已提速的冷却时间总和：X"
+  },
+  "2009": {
+    "name": "狂热者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/zealot_large.png",
+    "rarityText": "银色",
+    "desc": "你的攻击会对一个额外目标发射一个飞弹，从而造成削减过的伤害并施加。"
+  },
+  "2010": {
+    "name": "双发快射",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/doubletap_large.png",
+    "rarityText": "棱彩",
+    "desc": "你的暴击施加一次额外的攻击特效。获得暴击几率。"
+  },
+  "2016": {
+    "name": "注魔",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/juiced_large.png",
+    "rarityText": "银色",
+    "desc": "攻击特效消耗法力值以造成魔法伤害，这个伤害可以暴击。"
+  },
+  "2018": {
+    "name": "纯粹主义者 - 术师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/puristcaster_large.png",
+    "rarityText": "银色",
+    "desc": "获得百分比冷却缩减并将你的所有攻击速度转化为技能急速。"
+  },
+  "2024": {
+    "name": "由暴生急",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/critncast_large.png",
+    "rarityText": "银色",
+    "desc": "获得X技能急速(X%)。"
+  },
+  "2026": {
+    "name": "杀意翻涌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/killsecure_large.png",
+    "rarityText": "银色",
+    "desc": "在朝着低生命值的敌人时，获得额外移动速度。"
+  },
+  "2031": {
+    "name": "空投熊",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/drop_bear_large.png",
+    "rarityText": "棱彩",
+    "desc": "阵亡时，召唤提伯斯，从而对你周围的敌人们造成X魔法伤害和X秒晕眩。提伯斯随后会追击你的击杀者。\n\n提伯斯还会拥有你的所有强化符文。"
+  },
+  "2032": {
+    "name": "鲨鱼诱饵",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fishbait_large.png",
+    "rarityText": "金色",
+    "desc": "在阵亡之后的若干秒，一头鲨鱼会啃噬所有附近的敌人们。你可以在阵亡后进行移动，以给鲨鱼攻击进行定位。"
+  },
+  "2034": {
+    "name": "鲨鱼暴风",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/sharktempest_large.png",
+    "rarityText": "金色",
+    "desc": "鲨鱼们环绕着你的【雪球】，对附近的敌人们造成伤害和减速。当你的【雪球】命中一个英雄时，其会陷入一阵鲨鱼风暴之中！"
+  },
+  "2042": {
+    "name": "藏身草丛",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/brushpower_large.png",
+    "rarityText": "金色",
+    "desc": "进入草丛时提供持续X秒的草丛能量。在草丛能量处于激活状态时，你多造成X%伤害。\n\n已造成的伤害：X\n\n待在草丛中会刷新【草丛能量】。"
+  },
+  "2043": {
+    "name": "自然即是治愈",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/natureishealing_large.png",
+    "rarityText": "金色",
+    "desc": "站在草丛中时，每秒回复最大生命值。"
+  },
+  "2046": {
+    "name": "魄罗蛮冲",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/questporocharge_large.png",
+    "rarityText": "棱彩",
+    "desc": "【魄罗佳肴】会每X秒出现在你周围。投喂魄罗会给你魄罗之爱层数。在X层时，解锁魄罗冲锋召唤师技能。投喂更多魄罗会提升你发动攻势的波次。\n\n魄罗冲锋：发动若干波次的魄罗攻势，可对敌方英雄们造成X物理伤害。\n\n你当前可发动X波魄罗攻势。\n\n魄罗们仅能命中单个敌方英雄，并且仅第一波攻势会击飞敌人们。\n\n“噢吼！它们可真萌啊！”——魄罗驯养人"
+  },
+  "2054": {
+    "name": "三重射击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "你的技能会瞄准你前方2个额外的敌人。"
+  },
+  "2055": {
+    "name": "多重射击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "任务：用【】技能命中敌方英雄次。"
+  },
+  "2062": {
+    "name": "回响施放",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "施放你的技能时会朝你的鼠标位置派出一个复制体并再次施放该技能。"
+  },
+  "2063": {
+    "name": "位面转移",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/whenthedarknesscomes_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得召唤师技能当黑暗到来。\n\n当黑暗到来：发射一道灿烂之光到一个位置。当它着陆时，区域内的所有活着的单位都将在接下来的X秒期间被送到一个不同的领域。\n\n在你处于这个领域时，你获得：\n X生命值\n X法术强度\n X攻击力\n X体型\n\n所有单位在该领域中都能自由地移动和行动，但不能以战略点(诸如防御塔或召唤水晶)为目标。\n\n“跟随你的光明……”——一个迷失的灵魂"
+  },
+  "2064": {
+    "name": "快步",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "当你使用【技能】时，朝你的鼠标指针进行冲刺。"
+  },
+  "2065": {
+    "name": "惊惧",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/desecrator_large.png",
+    "rarityText": "金色",
+    "desc": "每当你施放【技能】时，恐惧你周围的敌人们."
+  },
+  "2072": {
+    "name": "咒语裂变",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "在命中时、最大距离时或再次施放时，你的技能飞弹会分裂为两部分。"
+  },
+  "2073": {
+    "name": "虹吸",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "用技能伤害敌方英雄时会治疗你。"
+  },
+  "2076": {
+    "name": "保持坚定",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "当【技能】对敌方英雄造成伤害时，获得护甲和魔法抗性。"
+  },
+  "2077": {
+    "name": "贪欲束缚",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradehubris_large.png",
+    "rarityText": "金色",
+    "desc": "用你的【技能】定身或缚地敌方英雄时造成额外伤害并对你进行治疗。"
+  },
+  "2078": {
+    "name": "连锁反应",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "棱彩",
+    "desc": "如果一个被【技能】击退的目标命中了另一个英雄，则二者都会被击飞并受到伤害。在与地形产生碰撞时，该击飞时长会延长并且他们会受到额外伤害。"
+  },
+  "2080": {
+    "name": "冰雪爆裂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/snowbomb_large.png",
+    "rarityText": "金色",
+    "desc": "再次施放雪球会造成提升伤害、击飞该目标、并击退附近的敌人们。"
+  },
+  "2082": {
+    "name": "我们的治疗",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/equillibrium_large.png",
+    "rarityText": "金色",
+    "desc": "{{Kiwi_Augment_Equilibrium_Summary}}"
+  },
+  "2083": {
+    "name": "牙仙子",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/questburstingteeth_large.png",
+    "rarityText": "金色",
+    "desc": "爆裂敌人会掉落牙齿。拾取牙齿会提供给你永久的穿甲和法术穿透。"
+  },
+  "2087": {
+    "name": "大法师",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/archmage_large.png",
+    "rarityText": "棱彩",
+    "desc": "施放一个技能会返还另一个随机技能的花费，数额相当于原技能冷却时间。"
+  },
+  "2088": {
+    "name": "下雪天",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/snowday_large.png",
+    "rarityText": "银色",
+    "desc": "你的【雪球】获得100技能急速。在命中一名敌人时造成额外魔法伤害。如果你没有【雪球】，则获得一个【雪球】。"
+  },
+  "2089": {
+    "name": "哎哟，我的硬币！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/youchmycoins_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "2091": {
+    "name": "无尽大杀四方",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/endlessdecimate_large.png",
+    "rarityText": "金色",
+    "desc": "在战斗状态下，自动施放一次环形斧头挥舞从而造成物理伤害。被斧刃命中的敌人们受到额外伤害并治疗你。"
+  },
+  "2095": {
+    "name": "掷骰狂人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/highroller_large.png",
+    "rarityText": "棱彩",
+    "desc": "附近敌人在阵亡时有几率掉落【属性锻造器】。"
+  },
+  "2096": {
+    "name": "小小的额外帮助",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "在你的技能持续期间获得攻击距离和攻击速度。"
+  },
+  "2097": {
+    "name": "虚空冲刺",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "【{{SpellName}}】技能会在目标终点产生一片【虚空地带】。它会对敌方英雄们造成持续X秒的X%减速以及X魔法伤害。 \n\n已减速的英雄数：X"
+  },
+  "2098": {
+    "name": "吃过路兵",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dashing_large.png",
+    "rarityText": "棱彩",
+    "desc": "周期性地识别出敌方英雄身上的破绽。 用攻击或技能命中它们时，会造成最大生命值真实伤害、回复生命值并提供移动速度。这些效果可以叠加。"
+  },
+  "2099": {
+    "name": "飞升仪式",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/glasscannon_large.png",
+    "rarityText": "棱彩",
+    "desc": "参与击杀敌方英雄后会留下其精华。攻击该精华会提供移动速度并重置基础技能冷却时间。"
+  },
+  "2100": {
+    "name": "急速之追求",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "用技能命中敌方英雄以获得技能急速。"
+  },
+  "2102": {
+    "name": "高压锅",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/questpressurecooker_large.png",
+    "rarityText": "金色",
+    "desc": "每一秒，对附近的敌方英雄们施加一层可无限叠加的灼烧，在秒的持续时间里每秒造成魔法伤害。"
+  },
+  "2103": {
+    "name": "狙神飞星",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/questbangbang_large.png",
+    "rarityText": "金色",
+    "desc": "任务：用技能狙击个敌方英雄"
+  },
+  "2104": {
+    "name": "灵魄炸弹",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spiritbomb_large.png",
+    "rarityText": "棱彩",
+    "desc": "为友方英雄提供治疗和护盾时会为你积攒一颗【灵魄炸弹】。在满层时，投掷该炸弹至生命值最低的那个友军，从而对其和附近友军们提供治疗和护盾。"
+  },
+  "2107": {
+    "name": "濒死悟道",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/hellbent_large.png",
+    "rarityText": "棱彩",
+    "desc": "用攻击或技能伤害敌方英雄时会提供层数。在满层时，你在阵亡时会进行强化复活。"
+  },
+  "2108": {
+    "name": "主玩辅助",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/questsupportmain_large.png",
+    "rarityText": "银色",
+    "desc": "任务：治疗友方英雄X生命值。\n\n奖励：你提供的任何治疗效果现在还会在X秒里提供相当于X%初始治疗量的持续治疗效果。\n\n已造成的治疗：X / X"
+  },
+  "2109": {
+    "name": "复位",
+    "icon": "https://raw.communitydragon.org/latest/plugins/rcp-be-lol-game-data/global/default/assets/ux/kiwi/augments/icons/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "再次施放【{{SpellName}}】技能时会产生爆炸，造成X魔法伤害，并回到你的原本位置。"
+  },
+  "2111": {
+    "name": "邦！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "被【技能】强化的攻击或技能会对目标和附近的敌人们造成额外伤害。"
+  },
+  "2115": {
+    "name": "软弹啪叽抓",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/squishyslappygrab_large.png",
+    "rarityText": "棱彩",
+    "desc": "偶尔对所有附近的敌方英雄放出软弹啪叽的手，然后用灵链系住。你的下次攻击将拉拽所有被系住的敌人。"
+  },
+  "2116": {
+    "name": "威能之追求",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/marksmage_large.png",
+    "rarityText": "金色",
+    "desc": "任务：用【技能】命中敌人次。"
+  },
+  "2118": {
+    "name": "大招工具人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/skipthebasic_large.png",
+    "rarityText": "棱彩",
+    "desc": ""
+  },
+  "2119": {
+    "name": "过量延伸者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/overextender_large.png",
+    "rarityText": "金色",
+    "desc": "你的加农炮发射器的距离、飞行速度和伤害已经得到显著提升。回城并进入到你的加农炮发射器。\n\n旅途经过的单位数：X"
+  },
+  "2123": {
+    "name": "超负荷",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "使用另一个技能会重置技能的冷却时间。"
+  },
+  "2125": {
+    "name": "前进时间到",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "激活【技能】会在其持续期间为你提供移动速度。"
+  },
+  "2126": {
+    "name": "装填",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightningstrikes_large.png",
+    "rarityText": "金色",
+    "desc": "在【{{SpellName}}】技能期间的普攻{{ Item_Keyword_OnHit }}会降低其X秒冷却时间。\n\n已节省的秒数：X"
+  },
+  "2127": {
+    "name": "大师铸就",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/forgedbythemaster_large.png",
+    "rarityText": "银色",
+    "desc": "使你的装备和强化符文伤害提升。"
+  },
+  "2128": {
+    "name": "炽燃利息",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bloodmoney2_large.png",
+    "rarityText": "金色",
+    "desc": "英雄身上的灼烧和持续伤害会生成X+X%造成伤害的金币。\n\n已生成的金币：X"
+  },
+  "2129": {
+    "name": "地形专家",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lightningstrikes_large.png",
+    "rarityText": "金色",
+    "desc": "你的技能会在它周围的一个区域内造成伤害。"
+  },
+  "2131": {
+    "name": "别停止引导",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dontchangethechannel_large.png",
+    "rarityText": "银色",
+    "desc": "你每引导一秒都会获得护盾值。"
+  },
+  "2132": {
+    "name": "术士果汁盒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/warlockjuicebox_large.png",
+    "rarityText": "金色",
+    "desc": "获得全能吸血。"
+  },
+  "2133": {
+    "name": "仁慈打击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "在使用【技能】之后，你的下一次普攻获得攻击距离、攻击速度并造成额外最大生命值魔法伤害。"
+  },
+  "2134": {
+    "name": "电涌力场",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/surgefield_large.png",
+    "rarityText": "棱彩",
+    "desc": "在施放终极技能时，在你周围生成一个地带来提供技能急速和移动速度。在其中时，它会发射飞弹，飞弹造成相当于你造成的伤害。"
+  },
+  "2135": {
+    "name": "针插垫",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/symphonyofwar_large.png",
+    "rarityText": "棱彩",
+    "desc": "在【技能】期间进行攻击会施加标记，其会在该持续时长结束时爆炸，从而造成伤害并提供移动速度。"
+  },
+  "2136": {
+    "name": "可靠武器",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "用【技能】打击敌方英雄时会铸造一条友谊纽带。"
+  },
+  "2137": {
+    "name": "轻拍背部",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/patontheback_large.png",
+    "rarityText": "金色",
+    "desc": "友军会在你走过时鼓励你，为你提供护盾和移动速度。"
+  },
+  "2138": {
+    "name": "自适应防护",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "用【技能】打击一个敌方英雄时，为你提供持续秒的护甲或魔法抗性，基于该技能的伤害类型。这个效果可以叠加。"
+  },
+  "2139": {
+    "name": "豪猪",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pincushion_large.png",
+    "rarityText": "金色",
+    "desc": "承受来自英雄的伤害会积攒一次尖针迸发，这些尖针会从你身上飞出，对附近的敌人们造成伤害和减速。"
+  },
+  "2140": {
+    "name": "升级：贪欲九头蛇",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradesheen_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "2141": {
+    "name": "终极九头蛇",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ultrahydra_large.png",
+    "rarityText": "棱彩",
+    "desc": "完成一个【九头蛇】装备时获得【提亚马特】；集齐巨型/贪欲/亵渎九头蛇后获得【终极九头蛇】"
+  },
+  "2143": {
+    "name": "升级：焚天",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradeie_large.png",
+    "rarityText": "金色",
+    "desc": ""
+  },
+  "2144": {
+    "name": "加固护盾",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_silver.png",
+    "rarityText": "银色",
+    "desc": "来自【技能】的护盾变得更强并且受益于目标的已损失生命值。"
+  },
+  "2148": {
+    "name": "双重打击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/adamant_large.png",
+    "rarityText": "银色",
+    "desc": ""
+  },
+  "2157": {
+    "name": "升级：死亡之舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradedeathdance_large.png",
+    "rarityText": "银色",
+    "desc": "获得250金币，所受伤害延迟结算，击杀时按额外攻击力治疗"
+  },
+  "3004": {
+    "name": "罪恶快感！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/overextender_large.png",
+    "rarityText": "金色",
+    "desc": "将一个召唤师技能替换为罪恶快感！罪恶快感！驾驭一枚飞弹，它会在命中敌方英雄、建筑物或墙体后爆炸。爆炸半径内的敌人会受到物理伤害。"
+  },
+  "3016": {
+    "name": "伤不过三",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/silverbeats_large.png",
+    "rarityText": "棱彩",
+    "desc": "对一个敌方英雄的每第三次连续的攻击造成真实伤害并永久提升由这个技能造成的伤害。"
+  },
+  "3018": {
+    "name": "大腕",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bigshot_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得暴击伤害和额外攻击力。你的攻击速度转化为暴击伤害。"
+  },
+  "3025": {
+    "name": "音之屏障",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/swiftandsafe_large.png",
+    "rarityText": "银色",
+    "desc": "为一名友军提供护盾时，会在秒内提供持续衰减的移动速度和幽灵状态。"
+  },
+  "3036": {
+    "name": "翻倍时间",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/aram_phenomenalevil_large.png",
+    "rarityText": "金色",
+    "desc": "在短时间内用2种不同技能对一名敌方英雄造成伤害时，会造成魔法伤害并提供最大法力值。"
+  },
+  "3039": {
+    "name": "拯救",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/salvation_large.png",
+    "rarityText": "金色",
+    "desc": "受到伤害导致你的生命值低于时，会释放一道冲击波，对附近敌人造成伤害并将其击退，同时为你周围大范围区域内的所有友方英雄回复生命值。"
+  },
+  "3048": {
+    "name": "弹跳蜜蜂",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/kingme_large.png",
+    "rarityText": "棱彩",
+    "desc": "施放技能后，你的下一次普攻会弹跳至相距最近的那个敌人。任务：将普攻弹跳至敌方英雄。奖励：每任务等级获得+攻击力和额外一次弹跳"
+  },
+  "3049": {
+    "name": "装甲冲击",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/armoredimpact_large.png",
+    "rarityText": "金色",
+    "desc": "施放技能后，你的下一次普通攻击会对附近敌人造成额外物理伤害。"
+  },
+  "3051": {
+    "name": "蓝色屏障",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bluenote_large.png",
+    "rarityText": "银色",
+    "desc": "获得持续秒的护盾，数额相当于你花费的法力值。"
+  },
+  "3052": {
+    "name": "远射天资",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bonk_large.png",
+    "rarityText": "银色",
+    "desc": "在接近最大攻击距离处打出的攻击会附带额外物理伤害攻击特效。"
+  },
+  "3053": {
+    "name": "热舞怪兽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_prismatic.png",
+    "rarityText": "棱彩",
+    "desc": "施放【技能】会获得额外生命值，并在技能持续期间减速附近敌人。每次参与击杀都会永久提升该效果。"
+  },
+  "3055": {
+    "name": "终极循环往复",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/zealot_large.png",
+    "rarityText": "银色",
+    "desc": "获得终极技能急速。"
+  },
+  "3058": {
+    "name": "嗡嗡怪兽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/ticklemonster_large.png",
+    "rarityText": "金色",
+    "desc": "攻击力转化为攻击速度。普攻附带额外魔法伤害攻击特效。"
+  },
+  "3059": {
+    "name": "没法力，没问题",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/nomananoproblem_large.png",
+    "rarityText": "银色",
+    "desc": "来自你的装备的法力值转化为法术强度。使你的总法术强度提升。"
+  },
+  "3060": {
+    "name": "单曲红人",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "每拥有技能急速，【技能】技能的伤害就会提升，但它不再受益于技能急速。"
+  },
+  "3063": {
+    "name": "溺水之赠礼",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/giftofthedrowned_large.png",
+    "rarityText": "银色",
+    "desc": "额外生命值转化为穿甲。获得穿甲。"
+  },
+  "3071": {
+    "name": "黄铜爆音",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/camo_large.png",
+    "rarityText": "金色",
+    "desc": "将一个召唤师技能替换为黄铜爆音。黄铜爆音：蓄力吹响大喇叭，击退并对敌人造成魔法伤害。"
+  },
+  "3075": {
+    "name": "反冲",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "你的【技能】造成额外伤害并且你因反冲力而后退。"
+  },
+  "3078": {
+    "name": "鼓声暴起 低音轰鸣",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/theboomandthebass_large.png",
+    "rarityText": "金色",
+    "desc": "施放技能后，你的下一次攻击变得更快，造成额外魔法伤害并为你提供持续衰减的移动速度。"
+  },
+  "3079": {
+    "name": "死之舞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/totentanz_large.png",
+    "rarityText": "棱彩",
+    "desc": "将一个召唤师技能替换为与死亡共舞一曲。与死亡共舞一曲：向前闪烁并进入不可被击杀状态。在秒内参与击杀一个英雄，否则你会直接阵亡。"
+  },
+  "3081": {
+    "name": "命运之武器",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/protagonistssignatureweapon_large.png",
+    "rarityText": "金色",
+    "desc": "你的第一件传说级装备成为命运之武器，属性基于参与击杀英雄数提升。"
+  },
+  "3085": {
+    "name": "灵魂乐流",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/flowofspirit_large.png",
+    "rarityText": "银色",
+    "desc": "施放【技能】会为你提供持续一段时间的攻击速度。"
+  },
+  "3086": {
+    "name": "小蜜蜂！！！",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/bees_large.png",
+    "rarityText": "金色",
+    "desc": "每过一段时间，你的下一个命中敌方英雄的技能会发射一个会爆炸的小蜜蜂巢穴，在一段短时间里造成魔法伤害和减速。小蜜蜂附带攻击特效。"
+  },
+  "3088": {
+    "name": "深红钴蓝闪光",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "被【技能】伤害过的敌方英雄会被标记。攻击带标记的敌人会造成额外魔法伤害并缩减【技能】的冷却时间。"
+  },
+  "3094": {
+    "name": "巫妖大脑",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/lichbrain_large.png",
+    "rarityText": "银色",
+    "desc": "获得法术强度。"
+  },
+  "3116": {
+    "name": "将他们放倒倒倒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/takeemdowndowndown_large.png",
+    "rarityText": "金色",
+    "desc": "普攻和技能在命中时造成额外魔法伤害并对敌方英雄施加层数。在满层时，消耗所有层数，基于已损失生命值造成魔法伤害，并基于造成的伤害回复生命值。"
+  },
+  "3118": {
+    "name": "奥术公理",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/arcaneaxiom_large.png",
+    "rarityText": "金色",
+    "desc": "在你对一名敌方英雄造成伤害后，如果该英雄在秒内阵亡，则会返还你终极技能的部分总冷却时间。"
+  },
+  "3121": {
+    "name": "水果化",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fruitseason_large.png",
+    "rarityText": "银色",
+    "desc": "参与击杀会引发水果爆炸。水果可回复生命值和法力值。"
+  },
+  "3123": {
+    "name": "珠光手镯",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/genericabilityaugmenticon_gold.png",
+    "rarityText": "金色",
+    "desc": "【技能】可以暴击。获得暴击几率。"
+  },
+  "3129": {
+    "name": "吸元秘术",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mercysstrike_large.png",
+    "rarityText": "金色",
+    "desc": "每秒，你的下次攻击造成额外物理伤害，并为你回复生命值。施放技能会缩减该效果的冷却时间。"
+  },
+  "3131": {
+    "name": "屹立不倒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stillhere_large.png",
+    "rarityText": "金色",
+    "desc": "基于你的已损失生命值获得攻击速度和生命偷取。"
+  },
+  "3132": {
+    "name": "王冠之重",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/heavyisthecrown_large.png",
+    "rarityText": "金色",
+    "desc": "获得攻击力、法术强度和攻击速度，但移动速度降低。每次参与击杀都会获得一层【背负】以提升该效果。阵亡时失去一半层数"
+  },
+  "3134": {
+    "name": "孤勇者",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/adamant_large.png",
+    "rarityText": "银色",
+    "desc": "附近每有一个敌方英雄，你就会获得攻击速度、护甲和魔法抗性。"
+  },
+  "3149": {
+    "name": "一起抱抱",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/empyreampromise_large.png",
+    "rarityText": "棱彩",
+    "desc": "用【技能】为友方英雄提供治疗或护盾时，会对名其他附近友方英雄再次施放该技能。"
+  },
+  "3150": {
+    "name": "升级：风暴狂涌",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgradehubris_large.png",
+    "rarityText": "金色",
+    "desc": "风暴狂涌 - 风啸现在总会在一个区域内引爆，基于最大生命值造成魔法伤害。被初段引爆命中的敌方英雄会被风啸标记。获得金币。"
+  },
+  "3159": {
+    "name": "登峰造极境",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/zerohour_large.png",
+    "rarityText": "棱彩",
+    "desc": "如果你使用【技能】技能击杀了一个敌方英雄，则可以再次施放一次该技能。每次再次施放都会造成额外的后续伤害。"
+  },
+  "3163": {
+    "name": "迷人蝴蝶",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/enchantedbuttery_large.png",
+    "rarityText": "金色",
+    "desc": "为友方英雄提供治疗或护盾时，会聚集蝴蝶。在收集只蝴蝶之后，对一个敌方英雄造成伤害时会将它们发射出去以造成魔法伤害。"
+  },
+  "3170": {
+    "name": "重型",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pentakill_small.png",
+    "rarityText": "金色",
+    "desc": "强化版技能获得20技能急速、10%额外伤害、以及10%治疗和护盾效果。"
+  },
+  "3171": {
+    "name": "力量",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pentakill_small.png",
+    "rarityText": "金色",
+    "desc": "强化版技能获得20技能急速、10%额外伤害、以及10%治疗和护盾效果。"
+  },
+  "3172": {
+    "name": "鞭挞",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pentakill_small.png",
+    "rarityText": "金色",
+    "desc": "强化版技能获得20技能急速、10%额外伤害、以及10%治疗和护盾效果。"
+  },
+  "3173": {
+    "name": "厄运",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pentakill_small.png",
+    "rarityText": "金色",
+    "desc": "强化版技能获得20技能急速、10%额外伤害、以及10%治疗和护盾效果。"
+  },
+  "3176": {
+    "name": "GoH_PentakillAug_Generic_BlankName",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pentakill_small.png",
+    "rarityText": "金色",
+    "desc": "强化版技能获得20技能急速、10%额外伤害、以及10%治疗和护盾效果。"
+  },
+  "3262": {
+    "name": "史莱姆时间",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/slimetime_large.png",
+    "rarityText": "银色",
+    "desc": "每几秒，自动施放来自你身体的一团粘液，对附近的敌人们造成魔法伤害。如果你命中了一个英雄，则会分泌出一个液团，在你走上去时治疗你。"
+  },
+  "3263": {
+    "name": "超坚定风采",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/steadfastpresence_large.png",
+    "rarityText": "金色",
+    "desc": "获得额外护甲、魔法抗性和韧性。当你低于40%最大生命值时，该加成会提升。"
+  },
+  "3264": {
+    "name": "秘术卫士",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/mysticguard_large.png",
+    "rarityText": "银色",
+    "desc": "获得20魔法抗性，然后额外魔法抗性提高25%。"
+  },
+  "3265": {
+    "name": "坚不可破",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fortified_large.png",
+    "rarityText": "银色",
+    "desc": "获得20护甲，然后额外护甲提高25%。"
+  },
+  "7001": {
+    "name": "升级：兹若特传送门",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgrade_zzrotportal_large.png",
+    "rarityText": "银色",
+    "desc": "兹若特传送门生成X个额外的仆从，并且你每拥有X级就会生成一个额外的仆从。\n\n仆从们也会在传送门被摧毁时生成。"
+  },
+  "7002": {
+    "name": "黑切联盟",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dont_stop_cleaving_large.png",
+    "rarityText": "金色",
+    "desc": "你可以购买不限量的黑色切割者。在购买时，提升新的黑色切割者的属性，数额相当于X%x你已拥有的数量。\n\n即刻获得残暴之力。"
+  },
+  "7003": {
+    "name": "或杀或死",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/do_or_die_large.png",
+    "rarityText": "棱彩",
+    "desc": "将梅贾的窃魂卷、利维坦之甲、神秘之剑的最大层数翻倍。\n\n“不不不，嘉文，我说的是，杀，或者，死”"
+  },
+  "7004": {
+    "name": "一饮而尽",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/drink_up_large.png",
+    "rarityText": "银色",
+    "desc": "你的队伍中的每个人即刻获得X瓶生命药水。\n\n每参与击杀X次，就会获得X瓶生命药水。"
+  },
+  "7005": {
+    "name": "欲速则不达",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/haste_makes_waste_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得X% 冷却缩减。\n\n将你的冷却缩减上限提升X%。"
+  },
+  "7006": {
+    "name": "又快又狠",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stabby_stabby_large.png",
+    "rarityText": "银色",
+    "desc": "获得X冷却缩减。\n\n将你的冷却缩减上限提升至X%。"
+  },
+  "7007": {
+    "name": "升级：冥火之拥",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgrade_deathfire_large.png",
+    "rarityText": "金色",
+    "desc": "将冥火之拥的伤害增幅提升至X%并将它的冷却时间缩短X%。\n\n冥火之拥现在会将你的目标附近半径X之内的所有敌方英雄都选为目标。"
+  },
+  "7008": {
+    "name": "多兰的最铁粉丝",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dorans_fan_large.png",
+    "rarityText": "棱彩",
+    "desc": "在第一件多兰之刃、多兰之戒和多兰之盾之后的每次购买都会为原装备提供一个层数。\n\n每层提供X%的该装备属性。\n\n这些装备的被动效果不会提升。你的各个多兰系列装备都不再能被售出。\n\n就像30件多兰的装备"
+  },
+  "7009": {
+    "name": "升级：激发之匣",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/upgrade_innervating_large.png",
+    "rarityText": "金色",
+    "desc": "将激发之匣的生命值和法力值回复量提升X%。\n\n激发之匣会为你的目标附近的所有友方英雄回复生命值和法力值。\n\n如果你以为乌迪尔以前难以被击杀……"
+  },
+  "7010": {
+    "name": "时光发条：心之钢",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/fs_heart_steal_large.png",
+    "rarityText": "金色",
+    "desc": "在获得X额外生命值之后，将手伸入未来然后获得一件心之钢。\n\n【心之钢】不可售出。\n\n横置10能量……"
+  },
+  "7011": {
+    "name": "真正的永恒",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/do_or_die_large.png",
+    "rarityText": "棱彩",
+    "desc": "你可以购买不限量的时光之杖。你的时光之杖的叠层变得更快，并且它的层数没有上限。获得一个催化神石。\n\n出门装备、核心出装、逆风希望"
+  },
+  "7012": {
+    "name": "海克斯核心",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/dont_stop_cleaving_large.png",
+    "rarityText": "棱彩",
+    "desc": "获得一个海克斯核心原型。花费金币以升级该海克斯核心并永久升级你的技能。"
+  },
+  "7013": {
+    "name": "主玩打野之精魄",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/spiritualpurification_large.png",
+    "rarityText": "金色",
+    "desc": "你拥有的那些打野装的主要属性提升X%。\n\n每种打野装仅有一件能够获得属性提升。\n\n破碎幽灵之精魄、远古魔像之精魄、蜥蜴长老之精魄、麦瑞德裂血手套、瑞格之灯、以及烈焰之炬。"
+  },
+  "7014": {
+    "name": "拱火诱饵",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stabby_stabby_large.png",
+    "rarityText": "银色",
+    "desc": "获得X%闪避几率"
+  },
+  "7015": {
+    "name": "召唤师的游猎",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/stabby_stabby_large.png",
+    "rarityText": "银色",
+    "desc": "在野区或河道中时，你会快速发现消耗品。\n\n'中路？我们要去的地方不需要中路！'"
+  },
+  "12317": {
+    "name": "潘朵拉的盒子",
+    "icon": "https://game.gtimg.cn/images/lol/act/img/rune/pandoras_box_large.png",
+    "rarityText": "棱彩",
+    "desc": "将你的所有强化符文变为随机的棱彩阶强化符文。"
+  }
+}

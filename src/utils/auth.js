@@ -5,6 +5,7 @@ import {
   lzyumiA,
   lzelo,
   lesoBase,
+  czjBase,
   platform2areaId,
 } from "@/utils/area.js";
 
@@ -602,6 +603,14 @@ export function handlerso1Data(source) {
         bearingInjuries: mys?.bearingInjuries,
         damageAllPer,
         bearingInjuriesPer,
+        augmentIds: [
+          yours.playerAugment1,
+          yours.playerAugment2,
+          yours.playerAugment3,
+          yours.playerAugment4,
+          yours.playerAugment5,
+          yours.playerAugment6,
+        ].filter(id => Number(id) > 0),
         participants,
       };
     });
@@ -807,8 +816,8 @@ export function handlerMergeOld(source) {
 export function getBaseUrl() {
   const idx = uni.getStorageSync("baseUrl");
   const baseUrl = baseUrlList?.[idx]?.value ?? lzyumiA;
-  // 地址3 是搜联盟（lolso1）地址，不提供 lzyumi 接口，回退用地址1
-  return baseUrl === lesoBase ? lzyumiA : baseUrl;
+  // 地址3/地址4 分别是搜联盟、峡谷查个分地址，不提供 lzyumi 接口，回退用地址1
+  return baseUrl === lesoBase || baseUrl === czjBase ? lzyumiA : baseUrl;
 }
 
 // 接口地址名称（统一取设置页 baseUrl 下标，默认「地址1」）

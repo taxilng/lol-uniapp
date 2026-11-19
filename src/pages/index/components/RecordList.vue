@@ -3,7 +3,7 @@
     <uv-tabs
       class="tabc"
       :key="`tabsMain-${tabsRenderKey}`"
-      v-if="batchBaseUrl !== '地址3'"
+      v-if="!['地址3', '地址4'].includes(batchBaseUrl)"
       :list="tabs"
       @click="tabChange"
       :current="currentTabs"
@@ -11,7 +11,7 @@
     <uv-tabs
       class="tabc"
       :key="`tabs3-${tabsRenderKey}`"
-      v-if="batchBaseUrl === '地址3'"
+      v-if="['地址3', '地址4'].includes(batchBaseUrl)"
       :list="tabs3"
       @click="tabChange3"
       :current="currentTabs3"
@@ -105,7 +105,7 @@ initTabs();
 
 function initTabs() {
   // 切换地址后重置对应 tab 组的选中状态，保证高亮与 activeTab 一致
-  if (batchBaseUrl.value === "地址3") {
+  if (batchBaseUrl.value === "地址3" || batchBaseUrl.value === "地址4") {
     activeTab.value = tabs3.value?.[0];
     currentTabs3.value = 0;
   } else {
