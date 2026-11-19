@@ -172,6 +172,7 @@
                       @error="hideBrokenIcon"
                       @mouseenter.stop="showAugmentTip($event, aug.id)"
                       @mouseleave="hideAugmentTip"
+                      @click.stop="showAugmentTip($event, aug.id)"
                     />
                   </view>
                 </view>
@@ -455,12 +456,16 @@ function augmentList(ids) {
 
 function showAugmentTip(e, id) {
   const meta = getAugment(id);
-  const point = e?.touches?.[0] ?? e ?? {};
+  const point = e?.touches?.[0] ?? e?.changedTouches?.[0] ?? e ?? {};
   const { windowWidth = 375, windowHeight = 667 } = uni.getSystemInfoSync();
   const tipWidth = 260;
   const tipHeight = 120;
-  const x = Number(point.clientX ?? point.pageX ?? 0);
-  const y = Number(point.clientY ?? point.pageY ?? 0);
+  const x = Number(
+    point.clientX ?? point.pageX ?? e?.detail?.x ?? windowWidth / 2
+  );
+  const y = Number(
+    point.clientY ?? point.pageY ?? e?.detail?.y ?? windowHeight / 2
+  );
   const top =
     y + tipHeight + 16 > windowHeight
       ? Math.max(8, y - tipHeight - 8)
