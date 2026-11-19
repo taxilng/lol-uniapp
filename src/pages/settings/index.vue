@@ -292,6 +292,27 @@
         </view>
       </template>
     </view>
+    <view v-if="activeTab === 2">
+      <view class="mt-4 flex items-center">
+        <uv-input
+          v-model="checkinCode"
+          placeholder="请输入公众号获取的签到口令"
+          border="bottom"
+          clearable
+        ></uv-input>
+      </view>
+      <view class="flex flex-wrap items-center mt-2">
+        <view class="mr-4">
+          <uv-button
+            size="small"
+            type="primary"
+            text="签到"
+            :loading="checkinLoading"
+            @click="checkinIN"
+          ></uv-button>
+        </view>
+      </view>
+    </view>
     <view
       class="flex flex-wrap items-center pt-2 mt-2 mb-2 border-t-2 border-gray-300"
     >
@@ -373,7 +394,7 @@
           :key="acc.name"
           class="flex py-1"
           :class="acc.current ? 'bg-blue-100 font-bold' : ''"
-          @click="refreshCzjAccount(true)"
+          @click="onCzjAccountClick(acc)"
         >
           <text class="flex-1">{{ acc.name }}</text>
           <text class="flex-1">{{ acc.status }}</text>
@@ -445,7 +466,14 @@ import {
   getLesoAccountIndex,
   getLesoAccountStatus,
 } from "@/api/leso";
-import { czjMe, czjLoginAndMe, CZJ_ACCOUNT_POOL } from "@/api/czj";
+import {
+  czjMe,
+  czjLoginAndMe,
+  czjCheckin,
+  CZJ_ACCOUNT_POOL,
+  getCzjCurrentAccount,
+  setCzjCurrentAccount,
+} from "@/api/czj";
 
 onMounted(() => {
   init();
@@ -660,45 +688,83 @@ onShow(() => {
 
 // 查战绩（峡谷查个分）账号池：当前登录账号与每日查询额度
 const czjAccountRows = ref([]);
+// 已查询到的账号额度，切换账号时不清空
+const czjAccountCache = ref({});
+
+function buildCzjRows(currentName, currentOk = true) {
+  czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => {
+    const cache = czjAccountCache.value[name];
+    if (name === currentName) {
+      return {
+        name,
+        current: true,
+        status: !currentOk ? "未登录" : cache?.exhausted ? "已用完" : "已登录",
+        quotaText: cache?.quotaText || "--",
+      };
+    }
+    return {
+      name,
+      current: false,
+      status: cache ? (cache.exhausted ? "已用完" : "待切换") : "未查询",
+      quotaText: cache?.quotaText || "--",
+    };
+  });
+}
 
 async function refreshCzjAccount(forceLogin = false) {
+  const currentName = getCzjCurrentAccount();
   try {
     const res = await (forceLogin ? czjLoginAndMe() : czjMe());
     const user = res?.user ?? {};
-    const currentName = user.username || CZJ_ACCOUNT_POOL[0];
     const permission = user.queryPermission ?? user.checkin?.permission;
-    const statusText =
-      user.status === "normal" || !user.status ? "已登录" : user.status;
-    czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => {
-      const current = name === currentName;
-      return {
-        name,
-        current,
-        status: current ? statusText : "未登录",
-        quotaText:
-          current && permission?.limit !== undefined
-            ? `${permission.remaining ?? "--"}/${permission.limit}`
-            : "--",
-      };
-    });
+    const limit = permission?.limit;
+    const remaining = permission?.remaining;
+    czjAccountCache.value = {
+      ...czjAccountCache.value,
+      [currentName]: {
+        quotaText: limit !== undefined ? `${remaining ?? "--"}/${limit}` : "--",
+        exhausted: Number(remaining) === 0,
+      },
+    };
+    buildCzjRows(currentName);
+    return true;
   } catch (error) {
-    czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => ({
-      name,
-      current: true,
-      status: "未登录",
-      quotaText: "--",
-    }));
+    buildCzjRows(currentName, false);
+    return false;
   }
 }
 
-async function onCzjPoolTitleClick() {
-  uni.showLoading({ title: "登录查询中..." });
+// 点击账号行：切换为当前账号并重新登录查询
+async function onCzjAccountClick(acc) {
+  if (!setCzjCurrentAccount(acc.name)) return;
+  uni.showLoading({ title: `登录 ${acc.name}...` });
   try {
     await refreshCzjAccount(true);
-    uni.showToast({ title: "查询完成", icon: "none" });
+    uni.showToast({ title: `${acc.name} 已切换`, icon: "none" });
   } finally {
     uni.hideLoading();
   }
+}
+
+// 点击标题：遍历账号池逐个查询额度，最后切回原账号
+async function onCzjPoolTitleClick() {
+  const original = getCzjCurrentAccount();
+  let failCount = 0;
+  for (const name of CZJ_ACCOUNT_POOL) {
+    uni.showLoading({ title: `查询 ${name}...` });
+    if (!setCzjCurrentAccount(name)) continue;
+    if (!(await refreshCzjAccount(true))) {
+      failCount++;
+      console.log("查询账号额度失败", name);
+    }
+  }
+  setCzjCurrentAccount(original);
+  if (!(await refreshCzjAccount(true))) failCount++;
+  uni.hideLoading();
+  uni.showToast({
+    title: failCount ? `查询完成，${failCount} 个失败` : "全部账号查询完成",
+    icon: "none",
+  });
 }
 
 // 默认页面
@@ -1020,7 +1086,43 @@ const tabAccountList = [
     name: "同步账号",
     value: "synchronous",
   },
+  {
+    name: "每日签到",
+    value: "checkin",
+  },
 ];
+
+// 每日签到（峡谷查个分）
+const checkinCode = ref("");
+const checkinLoading = ref(false);
+
+async function checkinIN() {
+  const code = checkinCode.value.trim();
+  if (!code) {
+    uni.showToast({ title: "请输入签到口令", icon: "none" });
+    return;
+  }
+  checkinLoading.value = true;
+  try {
+    const res = await czjCheckin(code);
+    const alreadyCheckedIn = res?.data?.alreadyCheckedIn;
+    uni.showModal({
+      title: alreadyCheckedIn ? "今日已签到" : "签到成功",
+      content: res?.message || "签到成功",
+      showCancel: false,
+    });
+    if (!alreadyCheckedIn) checkinCode.value = "";
+    refreshCzjAccount();
+  } catch (error) {
+    uni.showModal({
+      title: "签到失败",
+      content: error?.message || "签到失败，请稍后重试",
+      showCancel: false,
+    });
+  } finally {
+    checkinLoading.value = false;
+  }
+}
 
 // 同步账号
 const captchaBase64 = ref("");

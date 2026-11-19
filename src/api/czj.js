@@ -9,12 +9,25 @@
 
 const CZJ_BASE = "/czj";
 
-// 峡谷查个分账号（当前仅 fx1 可用）
-const CZJ_ACCOUNT = "fx1";
+// 峡谷查个分账号池（密码统一）
 const CZJ_PASSWORD = "123456";
+export const CZJ_ACCOUNT_POOL = ["fx1", "fx01"];
 
-// 账号池：设置页展示用，新增账号时在这里追加
-export const CZJ_ACCOUNT_POOL = [CZJ_ACCOUNT];
+const CZJ_ACCOUNT_INDEX_KEY = "czjAccountIndex";
+
+export function getCzjCurrentAccount() {
+  const idx = Number(uni.getStorageSync(CZJ_ACCOUNT_INDEX_KEY));
+  return CZJ_ACCOUNT_POOL[idx] || CZJ_ACCOUNT_POOL[0];
+}
+
+// 切换当前使用账号：清空进行中的登录，下次请求会用新账号重新登录
+export function setCzjCurrentAccount(name) {
+  const idx = CZJ_ACCOUNT_POOL.indexOf(name);
+  if (idx < 0) return false;
+  uni.setStorageSync(CZJ_ACCOUNT_INDEX_KEY, idx);
+  loginPromise = null;
+  return true;
+}
 
 function czjUrl(path, query = {}) {
   const qs = Object.entries(query)
@@ -44,6 +57,42 @@ function isCzjAuthExpired(resData) {
   return CZJ_AUTH_EXPIRED_KEYWORDS.some(keyword => message.includes(keyword));
 }
 
+// 今日免费查询次数用完
+function isCzjQuotaExhausted(resData) {
+  if (resData?.code !== 403) return false;
+  const permission = resData?.data?.permission;
+  return (
+    permission?.type === "free_limited" ||
+    Number(permission?.remaining) === 0 ||
+    String(resData?.message || "").includes("次数已用完")
+  );
+}
+
+// 本次运行期间已用尽的账号，避免在账号之间来回切换
+const exhaustedAccounts = new Set();
+let switchingPromise = null;
+
+// 切换到下一个未用尽的账号并登录；没有可用账号时返回 false
+function switchCzjAccount() {
+  if (!switchingPromise) {
+    exhaustedAccounts.add(getCzjCurrentAccount());
+    const next = CZJ_ACCOUNT_POOL.find(
+      name => !exhaustedAccounts.has(name)
+    );
+    if (!next) {
+      return Promise.resolve(false);
+    }
+    console.log("峡谷查个分查询次数用尽，切换账号：", next);
+    setCzjCurrentAccount(next);
+    switchingPromise = ensureCzjLogin()
+      .then(() => true)
+      .finally(() => {
+        switchingPromise = null;
+      });
+  }
+  return switchingPromise;
+}
+
 let loginPromise = null;
 
 // 自动登录（并发请求共享同一次登录，避免重复登录顶掉会话）
@@ -52,7 +101,7 @@ function ensureCzjLogin() {
     loginPromise = czjRawRequest("/User/login_password.php", {
       method: "POST",
       body: {
-        account: CZJ_ACCOUNT,
+        account: getCzjCurrentAccount(),
         password: CZJ_PASSWORD,
       },
     })
@@ -74,10 +123,18 @@ function ensureCzjLogin() {
 async function czjRequest(pathWithQuery, { method = "GET", body } = {}) {
   const path = pathWithQuery.split("?")[0];
   let resData = await czjRawRequest(pathWithQuery, { method, body });
-  // 未登录 / 会话失效：自动登录一次并重试（只重试一次，避免死循环）
-  if (path !== "/User/login_password.php" && isCzjAuthExpired(resData)) {
-    await ensureCzjLogin();
-    resData = await czjRawRequest(pathWithQuery, { method, body });
+  if (path !== "/User/login_password.php") {
+    if (isCzjAuthExpired(resData)) {
+      // 未登录 / 会话失效：自动登录一次并重试（只重试一次，避免死循环）
+      await ensureCzjLogin();
+      resData = await czjRawRequest(pathWithQuery, { method, body });
+    } else if (isCzjQuotaExhausted(resData)) {
+      // 今日免费查询次数用完：切换到下一个账号并重试
+      const switched = await switchCzjAccount();
+      if (switched) {
+        resData = await czjRawRequest(pathWithQuery, { method, body });
+      }
+    }
   }
   if (resData.code === 0 || resData.code === 200) {
     return resData.data;
@@ -171,6 +228,24 @@ export function czjMe() {
 export async function czjLoginAndMe() {
   await ensureCzjLogin();
   return czjRequest(`/User/me.php?_t=${Date.now()}`);
+}
+
+// 每日签到，code 为公众号获取的签到口令
+// 返回完整响应（含 message），用于区分「签到成功」和「今天已签到」
+export async function czjCheckin(code) {
+  const path = "/User/checkin.php";
+  let resData = await czjRawRequest(path, { method: "POST", body: { code } });
+  if (isCzjAuthExpired(resData)) {
+    await ensureCzjLogin();
+    resData = await czjRawRequest(path, { method: "POST", body: { code } });
+  }
+  if (resData.code === 0 || resData.code === 200) {
+    return resData;
+  }
+  const err = new Error(resData.message || "签到失败");
+  err.code = resData.code;
+  err.data = resData.data;
+  throw err;
 }
 
 /**
