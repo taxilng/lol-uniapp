@@ -101,6 +101,12 @@
               ).toFixed(2)}%)`
             }}
           </text>
+          <text
+            v-if="batchBaseUrl === '地址3' && item.avgDamageShareOfTeam"
+            class="mt-1 text-xs mx-1"
+          >
+            输: {{ (item.avgDamageShareOfTeam * 100).toFixed(0) }}%
+          </text>
           <view v-if="batchBaseUrl === '地址3'" class="flex mt-1 text-xs">
             <view v-if="item.damageMax">
               <i class="mr-1 ml-2 honor16 honor16-hurt2"></i>
@@ -110,14 +116,14 @@
               <i class="mr-1 ml-2 honor16 honor16-hurt"></i>
               {{ percentageConversion(item.defenseMax, 0) }}
             </view>
-            <view v-if="item.killsMax">
+            <!-- <view v-if="item.killsMax">
               <i class="mr-1 ml-2 honor16 honor16-kill"></i>
               {{ percentageConversion(item.killsMax, 0) }}
-            </view>
-            <view v-if="item.assistsMax">
+            </view> -->
+            <!-- <view v-if="item.assistsMax">
               <i class="mr-1 ml-2 honor16 honor16-attack"></i>
               {{ percentageConversion(item.assistsMax, 0) }}
-            </view>
+            </view> -->
             <view v-if="item.pentaKills">
               <i class="mr-1 ml-2 honor16 honor16-kill5"></i>
               {{ item.pentaKills }}
@@ -528,6 +534,14 @@ const userInfos = computed(() =>
       visible:
         (mode.value === "detailed" || activeTab.value.name?.includes("黑")) &&
         hasValue(item.value.blackoutTimes),
+    },
+    {
+      label: "胜负",
+      value: `${item.value.wins ?? 0}/${item.value.losses ?? 0}`,
+      visible:
+        (["detailed"].includes(mode.value) ||
+          !activeTab.value.name?.includes("黑")) &&
+        hasValue(item.value.wins, item.value.losses),
     },
     {
       label: "有效场次",
