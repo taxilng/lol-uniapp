@@ -13,6 +13,9 @@ const CZJ_BASE = "/czj";
 const CZJ_ACCOUNT = "fx1";
 const CZJ_PASSWORD = "123456";
 
+// 账号池：设置页展示用，新增账号时在这里追加
+export const CZJ_ACCOUNT_POOL = [CZJ_ACCOUNT];
+
 function czjUrl(path, query = {}) {
   const qs = Object.entries(query)
     .filter(([, v]) => v !== undefined && v !== null && v !== "")
@@ -157,6 +160,17 @@ export async function czjMatchPage({
       matchId: m?.metadata?.match_id,
     }))
     .filter(m => m.gameId);
+}
+
+// 当前登录账号信息（含每日查询额度）
+export function czjMe() {
+  return czjRequest(`/User/me.php?_t=${Date.now()}`);
+}
+
+// 先强制登录一次，再查询当前账号信息（设置页点击刷新用）
+export async function czjLoginAndMe() {
+  await ensureCzjLogin();
+  return czjRequest(`/User/me.php?_t=${Date.now()}`);
 }
 
 /**

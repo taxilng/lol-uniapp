@@ -359,6 +359,31 @@
         </view>
       </view>
     </view>
+    <!-- 查战绩账号池（峡谷查个分） -->
+    <view class="mb-4 mt-4">
+      <text class="font-bold" @click="onCzjPoolTitleClick">查战绩账号池</text>
+      <view class="mt-2 text-sm">
+        <view class="flex border-b border-gray-300 py-1">
+          <text class="flex-1">账号</text>
+          <text class="flex-1">状态</text>
+          <text class="flex-1">剩余次数</text>
+        </view>
+        <view
+          v-for="acc in czjAccountRows"
+          :key="acc.name"
+          class="flex py-1"
+          :class="acc.current ? 'bg-blue-100 font-bold' : ''"
+          @click="refreshCzjAccount(true)"
+        >
+          <text class="flex-1">{{ acc.name }}</text>
+          <text class="flex-1">{{ acc.status }}</text>
+          <text class="flex-1">{{ acc.quotaText }}</text>
+        </view>
+        <view v-if="!czjAccountRows.length" class="py-1 text-gray-400">
+          点击标题加载
+        </view>
+      </view>
+    </view>
     <multiple-select
       v-model="show"
       :data="userOptions"
@@ -420,9 +445,11 @@ import {
   getLesoAccountIndex,
   getLesoAccountStatus,
 } from "@/api/leso";
+import { czjMe, czjLoginAndMe, CZJ_ACCOUNT_POOL } from "@/api/czj";
 
 onMounted(() => {
   init();
+  refreshCzjAccount();
 });
 
 function init() {
@@ -630,6 +657,49 @@ async function onPoolTitleClick() {
 onShow(() => {
   refreshLesoAccounts();
 });
+
+// 查战绩（峡谷查个分）账号池：当前登录账号与每日查询额度
+const czjAccountRows = ref([]);
+
+async function refreshCzjAccount(forceLogin = false) {
+  try {
+    const res = await (forceLogin ? czjLoginAndMe() : czjMe());
+    const user = res?.user ?? {};
+    const currentName = user.username || CZJ_ACCOUNT_POOL[0];
+    const permission = user.queryPermission ?? user.checkin?.permission;
+    const statusText =
+      user.status === "normal" || !user.status ? "已登录" : user.status;
+    czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => {
+      const current = name === currentName;
+      return {
+        name,
+        current,
+        status: current ? statusText : "未登录",
+        quotaText:
+          current && permission?.limit !== undefined
+            ? `${permission.remaining ?? "--"}/${permission.limit}`
+            : "--",
+      };
+    });
+  } catch (error) {
+    czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => ({
+      name,
+      current: true,
+      status: "未登录",
+      quotaText: "--",
+    }));
+  }
+}
+
+async function onCzjPoolTitleClick() {
+  uni.showLoading({ title: "登录查询中..." });
+  try {
+    await refreshCzjAccount(true);
+    uni.showToast({ title: "查询完成", icon: "none" });
+  } finally {
+    uni.hideLoading();
+  }
+}
 
 // 默认页面
 const pickerRef = ref();
