@@ -11,7 +11,7 @@ const CZJ_BASE = "/czj";
 
 // 峡谷查个分账号池（密码统一）
 const CZJ_PASSWORD = "123456";
-export const CZJ_ACCOUNT_POOL = ["fx1", "fx01"];
+export const CZJ_ACCOUNT_POOL = ["fx1", "fx01", "fx2"];
 
 const CZJ_ACCOUNT_INDEX_KEY = "czjAccountIndex";
 
