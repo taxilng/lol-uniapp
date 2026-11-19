@@ -11,7 +11,7 @@ const CZJ_BASE = "/czj";
 
 // 峡谷查个分账号池（密码统一）
 const CZJ_PASSWORD = "123456";
-export const CZJ_ACCOUNT_POOL = ["fx1", "fx01", "fx2"];
+export const CZJ_ACCOUNT_POOL = ["fx1", "fx01", "fx2", "fx3"];
 
 const CZJ_ACCOUNT_INDEX_KEY = "czjAccountIndex";
 
@@ -318,6 +318,8 @@ export async function czjFetchPlayerFull({ gameName, tagLine, count = 20 }) {
     puuid,
     serverId,
     base: {
+      // puuid 必须带上：下游 handlerso1Data 靠它从 participants 里定位"自己"（与搜联盟 base 同构）
+      puuid,
       profileIconId: overview?.profileIconId,
       level: overview?.level,
       privacy: overview?.privacy,
