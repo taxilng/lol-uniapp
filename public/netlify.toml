@@ -9,11 +9,6 @@
   status = 200
 
 [[redirects]]
-  from = "/czj/*"
-  to = "https://chazhanji.cn/:splat"
-  status = 200
-
-[[redirects]]
   from = "/bspapp/*"
   to = "https://fund-api-url.rabt.top/http/user-center/:splat"
   status = 200
