@@ -1,11 +1,16 @@
 <template>
   <view class="shadow-sm" v-if="iconId" @click="handleClick">
-    <img class="w-10 h-10 rounded-full" :class="{ myrotate: loading }" :src="baseUrl" />
+    <img
+      class="w-10 h-10 rounded-full"
+      :class="{ myrotate: loading }"
+      :src="baseUrl"
+      @error="onImgError"
+    />
   </view>
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 const props = defineProps({
   iconId: [String, Number],
@@ -18,9 +23,21 @@ const handleClick = () => {
   emit('click')
 }
 
-const baseUrl = computed(
-  () =>
-    `https://wegame.gtimg.com/g.26-r.c2d3c/helper/lol/assis/images/resources/usericon/${props.iconId}.png`
+// 默认用 down.qq.com 的 jpg，加载失败降级到 wegame.gtimg.com 的 png
+const loadFailed = ref(false)
+const baseUrl = computed(() =>
+  loadFailed.value
+    ? `https://wegame.gtimg.com/g.26-r.c2d3c/helper/lol/assis/images/resources/usericon/${props.iconId}.png`
+    : `https://down.qq.com/lolapp/lol/summoner/profileicon/${props.iconId}.jpg`
+)
+function onImgError() {
+  loadFailed.value = true
+}
+watch(
+  () => props.iconId,
+  () => {
+    loadFailed.value = false
+  }
 )
 </script>
 
