@@ -989,11 +989,20 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         const myTableData =
           searchType === "history" ? tableData1.value : tableDataOnline.value;
         newData.forEach(y => {
-          const findIdx = myTableData.findIndex(
-            v => y.nameInfoNew === v.nameInfoNew
-          );
+          // 同一玩家判定：nameInfoNew（游戏名#tag，改版后全局唯一，兼容地址1~4）为主键；
+          // openId 仅接口1 链路提供，作为玩家改名后的兜底匹配
+          const samePlayer = v =>
+            y.nameInfoNew === v.nameInfoNew ||
+            (y.openId && v.openId && y.openId === v.openId);
+          const findIdx = myTableData.findIndex(samePlayer);
           if (findIdx !== -1) {
             myTableData[findIdx] = y;
+            // 清理历史遗留的重复记录（旧链路按不同键写入导致的同名多条）
+            for (let i = myTableData.length - 1; i > findIdx; i--) {
+              if (samePlayer(myTableData[i])) {
+                myTableData.splice(i, 1);
+              }
+            }
           } else {
             myTableData.push(y);
           }
