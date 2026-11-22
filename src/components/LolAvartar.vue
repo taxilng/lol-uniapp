@@ -1,7 +1,7 @@
 <template>
   <view class="shadow-sm" v-if="iconId" @click="handleClick">
     <img
-      class="w-10 h-10 rounded-full"
+      class="w-10 h-10 rounded-lg"
       :class="{ myrotate: loading }"
       :src="baseUrl"
       @error="onImgError"
@@ -61,7 +61,7 @@ watch(
 .h-10 {
   height: 100rpx;
 }
-.rounded-full {
-  border-radius: 50%;
+.rounded-lg {
+  border-radius: 8px;
 }
 </style>
