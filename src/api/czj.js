@@ -9,20 +9,45 @@
 
 const CZJ_BASE = "/czj";
 
-// 峡谷查个分账号池（密码统一）
+// 峡谷查个分账号池（密码统一，支持设置页手动编辑并持久化到本地）
 const CZJ_PASSWORD = "123456";
-export const CZJ_ACCOUNT_POOL = ["fx1", "fx01", "fx2", "fx3"];
+const DEFAULT_CZJ_ACCOUNT_POOL = ["fx1", "fx01", "fx2", "fx3"];
+const CZJ_POOL_KEY = "czjAccountPool";
+
+export function getCzjAccountPool() {
+  try {
+    const list = JSON.parse(uni.getStorageSync(CZJ_POOL_KEY));
+    if (Array.isArray(list)) {
+      const cleaned = list.map(v => String(v).trim()).filter(Boolean);
+      if (cleaned.length) return cleaned;
+    }
+  } catch (error) {
+    console.log("读取账号池配置失败", error);
+  }
+  return [...DEFAULT_CZJ_ACCOUNT_POOL];
+}
+
+// 保存账号池（数组，自动去重去空），返回清洗后的列表
+export function setCzjAccountPool(list) {
+  const cleaned = [
+    ...new Set(list.map(v => String(v).trim()).filter(Boolean)),
+  ];
+  uni.setStorageSync(CZJ_POOL_KEY, JSON.stringify(cleaned));
+  loginPromise = null;
+  return cleaned;
+}
 
 const CZJ_ACCOUNT_INDEX_KEY = "czjAccountIndex";
 
 export function getCzjCurrentAccount() {
+  const pool = getCzjAccountPool();
   const idx = Number(uni.getStorageSync(CZJ_ACCOUNT_INDEX_KEY));
-  return CZJ_ACCOUNT_POOL[idx] || CZJ_ACCOUNT_POOL[0];
+  return pool[idx] || pool[0];
 }
 
 // 切换当前使用账号：清空进行中的登录，下次请求会用新账号重新登录
 export function setCzjCurrentAccount(name) {
-  const idx = CZJ_ACCOUNT_POOL.indexOf(name);
+  const idx = getCzjAccountPool().indexOf(name);
   if (idx < 0) return false;
   uni.setStorageSync(CZJ_ACCOUNT_INDEX_KEY, idx);
   loginPromise = null;
@@ -68,6 +93,18 @@ function isCzjQuotaExhausted(resData) {
   );
 }
 
+// 被封禁的账号（登录返回 401 且提示禁用）
+function isCzjBannedRes(resData) {
+  return (
+    resData?.code === 401 && String(resData?.message || "").includes("禁用")
+  );
+}
+const bannedAccounts = new Set();
+
+export function isCzjAccountBanned(name) {
+  return bannedAccounts.has(name);
+}
+
 // 本次运行期间已用尽的账号，避免在账号之间来回切换
 const exhaustedAccounts = new Set();
 let switchingPromise = null;
@@ -76,7 +113,7 @@ let switchingPromise = null;
 function switchCzjAccount() {
   if (!switchingPromise) {
     exhaustedAccounts.add(getCzjCurrentAccount());
-    const next = CZJ_ACCOUNT_POOL.find(
+    const next = getCzjAccountPool().find(
       name => !exhaustedAccounts.has(name)
     );
     if (!next) {
@@ -107,8 +144,12 @@ function ensureCzjLogin() {
     })
       .then(resData => {
         if (resData.code !== 0 && resData.code !== 200) {
+          if (isCzjBannedRes(resData)) {
+            bannedAccounts.add(getCzjCurrentAccount());
+          }
           const err = new Error(resData.message || "峡谷查个分登录失败");
           err.code = resData.code;
+          err.banned = isCzjBannedRes(resData);
           throw err;
         }
         return resData.data;
@@ -139,9 +180,13 @@ async function czjRequest(pathWithQuery, { method = "GET", body } = {}) {
   if (resData.code === 0 || resData.code === 200) {
     return resData.data;
   }
+  if (isCzjBannedRes(resData)) {
+    bannedAccounts.add(getCzjCurrentAccount());
+  }
   const err = new Error(resData.message || "峡谷查个分接口请求失败");
   err.code = resData.code;
   err.data = resData.data;
+  err.banned = isCzjBannedRes(resData);
   throw err;
 }
 

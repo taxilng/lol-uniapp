@@ -404,6 +404,21 @@
           点击标题加载
         </view>
       </view>
+      <view class="mt-2">
+        <uv-textarea
+          v-model="czjPoolInput"
+          :maxlength="-1"
+          placeholder="账号池，多个账号用逗号分隔，如 fx1,fx2,fx3"
+        ></uv-textarea>
+        <view class="mt-2">
+          <uv-button
+            size="small"
+            type="primary"
+            text="保存账号池"
+            @click="saveCzjPool"
+          ></uv-button>
+        </view>
+      </view>
     </view>
     <multiple-select
       v-model="show"
@@ -470,13 +485,16 @@ import {
   czjMe,
   czjLoginAndMe,
   czjCheckin,
-  CZJ_ACCOUNT_POOL,
+  getCzjAccountPool,
+  setCzjAccountPool,
+  isCzjAccountBanned,
   getCzjCurrentAccount,
   setCzjCurrentAccount,
 } from "@/api/czj";
 
 onMounted(() => {
   init();
+  initCzjPoolInput();
   refreshCzjAccount();
 });
 
@@ -691,9 +709,36 @@ const czjAccountRows = ref([]);
 // 已查询到的账号额度，切换账号时不清空
 const czjAccountCache = ref({});
 
+// 账号池手动编辑（逗号分隔，保存到本地持久化）
+const czjPoolInput = ref("");
+
+function initCzjPoolInput() {
+  czjPoolInput.value = getCzjAccountPool().join(",");
+}
+
+function saveCzjPool() {
+  const list = setCzjAccountPool(czjPoolInput.value.split(/[，,]/));
+  if (!list.length) {
+    uni.showToast({ title: "请输入至少一个账号", icon: "none" });
+    return;
+  }
+  czjAccountCache.value = {};
+  initCzjPoolInput();
+  buildCzjRows(getCzjCurrentAccount(), false);
+  uni.showToast({ title: "保存成功", icon: "success" });
+}
+
 function buildCzjRows(currentName, currentOk = true) {
-  czjAccountRows.value = CZJ_ACCOUNT_POOL.map(name => {
+  czjAccountRows.value = getCzjAccountPool().map(name => {
     const cache = czjAccountCache.value[name];
+    if (isCzjAccountBanned(name)) {
+      return {
+        name,
+        current: name === currentName,
+        status: "已封禁",
+        quotaText: cache?.quotaText || "--",
+      };
+    }
     if (name === currentName) {
       return {
         name,
@@ -729,6 +774,13 @@ async function refreshCzjAccount(forceLogin = false) {
     buildCzjRows(currentName);
     return true;
   } catch (error) {
+    if (error?.banned) {
+      uni.showModal({
+        title: "账号已封禁",
+        content: error.message || "违规使用账号已被禁用，请联系管理员",
+        showCancel: false,
+      });
+    }
     buildCzjRows(currentName, false);
     return false;
   }
@@ -750,7 +802,7 @@ async function onCzjAccountClick(acc) {
 async function onCzjPoolTitleClick() {
   const original = getCzjCurrentAccount();
   let failCount = 0;
-  for (const name of CZJ_ACCOUNT_POOL) {
+  for (const name of getCzjAccountPool()) {
     uni.showLoading({ title: `查询 ${name}...` });
     if (!setCzjCurrentAccount(name)) continue;
     if (!(await refreshCzjAccount(true))) {
