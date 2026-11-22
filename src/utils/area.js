@@ -455,6 +455,10 @@ export const baseUrlList = [
     name: "地址4",
     value: czjBase,
   },
+  {
+    name: "地址5",
+    value: "https://a.2025lol.top",
+  },
 ];
 
 export const S5ChessList = [
