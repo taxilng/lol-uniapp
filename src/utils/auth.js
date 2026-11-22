@@ -403,6 +403,21 @@ export function handlerso1Data(source) {
           ].includes(v.queueId)
       );
     }
+    // 组队（几黑）统计：同模式同队共同出现 ≥2 场的队友视为组队
+    const premadeCoCount = {};
+    effectiveCompetition.forEach(v => {
+      const yourIdx = v.participants.findIndex(
+        x => x.puuid === source.baseInfo?.puuid
+      );
+      if (yourIdx === -1) return;
+      v.participants.forEach((x, i) => {
+        const isYourTeam = (yourIdx < 5 && i < 5) || (yourIdx >= 5 && i >= 5);
+        if (x.puuid && x.puuid !== source.baseInfo?.puuid && isYourTeam) {
+          const key = `${v.queueId}_${x.puuid}`;
+          premadeCoCount[key] = (premadeCoCount[key] || 0) + 1;
+        }
+      });
+    });
     // 你的所有队友和对手
     const yourMatchPlayersList = [];
     const list = effectiveCompetition.map(v => {
@@ -414,6 +429,19 @@ export function handlerso1Data(source) {
       const yourIndex = v.participants.findIndex(
         x => x.puuid === source.baseInfo?.puuid
       );
+      // 本场组队人数（几黑）：自己 + 同队中与本玩家同模式同队出现≥2场的队友
+      const premadeSize =
+        1 +
+        v.participants.filter((x, i) => {
+          const isYourTeam =
+            (yourIndex < 5 && i < 5) || (yourIndex >= 5 && i >= 5);
+          return (
+            x.puuid &&
+            x.puuid !== source.baseInfo?.puuid &&
+            isYourTeam &&
+            (premadeCoCount[`${v.queueId}_${x.puuid}`] || 0) >= 2
+          );
+        }).length;
       // console.log("你的index", yourIndex);
       const yourMatchPlayers = v.participants
         .map((v, i) => {
@@ -584,6 +612,7 @@ export function handlerso1Data(source) {
           "gameDuration",
           "platformId",
         ]),
+        premadeSize,
         ...pick(yours, [
           "championId",
           "win",

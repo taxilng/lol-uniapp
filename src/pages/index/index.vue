@@ -386,6 +386,16 @@ function onLineSubmit() {
 }
 
 const failOnlineData = ref([]);
+// 同一玩家判定：nameInfoNew（游戏名#tag，改版后全局唯一，兼容地址1~4）为主键；
+// openId 仅部分链路提供，作为玩家改名后的兜底匹配
+// 注意：地址1/2 写入的记录顶层没有 puuid，地址3/4 的链路不能只按 puuid 去重
+function isSamePlayer(a, b) {
+  return (
+    (a?.nameInfoNew && a.nameInfoNew === b?.nameInfoNew) ||
+    (a?.openId && b?.openId && a.openId === b.openId)
+  );
+}
+
 async function getNewOnline(requestScope = "all") {
   let allrequestParams = [];
   if (requestScope === "all") {
@@ -456,7 +466,7 @@ async function getNewOnline(requestScope = "all") {
 
     newData = handlerMerge(newData);
     newData.forEach(y => {
-      const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
+      const findIdx = tableData1.value.findIndex(v => isSamePlayer(y, v));
       if (findIdx !== -1) {
         tableData1.value[findIdx] = {
           ...tableData1.value[findIdx],
@@ -560,7 +570,7 @@ async function getNewHistorys(requestScope = "all") {
     console.log("失败数据2", failHistoryData.value);
     newData = handlerMerge(newData);
     newData.forEach(y => {
-      const findIdx = tableData1.value.findIndex(v => y.puuid === v.puuid);
+      const findIdx = tableData1.value.findIndex(v => isSamePlayer(y, v));
       if (findIdx !== -1) {
         tableData1.value[findIdx] = y;
       } else {
@@ -989,17 +999,12 @@ async function getHistorys(searchType = "history", searchRange = "all") {
         const myTableData =
           searchType === "history" ? tableData1.value : tableDataOnline.value;
         newData.forEach(y => {
-          // 同一玩家判定：nameInfoNew（游戏名#tag，改版后全局唯一，兼容地址1~4）为主键；
-          // openId 仅接口1 链路提供，作为玩家改名后的兜底匹配
-          const samePlayer = v =>
-            y.nameInfoNew === v.nameInfoNew ||
-            (y.openId && v.openId && y.openId === v.openId);
-          const findIdx = myTableData.findIndex(samePlayer);
+          const findIdx = myTableData.findIndex(v => isSamePlayer(y, v));
           if (findIdx !== -1) {
             myTableData[findIdx] = y;
             // 清理历史遗留的重复记录（旧链路按不同键写入导致的同名多条）
             for (let i = myTableData.length - 1; i > findIdx; i--) {
-              if (samePlayer(myTableData[i])) {
+              if (isSamePlayer(y, myTableData[i])) {
                 myTableData.splice(i, 1);
               }
             }

@@ -117,6 +117,12 @@
                       <text class="text-slate-500">
                         {{ levelConfig.game_mod[item.queueId] }}
                       </text>
+                      <text
+                        v-if="item.premadeSize"
+                        class="ml-2 text-orange-400 font-bold"
+                      >
+                        {{ item.premadeSize > 1 ? item.premadeSize + "黑" : "单排" }}
+                      </text>
                       <i
                         v-if="item.damageMax"
                         class="ml-2 honor16 honor16-hurt2"
