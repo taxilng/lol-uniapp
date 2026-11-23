@@ -681,14 +681,15 @@ function updateRecord() {
       historyStore.setHistoryList(newData);
       recordData.value = newData;
 
-      // 先取出已缓存的 lolOnline，再根据 openId 更新对应项后保存
-      const matchOpenId = newData.openId || userHistory.openId;
+      // 先取出已缓存的 lolOnline，再按 nameInfoNew 更新对应项后保存
+      // 不能用 openId 匹配：同一账号不同大区的 openId 相同，会互相覆盖
+      const matchKey = newData.nameInfoNew || userHistory.nameInfoNew;
       try {
         const lolOnlineRaw = uni.getStorageSync("lolOnline");
         const lolOnlineArr = lolOnlineRaw ? JSON.parse(lolOnlineRaw) : [];
-        if (Array.isArray(lolOnlineArr) && matchOpenId) {
+        if (Array.isArray(lolOnlineArr) && matchKey) {
           const idx = lolOnlineArr.findIndex(
-            v => v.openId === matchOpenId
+            v => v.nameInfoNew === matchKey
           );
           if (idx !== -1) {
             lolOnlineArr[idx] = newData;

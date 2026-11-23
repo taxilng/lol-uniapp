@@ -386,14 +386,10 @@ function onLineSubmit() {
 }
 
 const failOnlineData = ref([]);
-// 同一玩家判定：nameInfoNew（游戏名#tag，改版后全局唯一，兼容地址1~4）为主键；
-// openId 仅部分链路提供，作为玩家改名后的兜底匹配
-// 注意：地址1/2 写入的记录顶层没有 puuid，地址3/4 的链路不能只按 puuid 去重
+// 同一玩家判定：只能按 nameInfoNew（游戏名#tag，改版后全局唯一，兼容地址1~4）去重
+// 不能用 openId：同一账号登录不同大区时 openId 相同，会把不同大区的玩家错误合并
 function isSamePlayer(a, b) {
-  return (
-    (a?.nameInfoNew && a.nameInfoNew === b?.nameInfoNew) ||
-    (a?.openId && b?.openId && a.openId === b.openId)
-  );
+  return !!a?.nameInfoNew && a.nameInfoNew === b?.nameInfoNew;
 }
 
 async function getNewOnline(requestScope = "all") {
