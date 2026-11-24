@@ -297,7 +297,12 @@ export async function czjCheckin(code) {
  * 获取玩家完整数据（对齐搜联盟链路的 baseInfo + list 结构）
  * 返回 { puuid, serverId, base, matchHistory, statistics }
  */
-export async function czjFetchPlayerFull({ gameName, tagLine, count = 20 }) {
+export async function czjFetchPlayerFull({
+  gameName,
+  tagLine,
+  count = 20,
+  queueId = 0,
+}) {
   const summoner = await czjResolveSummoner({ gameName, tagLine });
   const { puuid, serverId } = summoner;
   const totalPages = Math.max(1, Math.ceil(count / 20));
@@ -312,6 +317,7 @@ export async function czjFetchPlayerFull({ gameName, tagLine, count = 20 }) {
           puuid,
           page: i,
           size: 20,
+          queueId,
           authorized: true,
         })
       );

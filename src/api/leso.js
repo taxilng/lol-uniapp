@@ -286,15 +286,17 @@ export function lesoMatchAnalysis({ serverId, puuid, page = 1, size = 20, tag = 
  * matchHistory 与 akari history_all 的对局数组同构（participants/gameDuration/queueId 等）
  * statistics.summary 为多页汇总（按场次加权平均）
  */
-export async function lesoFetchPlayerFull({ gameName, tagLine, count = 20 }) {
+export async function lesoFetchPlayerFull({ gameName, tagLine, count = 20, queueId = 0 }) {
   const { puuid, serverId } = await lesoResolveSummoner({ gameName, tagLine });
   const totalPages = Math.max(1, Math.ceil(count / 20));
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+  // 模式筛选：tag 即队列过滤（-1 全部），前端统一传 queueId，0 视为全部
+  const tag = queueId > 0 ? queueId : -1;
   const [overview, matchPages] = await Promise.all([
     lesoOverview({ serverId, puuid }),
     Promise.all(
       pages.map(page =>
-        lesoMatchAnalysis({ serverId, puuid, page, size: 20, tag: -1 }).catch(
+        lesoMatchAnalysis({ serverId, puuid, page, size: 20, tag }).catch(
           () => ({ matchHistory: [] })
         )
       )

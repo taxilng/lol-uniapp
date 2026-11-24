@@ -515,11 +515,15 @@ async function getNewHistorys(requestScope = "all") {
               gameName: v.label,
               tagLine: v.tagLine,
               count: userInfo.value.num,
+              // 模式筛选：后端按 queueId 过滤（全部比赛为 0）
+              queueId: userInfo.value.queueId || 0,
             })
           : await lesoFetchPlayerFull({
               gameName: v.label,
               tagLine: v.tagLine,
               count: userInfo.value.num,
+              // 模式筛选：搜联盟按 tag（同 queueId）过滤（全部比赛为 0）
+              queueId: userInfo.value.queueId || 0,
             });
       const baseInfo = full.base;
       baseInfo.puuid = full.puuid;
@@ -604,39 +608,27 @@ const tableData1 = ref([]);
 const tableDataOnline = ref([]);
 const failRequest = ref([]);
 
-const CompetitionTypeOption = ref([
+// 基础选项：地址3/4（搜联盟/峡谷查个分）支持海克斯大乱斗，地址1/2/5 不支持需隐藏
+const baseCompetitionOptions = [
   { value: "1", label: "全部比赛" },
   { value: "2", label: "单双排", queueId: 420 },
   { value: "3", label: "灵活排位", queueId: 440 },
   { value: "4", label: "匹配赛", queueId: 430 },
   { value: "5", label: "大乱斗", queueId: 450 },
-  // { value: "6", label: "非人机" },
-]);
+  { value: "6", label: "海克斯大乱斗", queueId: 2400 },
+];
+
+const CompetitionTypeOption = ref([...baseCompetitionOptions]);
 
 watch(
-  () => userInfo.value,
+  () => userInfo.value?.batchBaseUrl,
   val => {
-    // console.log("接口地址", val?.batchBaseUrl);
-    if (val?.batchBaseUrl !== "地址3" && val?.batchBaseUrl !== "地址4") {
-      CompetitionTypeOption.value = [
-        { value: "1", label: "全部比赛" },
-        { value: "2", label: "单双排", queueId: 420 },
-        { value: "3", label: "灵活排位", queueId: 440 },
-        { value: "4", label: "匹配赛", queueId: 430 },
-        { value: "5", label: "大乱斗", queueId: 450 },
-      ];
-    } else {
-      CompetitionTypeOption.value = [
-        { value: "1", label: "全部比赛" },
-        { value: "2", label: "单双排", queueId: 420 },
-        { value: "3", label: "灵活排位", queueId: 440 },
-        { value: "4", label: "匹配赛", queueId: 430 },
-        { value: "5", label: "大乱斗", queueId: 450 },
-        { value: "6", label: "非人机" },
-      ];
-    }
+    const supportHextechAram = val === "地址3" || val === "地址4";
+    CompetitionTypeOption.value = baseCompetitionOptions.filter(
+      v => supportHextechAram || v.value !== "6"
+    );
   },
-  { deep: true }
+  { immediate: true }
 );
 
 const roles = ref([]);
