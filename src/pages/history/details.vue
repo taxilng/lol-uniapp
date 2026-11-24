@@ -291,10 +291,42 @@
                   </text>
                 </text>
               </view>
+
+              <view
+                v-if="augmentList(player).length"
+                class="flex items-center mt-1"
+              >
+                <img
+                  v-for="aug in augmentList(player)"
+                  :key="aug.id"
+                  class="augment-icon mr-1"
+                  :src="aug.icon"
+                  @error="hideBrokenIcon"
+                  @mouseenter.stop="showAugmentTip($event, aug.id)"
+                  @mouseleave="hideAugmentTip"
+                  @click.stop="showAugmentTip($event, aug.id)"
+                />
+              </view>
             </view>
           </view>
         </view>
       </template>
+    </view>
+
+    <view
+      v-if="augmentTip.visible"
+      class="augment-tip"
+      :style="{ left: augmentTip.x + 'px', top: augmentTip.y + 'px' }"
+    >
+      <view class="augment-tip__name">
+        {{ augmentTip.name }}
+        <text v-if="augmentTip.rarity" class="augment-tip__rarity">
+          {{ augmentTip.rarity }}
+        </text>
+      </view>
+      <view class="augment-tip__desc">
+        {{ augmentTip.desc || "暂无说明" }}
+      </view>
     </view>
   </view>
 </template>
@@ -323,6 +355,7 @@ import {
 } from "@/utils/auth";
 import screenshot from "@/utils/screenshot";
 import { areaMap, levelConfig } from "@/utils/area.js";
+import { getAugment } from "@/utils/augment";
 import { userHistoryStore } from "@/stores/userHistory";
 
 const historyStore = userHistoryStore();
@@ -470,6 +503,60 @@ async function goSO1HistoryList(player) {
   } finally {
     loading.value = false;
   }
+}
+
+// 海克斯强化图标与悬浮提示（参考战绩列表页）
+const augmentTip = ref({
+  visible: false,
+  x: 0,
+  y: 0,
+  name: "",
+  rarity: "",
+  desc: "",
+});
+
+function augmentList(player) {
+  const ids = [
+    player.playerAugment1,
+    player.playerAugment2,
+    player.playerAugment3,
+    player.playerAugment4,
+    player.playerAugment5,
+    player.playerAugment6,
+  ].filter(id => id);
+  return ids.map(id => getAugment(id)).filter(aug => aug.icon);
+}
+
+function showAugmentTip(e, id) {
+  const meta = getAugment(id);
+  const point = e?.touches?.[0] ?? e?.changedTouches?.[0] ?? e ?? {};
+  const { windowWidth = 375, windowHeight = 667 } = uni.getSystemInfoSync();
+  const tipWidth = 260;
+  const tipHeight = 120;
+  const x = Number(
+    point.clientX ?? point.pageX ?? e?.detail?.x ?? windowWidth / 2,
+  );
+  const y = Number(
+    point.clientY ?? point.pageY ?? e?.detail?.y ?? windowHeight / 2,
+  );
+  const top =
+    y + tipHeight + 16 > windowHeight ? Math.max(8, y - tipHeight - 8) : y + 16;
+  augmentTip.value = {
+    visible: true,
+    x: Math.max(8, Math.min(x + 12, windowWidth - tipWidth - 8)),
+    y: top,
+    name: meta.name,
+    rarity: meta.rarityText,
+    desc: meta.desc,
+  };
+}
+
+function hideAugmentTip() {
+  augmentTip.value.visible = false;
+}
+
+function hideBrokenIcon(e) {
+  if (e?.target) e.target.style.display = "none";
 }
 
 function getGameInfo(item) {
@@ -667,5 +754,44 @@ onMounted(() => {
 
 .myborder {
   border-top: 1px solid #ccc;
+}
+
+.augment-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: #424245;
+}
+
+.augment-tip {
+  position: fixed;
+  z-index: 9999;
+  width: 260px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.95);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.5;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+
+  &__name {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  &__rarity {
+    margin-left: 6px;
+    font-size: 11px;
+    font-weight: 400;
+    color: #fbbf24;
+  }
+
+  &__desc {
+    margin-top: 4px;
+    color: #e5e7eb;
+    white-space: pre-wrap;
+  }
 }
 </style>
