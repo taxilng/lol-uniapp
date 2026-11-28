@@ -45,7 +45,7 @@
 <script setup>
 import { ref, computed, toRefs, watch } from "vue";
 import { EventBus } from "@/utils/event-bus.js";
-import { getBatchBaseUrlName } from "@/utils/auth";
+import { getBatchBaseUrlName, trimLolRecordCache } from "@/utils/auth";
 import RecordItem from "./RecordItem.vue";
 
 const props = defineProps({
@@ -268,7 +268,10 @@ function handleDelItem(index) {
   mylist.splice(index, 1);
 
   if (uni.getStorageSync("lol")) {
-    uni.setStorageSync("lol", JSON.stringify(props.list));
+    uni.setStorageSync(
+      "lol",
+      JSON.stringify(props.list?.map(trimLolRecordCache))
+    );
   }
   if (uni.getStorageSync("lolOnline")) {
     uni.setStorageSync("lolOnline", JSON.stringify(listOnline.value));

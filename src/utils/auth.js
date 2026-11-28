@@ -683,6 +683,149 @@ export function handlerso1Data(source) {
   }
 }
 
+// 「lol」本地缓存瘦身：只保留列表页（RecordCard/RecordItem）、历史页、详情页实际用到的字段。
+// 接口原始报文里的 battleInfo（宣传图/段位历史）、10 局卡片皮肤文案、赛季大段 HTML 等占单条记录约 80% 体积，缓存时丢弃。
+const PARTICIPANT_CACHE_FIELDS = [
+  "win",
+  "championId",
+  "spell1Id",
+  "spell2Id",
+  "item0",
+  "item1",
+  "item2",
+  "item3",
+  "item4",
+  "item5",
+  "item6",
+  "riotIdGameName",
+  "riotIdTagline",
+  "kills",
+  "deaths",
+  "assists",
+  "pentaKills",
+  "perks1",
+  "perks2",
+  "damageMax",
+  "defenseMax",
+  "killsMax",
+  "assistsMax",
+  "damageAll",
+  "bearingInjuries",
+];
+
+// 旧链路（地址1/2/5）单局条目：历史页渲染 + 详情页按 gameId/openId/areaId 重新拉详情
+const GAME_CACHE_FIELDS = [
+  "gameId",
+  "openId",
+  "areaId",
+  "isWin",
+  "wasMvp",
+  "wasSvp",
+  "championId",
+  "titleTime",
+  "title",
+  "battleTypeStr",
+];
+
+const RECORD_CACHE_FIELDS = [
+  // 列表卡片展示（RecordCard/RecordItem）
+  "name",
+  "nameInfoNew",
+  "tagLine",
+  "iconId",
+  "level",
+  "message",
+  "messageDetail",
+  "publicInfo",
+  "onlineInfo",
+  "mlolgender",
+  "mlollatestLocation",
+  "totalGames",
+  "wins",
+  "losses",
+  "rate",
+  "netVictoryField",
+  "kills",
+  "deaths",
+  "assists",
+  "mvp",
+  "svp",
+  "blackoutTimes",
+  "blackoutWins",
+  "blackMvp",
+  "blackSvp",
+  "twoBlack",
+  "twoBlackWins",
+  "threeBlack",
+  "threeBlackWins",
+  "fourBlack",
+  "fourBlackWins",
+  "fiveBlack",
+  "fiveBlackWins",
+  "allChaotic",
+  "allMatching",
+  "rankingData",
+  "startTime",
+  "lastGameDate",
+  "damageMax",
+  "defenseMax",
+  "killsMax",
+  "assistsMax",
+  "pentaKills",
+  "avgDamageShareOfTeam",
+  "avgDamageTakenShareOfTeam",
+  "yourMatchPlayersList",
+  // 排序、合并、重新查询需要
+  "label",
+  "value",
+  "openId",
+  "areaId",
+  "puuid",
+  "serverId",
+  // 跳历史页/详情页的链路数据
+  "currentGame",
+  "curryMap",
+  // 以下字段 pick 后再单独瘦身（battleInfo 只留赛季汇总，单局条目只留渲染/详情字段）
+  "battleInfo",
+  "data",
+  "effectiveCompetition",
+];
+
+export function trimLolRecordCache(record) {
+  if (!record || typeof record !== "object") return record;
+  const trimmed = pick(record, RECORD_CACHE_FIELDS);
+  if (trimmed.battleInfo) {
+    // battleInfo 只留隐藏分查询（openId/areaId）和卡片展示的赛季汇总
+    trimmed.battleInfo = {
+      openId: trimmed.battleInfo.openId,
+      areaId: trimmed.battleInfo.areaId,
+      seasonInfoMap: pick(trimmed.battleInfo.seasonInfoMap || {}, [
+        "maxTier",
+        "maxQueue",
+        "totalGames",
+        "totalRate",
+      ]),
+    };
+  }
+  if (trimmed.data) {
+    trimmed.data = trimmed.data.map(game => pick(game, GAME_CACHE_FIELDS));
+  }
+  if (trimmed.effectiveCompetition) {
+    trimmed.effectiveCompetition = trimmed.effectiveCompetition.map(game =>
+      pick(game, GAME_CACHE_FIELDS)
+    );
+  }
+  if (trimmed.list) {
+    trimmed.list = trimmed.list.map(game => ({
+      ...game,
+      participants: game.participants?.map(p =>
+        pick(p, PARTICIPANT_CACHE_FIELDS)
+      ),
+    }));
+  }
+  return trimmed;
+}
+
 export function handlerMerge(source) {
   const mergeListStr = uni.getStorageSync("mergeList");
   let mergeList = [];
