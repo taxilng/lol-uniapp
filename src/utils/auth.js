@@ -820,6 +820,22 @@ export function trimLolRecordCache(record) {
       pick(game, GAME_CACHE_FIELDS)
     );
   }
+  if (trimmed.yourMatchPlayersList) {
+    // 队友榜（RecordItem 渲染 + handlerMerge 排序）只用到这几个字段，生成时的参与者整包字段不入缓存
+    trimmed.yourMatchPlayersList = trimmed.yourMatchPlayersList.map(player =>
+      pick(player, [
+        "puuid",
+        "riotIdGameName",
+        "riotIdTagline",
+        "totalGames",
+        "totalWins",
+        "teamSession",
+        "teamWins",
+        "opponentSession",
+        "opponentWins",
+      ])
+    );
+  }
   if (trimmed.list) {
     trimmed.list = trimmed.list.map(game => ({
       ...game,
