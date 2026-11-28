@@ -641,7 +641,7 @@ function handleOpenHistory() {
   if (!editStatus.value) {
     historyStore.setHistoryList(item.value);
     navigateToWithLimit({
-      url: "/pages/history/index",
+      url: `/pages/history/index?nameInfoNew=${encodeURIComponent(item.value?.nameInfoNew ?? "")}`,
     });
   }
 }

@@ -705,6 +705,13 @@ const PARTICIPANT_CACHE_FIELDS = [
   "pentaKills",
   "perks1",
   "perks2",
+  // 海克斯强化（details.vue 详情页按 playerAugment1-6 渲染图标）
+  "playerAugment1",
+  "playerAugment2",
+  "playerAugment3",
+  "playerAugment4",
+  "playerAugment5",
+  "playerAugment6",
   "damageMax",
   "defenseMax",
   "killsMax",
@@ -785,9 +792,10 @@ const RECORD_CACHE_FIELDS = [
   // 跳历史页/详情页的链路数据
   "currentGame",
   "curryMap",
-  // 以下字段 pick 后再单独瘦身（battleInfo 只留赛季汇总，单局条目只留渲染/详情字段）
+  // 地址3/4（搜联盟/峡谷查个分）链路的对局列表只在 record.list 里，历史页/详情页都靠它
+  "list",
+  // 旧链路历史列表：effectiveCompetition 是 data 去掉无效局的子集，渲染只用它，data 不再入缓存
   "battleInfo",
-  "data",
   "effectiveCompetition",
 ];
 
@@ -807,9 +815,6 @@ export function trimLolRecordCache(record) {
       ]),
     };
   }
-  if (trimmed.data) {
-    trimmed.data = trimmed.data.map(game => pick(game, GAME_CACHE_FIELDS));
-  }
   if (trimmed.effectiveCompetition) {
     trimmed.effectiveCompetition = trimmed.effectiveCompetition.map(game =>
       pick(game, GAME_CACHE_FIELDS)
@@ -824,6 +829,20 @@ export function trimLolRecordCache(record) {
     }));
   }
   return trimmed;
+}
+
+// 按 nameInfoNew 从「lol」本地缓存恢复战绩记录（H5 刷新后 pinia 数据丢失时的兜底）
+export function restoreLolRecord(nameInfoNew) {
+  if (!nameInfoNew) return null;
+  try {
+    const raw = uni.getStorageSync("lol");
+    const list = raw ? JSON.parse(raw) : [];
+    if (!Array.isArray(list)) return null;
+    return list.find(v => v?.nameInfoNew === nameInfoNew) || null;
+  } catch (error) {
+    console.log("恢复战绩缓存失败", error);
+    return null;
+  }
 }
 
 export function handlerMerge(source) {

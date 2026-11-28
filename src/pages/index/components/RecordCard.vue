@@ -489,7 +489,7 @@ function openHistory() {
   showTips.value = 1;
   historyStore.setHistoryList(recordData.value);
   navigateToWithLimit({
-    url: "/pages/history/index",
+    url: `/pages/history/index?nameInfoNew=${encodeURIComponent(recordData.value?.nameInfoNew ?? "")}`,
   });
 }
 

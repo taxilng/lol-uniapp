@@ -333,6 +333,7 @@
 
 <script setup>
 import { onMounted, ref, watch } from "vue";
+import { onLoad } from "@dcloudio/uni-app";
 import LolEquip from "@/components/LolEquip.vue";
 import LolAvartar from "@/components/LolAvartar.vue";
 import HeroAvatar from "@/components/HeroAvatar.vue";
@@ -357,6 +358,7 @@ import screenshot from "@/utils/screenshot";
 import { areaMap, levelConfig } from "@/utils/area.js";
 import { getAugment } from "@/utils/augment";
 import { userHistoryStore } from "@/stores/userHistory";
+import { restoreLolRecord } from "@/utils/auth";
 
 const historyStore = userHistoryStore();
 const userHistory = ref({});
@@ -710,6 +712,27 @@ function handleShare() {
     () => (shareLoading.value = false),
   );
 }
+
+// F5 刷新兜底：URL 带 nameInfoNew + gameIndex 且 pinia 数据为空时，从「lol」本地缓存定位回这局
+onLoad(query => {
+  const hasDetail = Object.keys(historyStore.historyDetail ?? {}).length > 0;
+  if (hasDetail || !query?.nameInfoNew) return;
+  let name = query.nameInfoNew;
+  try {
+    name = decodeURIComponent(name);
+  } catch (error) {
+    // 已是解码后的原值，直接使用
+  }
+  const restored = restoreLolRecord(name);
+  if (!restored) return;
+  historyStore.setHistoryList(restored);
+  const gameIndex = Number(query.gameIndex) || 0;
+  const game =
+    restored.list?.[gameIndex] ?? restored.effectiveCompetition?.[gameIndex];
+  if (game) {
+    historyStore.setHistoryDetail(game);
+  }
+});
 
 onMounted(() => {
   const gameDetails = historyStore.historyDetailObj ?? {};

@@ -95,7 +95,7 @@
               }"
               v-for="(item, index) in recordData.list"
               :key="index"
-              @click="handleOpenHistoryDetail(item)"
+              @click="handleOpenHistoryDetail(item, index)"
             >
               <view class="flex items-center cursor-pointer">
                 <HeroAvatar
@@ -186,7 +186,7 @@
             </view>
           </view>
         </template>
-        <template v-if="!recordData.data && !recordData.list">
+        <template v-if="!recordData.data && !recordData.effectiveCompetition && !recordData.list">
           <uv-button
             size="small"
             type="success"
@@ -194,7 +194,8 @@
             @click="goHome"
           ></uv-button>
         </template>
-        <template v-if="recordData.data">
+        <!-- 旧链路：历史列表渲染 effectiveCompetition；data 是其未过滤全集，缓存恢复后可能不存在 -->
+        <template v-if="recordData.data || recordData.effectiveCompetition">
           <view
             v-if="recordData?.curryMap?.gameId"
             class="flex justify-center bg-violet-200 w-full p-2 items-center"
@@ -223,7 +224,7 @@
             }"
             v-for="(item, index) in recordData.effectiveCompetition"
             :key="index"
-            @click="handleOpenHistoryDetail(item)"
+            @click="handleOpenHistoryDetail(item, index)"
           >
             <view class="flex items-center cursor-pointer">
               <HeroAvatar
@@ -267,7 +268,7 @@
 
 <script setup>
 import { ref, onActivated, onMounted, watch } from "vue";
-import { onReachBottom } from "@dcloudio/uni-app";
+import { onReachBottom, onLoad } from "@dcloudio/uni-app";
 import { throttle } from "lodash";
 import LolAvartar from "@/components/LolAvartar.vue";
 import HeroAvatar from "@/components/HeroAvatar.vue";
@@ -280,6 +281,7 @@ import {
   navigateToWithLimit,
   replaceStrings,
   getBatchBaseUrlName,
+  restoreLolRecord,
 } from "@/utils/auth";
 import {
   searchPlayerAll,
@@ -424,10 +426,12 @@ function initUpdateRecord() {
   updateRecord();
 }
 
-function handleOpenHistoryDetail(item) {
+// 点击单局进详情：URL 带 nameInfoNew + gameIndex，刷新后可从本地缓存定位回这局
+function handleOpenHistoryDetail(item, index) {
   historyStore.setHistoryDetail(item);
+  const name = recordData.value?.nameInfoNew ?? historyStore.historyList?.nameInfoNew ?? "";
   navigateToWithLimit({
-    url: "/pages/history/details",
+    url: `/pages/history/details?nameInfoNew=${encodeURIComponent(name)}&gameIndex=${index ?? 0}`,
   });
 }
 
@@ -605,6 +609,21 @@ async function update3(init) {
     loading.value = false;
   }
 }
+
+// F5 刷新兜底：URL 带 nameInfoNew 且 pinia 数据为空时，从「lol」本地缓存恢复记录
+onLoad(query => {
+  if (historyStore.historyList?.nameInfoNew || !query?.nameInfoNew) return;
+  let name = query.nameInfoNew;
+  try {
+    name = decodeURIComponent(name);
+  } catch (error) {
+    // 已是解码后的原值，直接使用
+  }
+  const restored = restoreLolRecord(name);
+  if (restored) {
+    historyStore.setHistoryList(restored);
+  }
+});
 
 onMounted(() => {
   const userHistory = historyStore.historyList ?? {};
